@@ -18,7 +18,7 @@ Make sure that the `src` folder, the `Module`, the `Module Service Provider` and
 
 1- Create a config file in your module `resources/config/builder.php`
 
-2- Specify a list of stream namespaces that you wanted to generate entitie for
+2- Specify a list of stream namespaces that you wanted to generate entities for
 ```
 	'namespaces' => ['coffee']
 ```

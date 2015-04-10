@@ -1,6 +1,6 @@
 # Entity Builder Extension
 
-This Module extends PyroCMS core/streams to generate entity components. 
+This is an extension to PyroCMS core/streams to generate entity components.
 
 ## Scaffold your PyroCMS Modules in style
 

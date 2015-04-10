@@ -4,7 +4,7 @@ This is an extension to PyroCMS core/streams to generate entity components.
 
 ## Scaffold your PyroCMS Modules in style
 
-The Entity Builder to to be used with any of your Pyro modules. This extension once installed, works in the background to generate entities for all your streams. It will also configure your module with routes, bindings, language file entries etc, so you don't have to lift a finger.
+This extension once installed, works in the background to generate entities for all streams migrations in your modules. It will also configure your modules with routes, bindings, language file entries etc, so you don't have to lift a finger.
 
 ## What is an Entity
 

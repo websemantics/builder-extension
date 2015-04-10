@@ -34,3 +34,6 @@ Make sure that the `src` folder, the `Module`, the `Module Service Provider` and
  * @author    WebSemantics, Inc. <info@websemantics.ca>
  * @author    Adnan Sagar <msagar@websemantics.ca>'
 ```
+5- Install your module
+
+6- Enjoy

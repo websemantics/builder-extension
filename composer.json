@@ -1,0 +1,39 @@
+{
+    "name": "websemantics/entity_builder-extension",
+    "type": "streams-addon",
+    "version": "1.0.0",
+    "description": "Scaffold your PyroCMS Modules in style",
+    "keywords": [
+        "ibuild",
+        "streams",
+        "pyrocms",
+        "laravel"
+    ],
+    "homepage": "http://websemantics.ca",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "WebSemantics, Inc.",
+            "email": "info@websemantics.ca",
+            "homepage": "http://websemantics.ca",
+            "role": "Owner"
+        }
+    ],
+    "support": {
+        "email": "info@websemantics.ca"
+    },
+    "require":{
+        "nikic/php-parser": "~1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Websemantics\\EntityBuilderExtension\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    },
+    "minimum-stability": "dev"
+}

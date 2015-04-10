@@ -17,17 +17,18 @@ To Use:
 1- Create a config file in your module resources/config/builder.php
 
 2- Specify a list of stream namespaces that you wanted to generate entitie for.
-
+```
 	'namespaces' => ['coffee']
-
+```
 3- Specify if you want the entities generated grouped in a namespace folder
-
+```
 	'namespace_folder' => true,
-
+```
 4- Specify your project docblock
-
+```
 	'docblock' =>
 ' * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
  * @author    WebSemantics, Inc. <info@websemantics.ca>
  * @author    Adnan Sagar <msagar@websemantics.ca>'
+```

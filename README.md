@@ -1,32 +1,34 @@
 # Entity Builder Extension
 
-Scaffold your PyroCMS Modules in style.
-
 This Module extends PyroCMS core/streams to generate entity components. 
 
-An Entity builder to to be used with Pyro Modules. An Entity is a representation of an Object Type which may correspond with a Stream,.. for example, a Person, a Company or an Animal can all be generated as Pyro Entities. Code generated includes the Entity Model and Repository, Plugin, Contracts, Table and Form Builders.
+## Scaffold your PyroCMS Modules in style
 
-Notice:
-=======
+The Entity Builder to to be used with any of your Pyro modules. This extension once installed, works in the background to generate entities for all your streams. It will also configure your module with routes, bindings, language file entries etc, so you don't have to lift a finger.
 
-Make sure that the 'src' folder, the Module, the Module Service Provider and the 'addon.php' english language files have write permissions.
+## What is an Entity
 
-To Use:
-=======
+An Entity is a representation of an Object Type which may correspond with a Stream,.. for example, a Person, a Company or an Animal can all be generated as Pyro Entities. Code generated includes the Entity Model and Repository, Plugin, Contracts, Table and Form Builders.
 
-1- Create a config file in your module resources/config/builder.php
+### Notice:
 
-2- Specify a list of stream namespaces that you wanted to generate entitie for.
+Make sure that the `src` folder, the `Module`, the `Module Service Provider` and the `addon.php` english language file have write permissions.
+
+### To Use:
+
+1- Create a config file in your module `resources/config/builder.php`
+
+2- Specify a list of stream namespaces that you wanted to generate entitie for
 ```
 	'namespaces' => ['coffee']
 ```
-3- Specify if you want the entities generated grouped in a namespace folder
+3- Specify if you want the entities generated grouped in a folder (named after the current Namespace)
 ```
 	'namespace_folder' => true,
 ```
-4- Specify your project docblock
+4- Specify your project docblock to be included with the generated code
 ```
-	'docblock' =>
+'docblock' =>
 ' * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
  * @author    WebSemantics, Inc. <info@websemantics.ca>

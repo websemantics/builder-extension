@@ -66,11 +66,15 @@ class GenerateEntityHandler
 
         $entity   = __DIR__ . '/../../../resources/assets/entity';
 
+        $namespace_folder = array_get($module->hasConfig('builder'), 
+                            'namespace_folder', true) ? "" : "{namespace}/";
+
         $data = $this->getTemplateData($module, $stream);
 
         $destination = $module->getPath();
 
-        $this->files->parseDirectory($entity.'/code/' , $destination.'/src', $data);
+        $this->files->parseDirectory($entity."/code/$namespace_folder" , 
+                                     $destination.'/src', $data);
 
         try {
                                 
@@ -115,7 +119,6 @@ class GenerateEntityHandler
 
         if(!is_null($content))
             file_put_contents($file, $content);
-
     }
 
     /**
@@ -138,7 +141,6 @@ class GenerateEntityHandler
             'docblock'                      => array_get($module->hasConfig('builder'), 'docblock', ''),
             'namespace'                     => $namespace,
             'namespace_folder'              => $namespace_folder,
-            'fields'                        => (new StreamAssignmentsParser())->parse($stream),
             'vendor_name'                   => (new VendorNameParser())->parse($module),
             'module_name'                   => $moduleName,
             'module_name_lower'             => strtolower($moduleName),

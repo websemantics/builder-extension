@@ -1,11 +1,11 @@
 <?php namespace Websemantics\EntityBuilderExtension\Handlers\Events;
 
 use Illuminate\Foundation\Bus\DispatchesCommands;
-use Anomaly\Streams\Platform\Stream\Event\StreamWasCreated;
+use Anomaly\Streams\Platform\Assignment\Event\AssignmentWasCreated;
 use Anomaly\Streams\Platform\Addon\Module\ModuleCollection;
-use Websemantics\EntityBuilderExtension\Command\GenerateEntity;
+use Websemantics\EntityBuilderExtension\Command\ModifyEntity;
 
-class StreamWasCreatedHandler {
+class AssignmentWasCreatedHandler {
 
   use DispatchesCommands;
 
@@ -24,19 +24,21 @@ class StreamWasCreatedHandler {
 	/**
 	 * Handle the event.
 	 *
-	 * @param  StreamWasCreated  $event
+	 * @param  AssignmentWasCreated  $event
 	 * @return void
 	 */
-	public function handle(StreamWasCreated $event)
+	public function handle(AssignmentWasCreated $event)
 	{
-		$stream = $event->getStream();
+
+		$assignment = $event->getAssignment();
+		$stream = $assignment->getStream();
 
 		foreach ($this->modules as $module) {
 			
 			$namespaces = array_get($module->hasConfig('builder'), 'namespaces', []);
 
 			if(in_array($stream->getNamespace(), $namespaces)){
-        $this->dispatch(new GenerateEntity($module, $stream));
+        $this->dispatch(new ModifyEntity($module, $stream, $assignment));
 			}
 
 		}

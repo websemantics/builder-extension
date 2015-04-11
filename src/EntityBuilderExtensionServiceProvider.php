@@ -22,8 +22,8 @@ class EntityBuilderExtensionServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $listeners = [
-        'Anomaly\Streams\Platform\Stream\Event\StreamWasCreated' => ['Websemantics\EntityBuilderExtension\Handlers\Events\StreamWasCreatedHandler']
-        // 'Anomaly\Streams\Platform\Stream\Event\StreamWasSaved' => ['Websemantics\EntityBuilderExtension\Handlers\Events\StreamWasCreatedHandler'],
+        'Anomaly\Streams\Platform\Stream\Event\StreamWasCreated' => ['Websemantics\EntityBuilderExtension\Handlers\Events\StreamWasCreatedHandler'],
+        'Anomaly\Streams\Platform\Assignment\Event\AssignmentWasCreated' => ['Websemantics\EntityBuilderExtension\Handlers\Events\AssignmentWasCreatedHandler']
     ];
 
 }

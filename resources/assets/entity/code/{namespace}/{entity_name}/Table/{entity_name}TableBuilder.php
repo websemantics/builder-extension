@@ -13,15 +13,6 @@ class {entity_name}TableBuilder extends TableBuilder
 {
 
     /**
-     * The table columns.
-     *
-     * @var array
-     */
-    protected $columns = [
-        {fields}
-    ];
-
-    /**
      * The table buttons.
      *
      * @var array

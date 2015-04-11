@@ -83,12 +83,13 @@ class GenericPhpParser
         // (2) Parse the Service Provider for the named property 
         // '$name' (i.e. 'route', 'bindings' etc), get its array value
         // then merge with the template array
-
+        // TO DO: abstract to a better logic
         if($this->code[0]->getType() === 'Stmt_Namespace'){
             $this->helper->parseClassProperty($this->code[0], $name, $templateNode[0]);
         }
 
         // (3) Parse the addon.php language file for the section list
+        // TO DO: abstract to a better logic
         if($this->code[0]->getType() === 'Stmt_Return' && 
            $this->code[0]->expr->getType() === 'Expr_Array'){
             $this->helper->parseReturnArray($this->code[0], $name, $templateNode[0]);

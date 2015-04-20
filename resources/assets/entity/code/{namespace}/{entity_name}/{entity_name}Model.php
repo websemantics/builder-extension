@@ -20,4 +20,6 @@ class {entity_name}Model extends {namespace}{entity_name_plural}EntryModel imple
      */
     protected $cacheMinutes = 9999;
 
+    {model_content}
+
 }

@@ -1,7 +1,6 @@
 <?php namespace Websemantics\EntityBuilderExtension;
 
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
-use Illuminate\Routing\Router;
 
 /**
  * Class EntityBuilderExtensionServiceProvider
@@ -22,8 +21,9 @@ class EntityBuilderExtensionServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $listeners = [
-        'Anomaly\Streams\Platform\Stream\Event\StreamWasCreated' => ['Websemantics\EntityBuilderExtension\Handlers\Events\StreamWasCreatedHandler'],
-        'Anomaly\Streams\Platform\Assignment\Event\AssignmentWasCreated' => ['Websemantics\EntityBuilderExtension\Handlers\Events\AssignmentWasCreatedHandler']
+        'Anomaly\Streams\Platform\Stream\Event\StreamWasCreated'         => ['Websemantics\EntityBuilderExtension\Handlers\Events\StreamWasCreatedHandler'],
+        'Anomaly\Streams\Platform\Assignment\Event\AssignmentWasCreated' => ['Websemantics\EntityBuilderExtension\Handlers\Events\AssignmentWasCreatedHandler'],
+        'Anomaly\Streams\Platform\Addon\Module\Event\ModuleWasInstalled' => ['Websemantics\EntityBuilderExtension\Handlers\Events\ModuleWasInstalledHandler']
     ];
 
 }

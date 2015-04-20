@@ -41,4 +41,5 @@ class {entity_name}Repository implements {entity_name}RepositoryInterface
         return $this->model->create($attributes);
     }
 
+    {repository_content}
 }

@@ -8,7 +8,11 @@ use Websemantics\EntityBuilderExtension\Parser\VendorNameParser;
 use Websemantics\EntityBuilderExtension\Parser\NamespaceParser;
 use Websemantics\EntityBuilderExtension\Parser\StreamAssignmentsParser;
 use Websemantics\EntityBuilderExtension\Parser\GenericPhpParser;
-
+use Websemantics\EntityBuilderExtension\Parser\TableFieldsParser;
+use Websemantics\EntityBuilderExtension\Parser\FormFieldsParser;
+use Websemantics\EntityBuilderExtension\Parser\ModelContentParser;
+use Websemantics\EntityBuilderExtension\Parser\RepositoryContentParser;
+use Websemantics\EntityBuilderExtension\Parser\SeederDataParser;
 
 use Anomaly\Streams\Platform\Addon\Module\Module;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
@@ -80,17 +84,21 @@ class GenerateEntityHandler
                                 
             $this->processFile(
                 $destination . '/src/' . $data['module_name'] . 'ModuleServiceProvider.php',
-                ['routes' => $entity.'/routes.php',
-                 'bindings' => $entity.'/bindings.php',
-                 'singletons' => $entity.'/singletons.php'], $data);
+                ['routes' => $entity.'/templates/module/routes.php',
+                 'bindings' => $entity.'/templates/module/bindings.php',
+                 'singletons' => $entity.'/templates/module/singletons.php'], $data);
 
             $this->processFile(
                 $destination . '/src/' . $data['module_name'] . 'Module.php',
-                ['sections' => $entity.'/sections.php'], $data);
+                ['sections' => $entity.'/templates/module/sections.php'], $data);
 
             $this->processFile(
                 $destination . '/resources/lang/en/addon.php',
-                ['section' => $entity.'/addon.php'], $data);
+                ['section' => $entity.'/templates/module/addon.php'], $data);
+
+            $this->processFile(
+                $destination . '/src/' . $data['module_name'] . 'ModuleSeeder.php',
+                ['seeders' => $entity.'/templates/module/seeding.php'], $data);
 
         } catch (\PhpParser\Error $e) {
             die($e->getMessage());
@@ -98,7 +106,7 @@ class GenerateEntityHandler
     }
 
     /**
-     * Process a php target file  to append syntax-sensitive content 
+     * Process a php target file  to append PHP syntax-sensitive content 
      * from multiple template sources.
      *
      * @param  string $file, a php file to modify
@@ -137,9 +145,15 @@ class GenerateEntityHandler
         // Wheather we use a grouping folder for all streams with the same namespace
         $namespace_folder = array_get($module->hasConfig('builder'), 
                             'namespace_folder', true) ? "$namespace\\" : "";
+
         return [
             'docblock'                      => array_get($module->hasConfig('builder'), 'docblock', ''),
             'namespace'                     => $namespace,
+            'table_fields'                  => (new TableFieldsParser())->parse($module, $stream),
+            'form_fields'                   => (new FormFieldsParser())->parse($module,$stream),
+            'model_content'                 => (new ModelContentParser())->parse($module, $stream),
+            'repository_content'            => (new RepositoryContentParser())->parse($module, $stream),
+            'seeder_data'                   => (new SeederDataParser())->parse($module, $stream),
             'namespace_folder'              => $namespace_folder,
             'vendor_name'                   => (new VendorNameParser())->parse($module),
             'module_name'                   => $moduleName,

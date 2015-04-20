@@ -1,12 +1,12 @@
 <?php namespace Websemantics\EntityBuilderExtension\Handlers\Events;
 
 use Illuminate\Foundation\Bus\DispatchesCommands;
-use Anomaly\Streams\Platform\Stream\Event\StreamWasCreated;
+use Anomaly\Streams\Platform\Addon\Module\Event\ModuleWasInstalled;
 use Anomaly\Streams\Platform\Addon\Module\ModuleCollection;
-use Websemantics\EntityBuilderExtension\Command\GenerateEntity;
+use Websemantics\EntityBuilderExtension\Command\ModifyModule;
 
 /**
- * Class StreamWasCreatedHandler
+ * Class ModuleWasInstalledHandler
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
@@ -16,7 +16,7 @@ use Websemantics\EntityBuilderExtension\Command\GenerateEntity;
  * @package   Websemantics\EntityBuilderExtension
  */
 
-class StreamWasCreatedHandler {
+class ModuleWasInstalledHandler {
 
   use DispatchesCommands;
 
@@ -35,23 +35,19 @@ class StreamWasCreatedHandler {
 	/**
 	 * Handle the event.
 	 *
-	 * @param  StreamWasCreated  $event
+	 * @param  ModuleWasInstalled  $event
 	 * @return void
 	 */
-	public function handle(StreamWasCreated $event)
+	public function handle(ModuleWasInstalled $event)
 	{
-		$stream = $event->getStream();
+		$module = $event->getModule();
 
-		foreach ($this->modules as $module) {
-			
-			$namespaces = array_get($module->hasConfig('builder'), 'namespaces', []);
-			$on_module  = array_get($module->hasConfig('builder'), 'on_module', true);
+		$namespaces = array_get($module->hasConfig('builder'), 'namespaces', []);
 
-			if(!$on_module && in_array($stream->getNamespace(), $namespaces)){
-        $this->dispatch(new GenerateEntity($module, $stream));
-			}
-
+		if(count($namespaces) > 0){
+      $this->dispatch(new ModifyModule($module));
 		}
+
 	}
 
 }

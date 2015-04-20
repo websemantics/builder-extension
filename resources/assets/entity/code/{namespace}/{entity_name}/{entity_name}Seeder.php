@@ -13,6 +13,15 @@ class {entity_name}Seeder extends Seeder
 {
 
     /**
+     * The ${entity_name_lower_plural} seeder data
+     *
+     * @var array
+     */
+    protected $data = [
+        {seeder_data}
+    ];
+
+    /**
      * The ${entity_name_lower_plural} repository.
      *
      * @var {entity_name}RepositoryInterface
@@ -34,10 +43,10 @@ class {entity_name}Seeder extends Seeder
      */
     public function run()
     {
-        $this->{entity_name_lower_plural}->create(
-            [
-                /* 'name'            => 'Example', */
-            ]
-        );
+        $this->{entity_name_lower_plural}->truncate();
+
+       foreach ($this->data as $item){
+            $this->{entity_name_lower_plural}->create($item);
+       }
     }
 }

@@ -1,7 +1,5 @@
 <?php namespace {vendor_name}\{module_name}Module\{namespace_folder}{entity_name}\Contract;
 
-use Anomaly\Streams\Platform\Entry\EntryCollection;
-
 /**
  * Interface {entity_name}RepositoryInterface
  *

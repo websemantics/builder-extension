@@ -19,6 +19,7 @@ class {entity_name}TableColumns
     public function handle({entity_name}TableBuilder $builder)
     {
         $builder->setColumns([
+            {table_fields}
             ]);
     }
 }

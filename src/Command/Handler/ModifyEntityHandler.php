@@ -75,21 +75,19 @@ class ModifyEntityHandler
 
         $data = $this->getTemplateData($module, $stream, $assignment);
 
-        $destination = $module->getPath();
-
         $source = $entity.'/code/{namespace}/';
 
         $destination = $module->getPath() . '/src/' . $data['namespace_folder'];
 
-        // (1) Process the form builder
+        // (1) Process the form builder class
         $this->processFormBuilder($destination . $data['entity_name'] . '/Form/'. 
                                $data['entity_name'].'FormBuilder.php',
-                               $entity.'/form_simple_field.txt', $data);
+                               $entity.'/templates/field/form_simple_field.txt', $data);
         
-        // (2) Process the table column
+        // (2) Process the table column class
         $this->processTableColumns($destination . $data['entity_name'] . '/Table/'. 
                                $data['entity_name'].'TableColumns.php',
-                               $entity.'/table_simple_field.txt', $data);
+                               $entity.'/templates/field/table_simple_field.txt', $data);
     }
 
     /**

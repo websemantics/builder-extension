@@ -39,11 +39,11 @@ class GenericPhpParser
 
     /**
      * Parse the PHP code of the ServiceProvider to get the named property (i.e. bindings)
-     * @param string $serviceProvider the module service provider file content,
+     * @param string $phpCode, the content of a php file,
      * @param string $data used to replace placeholders inside template file
      * @param string $parser text parser
      */
-    public function __construct($serviceProvider, $data , $parser)
+    public function __construct($phpCode, $data , $parser)
     {
         $this->data = $data;
 
@@ -55,7 +55,7 @@ class GenericPhpParser
 
         $this->helper = new Helper();
 
-        $this->code = $serviceProvider ? $this->phpParser->parse($serviceProvider) : null;
+        $this->code = $phpCode ? $this->phpParser->parse($phpCode) : null;
     }
 
     /**
@@ -78,8 +78,8 @@ class GenericPhpParser
 
         // Reading template file
         if(count($templateNode) > 0 && $templateNode[0]->getType() !== 'Expr_Array')
-            throw new Exception("Incorrect template formatting", 1);
-                
+            throw new \Exception("Incorrect template formatting", 1);
+       
         // (2) Parse the Service Provider for the named property 
         // '$name' (i.e. 'route', 'bindings' etc), get its array value
         // then merge with the template array
@@ -98,7 +98,7 @@ class GenericPhpParser
     }
 
     /**
-     * Get the serviceProvider content
+     * Get the phpCode content
      *
      * @return string
      */

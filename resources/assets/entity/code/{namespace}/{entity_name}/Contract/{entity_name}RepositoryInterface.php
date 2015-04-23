@@ -11,6 +11,13 @@ interface {entity_name}RepositoryInterface
 {
 
     /**
+     * Truncate {entity_name_lower}.
+     *
+     * @return static
+     */
+    public function truncate();
+
+    /**
      * Create a new {entity_name_lower}.
      *
      * @param array $attributes
@@ -18,5 +25,4 @@ interface {entity_name}RepositoryInterface
      */
     public function create(array $attributes);
 
-   
 }

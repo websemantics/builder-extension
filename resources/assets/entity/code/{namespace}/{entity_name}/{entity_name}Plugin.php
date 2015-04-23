@@ -1,6 +1,5 @@
 <?php namespace {vendor_name}\{module_name}Module\{namespace_folder}{entity_name};
 
-use {vendor_name}\{module_name}Module\{namespace_folder}{entity_name}\Contract\{entity_name}RepositoryInterface;
 use Anomaly\Streams\Platform\Addon\Plugin\Plugin;
 
 /**
@@ -16,16 +15,16 @@ class {entity_name}Plugin extends Plugin
     /**
      * The {entity_name_lower} repository.
      *
-     * @var {entity_name}RepositoryInterface
+     * @var {entity_name}Repository
      */
     protected ${entity_name_lower_plural};
 
     /**
      * Create a new {entity_name}Plugin instance.
      *
-     * @param {entity_name}RepositoryInterface ${entity_name_lower_plural}
+     * @param {entity_name}Repository ${entity_name_lower_plural}
      */
-    public function __construct({entity_name}RepositoryInterface ${entity_name_lower_plural})
+    public function __construct({entity_name}Repository ${entity_name_lower_plural})
     {
         $this->{entity_name_lower_plural} = ${entity_name_lower_plural};
     }

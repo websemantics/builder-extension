@@ -45,9 +45,8 @@ class StreamWasCreatedHandler {
 		foreach ($this->modules as $module) {
 			
 			$namespaces = array_get($module->hasConfig('builder'), 'namespaces', []);
-			$on_module  = array_get($module->hasConfig('builder'), 'on_module', true);
 
-			if(!$on_module && in_array($stream->getNamespace(), $namespaces)){
+			if(in_array($stream->getNamespace(), $namespaces)){
         $this->dispatch(new GenerateEntity($module, $stream));
 			}
 

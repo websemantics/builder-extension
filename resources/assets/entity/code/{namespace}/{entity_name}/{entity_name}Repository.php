@@ -1,6 +1,5 @@
 <?php namespace {vendor_name}\{module_name}Module\{namespace_folder}{entity_name};
 
-use {vendor_name}\{module_name}Module\{namespace_folder}{entity_name}\Contract\{entity_name}Interface;
 use {vendor_name}\{module_name}Module\{namespace_folder}{entity_name}\Contract\{entity_name}RepositoryInterface;
 
 /**
@@ -31,6 +30,16 @@ class {entity_name}Repository implements {entity_name}RepositoryInterface
     }
 
     /**
+     * Truncate {entity_name_lower}.
+     *
+     * @return static
+     */
+    public function truncate()
+    {
+        return $this->model->truncate();
+    }
+
+    /**
      * Create a new {entity_name_lower}.
      *
      * @param array $attributes
@@ -41,5 +50,4 @@ class {entity_name}Repository implements {entity_name}RepositoryInterface
         return $this->model->create($attributes);
     }
 
-    {repository_content}
 }

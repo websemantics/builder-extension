@@ -80,7 +80,7 @@ class GenericPhpParser
         if(count($templateNode) > 0 && $templateNode[0]->getType() !== 'Expr_Array')
             throw new \Exception("Incorrect template formatting", 1);
        
-        // (2) Parse the Service Provider for the named property 
+        // (2) Parse the php code for the named property 
         // '$name' (i.e. 'route', 'bindings' etc), get its array value
         // then merge with the template array
         // TO DO: abstract to a better logic

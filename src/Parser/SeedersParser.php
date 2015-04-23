@@ -4,7 +4,7 @@ use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 use Anomaly\Streams\Platform\Addon\Module\Module;
 
 /**
- * Class SeederDataParser
+ * Class SeedersParser
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
@@ -14,7 +14,7 @@ use Anomaly\Streams\Platform\Addon\Module\Module;
  * @package   Websemantics\EntityBuilderExtension
  */
 
-class SeederDataParser
+class SeedersParser
 {
 
     /**
@@ -28,8 +28,8 @@ class SeederDataParser
     {
         // First, check if the user has default content
         $destination = $module->getPath();
-        $entityName  = studly_case(str_singular($stream->getSlug()));
-        $file        = $destination."/builder/$entityName/$entityName"."SeederData.php";
+        $entityName  = strtolower(str_singular($stream->getSlug()));
+        $file        = $destination."/seeders/$entityName".".php";
 
         return file_exists($file) ? file_get_contents($file) : '';
     }

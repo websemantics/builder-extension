@@ -74,16 +74,8 @@ class ModifyModuleHandler
         $destination = $module->getPath();
 
         $namespaces = array_get($module->hasConfig('builder'), 'namespaces', []);
-        $on_module  = array_get($module->hasConfig('builder'), 'on_module', true);
 
-        if($on_module){
-            foreach ($namespaces as $namespace) {
-                $streams = $this->streamRepository->findByNamespace($namespace);
-                foreach ($streams as $stream) {
-                    $this->dispatch(new GenerateEntity($module, $stream));
-                }
-            }            
-        }
+        /* Anything here!! */
     }
 
 }

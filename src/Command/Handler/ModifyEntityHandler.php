@@ -2,6 +2,7 @@
 
 use Websemantics\EntityBuilderExtension\Command\ModifyEntity;
 use Websemantics\EntityBuilderExtension\Filesystem\Filesystem;
+
 use Anomaly\Streams\Platform\Addon\Module\Module;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 use Anomaly\Streams\Platform\Assignment\AssignmentModel;
@@ -12,7 +13,6 @@ use Websemantics\EntityBuilderExtension\Parser\VendorNameParser;
 use Websemantics\EntityBuilderExtension\Parser\NamespaceParser;
 use Websemantics\EntityBuilderExtension\Parser\AssignmentNameParser;
 use Websemantics\EntityBuilderExtension\Parser\AssignmentSlugParser;
-use Websemantics\EntityBuilderExtension\Parser\StreamAssignmentsParser;
 
 
 /**
@@ -73,6 +73,9 @@ class ModifyEntityHandler
 
         $entity   = __DIR__ . '/../../../resources/assets/entity';
 
+        $this->files->setAvoidOverwrite(array_get($module->hasConfig('builder'), 
+                            'avoid_overwrite', []));
+
         $data = $this->getTemplateData($module, $stream, $assignment);
 
         $source = $entity.'/code/{namespace}/';
@@ -101,16 +104,16 @@ class ModifyEntityHandler
     {
 
         // Use the simple field template
-        $template = $this->parser->parse(file_get_contents($template), $data);
+        $template = $this->parser->parse($this->files->get($template), $data);
 
-        $content = file_get_contents($file);
+        $content = $this->files->get($file);
 
         $needle = 'protected $fields = [';
 
         $content = substr_replace($content, $template, strpos($content, $needle), 
                                   strlen($needle));
 
-        file_put_contents($file, $content);
+        $this->files->put($file, $content);
     }
 
     /**
@@ -124,16 +127,16 @@ class ModifyEntityHandler
     {
 
         // Use the simple field template
-        $template = $this->parser->parse(file_get_contents($template), $data);
+        $template = $this->parser->parse($this->files->get($template), $data);
 
-        $content = file_get_contents($file);
+        $content = $this->files->get($file);
 
         $needle = '$builder->setColumns([';
 
         $content = substr_replace($content, $template, strpos($content, $needle), 
                                   strlen($needle));
 
-        file_put_contents($file, $content);
+        $this->files->put($file, $content);
     }
 
     /**

@@ -6,13 +6,8 @@ use Websemantics\EntityBuilderExtension\Parser\EntityNameParser;
 use Websemantics\EntityBuilderExtension\Parser\ModuleNameParser;
 use Websemantics\EntityBuilderExtension\Parser\VendorNameParser;
 use Websemantics\EntityBuilderExtension\Parser\NamespaceParser;
-use Websemantics\EntityBuilderExtension\Parser\StreamAssignmentsParser;
 use Websemantics\EntityBuilderExtension\Parser\GenericPhpParser;
-use Websemantics\EntityBuilderExtension\Parser\TableFieldsParser;
-use Websemantics\EntityBuilderExtension\Parser\FormFieldsParser;
-use Websemantics\EntityBuilderExtension\Parser\ModelContentParser;
-use Websemantics\EntityBuilderExtension\Parser\RepositoryContentParser;
-use Websemantics\EntityBuilderExtension\Parser\SeederDataParser;
+use Websemantics\EntityBuilderExtension\Parser\SeedersParser;
 
 use Anomaly\Streams\Platform\Addon\Module\Module;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
@@ -73,6 +68,9 @@ class GenerateEntityHandler
         $namespace_folder = array_get($module->hasConfig('builder'), 
                             'namespace_folder', true) ? "" : "{namespace}/";
 
+        $this->files->setAvoidOverwrite(array_get($module->hasConfig('builder'), 
+                            'avoid_overwrite', []));
+
         $data = $this->getTemplateData($module, $stream);
 
         $destination = $module->getPath();
@@ -115,7 +113,7 @@ class GenerateEntityHandler
      */
     protected function processFile($file, $templates, $data)
     {
-        $content = file_get_contents($file);
+        $content = $this->files->get($file);
 
         $phpParser = new GenericPhpParser($content, $data, $this->parser);
 
@@ -126,7 +124,7 @@ class GenerateEntityHandler
         $content = $phpParser->prettyPrint();
 
         if(!is_null($content))
-            file_put_contents($file, $content);
+           $this->files->put($file, $content);
     }
 
     /**
@@ -149,11 +147,7 @@ class GenerateEntityHandler
         return [
             'docblock'                      => array_get($module->hasConfig('builder'), 'docblock', ''),
             'namespace'                     => $namespace,
-            'table_fields'                  => (new TableFieldsParser())->parse($module, $stream),
-            'form_fields'                   => (new FormFieldsParser())->parse($module,$stream),
-            'model_content'                 => (new ModelContentParser())->parse($module, $stream),
-            'repository_content'            => (new RepositoryContentParser())->parse($module, $stream),
-            'seeder_data'                   => (new SeederDataParser())->parse($module, $stream),
+            'seeder_data'                   => (new SeedersParser())->parse($module, $stream),
             'namespace_folder'              => $namespace_folder,
             'vendor_name'                   => (new VendorNameParser())->parse($module),
             'module_name'                   => $moduleName,

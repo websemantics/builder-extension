@@ -68,6 +68,7 @@ class Helper
      */
     public function parseClassProperty(&$node, $name, $templateNode)
     {
+
     		$array = [];
       	
       	$templateArray = $this->node2Array($templateNode);
@@ -114,8 +115,16 @@ class Helper
         if($node->getType() === 'Expr_Array'){
 	        foreach ($node->items as $item){
 	        	if($item->value->getType() == 'Scalar_String'){
-	           	$items[$item->key->value] = $item->value->value;
-	        	}
+              if($item->key)
+               $items[$item->key->value] = $item->value->value;
+              else
+               $items[] = $item->value->value;
+	        	} elseif($item->value->getType() == 'Expr_Array'){
+              if($item->key)
+                $items[$item->key->value] = $this->node2Array($item->value);
+              else
+                $items[] = $this->node2Array($item->value);
+            }
 	        }
         }
 

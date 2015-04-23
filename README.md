@@ -42,7 +42,7 @@ Code generated for an entity includes the Entity Model and Repository, Plugin, S
   ['name' => 'kate', 'age' => 25]
 ```
 
-Also, make sure that the Module Seeder class has the following structure:
+This will be added to the Entity Seeder class. Also, make sure that the Module Seeder class has the following structure:
 
 ```
 <?php namespace {{vendor_name}}\\{{module_name}}Module;
@@ -145,3 +145,8 @@ Make sure that the following folders/files have write permission:
 - `src/XyzModuleSeeder.php` 
 - `resources/lang/en/addon.php`
 - `src/Http/Controller/Admin`
+
+#### Install:
+
+To install this extension, download the code or clone this repo into your addon folder at 
+`addons/default/websemantics/entity_builder-extension`. Login your admin, and install from Addons/Extensions.

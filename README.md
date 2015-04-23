@@ -68,7 +68,7 @@ Refere to [example-module](https://github.com/websemantics/example-module)  or u
 
 #### Inner Working:
 
-Once installed, this extension listens mainly to two types of events *StreamWasCreated* and *AssignmentWasCreatedHandler*. To enable this extension for your current module, creat a config file at `resources/config/builder.php` and list the namespaces you would like the extension to generate code for. You can listen/generate code to multiple namespaces.
+Once installed, this extension listens mainly to two types of events *StreamWasCreated* and *AssignmentWasCreated*. To enable this extension for your current module, creat a config file at `resources/config/builder.php` and list the namespaces you would like the extension to generate code for. You can listen/generate code to multiple namespaces.
 
 ```
     'namespaces' => ['blogger', 'navigatin', 'etc']
@@ -77,7 +77,7 @@ Once installed, this extension listens mainly to two types of events *StreamWasC
 Here's an example of the [builder config file](https://github.com/websemantics/example-module/blob/master/resources/config/builder.php) taken from [Boxed](http://websemantics.github.io/boxed) example module github repo. Once that's done, create your Streams migration files as usual. The extension will kick in when it recieives either of the two events mentioned above:
 
 - *StreamWasCreated*
-- *AssignmentWasCreatedHandler* 
+- *AssignmentWasCreated* 
 
 1- For *StreamWasCreated* event, the extension will generate an entity folder for this stream from the template stored at `entity_builder-extension/resources/assets/entity/code`. The folder map of this entity follows the following structure:
 
@@ -120,7 +120,7 @@ By default, this folder structure would be generated in a subfolder at `src`. Th
 
 The extension then will generate a controller per stream at `xyz-module/src/Http/Controller/Admin/AbcController.php` and modify the *Module*, *ServiceProvider*, *Seeder* and language files to setup the entity to work correctly with the module. 
 
-2- For *AssignmentWasCreatedHandler* event, the extension will modify two files, `AbcTableColumns.php` and `AbcFormBuilder.php` and add a field slug per stream assignmenet.
+2- For *AssignmentWasCreated* event, the extension will modify two files, `AbcTableColumns.php` and `AbcFormBuilder.php` and add a field slug per stream assignmenet.
 
 Once the entity files have been created and working correctly with Pyro, you might want to modify and develop the classes indivisually. The extension provides a configuration option to list the files you don't want to overwrite accedentaly (when re-installing a module). For example, if you have edited the `AbcModle.php`, make sure to list that in the builder config file so that the extension will avoid overwrite if it exists. Here's an example, 
 

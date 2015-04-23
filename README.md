@@ -122,7 +122,7 @@ The extension then will generate a controller per stream at `xyz-module/src/Http
 
 2- For *AssignmentWasCreatedHandler* event, the extension will modify two files, `AbcTableColumns.php` and `AbcFormBuilder.php` and add a field slug per stream assignmenet.
 
-Once the entity files have been created and working correctly with Pyro, you might want to modify and develop the classes indivisually. The extension provides a configuration option to list the files you don't want to override accedentaly (when re-installing a module). For example, if you have edited the `AbcModle.php`, make sure to list that in the builder config file so that the extension will avoid overwrite if it exists. Here's an example, 
+Once the entity files have been created and working correctly with Pyro, you might want to modify and develop the classes indivisually. The extension provides a configuration option to list the files you don't want to overwrite accedentaly (when re-installing a module). For example, if you have edited the `AbcModle.php`, make sure to list that in the builder config file so that the extension will avoid overwrite if it exists. Here's an example, 
 
 ```
   'avoid_overwrite' => [

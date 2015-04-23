@@ -8,16 +8,63 @@ An Entity is a representation of an Object Type which may correspond with a Stre
 
 Code generated for an entity includes the Entity Model and Repository, Plugin, Seeder, Contracts, Table and Form Builders.
 
-#### Notice:
+#### Step by Step Usage:
 
-Make sure that the following folders/files have write permission:
+1- Starting with an empty module, use [Boxed](http://websemantics.github.io/boxed)
 
-- `src` 
-- `src/XyzModule.php`
-- `src/XyzServiceProvider.php`
-- `src/XyzModuleSeeder.php` 
-- `resources/lang/en/addon.php`
-- `src/Http/Controller/Admin`
+2- Create your streams migration files
+
+3- Create/edit the builder config file within your module at `resources/config/builder.php` to specify a list of stream namespaces that you wanted to generate entities for,
+
+```
+  'namespaces' => ['coffee']
+```
+
+4- Specify if you want the entities generated grouped in a folder (named after the current namespace)
+
+```
+  'namespace_folder' => true,
+```
+
+5- Specify your project docblock to be included with the generated code
+```
+'docblock' =>
+' * @link      http://websemantics.ca/ibuild
+ * @link      http://ibuild.io
+ * @author    WebSemantics, Inc. <info@websemantics.ca>
+ * @author    Adnan Sagar <msagar@websemantics.ca>'
+```
+
+6- If you have seed data for a particular Entity/Model (abc), place that in, `xyz-module/seeders/abc.php`. The content must be a list of entry values, for example:
+
+```
+  ['name' => 'jo', 'age' => 30], 
+  ['name' => 'kate', 'age' => 25]
+```
+
+Also, make sure that the Module Seeder class has the following structure:
+
+```
+<?php namespace {{vendor_name}}\\{{module_name}}Module;
+use Anomaly\Streams\Platform\Database\Seeder\Seeder;
+class {{module_name}}ModuleSeeder extends Seeder
+{
+  protected $seeders = [];
+    /**
+     * Seed the localization module.
+     */
+    public function run()
+    {   
+        foreach ($this->seeders as $seeder) {
+              $this->call($seeder);
+        }             
+    }
+}
+```
+
+Refere to [example-module](https://github.com/websemantics/example-module)  or use [Boxed](http://websemantics.github.io/boxed/) to scaffold your module's code.
+
+7- Finally, install your module
 
 #### Inner Working:
 
@@ -87,60 +134,14 @@ Once the entity files have been created and working correctly with Pyro, you mig
 
 Notice that, the name of the entity has been omitted.
 
-#### Step by Step Usage:
 
-1- Starting with an empty module, use [Boxed](http://websemantics.github.io/boxed)
+#### Notice:
 
-2- Create your streams migration files
+Make sure that the following folders/files have write permission:
 
-3- Create/edit the builder config file within your module at `resources/config/builder.php` to specify a list of stream namespaces that you wanted to generate entities for,
-
-```
-	'namespaces' => ['coffee']
-```
-
-4- Specify if you want the entities generated grouped in a folder (named after the current namespace)
-
-```
-	'namespace_folder' => true,
-```
-
-5- Specify your project docblock to be included with the generated code
-```
-'docblock' =>
-' * @link      http://websemantics.ca/ibuild
- * @link      http://ibuild.io
- * @author    WebSemantics, Inc. <info@websemantics.ca>
- * @author    Adnan Sagar <msagar@websemantics.ca>'
-```
-
-6- If you have seed data for a particular Entity/Model (abc), place that in, `xyz-module/seeders/abc.php`. The content must be a list of entry values, for example:
-
-```
-  ['name' => 'jo', 'age' => 30], 
-  ['name' => 'kate', 'age' => 25]
-```
-
-Also, make sure that the Module Seeder class has the following structure:
-
-```
-<?php namespace {{vendor_name}}\\{{module_name}}Module;
-use Anomaly\Streams\Platform\Database\Seeder\Seeder;
-class {{module_name}}ModuleSeeder extends Seeder
-{
-	protected $seeders = [];
-    /**
-     * Seed the localization module.
-     */
-    public function run()
-    {   
-    		foreach ($this->seeders as $seeder) {
-        	    $this->call($seeder);
-    		}             
-    }
-}
-```
-
-Refere to [example-module](https://github.com/websemantics/example-module)  or use [Boxed](http://websemantics.github.io/boxed/) to scaffold your module's code.
-
-7- Finally, install your module
+- `src` 
+- `src/XyzModule.php`
+- `src/XyzServiceProvider.php`
+- `src/XyzModuleSeeder.php` 
+- `resources/lang/en/addon.php`
+- `src/Http/Controller/Admin`

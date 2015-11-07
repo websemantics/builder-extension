@@ -1,6 +1,7 @@
 <?php namespace {vendor_name}\{module_name}Module\{namespace_folder}{entity_name};
 
 use {vendor_name}\{module_name}Module\{namespace_folder}{entity_name}\Contract\{entity_name}RepositoryInterface;
+{extends_repository_use}
 
 /**
  * Class {entity_name}Repository
@@ -9,7 +10,7 @@ use {vendor_name}\{module_name}Module\{namespace_folder}{entity_name}\Contract\{
  * @package   {vendor_name}\{module_name}Module\{namespace_folder}{entity_name}
  */
 
-class {entity_name}Repository implements {entity_name}RepositoryInterface
+class {entity_name}Repository {extends_repository}implements {entity_name}RepositoryInterface
 {
 
     /**

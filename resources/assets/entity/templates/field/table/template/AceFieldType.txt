@@ -1,0 +1,7 @@
+
+                [   'heading' => '{field_slug}',
+                    'value'   => function ({entity_name}Model $entry) {
+                                        
+	                  	return str_replace("{value}",  $entry->{field_slug}, '{column_template}');
+                    }
+                ],

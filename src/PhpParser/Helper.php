@@ -8,7 +8,7 @@ use PhpParser\Builder\Property;
 /**
  * Class PhpParser
  *
- * Helper methods fot the php-parser 
+ * Helper methods for the php-parser 
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
@@ -27,9 +27,10 @@ class Helper
      * @param Stmt_Return $node contains a php file return array (i.e. addon.php)
      * @param string $name, name of the attribute
      * @param Expr_Array $templateNode, key, value pairs from Template file 
+     * @param Boolean $front, set location to the front of the array 
      * @return Stmt_Return
      */
-    public function parseReturnArray(&$node, $name, $templateNode)
+    public function parseReturnArray(&$node, $name, $templateNode, $front)
     {
       
       $array = [];
@@ -43,7 +44,10 @@ class Helper
                  $property->value->getType() === 'Expr_Array'){
 
                   $matchKey = $key;
-                  $array = array_merge($this->node2Array($property->value), 
+                  $array = ($front) ? 
+                  array_merge($templateArray, 
+                              $this->node2Array($property->value)):
+                  array_merge($this->node2Array($property->value), 
                                        $templateArray);
                   break;
               }
@@ -64,9 +68,10 @@ class Helper
      * @param Stmt_Namespace $node contains a php namespace container
      * @param string $name, name of the attribute
      * @param Expr_Array $templateNode, key, value pairs from Template file 
+     * @param Boolean $front, set location to the front of the array 
      * @return Stmt_Namespace
      */
-    public function parseClassProperty(&$node, $name, $templateNode)
+    public function parseClassProperty(&$node, $name, $templateNode, $front = fales)
     {
 
     		$array = [];
@@ -83,8 +88,13 @@ class Helper
                        $name === $property->props[0]->name){
 
                         $matchKey = $key;
-                        $array = array_merge(
-                        	$this->node2Array($property->props[0]->default), $templateArray);
+
+                        $array = ($front) ? 
+                        array_merge($templateArray,
+                          $this->node2Array($property->props[0]->default)) : 
+                        array_merge($this->node2Array($property->props[0]->default), 
+                          $templateArray);
+
                         break;
                     }
                 }  

@@ -63,14 +63,15 @@ class GenericPhpParser
      *
      * @param string $name the name of the property
      * @param string $templateFile the file contains the property template data
+     * @param Boolean $front, set location to the front of the array 
      * @return array
      */
-    public function parse($name, $templateFile)
+    public function parse($name, $templateFile, $front = false)
     {   
         if(is_null($this->code))
             return;
 
-        // (1) Parse the template to get its content as an associativ earray
+        // (1) Parse the template to get its content as an associative array
         $template = file_get_contents($templateFile);                               
         $template = $this->parser->parse($template, $this->data);
 
@@ -85,14 +86,14 @@ class GenericPhpParser
         // then merge with the template array
         // TO DO: abstract to a better logic
         if($this->code[0]->getType() === 'Stmt_Namespace'){
-            $this->helper->parseClassProperty($this->code[0], $name, $templateNode[0]);
+            $this->helper->parseClassProperty($this->code[0], $name, $templateNode[0], $front);
         }
 
         // (3) Parse the addon.php language file for the section list
         // TO DO: abstract to a better logic
         if($this->code[0]->getType() === 'Stmt_Return' && 
            $this->code[0]->expr->getType() === 'Expr_Array'){
-            $this->helper->parseReturnArray($this->code[0], $name, $templateNode[0]);
+            $this->helper->parseReturnArray($this->code[0], $name, $templateNode[0], $front);
         }
 
     }

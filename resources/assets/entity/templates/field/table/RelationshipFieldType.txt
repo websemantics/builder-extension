@@ -1,0 +1,7 @@
+
+                [   'heading' => '{field_slug}',
+                    'value'   => function ({entity_name}Model $entry) {
+                        return ($entry->{relation_name}) ? $entry->{relation_name}->getTitle() :
+                        '{null_relationship_entry}';
+                    }
+                ],

@@ -1,2 +1,0 @@
-$builder->setColumns([
-						'{field_slug}',

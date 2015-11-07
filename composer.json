@@ -13,7 +13,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "WebSemantics, Inc.",
+            "name": "Web Semantics, Inc.",
             "email": "info@websemantics.ca",
             "homepage": "http://websemantics.ca",
             "role": "Owner"
@@ -28,7 +28,10 @@
     "autoload": {
         "psr-4": {
             "Websemantics\\EntityBuilderExtension\\": "src/"
-        }
+        },
+        "files": [
+            "src/Helpers/helper_functions.php"
+        ]
     },
     "extra": {
         "branch-alias": {

@@ -2,7 +2,7 @@
 
 use Websemantics\EntityBuilderExtension\Command\ModifyEntity;
 use Websemantics\EntityBuilderExtension\Filesystem\Filesystem;
-
+use Websemantics\EntityBuilderExtension\Command\Traits\FileProcessor;
 use Anomaly\Streams\Platform\Addon\Module\Module;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 use Anomaly\Streams\Platform\Assignment\AssignmentModel;
@@ -18,7 +18,7 @@ use Websemantics\EntityBuilderExtension\Parser\AssignmentSlugParser;
 /**
  * Class ModifyEntityHandler
  *
- * Here we will only handle Fields creations
+ * This handles 'AssignmentWasCreated' event
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
@@ -29,20 +29,7 @@ use Websemantics\EntityBuilderExtension\Parser\AssignmentSlugParser;
 
 class ModifyEntityHandler
 {
-
-    /**
-     * The file system utility.
-     *
-     * @var Filesystem
-     */
-    protected $files;
-
-    /**
-     * The parser utility.
-     *
-     * @var Parser
-     */
-    protected $parser;
+    use  FileProcessor;
 
     /**
      * Create a new ModifyEntityHandler instance.
@@ -53,8 +40,8 @@ class ModifyEntityHandler
      */
     function __construct(Filesystem $files, Parser $parser)
     {
-        $this->files       = $files;
-        $this->parser       = $parser;
+        $this->setFiles($files);
+        $this->setParser($parser);
     }
 
     /**
@@ -65,32 +52,45 @@ class ModifyEntityHandler
     public function handle(ModifyEntity $command)
     { 
 
-        $stream     = $command->getStream();
-        $module     = $command->getModule();
-        $assignment = $command->getAssignment();
+        $module               = $command->getModule();
+        $stream               = $command->getStream();
+        $assignment           = $command->getAssignment();
 
-        $destination = $module->getPath();
+        // Get the field config params from build.php
+        $field_config = ebxGetFieldConfig($module, $stream->getNamespace(), 
+                                $assignment->getFieldSlug());
 
         $entity   = __DIR__ . '/../../../resources/assets/entity';
 
-        $this->files->setAvoidOverwrite(array_get($module->hasConfig('builder'), 
-                            'avoid_overwrite', []));
+        // Set a list of files to avoid overwrite
+        $this->files->setAvoidOverwrite(ebxGetAvoidOverwrite($module));
 
-        $data = $this->getTemplateData($module, $stream, $assignment);
+        // Get the template data
+        $data = $this->getTemplateData($module, $stream, $assignment, $field_config);
 
         $source = $entity.'/code/{namespace}/';
 
-        $destination = $module->getPath() . '/src/' . $data['namespace_folder'];
+        // Get the namespace destination folder, if any!
+        $namespace_folder = ebxGetNamespaceFolder($module, $data['namespace'], true);
+
+        $destination = $module->getPath() . '/src/' . $namespace_folder.'/';
+        
+        // Get the asignment class name, i.e. TextFieldType
+        $fieldTypeClassName = ebxGetFieldTypeClassName($assignment);
 
         // (1) Process the form builder class
-        $this->processFormBuilder($destination . $data['entity_name'] . '/Form/'. 
-                               $data['entity_name'].'FormBuilder.php',
-                               $entity.'/templates/field/form_simple_field.txt', $data);
+        if(!$field_config['hide_field'])
+            $this->processFormBuilder($destination . $data['entity_name'] . '/Form/'. 
+                                   $data['entity_name'].'FormBuilder.php',
+                                   $entity."/templates/field/form/$fieldTypeClassName.txt", 
+                                   $data);
         
         // (2) Process the table column class
-        $this->processTableColumns($destination . $data['entity_name'] . '/Table/'. 
-                               $data['entity_name'].'TableColumns.php',
-                               $entity.'/templates/field/table_simple_field.txt', $data);
+        if(!$field_config['hide_column'])
+            $this->processTableColumns($destination . $data['entity_name'] . '/Table/'. 
+                                   $data['entity_name'].'TableColumns.php',
+                                   $entity."/templates/field/table/".($data['column_template'] ? 'template/':'')."$fieldTypeClassName.txt", 
+                                   $data);
     }
 
     /**
@@ -102,18 +102,8 @@ class ModifyEntityHandler
      */
     protected function processFormBuilder($file, $template, $data)
     {
+        $this->processTemplate($file, $template, $data, 'protected $fields = [', '];');
 
-        // Use the simple field template
-        $template = $this->parser->parse($this->files->get($template), $data);
-
-        $content = $this->files->get($file);
-
-        $needle = 'protected $fields = [';
-
-        $content = substr_replace($content, $template, strpos($content, $needle), 
-                                  strlen($needle));
-
-        $this->files->put($file, $content);
     }
 
     /**
@@ -125,18 +115,42 @@ class ModifyEntityHandler
      */
     protected function processTableColumns($file, $template, $data)
     {
+        $this->processTemplate($file, $template, $data, '$builder->setColumns([', ']);');
+    }
 
-        // Use the simple field template
-        $template = $this->parser->parse($this->files->get($template), $data);
+    /**
+     * process the table columns or form template and add fields to it
+     *
+     * @param  string $file, a php file to modify
+     * @param  string  $templates file location
+     * @param  string $data used to replace placeholders inside all template files
+     * @param  string $startNeedle used to locate where to add data
+     * @param  string $endNeedle used to locate where to add data
+     */
+    protected function processTemplate($file, $template, $data, $startNeedle, $endNeedle)
+    {
+        if(file_exists($template)){
 
-        $content = $this->files->get($file);
+            $template = $this->parser->parse($this->files->get($template), $data);
 
-        $needle = '$builder->setColumns([';
+            $content = $this->files->get($file);
 
-        $content = substr_replace($content, $template, strpos($content, $needle), 
-                                  strlen($needle));
+            // Extract content between start and end neeles,
+            $start   = strpos($content, $startNeedle) + strlen($startNeedle);
+            $end     = strrpos($content, $endNeedle);
+            $columns = substr($content, $start, $end - $start);
 
-        $this->files->put($file, $content);
+            // Insert column template at the ned,
+            $columns = $columns . $template;
+
+            // Reinsert into the file,
+            $content = substr_replace($content, $columns, $start , 
+                                      $end - $start);
+
+            $this->files->put($file, $content);
+        } else {
+            dd($template);
+        }
     }
 
     /**
@@ -144,10 +158,12 @@ class ModifyEntityHandler
      *
      * @param  Module $module
      * @param  StreamInterface $stream
+     * @param  AssignmentModel $assignment
+     * @param  Array $field_config
      * @return array
      */
     protected function getTemplateData(Module $module, StreamInterface $stream, 
-                                       AssignmentModel $assignment)
+                                       AssignmentModel $assignment, $field_config)
     {
         $entityName     = (new EntityNameParser())->parse($stream);
         $moduleName     = (new ModuleNameParser())->parse($module);
@@ -155,8 +171,7 @@ class ModifyEntityHandler
         $namespace      = (new NamespaceParser())->parse($stream);
 
         // Wheather we use a grouping folder for all streams with the same namespace
-        $namespace_folder = array_get($module->hasConfig('builder'), 
-                            'namespace_folder', true) ? "$namespace/" : "";
+        $namespace_folder = ebxGetNamespaceFolder($module, $namespace);
         
         return [
             'namespace'                     => $namespace,
@@ -164,7 +179,10 @@ class ModifyEntityHandler
             'vendor_name'                   => (new VendorNameParser())->parse($module),
             'module_name'                   => $moduleName,
             'entity_name'                   => $entityName,
-            'field_slug'                    => $fieldSlug
+            'field_slug'                    => $fieldSlug,
+            'relation_name'                 => camel_case($fieldSlug),
+            'null_relationship_entry'       => ebxNullRelationshipEntry($module),
+            'column_template'               => $field_config['column_template']
         ];
     }
 }

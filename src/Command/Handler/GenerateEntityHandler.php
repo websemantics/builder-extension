@@ -1,5 +1,6 @@
 <?php namespace Websemantics\EntityBuilderExtension\Command\Handler;
 
+use Websemantics\EntityBuilderExtension\Command\Traits\FileProcessor;
 use Websemantics\EntityBuilderExtension\Command\GenerateEntity;
 use Websemantics\EntityBuilderExtension\Filesystem\Filesystem;
 use Websemantics\EntityBuilderExtension\Parser\EntityNameParser;
@@ -16,6 +17,8 @@ use Anomaly\Streams\Platform\Support\Parser;
 /**
  * Class GenerateEntityHandler
  *
+ * This handles 'StreamWasCreated' event
+ *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
  * @author    WebSemantics, Inc. <info@websemantics.ca>
@@ -25,20 +28,7 @@ use Anomaly\Streams\Platform\Support\Parser;
 
 class GenerateEntityHandler
 {
-
-    /**
-     * The file system utility.
-     *
-     * @var Filesystem
-     */
-    protected $files;
-
-    /**
-     * The parser utility.
-     *
-     * @var Parser
-     */
-    protected $parser;
+    use  FileProcessor;
 
     /**
      * Create a new GenerateEntityHandler instance.
@@ -49,8 +39,8 @@ class GenerateEntityHandler
      */
     function __construct(Filesystem $files, Parser $parser)
     {
-        $this->files       = $files;
-        $this->parser       = $parser;
+        $this->setFiles($files);
+        $this->setParser($parser);
     }
 
     /**
@@ -65,11 +55,9 @@ class GenerateEntityHandler
 
         $entity   = __DIR__ . '/../../../resources/assets/entity';
 
-        $namespace_folder = array_get($module->hasConfig('builder'), 
-                            'namespace_folder', true) ? "" : "{namespace}/";
+        $namespace_folder = ebxGetNamespaceFolderTemplate($module);
 
-        $this->files->setAvoidOverwrite(array_get($module->hasConfig('builder'), 
-                            'avoid_overwrite', []));
+        $this->files->setAvoidOverwrite(ebxGetAvoidOverwrite($module));
 
         $data = $this->getTemplateData($module, $stream);
 
@@ -77,7 +65,6 @@ class GenerateEntityHandler
 
         $this->files->parseDirectory($entity."/code/$namespace_folder" , 
                                      $destination.'/src', $data);
-
         try {
                                 
             $this->processFile(
@@ -104,30 +91,6 @@ class GenerateEntityHandler
     }
 
     /**
-     * Process a php target file  to append PHP syntax-sensitive content 
-     * from multiple template sources.
-     *
-     * @param  string $file, a php file to modify
-     * @param  array  $templates list of key (property name), value (template file)
-     * @param  string $data used to replace placeholders inside all template files
-     */
-    protected function processFile($file, $templates, $data)
-    {
-        $content = $this->files->get($file);
-
-        $phpParser = new GenericPhpParser($content, $data, $this->parser);
-
-        foreach ($templates as $property => $template) {
-           $phpParser->parse($property, $template);
-        }
-        
-        $content = $phpParser->prettyPrint();
-
-        if(!is_null($content))
-           $this->files->put($file, $content);
-    }
-
-    /**
      * Get the template data from a stream object.
      *
      * @param  Module $module
@@ -141,21 +104,24 @@ class GenerateEntityHandler
         $namespace  = (new NamespaceParser())->parse($stream);
 
         // Wheather we use a grouping folder for all streams with the same namespace
-        $namespace_folder = array_get($module->hasConfig('builder'), 
-                            'namespace_folder', true) ? "$namespace\\" : "";
+        $namespace_folder = ebxGetNamespaceFolder($module,$namespace);
 
         return [
-            'docblock'                      => array_get($module->hasConfig('builder'), 'docblock', ''),
+            'docblock'                      => ebxGetDocblock($module),
             'namespace'                     => $namespace,
             'seeder_data'                   => (new SeedersParser())->parse($module, $stream),
             'namespace_folder'              => $namespace_folder,
             'vendor_name'                   => (new VendorNameParser())->parse($module),
             'module_name'                   => $moduleName,
             'module_name_lower'             => strtolower($moduleName),
+            'stream_slug'                   => studly_case($stream->getSlug()),
             'entity_name'                   => $entityName,
             'entity_name_plural'            => str_plural($entityName),
             'entity_name_lower'             => strtolower($entityName),
-            'entity_name_lower_plural'      => strtolower(str_plural($entityName))
+            'entity_name_lower_plural'      => strtolower(str_plural($entityName)),
+            'extends_repository'            => ebxExtendsRepository($module),
+            'extends_repository_use'        => ebxExtendsRepositoryUse($module),
+
         ];
     }
 }

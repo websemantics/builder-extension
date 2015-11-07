@@ -1,0 +1,10 @@
+
+                [   'heading' => '{field_slug}',
+                    'value'   => function ({entity_name}Model $entry) {
+                    
+	                    return ($entry->{relation_name})? 
+	                    str_replace("{value}",  $entry->{relation_name}->getTitle(), 
+	                    	'{column_template}') :
+	                    	'{null_relationship_entry}';
+                    }
+                ],

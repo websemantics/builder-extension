@@ -42,7 +42,7 @@ class ModuleWasInstalledHandler {
 	{
 		$module = $event->getModule();
 
-		$namespaces = array_get($module->hasConfig('builder'), 'namespaces', []);
+		$namespaces = ebxGetNamespaces($module);
 
 		if(count($namespaces) > 0){
       $this->dispatch(new ModifyModule($module));

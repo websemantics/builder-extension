@@ -44,7 +44,7 @@ class StreamWasCreatedHandler {
 
 		foreach ($this->modules as $module) {
 			
-			$namespaces = array_get($module->hasConfig('builder'), 'namespaces', []);
+			$namespaces = ebxGetNamespaces($module);
 
 			if(in_array($stream->getNamespace(), $namespaces)){
         $this->dispatch(new GenerateEntity($module, $stream));

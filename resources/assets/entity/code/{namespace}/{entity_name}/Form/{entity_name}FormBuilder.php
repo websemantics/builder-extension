@@ -16,7 +16,6 @@ class {entity_name}FormBuilder extends FormBuilder
      *
      * @var array
      */
-    protected $fields = [
-    ];
+    protected $fields = [];
 
 }

@@ -8,6 +8,7 @@ use {vendor_name}\{module_name}Module\{namespace_folder}{entity_name}\{entity_na
 {docblock}
  * @package   {vendor_name}\{module_name}Module\{namespace_folder}{entity_name}\Table
  */
+
 class {entity_name}TableColumns
 {
 
@@ -18,7 +19,6 @@ class {entity_name}TableColumns
      */
     public function handle({entity_name}TableBuilder $builder)
     {
-        $builder->setColumns([
-            ]);
+        $builder->setColumns([]);
     }
 }

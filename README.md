@@ -10,9 +10,9 @@ Code generated for an entity includes the Entity Model and Repository, Plugin, S
 
 #### Step by Step Usage:
 
-1- Install this extension, see bottom page.  
+1- Install this extension, see install section at the bottom of this page.  
 
-2- Start with an empty module, 'Blog' (namespace = 'blog' by defaul)
+2- Start with an empty module, 'Blog' (namespace = `blog` by defaul)
 
 ```
 php artisan make:addon websemantics.module.blog

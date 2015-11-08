@@ -208,7 +208,7 @@ Make sure that the following folders/files have write permission:
 ### Change Log
 All notable changes to this project will be documented in this section.
 
-#### [04] - 2015-11-5
+#### [0.4] - 2015-11-5
 ##### Changed
 - Customize table columns and form fields,
 - More control on templates

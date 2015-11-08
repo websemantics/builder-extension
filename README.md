@@ -10,23 +10,73 @@ Code generated for an entity includes the Entity Model and Repository, Plugin, S
 
 #### Step by Step Usage:
 
-1- Starting with an empty module, use [Boxed](http://websemantics.github.io/boxed)
+1- Install this extension, see bottom page.  
 
-2- Create your streams migration files
-
-3- Create/edit the builder config file within your module at `resources/config/builder.php` to specify a list of stream namespaces that you wanted to generate entities for,
+2- Start with an empty module, 'Blog' (namespace = 'blog' by defaul)
 
 ```
-  'namespaces' => ['coffee']
+php artisan make:addon websemantics.module.blog
 ```
 
-4- Specify if you want the entities generated grouped in a folder (named after the current namespace)
+Or use [Boxed](http://websemantics.github.io/boxed)
+
+3- Create your module fields migration file 
+
+```
+php artisan make:migration create_module_fields 
+--addon=websemantics.module.blog
+```
+
+Change content to:
+
+```
+    protected $fields = [
+        'title'                      => 'anomaly.field_type.text',
+        'content'                    => 'anomaly.field_type.text'
+    ];
+```
+
+4- Create your module streams migration files
+
+```
+php artisan make:migration create_blog_post 
+--addon=websemantics.module.slug
+```
+
+Change content to:
+
+```
+    protected $stream = [
+        'slug'         => 'post',
+        'title_column' => 'title'
+    ];
+
+    protected $assignments = [
+        'title'        => [
+            'required' => true,
+            'unique'   => true
+        ],
+        'content'     => [
+            'required' => true,
+        ]
+    ];
+```
+
+5- Create/edit the builder config file within your module at `resources/config/builder.php` to specify a list of stream namespaces that you wanted to generate entities for,
+
+```
+  'namespaces' => ['blog']
+```
+
+Find examble builder config file at `entity_builder-extension/resources/config/builder-example.php`
+
+6- Specify if you want the streams entities generated grouped in a folder (named after the current namespace)
 
 ```
   'namespace_folder' => true,
 ```
 
-5- Specify your project docblock to be included with the generated code
+7- Specify your project docblock to be included with the generated code
 ```
 'docblock' =>
 ' * @link      http://websemantics.ca/ibuild
@@ -35,7 +85,9 @@ Code generated for an entity includes the Entity Model and Repository, Plugin, S
  * @author    Adnan Sagar <msagar@websemantics.ca>'
 ```
 
-6- If you have seed data for a particular Entity/Model (abc), place that in, `xyz-module/seeders/abc.php`. The content must be a list of entry values, for example:
+More settings are detailed in the `builder-example.php` file.
+
+8- If you have seed data for a particular Entity/Model (abc), place that in, `xyz-module/seeders/abc.php`. The content must be a list of entry values, for example:
 
 ```
   ['name' => 'jo', 'age' => 30], 
@@ -64,7 +116,7 @@ class {{module_name}}ModuleSeeder extends Seeder
 
 Refere to [example-module](https://github.com/websemantics/example-module)  or use [Boxed](http://websemantics.github.io/boxed/) to scaffold your module's code.
 
-7- Finally, install your module
+7- Finally, install your module from command line, or admin.
 
 #### Inner Working:
 
@@ -148,5 +200,7 @@ Make sure that the following folders/files have write permission:
 
 #### Install:
 
-To install this extension, download the code or clone this repo into your addon folder at 
-`addons/default/websemantics/entity_builder-extension`. Login your admin, and install from Addons/Extensions.
+- Download the code or clone this repo into your addon folder at 
+`addons/default/websemantics/entity_builder-extension`
+- Login to your admin
+- Install this extension from Addons/Extensions

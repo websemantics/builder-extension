@@ -27,7 +27,7 @@ php artisan make:migration create_module_fields
 --addon=websemantics.module.blog
 ```
 
-Change content to:
+Change class content to:
 
 ```
     protected $fields = [
@@ -43,7 +43,7 @@ php artisan make:migration create_blog_post
 --addon=websemantics.module.slug
 ```
 
-Change content to:
+Change class content to:
 
 ```
     protected $stream = [

@@ -204,3 +204,22 @@ Make sure that the following folders/files have write permission:
 `addons/default/websemantics/entity_builder-extension`
 - Login to your admin
 - Install this extension from Addons/Extensions
+
+# Change Log
+All notable changes to this project will be documented in this section.
+
+### [04] - 2015-11-5
+#### Changed
+- Customize Table cloumns and form fileds,
+- More control on templates
+- Example builder
+- Detailed documentation
+- Fixing bugs
+
+### [0.2] - 2015-04-5
+#### Changed
+- Creates streams entities
+- Allow to group in namespace folder
+- Seeding streams
+
+

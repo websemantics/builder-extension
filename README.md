@@ -210,9 +210,9 @@ All notable changes to this project will be documented in this section.
 
 #### [04] - 2015-11-5
 ##### Changed
-- Customize Table cloumns and form fileds,
+- Customize Table columns and form fields,
 - More control on templates
-- Example builder
+- Example builder config file
 - Detailed documentation
 - Fixing bugs
 

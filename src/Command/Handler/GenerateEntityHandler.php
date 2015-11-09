@@ -50,40 +50,50 @@ class GenerateEntityHandler
      */
     public function handle(GenerateEntity $command)
     { 
-        $stream = $command->getStream();
-        $module = $command->getModule();
+        $stream     = $command->getStream();
+        $module     = $command->getModule();
 
-        $entity   = __DIR__ . '/../../../resources/assets/entity';
+        $entityPath   = __DIR__ . '/../../../resources/assets/entity';
+        $modulePath   = __DIR__ . '/../../../resources/assets/module';
 
         $namespace_folder = ebxGetNamespaceFolderTemplate($module);
 
-        $this->files->setAvoidOverwrite(ebxGetAvoidOverwrite($module));
-
         $data = $this->getTemplateData($module, $stream);
+
+        $this->files->setAvoidOverwrite(ebxGetAvoidOverwrite($module,[
+            // $data['module_name'] . 'ModuleSeeder.php',
+            // $data['module_name'] . 'Module.php',
+            // $data['module_name'] . 'ModuleServiceProvider.php',
+            ]));
 
         $destination = $module->getPath();
 
-        $this->files->parseDirectory($entity."/code/$namespace_folder" , 
+        /* Make sure Module's main files are present: Seeder etc
+        (TODO, optomize, doesn't have to run everytime) */
+        $this->files->parseDirectory($modulePath."/src" , 
+                                     $destination.'/src', $data);
+
+        $this->files->parseDirectory($entityPath."/code/$namespace_folder" , 
                                      $destination.'/src', $data);
         try {
                                 
             $this->processFile(
                 $destination . '/src/' . $data['module_name'] . 'ModuleServiceProvider.php',
-                ['routes' => $entity.'/templates/module/routes.php',
-                 'bindings' => $entity.'/templates/module/bindings.php',
-                 'singletons' => $entity.'/templates/module/singletons.php'], $data);
+                ['routes' => $entityPath.'/templates/module/routes.php',
+                 'bindings' => $entityPath.'/templates/module/bindings.php',
+                 'singletons' => $entityPath.'/templates/module/singletons.php'], $data);
 
             $this->processFile(
                 $destination . '/src/' . $data['module_name'] . 'Module.php',
-                ['sections' => $entity.'/templates/module/sections.php'], $data);
+                ['sections' => $entityPath.'/templates/module/sections.php'], $data);
 
             $this->processFile(
                 $destination . '/resources/lang/en/addon.php',
-                ['section' => $entity.'/templates/module/addon.php'], $data);
+                ['section' => $entityPath.'/templates/module/addon.php'], $data);
 
             $this->processFile(
                 $destination . '/src/' . $data['module_name'] . 'ModuleSeeder.php',
-                ['seeders' => $entity.'/templates/module/seeding.php'], $data);
+                ['seeders' => $entityPath.'/templates/module/seeding.php'], $data);
 
         } catch (\PhpParser\Error $e) {
             die($e->getMessage());
@@ -99,9 +109,10 @@ class GenerateEntityHandler
      */
     protected function getTemplateData(Module $module, StreamInterface $stream)
     {
-        $entityName = (new EntityNameParser())->parse($stream);
-        $moduleName = (new ModuleNameParser())->parse($module);
-        $namespace  = (new NamespaceParser())->parse($stream);
+        $entityName  = (new EntityNameParser())->parse($stream);
+        $moduleName  = (new ModuleNameParser())->parse($module);
+        $namespace   = (new NamespaceParser())->parse($stream);
+        $vendorName  = (new VendorNameParser())->parse($module);
 
         // Wheather we use a grouping folder for all streams with the same namespace
         $namespace_folder = ebxGetNamespaceFolder($module,$namespace);
@@ -111,7 +122,8 @@ class GenerateEntityHandler
             'namespace'                     => $namespace,
             'seeder_data'                   => (new SeedersParser())->parse($module, $stream),
             'namespace_folder'              => $namespace_folder,
-            'vendor_name'                   => (new VendorNameParser())->parse($module),
+            'vendor_name'                   => $vendorName,
+            'vendor_name_lower'             => strtolower($vendorName),
             'module_name'                   => $moduleName,
             'module_name_lower'             => strtolower($moduleName),
             'stream_slug'                   => studly_case($stream->getSlug()),

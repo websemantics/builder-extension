@@ -29,7 +29,7 @@ class AssignmentWasCreatedHandler {
 	 */
 	public function __construct(ModuleCollection $moduleCollection)
 	{
-		$this->modules = $moduleCollection->all();
+		$this->modules = $moduleCollection->withConfig('builder');
 	}
 
 	/**
@@ -40,7 +40,6 @@ class AssignmentWasCreatedHandler {
 	 */
 	public function handle(AssignmentWasCreated $event)
 	{
-
 		$assignment = $event->getAssignment();
 		$stream = $assignment->getStream();
 
@@ -49,7 +48,7 @@ class AssignmentWasCreatedHandler {
 			$namespaces = ebxGetNamespaces($module);
 
 			if(in_array($stream->getNamespace(), $namespaces)){
-        $this->dispatch(new ModifyEntity($module, $stream, $assignment));
+       		  $this->dispatch(new ModifyEntity($module, $stream, $assignment));
 			}
 
 		}

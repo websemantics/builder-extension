@@ -51,7 +51,7 @@ class ModifyEntityHandler
      */
     public function handle(ModifyEntity $command)
     { 
-
+return;
         $module               = $command->getModule();
         $stream               = $command->getStream();
         $assignment           = $command->getAssignment();
@@ -91,6 +91,7 @@ class ModifyEntityHandler
                                    $data['entity_name'].'TableColumns.php',
                                    $entity."/templates/field/table/".($data['column_template'] ? 'template/':'')."$fieldTypeClassName.txt", 
                                    $data);
+
     }
 
     /**

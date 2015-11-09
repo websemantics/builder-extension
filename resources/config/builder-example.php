@@ -69,10 +69,11 @@ return [
 	| Repository Super Class
 	|--------------------------------------------------------------------------
 	| Extend all generated repositories to a common super class, if any!
+	| For example: 'Websemantics\NamedModule\Common\CommonRepository'
 	|
 	*/
 
-	'extends_repository' => 'Websemantics\NamedModule\Common\CommonRepository',
+	'extends_repository' => '',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -95,7 +96,7 @@ return [
 	'avoid_overwrite' => [
 		'Model.php',
 		'Repository.php',
-		// 'TableColumns.php',
+		// 'TableColumns.php', /* uncomment this if you no longer want this to be overwritten */
 	    // 'FormBuilder.php'
 		// 'ModuleSeeder.php'
 	],

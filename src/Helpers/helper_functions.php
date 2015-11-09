@@ -35,7 +35,7 @@
   if (!function_exists('ebxGetNamespaces')) {
 
       function ebxGetNamespaces($module){
-        $namespaces = array_get($module->hasConfig('builder'), 'namespaces', []);
+        $namespaces = array_get(config($module->getNamespace('builder')), 'namespaces', []);
         return isAssociative($namespaces) ? array_keys($namespaces) : $namespaces;
       }
 
@@ -54,10 +54,8 @@
 
       function ebxGetFieldConfig($module, $namespace_slug, $field_slug){
 
-        $namespaces = array_get($module->hasConfig('builder'), 'namespaces', []);
-
+        $namespaces = array_get(config($module->getNamespace('builder')), 'namespaces', []);
         $namespace = array_get($namespaces, $namespace_slug, []);
-
         $field = array_get($namespace, $field_slug, []);
 
         return [
@@ -82,7 +80,10 @@
 
       function ebxGetNamespaceFolder($module, $namespace, $forward = false){
         $namespace = ($forward) ? "$namespace/": "$namespace\\";
-        return array_get($module->hasConfig('builder'), 
+
+        $namespaces = array_get(config($module->getNamespace('builder')), 'namespaces', []);
+
+        return array_get(config($module->getNamespace('builder')), 
                             'namespace_folder', true) ? $namespace : "";
       }
 
@@ -98,7 +99,7 @@
   if (!function_exists('ebxGetNamespaceFolderTemplate')) {
 
       function ebxGetNamespaceFolderTemplate($module){
-        return array_get($module->hasConfig('builder'), 
+        return array_get(config($module->getNamespace('builder')), 
                             'namespace_folder', true) ? "" : "{namespace}/";
       }
 
@@ -113,9 +114,9 @@
 
   if (!function_exists('ebxGetAvoidOverwrite')) {
 
-      function ebxGetAvoidOverwrite($module){
-        return array_get($module->hasConfig('builder'), 
-                            'avoid_overwrite', []);
+      function ebxGetAvoidOverwrite($module, $extra = []){
+        return array_merge(array_get(config($module->getNamespace('builder')), 
+                            'avoid_overwrite', []),$extra);
       }
 
   }
@@ -130,7 +131,8 @@
   if (!function_exists('ebxGetDocblock')) {
 
       function ebxGetDocblock($module){
-        return array_get($module->hasConfig('builder'), 'docblock', '');
+        return array_get(config($module->getNamespace('builder')), 
+                            'docblock', '');
       }
 
   }
@@ -144,7 +146,9 @@
   if (!function_exists('ebxNullRelationshipEntry')) {
 
       function ebxNullRelationshipEntry($module){
-        return array_get($module->hasConfig('builder'), 'null_relationship_entry', '<span class="label label-default">null</span>');
+        return array_get(config($module->getNamespace('builder')), 
+                            'null_relationship_entry', 
+                            '<span class="label label-default">null</span>');
       }
 
   }
@@ -157,8 +161,9 @@
 
   if (!function_exists('ebxExtendsRepository')) {
 
-      function ebxExtendsRepository($module){
-        $extends_repository = array_get($module->hasConfig('builder'), 'extends_repository', '');
+      function ebxExtendsRepository($module){        
+        $extends_repository = array_get(config($module->getNamespace('builder')), 
+                            'extends_repository', '');
         $extends_repository = explode('\\', $extends_repository);
         return (!empty($extends_repository))?"extends " . end($extends_repository) . " ":"";
       }
@@ -174,8 +179,8 @@
   if (!function_exists('ebxExtendsRepositoryUse')) {
 
       function ebxExtendsRepositoryUse($module){
-        $extends_repository = array_get($module->hasConfig('builder'), 'extends_repository', null);
-        
+        $extends_repository =  array_get(config($module->getNamespace('builder')), 
+                            'extends_repository',null);        
         return (!empty($extends_repository))? "use $extends_repository;":"";
       }
 
@@ -196,9 +201,7 @@
       function ebxGetFieldTypeClassName($assignment){
 
         $fieldTypeClassName = get_class($assignment->getFieldType());
-        
-        return substr($fieldTypeClassName, 
-                                        strrpos($fieldTypeClassName, '\\') + 1);
+        return substr($fieldTypeClassName,strrpos($fieldTypeClassName, '\\') + 1);
 
       }
 

@@ -29,7 +29,7 @@ class ModuleWasInstalledHandler {
 	 */
 	public function __construct(ModuleCollection $moduleCollection)
 	{
-		$this->modules = $moduleCollection->all();
+		$this->modules = $moduleCollection->withConfig('builder');
 	}
 
 	/**
@@ -45,7 +45,7 @@ class ModuleWasInstalledHandler {
 		$namespaces = ebxGetNamespaces($module);
 
 		if(count($namespaces) > 0){
-      $this->dispatch(new ModifyModule($module));
+      		$this->dispatch(new ModifyModule($module));
 		}
 
 	}

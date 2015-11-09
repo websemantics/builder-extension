@@ -47,7 +47,7 @@ class ModifyModuleHandler
      */
     public function handle(ModifyModule $command)
     { 
-
+return;
         $module = $command->getModule();
 
         $data = $this->getTemplateData($module);
@@ -57,6 +57,10 @@ class ModifyModuleHandler
         $folder   = __DIR__ . '/../../../resources/assets/module';
 
         try {
+
+            /* Copy resources */
+            $this->files->parseDirectory($folder."/resources" , 
+                                         $destination.'/resources', $data);
                                 
             $this->processFile(
                 $destination . '/src/' . $data['module_name'] . 'ModuleServiceProvider.php',

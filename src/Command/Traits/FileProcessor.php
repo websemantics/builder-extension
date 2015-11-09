@@ -52,6 +52,26 @@ trait FileProcessor
     }
 
     /**
+     * Get the file content
+     *
+     * @param  string $file, a php file template
+     */
+    public function get($file)
+    {
+        return $this->files->get($file);
+    }
+
+    /**
+     * True if file exists
+     *
+     * @param  string $file, a php file template
+     */
+    public function exists($file)
+    {
+        $this->files->exists($file);
+    }
+
+    /**
      * Process a php target file to append PHP syntax-sensitive content 
      * from multiple template sources.
      *
@@ -71,8 +91,8 @@ trait FileProcessor
         }
         
         $content = $phpParser->prettyPrint();
-
-        if(!is_null($content))
+        if(!is_null($content)){
            $this->files->put($file, $content);
+        }
     }
 }

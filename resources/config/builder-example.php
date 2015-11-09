@@ -33,8 +33,8 @@ return [
 	|
 	| Boolean Field Type:
 	| ------------------
-	| For boolean type there's a default column_template if it's set to empty ''
-	|  			'column_template'    =>  ''
+	| For boolean type there's a default column_template if it's value is set to,
+	|  			'column_template'    =>  'default'
 	| You can also have your own markup, for that there's two variables {class} & {value}
 	| For example, '<span class="label label-{class}">{value}</span>'
 	| 

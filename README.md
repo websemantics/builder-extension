@@ -18,7 +18,7 @@ Code generated for an entity includes the Entity Model and Repository, Plugin, S
 php artisan make:addon vendor.module.blog
 ```
 
-Or use [Boxed](http://websemantics.github.io/boxed)
+Or use [Boxed](http://websemantics.github.io/boxed)(recommended)
 
 Make sure that main module files have write permissions '777'
 

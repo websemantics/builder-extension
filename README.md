@@ -30,8 +30,7 @@ src/BlogModuleServiceProvider.php
 3- Create your module fields migration file, or modify if already exists 
 
 ```
-php artisan make:migration create_module_fields 
---addon=vendor.module.blog
+php artisan make:migration create_module_fields --addon=vendor.module.blog
 ```
 
 Change class content to:
@@ -52,8 +51,7 @@ Anomaly\Streams\Platform\Database\Migration\Migration
 4- Create your module streams migration files
 
 ```
-php artisan make:migration create_stream_post 
---addon=vendor.module.blog
+php artisan make:migration create_stream_post --addon=vendor.module.blog
 ```
 
 Change class content to:

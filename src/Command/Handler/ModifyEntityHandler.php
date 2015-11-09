@@ -51,7 +51,6 @@ class ModifyEntityHandler
      */
     public function handle(ModifyEntity $command)
     { 
-return;
         $module               = $command->getModule();
         $stream               = $command->getStream();
         $assignment           = $command->getAssignment();

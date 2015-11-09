@@ -47,7 +47,6 @@ class ModifyModuleHandler
      */
     public function handle(ModifyModule $command)
     { 
-return;
         $module = $command->getModule();
 
         $data = $this->getTemplateData($module);

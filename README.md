@@ -126,11 +126,11 @@ Find examble builder config file at `entity_builder-extension/resources/config/b
 
 More settings are detailed in the `builder-example.php` file.
 
-9- If you have seed data for a particular Entity/Model (abc), place that in, `xyz-module/seeders/abc.php`. The content must be a list of entry values, for example:
+9- If you have seed data for a particular Entity/Model (abc), place that in, `blog-module/seeders/post.php`. The content must be a list of entry values, for example:
 
 ```
-  ['name' => 'jo', 'age' => 30], 
-  ['name' => 'kate', 'age' => 25]
+  ['title' => 'Laravel', 'content' => 'PHP framework'], 
+  ['title' => 'PyroCMS', 'content' => 'PHP CMS']
 ```
 
 This will be added to the Entity Seeder class. Also, make sure that the Module Seeder class has the following structure:

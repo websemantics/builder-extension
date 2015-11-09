@@ -31,16 +31,23 @@ return [
 	|		]
 	| ]
 	|
+	| Boolean Field Type:
+	| ------------------
+	| For boolean type there's a default column_template if it's set to empty ''
+	|  			'column_template'    =>  ''
+	| You can also have your own markup, for that there's two variables {class} & {value}
+	| For example, '<span class="label label-{class}">{value}</span>'
+	| 
 	|	*/
 
 	'namespaces' => [
 		'namespace' => [
-			'field_slug_1' => [
-				'column_template'    => '<span class="label label-info">{value}</span>'
-			],
-			'field_slug_2' => [
-				'hide_column'        => true
-			]
+			// 'field_slug_1' => [
+			// 	'column_template'    => '<span class="label label-info">{value}</span>'
+			// ],
+			// 'field_slug_2' => [
+			// 	'hide_column'        => true
+			// ]
 		]
 	],
 	

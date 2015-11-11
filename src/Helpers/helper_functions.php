@@ -164,8 +164,13 @@
       function ebxExtendsRepository($module){        
         $extends_repository = array_get(config($module->getNamespace('builder')), 
                             'extends_repository', '');
-        $extends_repository = explode('\\', $extends_repository);
-        return (!empty($extends_repository))?"extends " . end($extends_repository) . " ":"";
+
+        if($extends_repository) {
+          $extends_repository = explode('\\', $extends_repository);
+          return (!empty($extends_repository))?"extends " . end($extends_repository) . " ":"";
+        } else {
+          return '';
+        }
       }
 
   }

@@ -15,10 +15,10 @@ Code generated for an entity includes the Entity Model and Repository, Plugin, S
 2- Start with an empty module, 'Blog' (namespace = `blog` by defaul)
 
 ```
-php artisan make:addon vendor.module.blog
+php artisan make:module vendor blog
 ```
 
-Or use [Boxed](http://websemantics.github.io/boxed) (recommended)
+Or use [Boxed](http://websemantics.github.io/boxed)
 
 Make sure that main module files have write permissions '777'
 
@@ -105,8 +105,6 @@ return [
 
 ```
 
-Find examble builder config file at `entity_builder-extension/resources/config/builder-example.php`
-
 7- Specify if you want the streams entities generated grouped in a folder (named after the current namespace)
 
 ```
@@ -122,7 +120,7 @@ Find examble builder config file at `entity_builder-extension/resources/config/b
  * @author    Adnan Sagar <msagar@websemantics.ca>'
 ```
 
-More settings are detailed in the `builder-example.php` file.
+More settings are detailed in the `builder.php` file.
 
 9- If you have seed data for a particular Entity/Model (abc), place that in, `blog-module/seeders/post.php`. The content must be a list of entry values, for example:
 
@@ -254,6 +252,10 @@ Make sure that the following folders/files have write permission:
 
 ### Change Log
 All notable changes to this project will be documented in this section.
+
+#### [0.5] - 2015-11-17
+##### Changed
+- Add new command to create a module
 
 #### [0.4] - 2015-11-5
 ##### Changed

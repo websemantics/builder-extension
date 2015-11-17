@@ -15,11 +15,10 @@ use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
 
 class EntityBuilderExtensionServiceProvider extends AddonServiceProvider
 {
-    /**
-     * Addon event listeners.
-     *
-     * @var array
-     */
+    protected $commands = array('Websemantics\EntityBuilderExtension\Console\MakeModule');
+   
+    protected $singletons = ['Illuminate\Filesystem\Filesystem' => 'Websemantics\EntityBuilderExtension\Filesystem\Filesystem'];
+
     protected $listeners = [
         'Anomaly\Streams\Platform\Stream\Event\StreamWasCreated'         => ['Websemantics\EntityBuilderExtension\Handlers\Events\StreamWasCreatedHandler'],
         'Anomaly\Streams\Platform\Assignment\Event\AssignmentWasCreated' => ['Websemantics\EntityBuilderExtension\Handlers\Events\AssignmentWasCreatedHandler'],

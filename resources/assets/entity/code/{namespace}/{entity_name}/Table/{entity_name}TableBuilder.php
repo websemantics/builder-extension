@@ -21,4 +21,12 @@ class {entity_name}TableBuilder extends TableBuilder
         'edit'
     ];
 
+    /**
+     * The table actions.
+     *
+     * @var array
+     */
+    public $actions = [
+        'delete'
+    ];
 }

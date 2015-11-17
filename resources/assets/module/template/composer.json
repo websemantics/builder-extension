@@ -1,0 +1,11 @@
+{
+    "name": "{vendor_name_lower}/{module_name_lower}-module",
+    "type": "streams-addon",
+    "autoload": {
+        "psr-4": {
+            "{vendor_name}\\{module_name}Module\\": "src/"
+        }
+    },
+    "require": {
+    }
+}

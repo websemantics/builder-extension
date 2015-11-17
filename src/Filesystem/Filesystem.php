@@ -1,7 +1,6 @@
 <?php namespace Websemantics\EntityBuilderExtension\Filesystem;
 
 use FilesystemIterator;
-use Illuminate\Filesystem\Filesystem as FilesystemBase;
 use Anomaly\Streams\Platform\Support\Parser;
 
 /**
@@ -17,8 +16,8 @@ use Anomaly\Streams\Platform\Support\Parser;
  * @package   Websemantics\EntityBuilderExtension
  */
 
-class Filesystem extends FilesystemBase{
-
+class Filesystem extends \Illuminate\Filesystem\Filesystem 
+{
     /**
      * The parser utility.
      *

@@ -1,30 +1,30 @@
-<?php namespace Websemantics\EntityBuilderExtension\Parser;
+<?php
+
+namespace Websemantics\EntityBuilderExtension\Parser;
 
 use Websemantics\EntityBuilderExtension\PhpParser\Helper;
 use PhpParser\PrettyPrinter\Standard;
-use PhpParser\Parser;
 use PhpParser\Lexer;
 
 /**
- * Class GenericPhpParser
+ * Class GenericPhpParser.
  *
- * This helper class parse the service provider content to allow modifiying the 
- * content of some properties (for example, route, bindings etc), no messing about 
+ * This helper class parse the service provider content to allow modifiying the
+ * content of some properties (for example, route, bindings etc), no messing about
  * with regular expressions
  *
  * Parsing code is never easy, hence, this class isn't doing great job at being
- * easy to follow, .. 
+ * easy to follow, ..
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
+ *
  * @author    WebSemantics, Inc. <info@websemantics.ca>
  * @author    Adnan Sagar <msagar@websemantics.ca>
  * @copyright 2012-2015 Web Semantics, Inc.
- * @package   Websemantics\EntityBuilderExtension
  */
-
 class GenericPhpParser
-{   
+{
     protected $data;
 
     protected $helper;
@@ -38,18 +38,19 @@ class GenericPhpParser
     protected $prettyPrinter;
 
     /**
-     * Parse the PHP code of the ServiceProvider to get the named property (i.e. bindings)
+     * Parse the PHP code of the ServiceProvider to get the named property (i.e. bindings).
+     *
      * @param string $phpCode, the content of a php file,
-     * @param string $data used to replace placeholders inside template file
-     * @param string $parser text parser
+     * @param string $data     used to replace placeholders inside template file
+     * @param string $parser   text parser
      */
-    public function __construct($phpCode, $data , $parser)
+    public function __construct($phpCode, $data, $parser)
     {
         $this->data = $data;
 
         $this->parser = $parser;
 
-        $this->phpParser = new Parser(new Lexer());
+        $this->phpParser = new \PhpParser\Parser\Php5(new Lexer());
 
         $this->prettyPrinter = new Standard();
 
@@ -59,57 +60,60 @@ class GenericPhpParser
     }
 
     /**
-     * Parse 
+     * Parse.
      *
-     * @param string $name the name of the property
+     * @param string $name         the name of the property
      * @param string $templateFile the file contains the property template data
-     * @param Boolean $front, set location to the front of the array 
+     * @param bool   $front,       set location to the front of the array
+     *
      * @return array
      */
     public function parse($name, $templateFile, $front = false)
-    {   
-        if(is_null($this->code))
+    {
+        if (is_null($this->code)) {
             return;
+        }
 
         // (1) Parse the template to get its content as an associative array
-        $template = file_get_contents($templateFile);                               
+        $template = file_get_contents($templateFile);
         $template = $this->parser->parse($template, $this->data);
 
         $templateNode = $this->phpParser->parse($template);
 
         // Reading template file
-        if(count($templateNode) > 0 && $templateNode[0]->getType() !== 'Expr_Array')
-            throw new \Exception("Incorrect template formatting", 1);
-       
-        // (2) Parse the php code for the named property 
+        if (count($templateNode) > 0 && $templateNode[0]->getType() !== 'Expr_Array') {
+            throw new \Exception('Incorrect template formatting', 1);
+        }
+
+        // (2) Parse the php code for the named property
         // '$name' (i.e. 'route', 'bindings' etc), get its array value
         // then merge with the template array
         // TO DO: abstract to a better logic
-        if($this->code[0]->getType() === 'Stmt_Namespace'){
+        if ($this->code[0]->getType() === 'Stmt_Namespace') {
             $this->helper->parseClassProperty($this->code[0], $name, $templateNode[0], $front);
         }
 
         // (3) Parse the addon.php language file for the section list
         // TO DO: abstract to a better logic
-        if($this->code[0]->getType() === 'Stmt_Return' && 
-           $this->code[0]->expr->getType() === 'Expr_Array'){
+        if ($this->code[0]->getType() === 'Stmt_Return' &&
+           $this->code[0]->expr->getType() === 'Expr_Array') {
             $this->helper->parseReturnArray($this->code[0], $name, $templateNode[0], $front);
         }
-
     }
 
     /**
-     * Get the phpCode content
+     * Get the phpCode content.
      *
      * @return string
      */
     public function prettyPrint()
     {
-        if(is_null($this->code))
-            return null;
+        if (is_null($this->code)) {
+            return;
+        }
 
         $content = $this->prettyPrinter->prettyPrintFile($this->code);
-        
-        return str_replace("\\\\", "\\", $content);
+
+        return str_replace('\\\\', '\\', $content);
     }
 }

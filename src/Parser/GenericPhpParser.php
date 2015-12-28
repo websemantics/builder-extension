@@ -5,19 +5,19 @@ namespace Websemantics\EntityBuilderExtension\Parser;
 use Websemantics\EntityBuilderExtension\PhpParser\Helper;
 use PhpParser\PrettyPrinter\Standard;
 use PhpParser\Lexer;
+use PhpParser\ParserFactory;
 
 /**
  * Class GenericPhpParser.
  *
  * This helper class parse the service provider content to allow modifiying the
- * content of some properties (for example, route, bindings etc), no messing about
- * with regular expressions
+ * content of some properties (for example, routes, bindings etc), no need messing about
+ * with regular expressions, oh yeah!
  *
- * Parsing code is never easy, hence, this class isn't doing great job at being
- * easy to follow, ..
+ * Parsing code is never easy, hence, this class isn't doing a great job at being
+ * easy to follow, .. go figure!
  *
- * @link      http://websemantics.ca/ibuild
- * @link      http://ibuild.io
+ * @link      http://websemantics.ca
  *
  * @author    WebSemantics, Inc. <info@websemantics.ca>
  * @author    Adnan Sagar <msagar@websemantics.ca>
@@ -50,9 +50,10 @@ class GenericPhpParser
 
         $this->parser = $parser;
 
-        $this->phpParser = new \PhpParser\Parser\Php5(new Lexer());
+        // $this->phpParser = new \PhpParser\Parser\Php7(new Lexer());
+        $this->phpParser = (new ParserFactory())->create(ParserFactory::PREFER_PHP7);
 
-        $this->prettyPrinter = new Standard();
+        $this->prettyPrinter = new Standard(['shortArraySyntax' => true]);
 
         $this->helper = new Helper();
 

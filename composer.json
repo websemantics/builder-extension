@@ -28,7 +28,7 @@
     "autoload": {
         "psr-4": {
             "Websemantics\\EntityBuilderExtension\\": "src/",
-            "PhpParser\\": "vvendor/nikic/php-parser/lib/PhpParser/"
+            "PhpParser\\": "vendor/nikic/php-parser/lib/PhpParser/"
         },
         "files": [
             "src/Helpers/helper_functions.php"

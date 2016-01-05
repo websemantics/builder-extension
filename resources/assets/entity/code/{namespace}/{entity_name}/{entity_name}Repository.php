@@ -12,7 +12,6 @@ use {vendor_name}\{module_name}Module\{namespace_folder}{entity_name}\Contract\{
 
 class {entity_name}Repository {extends_repository}implements {entity_name}RepositoryInterface
 {
-
     /**
      * The {entity_name_lower} model.
      *
@@ -32,8 +31,6 @@ class {entity_name}Repository {extends_repository}implements {entity_name}Reposi
 
     /**
      * Truncate {entity_name_lower}.
-     *
-     * @return static
      */
     public function truncate()
     {
@@ -44,11 +41,59 @@ class {entity_name}Repository {extends_repository}implements {entity_name}Reposi
      * Create a new {entity_name_lower}.
      *
      * @param array $attributes
-     * @return static
      */
     public function create(array $attributes)
     {
         return $this->model->create($attributes);
     }
 
+    /**
+     * Return model.
+     */
+    public function model()
+    {
+        return $this->model;
+    }
+
+    /**
+     * Find a model by id or list of attributes
+     *
+     * @param int / array $attributes, value of record (id) or list of (attributes)
+     */
+    public function find($attributes)
+    {
+        if(is_array($attributes)){
+            return $this->model->where($attributes)->first();  
+        }  elseif(is_numeric($id = $attributes)){
+            return $this->model->find($id);
+        }
+
+        return null;
+    }
+
+    /**
+     * Find a model by a specific field
+     *
+     * @param string $field, the field to find by
+     * @param string / int, $value, value of that field
+     * @param string $operation, the relational operation
+     */
+    public function findBy($field, $value, $operation = '=')
+    {
+        return $this->model->where($field, $operation, $value)->first(); 
+    }
+
+    /**
+     * Find a model by a list of attributes, if not found, attept to create one
+     *
+     * @param array $attributes, list of attributes values
+     */
+    public function findOrNew(array $attributes)
+    {
+        if(is_null($model = $this->find($attributes))){
+            return $this->create($attributes);
+        }
+
+        return $model;
+    }
 }

@@ -253,6 +253,10 @@ Make sure that the following folders/files have write permission:
 ### Change Log
 All notable changes to this project will be documented in this section.
 
+#### [0.6] - 2016-01-05
+##### Changed
+- Add common methods to Repository class
+
 #### [0.5] - 2015-11-17
 ##### Changed
 - Add new command to create a module

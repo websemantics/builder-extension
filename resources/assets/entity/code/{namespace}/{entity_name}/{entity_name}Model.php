@@ -14,10 +14,10 @@ class {entity_name}Model extends {namespace}{stream_slug}EntryModel implements {
 {
 
     /**
-     * The cache minutes.
+     * The number of minutes to cache query results.
      *
-     * @var int
+     * @var null|false|int
      */
-    protected $cacheMinutes = 9999;
+    protected $ttl = false;
 
 }

@@ -4,7 +4,7 @@ namespace Websemantics\EntityBuilderExtension\Command\Handler;
 
 use Websemantics\EntityBuilderExtension\Command\ModifyEntity;
 use Websemantics\EntityBuilderExtension\Filesystem\Filesystem;
-use Websemantics\EntityBuilderExtension\Command\Traits\FileProcessor;
+use Websemantics\EntityBuilderExtension\Command\Traits\TemplateProcessor;
 use Anomaly\Streams\Platform\Addon\Module\Module;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 use Anomaly\Streams\Platform\Assignment\AssignmentModel;
@@ -28,7 +28,7 @@ use Websemantics\EntityBuilderExtension\Parser\AssignmentSlugParser;
  */
 class ModifyEntityHandler
 {
-    use FileProcessor;
+    use TemplateProcessor;
 
     /**
      * Create a new ModifyEntityHandler instance.
@@ -74,15 +74,17 @@ class ModifyEntityHandler
         // Get the namespace destination folder, if any!
         $namespace_folder = ebxGetNamespaceFolder($module, $data['namespace'], true);
 
-        $destination = $module->getPath().'/src/'.$namespace_folder.'/';
+        $destination = $module->getPath();
 
-        // Get the asignment class name, i.e. TextFieldType
+        $entity_destination = $destination.'/src/'.$namespace_folder.'/'.$data['entity_name'];
+
+        // Get the assigned class name, i.e. TextFieldType
         $fieldTypeClassName = ebxGetFieldTypeClassName($assignment);
 
         // (1) Process the form builder class
         if (!$field_config['hide_field']) {
             $this->processFormBuilder(
-                $destination.$data['entity_name'].'/Form/'.
+                $entity_destination.'/Form/'.
                 $data['entity_name'].'FormBuilder.php',
                 $entity."/templates/field/form/$fieldTypeClassName.txt",
                 $data
@@ -92,12 +94,19 @@ class ModifyEntityHandler
         // (2) Process the table column class
         if (!$field_config['hide_column']) {
             $this->processTableColumns(
-                $destination.$data['entity_name'].'/Table/'.
+                $entity_destination.'/Table/'.
                 $data['entity_name'].'TableColumns.php',
                 $entity.'/templates/field/table/'.($data['column_template'] ? 'template/' : '')."$fieldTypeClassName.txt",
                 $data
             );
         }
+
+        // (3) Process the field language file
+        $this->processFile(
+            $destination.'/resources/lang/en/field.php',
+            [$data['field_slug'] => $entity.'/templates/module/field.php'],
+            $data
+        );
     }
 
     /**
@@ -122,44 +131,6 @@ class ModifyEntityHandler
     protected function processTableColumns($file, $template, $data)
     {
         $this->processTemplate($file, $template, $data, '$builder->setColumns([', ']);');
-    }
-
-    /**
-     * process the table columns or form template and add fields to it.
-     *
-     * @param string $file,       a php file to modify
-     * @param string $templates   file location
-     * @param string $data        used to replace placeholders inside all template files
-     * @param string $startNeedle used to locate where to add data
-     * @param string $endNeedle   used to locate where to add data
-     */
-    protected function processTemplate($file, $template, $data, $startNeedle, $endNeedle)
-    {
-        if (file_exists($template)) {
-            $template = $this->parser->parse($this->files->get($template), $data);
-
-            $content = $this->files->get($file);
-
-            // Extract content between start and end neeles,
-            $start = strpos($content, $startNeedle) + strlen($startNeedle);
-            $end = strrpos($content, $endNeedle);
-            $columns = substr($content, $start, $end - $start);
-
-            // Insert column template at the ned,
-            $columns = $columns.$template;
-
-            // Reinsert into the file,
-            $content = substr_replace(
-                $content,
-                $columns,
-                $start,
-                $end - $start
-            );
-
-            $this->files->put($file, $content);
-        } else {
-            dd('Missing template: '.$template);
-        }
     }
 
     /**
@@ -193,6 +164,7 @@ class ModifyEntityHandler
             'module_name' => $moduleName,
             'entity_name' => $entityName,
             'field_slug' => $fieldSlug,
+            'field_label' => studly_case($fieldSlug),
             'relation_name' => camel_case($fieldSlug),
             'null_relationship_entry' => ebxNullRelationshipEntry($module),
             'column_template' => $field_config['column_template'],

@@ -256,7 +256,7 @@ All notable changes to this project will be documented in this section.
 #### [Dev] - 2016-01-16
 ##### Changed
 - Generate language files for sreams and fields
-- fixing few bugs regarding Seeders
+- fixing few bugs with Entity Seeders
 
 #### [0.6] - 2016-01-05
 ##### Changed

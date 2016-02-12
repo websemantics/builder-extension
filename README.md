@@ -1,5 +1,19 @@
-## Entity Builder Extension
+```
+  ______       _   _ _           ____        _ _     _            
+ |  ____|     | | (_) |         |  _ \      (_) |   | |           
+ | |__   _ __ | |_ _| |_ _   _  | |_) |_   _ _| | __| | ___ _ __  
+ |  __| | '_ \| __| | __| | | | |  _ <| | | | | |/ _` |/ _ \ '__| 
+ | |____| | | | |_| | |_| |_| | | |_) | |_| | | | (_| |  __/ |    
+ |______|_| |_|\__|_|\__|\__, | |____/ \__,_|_|_|\__,_|\___|_|    
+ |  ____|    | |          __/ |(_)                                
+ | |__  __  _| |_ ___ _ _|___/_ _  ___  _ __                      
+ |  __| \ \/ / __/ _ \ '_ \/ __| |/ _ \| '_ \                     
+ | |____ >  <| ||  __/ | | \__ \ | (_) | | | |  _   _   _         
+ |______/_/\_\\__\___|_| |_|___/_|\___/|_| |_| (_) (_) (_)        
+  Web Semantics, Inc.
 
+ Version 0.6
+```                                                                                                                                 
 Scaffold your PyroCMS Modules in style. This extension once installed, works silently in the background to generate entities for all your streams. It will also configure your module with routes, bindings, language file entries etc, so you don't have to lift a finger
 
 ### What is an Entity
@@ -253,15 +267,12 @@ Make sure that the following folders/files have write permission:
 ### Change Log
 All notable changes to this project will be documented in this section.
 
-#### [Dev] - 2016-02-12
+#### [0.6] - 2016-02-12
 ##### Changed
+- Add common methods to Repository class
 - Generate language files for stream, fields and section
 - fixing few bugs with Entity Seeders
 - Code updates due to changes in Pyro
-
-#### [0.6] - 2016-01-05
-##### Changed
-- Add common methods to Repository class
 
 #### [0.5] - 2015-11-17
 ##### Changed

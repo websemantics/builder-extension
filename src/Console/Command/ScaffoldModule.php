@@ -115,6 +115,7 @@ class ScaffoldModule implements SelfHandling
             'docblock' => ' *',
             'vendor_name' => $vendorName,
             'vendor_name_lower' => strtolower($vendorName),
+            'namespace' => strtolower($moduleName),
             'module_name' => $moduleName,
             'module_name_lower' => strtolower($moduleName),
         ];

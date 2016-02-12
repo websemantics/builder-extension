@@ -35,7 +35,7 @@ return [
 	|	*/
 
 	'namespaces' => [
-		'namespace' => [
+		'{namespace}' => [
 			// 'field_slug_1' => [
 			// 	'column_template'    => '<span class="label label-info">{value}</span>'
 			// ],

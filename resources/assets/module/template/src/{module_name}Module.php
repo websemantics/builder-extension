@@ -24,6 +24,5 @@ class {module_name}Module extends Module
      * @var array
      */
     protected $sections = [
-        'example'
     ];
 }

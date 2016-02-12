@@ -77,11 +77,6 @@ class ModifyModuleHandler
                 true
             );
 
-            $this->processFile(
-                $destination.'/resources/lang/en/addon.php',
-                ['section' => $folder.'/addon.php'],
-                $data
-            );
         } catch (\PhpParser\Error $e) {
             die($e->getMessage());
         }

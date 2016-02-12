@@ -1,23 +1,25 @@
-<?php namespace Websemantics\EntityBuilderExtension\Console;
+<?php
+
+namespace Websemantics\EntityBuilderExtension\Console;
 
 use Websemantics\EntityBuilderExtension\Console\Command\ScaffoldModule;
-use Anomaly\Streams\Platform\Addon\Command\RegisterAddons;
+use Anomaly\Streams\Platform\Addon\AddonManager;
+use Anomaly\Streams\Platform\Addon\Console\Command\MakeAddonPaths;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
- * Class MakeModule
+ * Class MakeModule.
  *
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
+ *
  * @author    Adnan Sagar <msagar@websemantics.ca>
  * @copyright 2012-2015 Web Semantics, Inc.
- * @package   Websemantics\EntityBuilderExtension
  */
-
 class MakeModule extends Command
 {
     use DispatchesJobs;
@@ -36,31 +38,32 @@ class MakeModule extends Command
      */
     protected $description = 'Create a new module for the Entity Builder.';
 
- 	/**
+    /**
      * Execute the console command.
-     * 
      */
-    public function fire()
+    public function fire(AddonManager $addons)
     {
-    	$type = 'module';
+        $type = 'module';
         $vendor = $this->argument('vendor');
         $slug = $this->argument('slug');
 
-        if (empty($vendor) || empty($slug) ) {
+        if (empty($vendor) || empty($slug)) {
             throw new \Exception("Provide the vendor and module's slug");
         }
 
-        $this->dispatch(new ScaffoldModule($vendor, $type, $slug, $this));
+        $path = $this->dispatch(new MakeAddonPaths($vendor, $type, $slug, $this));
 
-        $this->dispatch(new RegisterAddons());
+        $this->dispatch(new ScaffoldModule($path, $vendor, $type, $slug, $this));
+
+        $addons->register();
 
         if ($type == 'module') {
             $this->call(
                 'make:migration',
                 [
-                    'name'     => 'create_' . $slug . '_fields',
-                    '--addon'  => "{$vendor}.{$type}.{$slug}",
-                    '--fields' => true
+                    'name' => 'create_'.$slug.'_fields',
+                    '--addon' => "{$vendor}.{$type}.{$slug}",
+                    '--fields' => true,
                 ]
             );
         }
@@ -75,7 +78,7 @@ class MakeModule extends Command
     {
         return [
             ['vendor', InputArgument::REQUIRED, 'The module\'s vendor.'],
-            ['slug', InputArgument::REQUIRED, 'The module\'s slug.']
+            ['slug', InputArgument::REQUIRED, 'The module\'s slug.'],
         ];
     }
 
@@ -87,7 +90,7 @@ class MakeModule extends Command
     protected function getOptions()
     {
         return [
-            ['shared', null, InputOption::VALUE_NONE, 'Indicates if the module should be created in shared addons.']
+            ['shared', null, InputOption::VALUE_NONE, 'Indicates if the module should be created in shared addons.'],
         ];
     }
 }

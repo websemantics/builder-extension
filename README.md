@@ -253,10 +253,11 @@ Make sure that the following folders/files have write permission:
 ### Change Log
 All notable changes to this project will be documented in this section.
 
-#### [Dev] - 2016-01-16
+#### [Dev] - 2016-02-12
 ##### Changed
-- Generate language files for sreams and fields
+- Generate language files for stream, fields and section
 - fixing few bugs with Entity Seeders
+- Code updates due to changes in Pyro
 
 #### [0.6] - 2016-01-05
 ##### Changed

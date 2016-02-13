@@ -80,6 +80,7 @@ class GenerateEntityHandler
             $destination.'/src',
             $data
         );
+
         try {
             $this->processFile(
                 $destination.'/src/'.$data['module_name'].'ModuleServiceProvider.php',
@@ -103,8 +104,8 @@ class GenerateEntityHandler
             );
 
             $this->processFile(
-                $destination.'/resources/lang/en/addon.php',
-                ['section' => $entityPath.'/templates/module/addon.php'],
+                $destination.'/resources/lang/en/section.php',
+                [$data['entity_name_lower_plural'] => $entityPath.'/templates/module/section.php'],
                 $data
             );
 

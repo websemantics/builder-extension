@@ -33,10 +33,8 @@ class Helper
      */
     public function parseReturnArray(&$node, $name, $templateNode, $front)
     {
-        $array = [];
         $matchKey = null;
-
-        $templateArray = $this->node2Array($templateNode);
+        $array = $this->node2Array($templateNode);
 
         foreach ($node->expr->items as $key => $property) {
             if ($property->getType() === 'Expr_ArrayItem') {
@@ -45,12 +43,12 @@ class Helper
                     $matchKey = $key;
                     $array = ($front) ?
                     array_merge(
-                        $templateArray,
+                        $array,
                         $this->node2Array($property->value)
                     ) :
                     array_merge(
                         $this->node2Array($property->value),
-                        $templateArray
+                        $array
                     );
                     break;
                 }
@@ -78,9 +76,7 @@ class Helper
      */
     public function parseClassProperty(&$node, $name, $templateNode, $front = fales)
     {
-        $array = [];
-
-        $templateArray = $this->node2Array($templateNode);
+        $array = $this->node2Array($templateNode);
 
         foreach ($node->stmts as $block) {
             if ($block->getType() === 'Stmt_Class') {
@@ -93,12 +89,12 @@ class Helper
 
                         $array = ($front) ?
                         array_merge(
-                            $templateArray,
+                            $array,
                             $this->node2Array($property->props[0]->default)
                         ) :
                         array_merge(
                             $this->node2Array($property->props[0]->default),
-                            $templateArray
+                            $array
                         );
 
                         break;

@@ -14,6 +14,7 @@ use Websemantics\EntityBuilderExtension\Parser\ModuleNameParser;
 use Websemantics\EntityBuilderExtension\Parser\VendorNameParser;
 use Websemantics\EntityBuilderExtension\Parser\NamespaceParser;
 use Websemantics\EntityBuilderExtension\Parser\AssignmentSlugParser;
+use Websemantics\EntityBuilderExtension\Parser\AssignmentLabelParser;
 
 /**
  * Class ModifyEntityHandler.
@@ -152,7 +153,10 @@ class ModifyEntityHandler
         $entityName = (new EntityNameParser())->parse($stream);
         $moduleName = (new ModuleNameParser())->parse($module);
         $fieldSlug = (new AssignmentSlugParser())->parse($assignment);
+        $fieldLabel = (new AssignmentLabelParser())->parse($assignment);
         $namespace = (new NamespaceParser())->parse($stream);
+
+
 
         // Wheather we use a grouping folder for all streams with the same namespace
         $namespace_folder = ebxGetNamespaceFolder($module, $namespace);
@@ -164,7 +168,7 @@ class ModifyEntityHandler
             'module_name' => $moduleName,
             'entity_name' => $entityName,
             'field_slug' => $fieldSlug,
-            'field_label' => studly_case($fieldSlug),
+            'field_label' => $fieldLabel,
             'relation_name' => camel_case($fieldSlug),
             'null_relationship_entry' => ebxNullRelationshipEntry($module),
             'column_template' => $field_config['column_template'],

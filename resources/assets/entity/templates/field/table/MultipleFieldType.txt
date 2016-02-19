@@ -1,7 +1,11 @@
 
                 [   'heading' => '{field_slug}',
                     'value'   => function ({entity_name}Model $entry) {
-                        return ($entry->{relation_name}) ? $entry->{relation_name}->getTitle() :
-                        '{null_relationship_entry}';
+    					$result = ($entry->{field_slug}) ? '' : '<span class="label label-default">null</span>';
+
+					    foreach ($entry->{field_slug} as $item) {
+					        $result .= '<span class="label label-default">' . $item->getTitle() . '</span>&nbsp;';
+					    }
+    					return $result;
                     }
                 ],

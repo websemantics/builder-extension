@@ -1,6 +1,6 @@
 <?php
 
 [
-            'name' => '{entity_name}',
+            'name' => '{entity_label}',
             'description' => '',
     ];

@@ -10,6 +10,7 @@ use Websemantics\EntityBuilderExtension\Parser\ModuleNameParser;
 use Websemantics\EntityBuilderExtension\Parser\VendorNameParser;
 use Websemantics\EntityBuilderExtension\Parser\NamespaceParser;
 use Websemantics\EntityBuilderExtension\Parser\SeedersParser;
+use Websemantics\EntityBuilderExtension\Parser\EntityLabelParser;
 use Anomaly\Streams\Platform\Addon\Module\Module;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 use Anomaly\Streams\Platform\Support\Parser;
@@ -142,6 +143,7 @@ class GenerateEntityHandler
     protected function getTemplateData(Module $module, StreamInterface $stream)
     {
         $entityName = (new EntityNameParser())->parse($stream);
+        $entityLabel = (new EntityLabelParser())->parse($stream);
         $moduleName = (new ModuleNameParser())->parse($module);
         $namespace = (new NamespaceParser())->parse($stream);
         $vendorName = (new VendorNameParser())->parse($module);
@@ -160,6 +162,8 @@ class GenerateEntityHandler
             'module_name_lower' => strtolower($moduleName),
             'stream_slug' => $stream->getSlug(),
             'studly_case_stream_slug' => studly_case($stream->getSlug()),
+            'entity_label' => $entityLabel,
+            'entity_label_plural' => str_plural($entityLabel),
             'entity_name' => $entityName,
             'entity_name_plural' => str_plural($entityName),
             'entity_name_lower' => strtolower($entityName),

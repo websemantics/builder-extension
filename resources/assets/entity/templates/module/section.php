@@ -1,3 +1,3 @@
 <?php [
-	    'title' => '{entity_name_plural}'
+	    'title' => '{entity_label_plural}'
 	];

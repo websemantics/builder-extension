@@ -4,6 +4,7 @@ use Illuminate\Foundation\Bus\DispatchesCommands;
 use Anomaly\Streams\Platform\Addon\Module\Event\ModuleWasInstalled;
 use Anomaly\Streams\Platform\Addon\Module\ModuleCollection;
 use Websemantics\EntityBuilderExtension\Command\ModifyModule;
+use Websemantics\EntityBuilderExtension\Command\SeedModule;
 
 /**
  * Class ModuleWasInstalledHandler
@@ -46,6 +47,7 @@ class ModuleWasInstalledHandler {
 
 		if(count($namespaces) > 0){
       		$this->dispatch(new ModifyModule($module));
+      		$this->dispatch(new SeedModule($module));
 		}
 
 	}

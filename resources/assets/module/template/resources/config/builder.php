@@ -8,7 +8,7 @@ return [
 	|--------------------------------------------------------------------------
 	| A list of all the Stream Namespaces used in this Module.
 	|
-	| More controel over code generated can be established per assigment, 
+	| More control over code generated can be established per assignment, 
 	| for example, hide / show table columns and form fields per stream assignment, 
 	| also table column field view / template.
 	|
@@ -18,7 +18,7 @@ return [
 	|		'namespace' => [
 	|			'field_slug' => [
 	|				'hide_column' => true,  *optional, (false by default)
-	|				'hide_field'  => fale,  *optional, (false by default)
+	|				'hide_field'  => false,  *optional, (false by default)
 	|				'column_template'    => 
 	|     '<span class="label label-default">{value}</span> *optional, ('{value}' by default)
 	|			]
@@ -81,7 +81,7 @@ return [
 	| Avoid Overwrite
 	|--------------------------------------------------------------------------
 	|
-	| For developement and to avoid overwriting on code added, list all the files 
+	| For development and to avoid overwriting on code added, list all the files 
 	| that should not be overwritten by the builder. Use the last part of the 
 	| file name, ..
 	| 

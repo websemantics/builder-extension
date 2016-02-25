@@ -10,10 +10,10 @@
  |  __| \ \/ / __/ _ \ '_ \/ __| |/ _ \| '_ \                     
  | |____ >  <| ||  __/ | | \__ \ | (_) | | | |  _   _   _         
  |______/_/\_\\__\___|_| |_|___/_|\___/|_| |_| (_) (_) (_)        
-  Web Semantics, Inc.
+  v0.6
+```                                                                                                       
+> Last update: 12 Feb 2016
 
- Version 0.6
-```                                                                                                                                 
 Scaffold your PyroCMS Modules in style. This extension once installed, works silently in the background to generate entities for all your streams. It will also configure your module with routes, bindings, language file entries etc, so you don't have to lift a finger
 
 ### What is an Entity

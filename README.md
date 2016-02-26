@@ -10,9 +10,9 @@
  |  __| \ \/ / __/ _ \ '_ \/ __| |/ _ \| '_ \                     
  | |____ >  <| ||  __/ | | \__ \ | (_) | | | |  _   _   _         
  |______/_/\_\\__\___|_| |_|___/_|\___/|_| |_| (_) (_) (_)        
-  v0.6
+  v0.7
 ```                                                                                                       
-> Last update: 12 Feb 2016
+> Last update: 25 Feb 2016
 
 Scaffold your PyroCMS Modules in style. This extension once installed, works silently in the background to generate entities for all your streams. It will also configure your module with routes, bindings, language file entries etc, so you don't have to lift a finger
 
@@ -24,9 +24,24 @@ Code generated for an entity includes the Entity Model and Repository, Plugin, S
 
 #### Step by Step Usage:
 
-1- Install this extension, see install section at the bottom of this page.  
+1- Create a new Pyro project and install,
 
-2- Start with an empty module, 'Blog' (namespace = `blog` by defaul)
+```
+composer create-project pyrocms/pyrocms=3.0-beta3 --prefer-dist builder-blog-example
+```
+```
+php builder-blog-example/artisan install
+```
+
+Or, use an exsting one.
+
+2- Install this extension, 
+
+```
+git clone https://github.com/websemantics/entity_builder-extension builder-blog-example/addons/default/websemantics/entity_builder-extension
+```
+
+3- Start with an empty module, 'Blog' (namespace = `blog` by defaul)
 
 ```
 php artisan make:module vendor blog
@@ -66,6 +81,10 @@ Anomaly\Streams\Platform\Database\Migration\Migration
 
 ```
 php artisan make:migration create_stream_post --addon=vendor.module.blog
+
+NEW artisan make:stream your_widgets your_vendor.module.module_slug`
+
+
 ```
 
 Change class content to:

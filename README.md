@@ -29,8 +29,6 @@ composer create-project pyrocms/pyrocms=3.0-beta3 --prefer-dist builder-blog-exa
 php builder-blog-example/artisan install
 ```
 
-Or, use an exsting one.
-
 2- Clone and install this extension, 
 
 ```

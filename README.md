@@ -67,7 +67,7 @@ Also, make sure the class extends,
 Anomaly\Streams\Platform\Database\Migration\Migration
 ```
 
-5- Create your module streams migration files
+5- Create your module streams migration files, here, let's create `Posts` stream,
 
 ```
 php builder-blog-example/artisan make:stream posts websemantics.module.blog

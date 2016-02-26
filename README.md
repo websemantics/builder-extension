@@ -1,10 +1,10 @@
 ```
-    ______      __  _ __           ____        _ __    __         
-   / ____/___  / /_(_) /___  __   / __ )__  __(_) /___/ /__  _____
-  / __/ / __ \/ __/ / __/ / / /  / __  / / / / / / __  / _ \/ ___/
- / /___/ / / / /_/ / /_/ /_/ /  / /_/ / /_/ / / / /_/ /  __/ /    
-/_____/_/ /_/\__/_/\__/\__, /  /_____/\__,_/_/_/\__,_/\___/_/     
-                      /____/   Extension v0.7                                                                 
+  _____       _   _ _           ____        _ _     _           
+ | ____|_ __ | |_(_) |_ _   _  | __ ) _   _(_) | __| | ___ _ __ 
+ |  _| | '_ \| __| | __| | | | |  _ \| | | | | |/ _` |/ _ \ '__|
+ | |___| | | | |_| | |_| |_| | | |_) | |_| | | | (_| |  __/ |   
+ |_____|_| |_|\__|_|\__|\__, | |____/ \__,_|_|_|\__,_|\___|_|   
+                        |___/   Extension v0.7                                 
 ```                                                                                             
 > Last update: 25 Feb 2016
 
@@ -18,7 +18,7 @@ Code generated for an entity includes the Entity Model and Repository, Plugin, S
 
 #### Step by Step Usage:
 
-1- Create a new Pyro project and install,
+1- Create a new Pyro project and install @ folder `builder-blog-example`
 
 ```
 composer create-project pyrocms/pyrocms=3.0-beta3 --prefer-dist builder-blog-example
@@ -29,16 +29,19 @@ php builder-blog-example/artisan install
 
 Or, use an exsting one.
 
-2- Install this extension, 
+2- Clone and install this extension, 
 
 ```
 git clone https://github.com/websemantics/entity_builder-extension builder-blog-example/addons/default/websemantics/entity_builder-extension
 ```
+```
+php builder-blog-example/artisan extension:install websemantics.extension.entity_builder
+```
 
-3- Start with an empty module, 'Blog' (namespace = `blog` by defaul)
+3- Start with a new module, 'Blog' (namespace = `blog` by defaul)
 
 ```
-php artisan make:module vendor blog
+php builder-blog-example/artisan make:module websemantics blog
 ```
 
 Or use [Boxed](http://websemantics.github.io/boxed)
@@ -50,10 +53,12 @@ src/BlogModule.php
 src/BlogModuleServiceProvider.php
 ```
 
-3- Create your module fields migration file, or modify if already exists 
+This step will also create fields migration file located at `builder-blog-example/addons/default/websemantics/blog-module/migrations`
+
+4- Use the module's fields migration file created at the previous step, or create a new one
 
 ```
-php artisan make:migration create_module_fields --addon=vendor.module.blog
+php builder-blog-example/artisan make:migration create_module_fields --addon=websemantics.module.blog
 ```
 
 Change class content to:
@@ -71,13 +76,10 @@ Also, make sure the class extends,
 Anomaly\Streams\Platform\Database\Migration\Migration
 ```
 
-4- Create your module streams migration files
+5- Create your module streams migration files
 
 ```
-php artisan make:migration create_stream_post --addon=vendor.module.blog
-
-NEW artisan make:stream your_widgets your_vendor.module.module_slug`
-
+php builder-blog-example/artisan make:stream posts websemantics.module.blog
 
 ```
 
@@ -85,7 +87,7 @@ Change class content to:
 
 ```
     protected $stream = [
-        'slug'         => 'post',
+        'slug'         => 'posts',
         'title_column' => 'title'
     ];
 
@@ -100,28 +102,7 @@ Change class content to:
     ];
 ```
 
-5- Create fields language file at `resources/lang/en/field.php`
-
-
-```
-<?php
-
-return [
-    'title'             => [
-        'name'         => 'Title',
-        'instructions' => 'What is the title of the post?',
-        'placeholder'  => 'Title'
-    ],
-    'content'             => [
-        'name'         => 'Content',
-        'instructions' => 'Place the content of this post',
-        'placeholder'  => 'Content'
-    ]
-];
-
-```
-
-6- Create/edit the builder config file within your module at `resources/config/builder.php` to specify a list of stream namespaces that you wanted to generate entities for,
+6- Create or edit the builder config file within your module at `builder-blog-example/addons/default/websemantics/blog-module/resources/config/builder.php` to specify a list of stream namespaces that you wanted to generate entities for,
 
 ```
   'namespaces' => [
@@ -149,46 +130,38 @@ return [
 
 More settings are detailed in the `builder.php` file.
 
-9- If you have seed data for a particular Entity/Model (abc), place that in, `blog-module/seeders/post.php`. The content must be a list of entry values, for example:
+9- If you have seed data for a particular Entity/Model (abc), place that in, `builder-blog-example/addons/default/websemantics/blog-module/seeders`. 
+
+In this example, create post.php (singular file name) at `builder-blog-example/addons/default/websemantics/blog-module/seeders/post.php`
+
+The content must be a list of entry values without the <?php, for example:
 
 ```
   ['title' => 'Laravel', 'content' => 'PHP framework'], 
   ['title' => 'PyroCMS', 'content' => 'PHP CMS']
 ```
 
-This will be added to the Entity Seeder class. Also, make sure that the Module Seeder class has the following structure:
+This will be added to the Entity Seeder class.
+
+10- Install your module,
 
 ```
-<?php namespace {{vendor_name}}\\{{module_name}}Module;
-use Anomaly\Streams\Platform\Database\Seeder\Seeder;
-class {{module_name}}ModuleSeeder extends Seeder
-{
-  protected $seeders = [];
-    /**
-     * Seed the localization module.
-     */
-    public function run()
-    {   
-        foreach ($this->seeders as $seeder) {
-              $this->call($seeder);
-        }             
-    }
-}
+php builder-blog-example/artisan module:install websemantics.module.blog
 ```
 
-Refere to [example-module](https://github.com/websemantics/example-module)  or use [Boxed](http://websemantics.github.io/boxed/) to scaffold your module's code.
+This will install and automatically seed your module, horray!
 
-10- Install your module from admin or command line,
+You are done. Go to admin panel and check your beautiful new Module in action `admin/blog/posts`
 
-```
-php artisan module:install vendor.module.blog
-```
+10- Make changes, regenerate and test
 
-10- Finally, seed your module from the command line,
+After making changes to your migration files, adding / removing streams, adding / removing fields, run a reinstall module command and watch how your module's entities get rebuilt with fresh code scaffolded before your eyes,
 
 ```
-php artisan db:seed --addon=vendor.module.blog
+php builder-blog-example/artisan module:reinstall websemantics.module.blog
 ```
+
+Have fun, 
 
 #### Inner Working:
 
@@ -279,6 +252,13 @@ Make sure that the following folders/files have write permission:
 
 ### Change Log
 All notable changes to this project will be documented in this section.
+
+#### [0.7] - 2016-02-25
+##### Changed
+- Improved documentation
+- Automatically seeds modules after install,
+- Support for more field types
+- Module example
 
 #### [0.6] - 2016-02-12
 ##### Changed

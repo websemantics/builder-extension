@@ -6,7 +6,7 @@ use Anomaly\Streams\Platform\Http\Controller\AdminController;
  * Class {module_name}Controller
  *
 {docblock}
- * @package   {vendor_name}\{module_name}Modul\Http\Controller\Admin
+ * @package   {vendor_name}\{module_name}Module\Http\Controller\Admin
  */
 
 class {module_name}Controller extends AdminController

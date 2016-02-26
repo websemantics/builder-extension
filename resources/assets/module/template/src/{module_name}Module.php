@@ -6,7 +6,7 @@ use Anomaly\Streams\Platform\Addon\Module\Module;
  * Class {module_name}Module
  *
 {docblock}
- * @package   {vendor_name}\{module_name}Modul
+ * @package   {vendor_name}\{module_name}Module
  */
 
 class {module_name}Module extends Module

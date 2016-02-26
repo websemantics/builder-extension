@@ -6,7 +6,7 @@ use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
  * Class {module_name}ModuleServiceProvider
  *
 {docblock}
- * @package   {vendor_name}\{module_name}Modul
+ * @package   {vendor_name}\{module_name}Module
  */
 
 class {module_name}ModuleServiceProvider extends AddonServiceProvider

@@ -12,7 +12,7 @@ use Illuminate\Contracts\Bus\SelfHandling;
  * This command will seed the current module
  *
 {docblock}
- * @package   {vendor_name}\{module_name}Modul\Listener\Command
+ * @package   {vendor_name}\{module_name}Module\Listener\Command
  */
 
 class Seed implements SelfHandling

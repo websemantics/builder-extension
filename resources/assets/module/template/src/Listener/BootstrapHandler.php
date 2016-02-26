@@ -10,7 +10,7 @@ use Illuminate\Contracts\Bus\SelfHandling;
  * Use this class to dispatch any job / command when this module has been installed.
  *
 {docblock}
- * @package   {vendor_name}\{module_name}Modul\Listener
+ * @package   {vendor_name}\{module_name}Module\Listener
  */
 
 class BootstrapHandler implements SelfHandling

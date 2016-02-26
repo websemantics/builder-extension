@@ -38,7 +38,7 @@ git clone https://github.com/websemantics/entity_builder-extension builder-blog-
 php builder-blog-example/artisan extension:install websemantics.extension.entity_builder
 ```
 
-3- Start with a new module, 'Blog' (namespace = `blog` by defaul)
+3- Create a new module, 'Blog' (namespace = `blog` by defaul)
 
 ```
 php builder-blog-example/artisan make:module websemantics blog

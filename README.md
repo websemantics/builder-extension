@@ -20,7 +20,7 @@ Code generated for an entity includes the Entity Model and Repository, Plugin, S
 
 The following example is also avilable here, [builder-blog-example](https://github.com/websemantics/builder-blog-example), 
 
-##### 1- Create a new Pyro project and install @ folder `builder-blog-example`
+1- Create a new Pyro project and install @ folder `builder-blog-example`
 
 ```
 composer create-project pyrocms/pyrocms=3.0-beta3 --prefer-dist builder-blog-example

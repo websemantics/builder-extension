@@ -19,7 +19,9 @@ class {module_name}ModuleServiceProvider extends AddonServiceProvider
 
     protected $middleware = [];
 
-    protected $listeners = [];
+    protected $listeners = [
+    'Anomaly\Streams\Platform\Addon\Module\Event\ModuleWasInstalled' => 
+    ['{vendor_name}\{module_name}Module\Listener\BootstrapHandler']];
 
     protected $providers = [];
 

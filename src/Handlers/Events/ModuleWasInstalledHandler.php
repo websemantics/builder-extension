@@ -47,7 +47,13 @@ class ModuleWasInstalledHandler {
 
 		if(count($namespaces) > 0){
       		$this->dispatch(new ModifyModule($module));
-      		$this->dispatch(new SeedModule($module));
+        	
+        	$seeding = ebxSeedingOption($module);
+
+      		/* Allow seeding automatically based on builder config */
+      		if($seeding === 'builder'){
+      			$this->dispatch(new SeedModule($module));
+      		}
 		}
 
 	}

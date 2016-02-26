@@ -51,6 +51,8 @@ class ModifyModuleHandler
 
         $data = $this->getTemplateData($module);
 
+        $seeding = ebxSeedingOption($module);
+
         $destination = $module->getPath();
 
         $folder = __DIR__.'/../../../resources/assets/module';
@@ -76,6 +78,16 @@ class ModifyModuleHandler
                 $data,
                 true
             );
+
+            if($seeding === 'self'){
+                /* Allow self seeder after a module install, */
+                $this->processFile(
+                    $destination.'/src/Listener/BootstrapHandler.php',
+                    ['jobs' => $folder.'/jobs.php'],
+                    $data,
+                    true
+                );
+            }
 
         } catch (\PhpParser\Error $e) {
             die($e->getMessage());

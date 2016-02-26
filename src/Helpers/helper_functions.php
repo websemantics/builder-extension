@@ -122,6 +122,22 @@
   }
 
  /**
+  * Return the seeding option ('no', 'builder' or 'self')
+  * 
+  * @param    Module - $module
+  * @return   string
+  */
+
+  if (!function_exists('ebxSeedingOption')) {
+
+      function ebxSeedingOption($module){
+        return array_get(config($module->getNamespace('builder')), 
+                            'seeding', 'builder');
+      }
+
+  }
+
+ /**
   * Return the folder name for the curent namespace or empty
   * 
   * @param    Module - $module

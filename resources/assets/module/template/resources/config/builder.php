@@ -47,6 +47,20 @@ return [
 	
 	/*
 	|--------------------------------------------------------------------------
+	| Seeding
+	|--------------------------------------------------------------------------
+	| Allow to seed the module after it has installed by:
+	|
+	| (1) The Entity Builder : 'builder'   (*default)
+	| (2) An internal seeder command : 'self'
+	| (3) Disable seeding : 'no' 
+	|
+	*/
+
+	'seeding' => 'builder',
+
+	/*
+	|--------------------------------------------------------------------------
 	| Relationship 'null' value
 	|--------------------------------------------------------------------------
 	| The default view for a null relationship entry

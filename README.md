@@ -4,9 +4,9 @@
  |  _| | '_ \| __| | __| | | | |  _ \| | | | | |/ _` |/ _ \ '__|
  | |___| | | | |_| | |_| |_| | | |_) | |_| | | | (_| |  __/ |   
  |_____|_| |_|\__|_|\__|\__, | |____/ \__,_|_|_|\__,_|\___|_|   
-                        |___/   Extension v0.7                                 
+                        |___/   Extension v0.8                                 
 ```                                                                                             
-> Last update: 25 Feb 2016
+> Last update: 26 Feb 2016
 
 Scaffold your PyroCMS Modules in style. This extension once installed, works silently in the background to generate entities for all your streams. It will also configure your module with routes, bindings, language file entries etc, so you don't have to lift a finger
 
@@ -110,7 +110,15 @@ Change class content to:
   'namespace_folder' => true,
 ```
 
-8- Specify your project docblock to be included with the generated code
+8- Specify automatic seeding after a module has installed
+
+There are three settings to the seeding option in builder.php, (1) `self` for an internal seeder handler per module, (2) `builder`, and here the entity builder will seed the module after install, (3) `no` for disabling seeding
+
+```
+  'seeding' => 'self', /* 'no', 'self' or 'builder' */
+```
+
+9- Specify your project docblock to be included with the generated code
 ```
 'docblock' =>
 ' * @link      http://websemantics.ca/ibuild
@@ -121,7 +129,7 @@ Change class content to:
 
 More settings are detailed in the `builder.php` file.
 
-9- If you have seed data for a particular Entity/Model (abc), place that in, `builder-blog-example/addons/default/websemantics/blog-module/seeders`. 
+10- If you have seed data for a particular Entity/Model (abc), place that in, `builder-blog-example/addons/default/websemantics/blog-module/seeders`. 
 
 In this example, create post.php (singular file name) at `builder-blog-example/addons/default/websemantics/blog-module/seeders/post.php`
 
@@ -134,7 +142,7 @@ The content must be a list of entry values without the <?php, for example:
 
 This will be added to the Entity Seeder class.
 
-10- Install your module,
+11- Install your module,
 
 ```
 php builder-blog-example/artisan module:install websemantics.module.blog
@@ -144,7 +152,7 @@ This will install and automatically seed your module, horray!
 
 You are done. Go to admin panel and check your beautiful new Module in action `admin/blog/posts`
 
-10- Make changes, regenerate and test
+12- Make changes, regenerate and test
 
 After making changes to your migration files, adding / removing streams, adding / removing fields, run a reinstall module command and watch how your module's entities get rebuilt with fresh code scaffolded before your eyes,
 
@@ -243,6 +251,11 @@ Make sure that the following folders/files have write permission:
 
 ### Change Log
 All notable changes to this project will be documented in this section.
+
+#### [0.8] - 2016-02-26
+##### Changed
+- Generates seeder command for automatic module seeding after install,
+- Enable disable seeding from builder config
 
 #### [0.7] - 2016-02-25
 ##### Changed

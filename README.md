@@ -255,7 +255,7 @@ All notable changes to this project will be documented in this section.
 #### [0.8] - 2016-02-26
 ##### Changed
 - Generates seeder command for automatic module seeding after install,
-- Enable disable seeding from builder config
+- Enables / disables seeding from builder config
 
 #### [0.7] - 2016-02-25
 ##### Changed

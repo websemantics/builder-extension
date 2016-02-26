@@ -1,4 +1,3 @@
-```
 ╔═══╦═╗─╔╦════╦══╦════╗───╔══╗╔╗─╔╦══╦╗──╔═══╦═══╦═══╗╔═══╦═╗╔═╦════╦═══╦═╗─╔╦═══╦══╦═══╦═╗─╔╗
 ║╔══╣║╚╗║║╔╗╔╗╠╣╠╣╔╗╔╗║───║╔╗║║║─║╠╣╠╣║──╚╗╔╗║╔══╣╔═╗║║╔══╩╗╚╝╔╣╔╗╔╗║╔══╣║╚╗║║╔═╗╠╣╠╣╔═╗║║╚╗║║
 ║╚══╣╔╗╚╝╠╝║║╚╝║║╚╝║║╠╣─╔╗║╚╝╚╣║─║║║║║║───║║║║╚══╣╚═╝║║╚══╗╚╗╔╝╚╝║║╚╣╚══╣╔╗╚╝║╚══╗║║║║─║║╔╗╚╝║
@@ -7,7 +6,7 @@
 ╚═══╩╝─╚═╝─╚╝─╚══╝─╚╝╚═╗╔╝╚═══╩═══╩══╩═══╩═══╩═══╩╝╚═╝╚═══╩═╝╚═╝─╚╝─╚═══╩╝─╚═╩═══╩══╩═══╩╝─╚═╝
 ─────────────────────╔═╝║
 ─────────────────────╚══╝ v0.7
-```                                                                                             
+
 > Last update: 25 Feb 2016
 
 Scaffold your PyroCMS Modules in style. This extension once installed, works silently in the background to generate entities for all your streams. It will also configure your module with routes, bindings, language file entries etc, so you don't have to lift a finger

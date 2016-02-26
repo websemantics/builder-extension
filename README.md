@@ -18,6 +18,8 @@ Code generated for an entity includes the Entity Model and Repository, Plugin, S
 
 #### Step by Step Usage:
 
+The following example is also avilable here, [builder-blog-example](https://github.com/websemantics/builder-blog-example), 
+
 1- Create a new Pyro project and install @ folder `builder-blog-example`
 
 ```
@@ -42,15 +44,6 @@ php builder-blog-example/artisan extension:install websemantics.extension.entity
 
 ```
 php builder-blog-example/artisan make:module websemantics blog
-```
-
-Or use [Boxed](http://websemantics.github.io/boxed)
-
-Make sure that main module files have write permissions '777'
-
-```
-src/BlogModule.php
-src/BlogModuleServiceProvider.php
 ```
 
 This step will also create fields migration file located at `builder-blog-example/addons/default/websemantics/blog-module/migrations`

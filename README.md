@@ -18,7 +18,7 @@ Code generated for an entity includes the Entity Model and Repository, Plugin, S
 
 #### Step by Step Usage:
 
-The following example is also avilable here, [builder-blog-example](https://github.com/websemantics/builder-blog-example), 
+The following example is also available here, [builder-blog-example](https://github.com/websemantics/builder-blog-example),
 
 1- Create a new Pyro project and install @ folder `builder-blog-example`
 
@@ -38,7 +38,7 @@ git clone https://github.com/websemantics/entity_builder-extension builder-blog-
 php builder-blog-example/artisan extension:install websemantics.extension.entity_builder
 ```
 
-3- Create a new module, 'Blog' (namespace = `blog` by defaul)
+3- Create a new module, 'Blog' (namespace = `blog` by default)
 
 ```
 php builder-blog-example/artisan make:module websemantics blog
@@ -129,7 +129,7 @@ There are three settings to the seeding option in builder.php, (1) `self` for an
 
 More settings are detailed in the `builder.php` file.
 
-10- If you have seed data for a particular Entity/Model (abc), place that in, `builder-blog-example/addons/default/websemantics/blog-module/seeders`. 
+10- If you have seed data for a particular Entity/Model (abc), place that in, `builder-blog-example/addons/default/websemantics/blog-module/resources/config/seeders`.
 
 In this example, create post.php (singular file name) at `builder-blog-example/addons/default/websemantics/blog-module/seeders/post.php`
 
@@ -148,7 +148,7 @@ This will be added to the Entity Seeder class.
 php builder-blog-example/artisan module:install websemantics.module.blog
 ```
 
-This will install and automatically seed your module, horray!
+This will install and automatically seed your module, hooray!
 
 You are done. Go to admin panel and check your beautiful new Module in action `admin/blog/posts`
 
@@ -167,7 +167,7 @@ Have fun,
 Once installed, this extension listens mainly to two types of events *StreamWasCreated* and *AssignmentWasCreated*. To enable this extension for your current module, creat a config file at `resources/config/builder.php` and list the namespaces you would like the extension to generate code for. You can listen/generate code to multiple namespaces.
 
 ```
-    'namespaces' => ['blogger', 'navigatin', 'etc']
+    'namespaces' => ['blogger', 'navigation', 'etc']
 ```
 
 Here's an example of the [builder config file](https://github.com/websemantics/example-module/blob/master/resources/config/builder.php) taken from [Boxed](http://websemantics.github.io/boxed) example module github repo. Once that's done, create your Streams migration files as usual. The extension will kick in when it recieives either of the two events mentioned above:
@@ -199,7 +199,7 @@ AbcEntity
   |     +--- AbcTableColumns.php
   |
   |
-  +---- AbcModle.php
+  +---- AbcModule.php
   |
   +---- AbcRepository.php
   |
@@ -216,9 +216,9 @@ By default, this folder structure would be generated in a subfolder at `src`. Th
 
 The extension then will generate a controller per stream at `xyz-module/src/Http/Controller/Admin/AbcController.php` and modify the *Module*, *ServiceProvider*, *Seeder* and language files to setup the entity to work correctly with the module. 
 
-2- For *AssignmentWasCreated* event, the extension will modify two files, `AbcTableColumns.php` and `AbcFormBuilder.php` and add a field slug per stream assignmenet.
+2- For *AssignmentWasCreated* event, the extension will modify two files, `AbcTableColumns.php` and `AbcFormBuilder.php` and add a field slug per stream assignment.
 
-Once the entity files have been created and working correctly with Pyro, you might want to modify and develop the classes indivisually. The extension provides a configuration option to list the files you don't want to overwrite accedentaly (when re-installing a module). For example, if you have edited the `AbcModle.php`, make sure to list that in the builder config file so that the extension will avoid overwrite if it exists. Here's an example, 
+Once the entity files have been created and working correctly with Pyro, you might want to modify and develop the classes individually. The extension provides a configuration option to list the files you don't want to overwrite accedentaly (when re-installing a module). For example, if you have edited the `AbcModle.php`, make sure to list that in the builder config file so that the extension will avoid overwrite if it exists. Here's an example,
 
 ```
   'avoid_overwrite' => [

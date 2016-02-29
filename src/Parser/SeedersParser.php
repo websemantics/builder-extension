@@ -29,8 +29,7 @@ class SeedersParser
         // First, check if the user has default content
         $destination = $module->getPath();
         $entityName  = strtolower(str_singular($stream->getSlug()));
-        $file        = $destination."/seeders/$entityName".".php";
-
+        $file        = $destination."resources/config/seeders/$entityName".".php";
         return file_exists($file) ? file_get_contents($file) : '';
     }
 }

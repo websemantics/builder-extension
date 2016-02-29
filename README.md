@@ -289,4 +289,8 @@ All notable changes to this project will be documented in this section.
 - Allow to group in namespace folder
 - Seeding streams
 
+## Related Resources
 
+- PyroCMS - https://github.com/pyrocms/pyrocms
+- Awesome Pyrocms - https://github.com/websemantics/awesome-pyrocms
+- Pyrocms Cheatsheet - http://websemantics.github.io/pyrocms-cheatsheet

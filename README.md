@@ -292,5 +292,5 @@ All notable changes to this project will be documented in this section.
 ## Related Resources
 
 - PyroCMS - https://github.com/pyrocms/pyrocms
-- Awesome Pyrocms - https://github.com/websemantics/awesome-pyrocms
-- Pyrocms Cheatsheet - http://websemantics.github.io/pyrocms-cheatsheet
+- Awesome PyroCMS - https://github.com/websemantics/awesome-pyrocms
+- PyroCMS Cheatsheet - http://websemantics.github.io/pyrocms-cheatsheet

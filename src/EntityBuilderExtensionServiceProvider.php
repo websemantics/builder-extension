@@ -12,11 +12,10 @@ use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
  * @copyright 2012-2015 Web Semantics, Inc.
  * @package   Websemantics\EntityBuilderExtension
  */
-
 class EntityBuilderExtensionServiceProvider extends AddonServiceProvider
 {
     protected $commands = array('Websemantics\EntityBuilderExtension\Console\MakeModule');
-   
+
     protected $singletons = ['Illuminate\Filesystem\Filesystem' => 'Websemantics\EntityBuilderExtension\Filesystem\Filesystem'];
 
     protected $listeners = [

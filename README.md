@@ -129,7 +129,7 @@ There are three settings to the seeding option in builder.php, (1) `self` for an
 
 More settings are detailed in the `builder.php` file.
 
-10- If you have seed data for a particular Entity/Model (abc), place that in, `builder-blog-example/addons/default/websemantics/blog-module/resources/config/seeders`.
+10- If you have seed data for a particular Entity/Model (abc), place that in, `builder-blog-example/addons/default/websemantics/blog-module/resources/seeders`.
 
 In this example, create post.php (singular file name) at `builder-blog-example/addons/default/websemantics/blog-module/seeders/post.php`
 

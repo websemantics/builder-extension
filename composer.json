@@ -2,7 +2,7 @@
     "name": "websemantics/entity_builder-extension",
     "type": "streams-addon",
     "version": "1.0.0",
-    "description": "Build entities for your Module streams, in style",
+    "description": "Scaffold your PyroCMS Modules in style",
     "keywords": [
         "ibuild",
         "streams",

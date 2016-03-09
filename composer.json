@@ -1,5 +1,6 @@
 {
     "name": "websemantics/entity_builder-extension",
+    "minimum-stability": "dev",
     "type": "streams-addon",
     "description": "Scaffold your PyroCMS Modules in style",
     "keywords": [

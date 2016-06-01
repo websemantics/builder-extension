@@ -1,10 +1,12 @@
 ```
-  _____       _   _ _           ____        _ _     _           
- | ____|_ __ | |_(_) |_ _   _  | __ ) _   _(_) | __| | ___ _ __ 
- |  _| | '_ \| __| | __| | | | |  _ \| | | | | |/ _` |/ _ \ '__|
- | |___| | | | |_| | |_| |_| | | |_) | |_| | | | (_| |  __/ |   
- |_____|_| |_|\__|_|\__|\__, | |____/ \__,_|_|_|\__,_|\___|_|   
-                        |___/   Extension v0.8                                 
+                                   _
+ ________ ___   ____ ______       | \ 
+|   __   \\  \ /   /|   __  \    _\   \
+|  |__)  | \  V   / |  |__)  |  / \ \  \
+|   ____/   \    /  |   __  <  |  |  |  |
+|  |         |  |   |  |  \  \ |  \__/  |             
+|__|         |__|   |__|   \__\ \______/
+Entity Builder Extension v0.8
 ```                                                                                             
 > Last update: 26 Feb 2016
 
@@ -289,4 +291,8 @@ All notable changes to this project will be documented in this section.
 - Allow to group in namespace folder
 - Seeding streams
 
+## Related Resources
 
+- PyroCMS - https://github.com/pyrocms/pyrocms
+- Awesome PyroCMS - https://github.com/websemantics/awesome-pyrocms
+- PyroCMS Cheatsheet - http://websemantics.github.io/pyrocms-cheatsheet

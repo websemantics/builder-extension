@@ -1,14 +1,20 @@
 ```
-                                   _
- ________ ___   ____ ______       | \ 
-|   __   \\  \ /   /|   __  \    _\   \
-|  |__)  | \  V   / |  |__)  |  / \ \  \
-|   ____/   \    /  |   __  <  |  |  |  |
-|  |         |  |   |  |  \  \ |  \__/  |             
-|__|         |__|   |__|   \__\ \______/
-Entity Builder Extension v0.8
+                                                                               __
+                                                                              /  |
+                   _________     _____     _____     __________              |    \_    
+                  |         \    \    \   /    /    |          \         __   \     `-_
+                  |    __    |    \    \ /    /     |    __     |       /   \  ''-.    \
+                  |   |__)   |     \    V    /      |   |__)    |      /    /      \    \
+                  |      ___/       \       /       |          <       |   |        |   |
+                  |     |            |     |        |     |\    \      \    \      /    /
+                  |     |            |     |        |     | \    \      \    `-..-'    /
+                  |_____|            |_____|        |_____|  \____\      '-_        _-'
+                                                                            `------'
+                 __    ___ ___      __          __  __ __    __   ___ __     __  __      
+                |_ |\ | | | | \_/  |__)/  \||  |  \|_ |__)  |_ \_/ | |_ |\ |(_ |/  \|\ | 
+                |__| \| | | |  |   |__)\__/||__|__/|__| \   |__/ \ | |__| \|__)|\__/| \|  v0.8
 ```                                                                                             
-> Last update: 26 Feb 2016
+> Last update: 8 August 2016
 
 Scaffold your PyroCMS Modules in style. This extension once installed, works silently in the background to generate entities for all your streams. It will also configure your module with routes, bindings, language file entries etc, so you don't have to lift a finger
 

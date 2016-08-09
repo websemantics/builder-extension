@@ -53,8 +53,8 @@ class GenerateEntityHandler
         $stream = $command->getStream();
         $module = $command->getModule();
 
-        $entityPath = __DIR__.'/../../../resources/assets/entity';
-        $modulePath = __DIR__.'/../../../resources/assets/module';
+        $entityPath = __DIR__.'/../../resources/assets/entity';
+        $modulePath = __DIR__.'/../../resources/assets/module';
 
         $namespace_folder = ebxGetNamespaceFolderTemplate($module);
 

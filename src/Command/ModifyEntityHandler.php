@@ -62,7 +62,7 @@ class ModifyEntityHandler
             $assignment->getFieldSlug()
         );
 
-        $entity = __DIR__.'/../../../resources/assets/entity';
+        $entity = __DIR__.'/../../resources/assets/entity';
 
         // Set a list of files to avoid overwrite
         $this->files->setAvoidOverwrite(ebxGetAvoidOverwrite($module));

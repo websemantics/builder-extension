@@ -1,6 +1,6 @@
 <?php
 
-namespace Websemantics\EntityBuilderExtension\Command\Handler;
+namespace Websemantics\EntityBuilderExtension\Command;
 
 use Websemantics\EntityBuilderExtension\Command\SeedModule;
 use Anomaly\Streams\Platform\Addon\Module\Module;

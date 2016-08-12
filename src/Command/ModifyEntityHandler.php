@@ -1,6 +1,6 @@
 <?php
 
-namespace Websemantics\EntityBuilderExtension\Command\Handler;
+namespace Websemantics\EntityBuilderExtension\Command;
 
 use Websemantics\EntityBuilderExtension\Command\ModifyEntity;
 use Websemantics\EntityBuilderExtension\Filesystem\Filesystem;
@@ -62,7 +62,7 @@ class ModifyEntityHandler
             $assignment->getFieldSlug()
         );
 
-        $entity = __DIR__.'/../../../resources/assets/entity';
+        $entity = __DIR__.'/../../resources/assets/entity';
 
         // Set a list of files to avoid overwrite
         $this->files->setAvoidOverwrite(ebxGetAvoidOverwrite($module));

@@ -1,6 +1,6 @@
 <?php
 
-namespace Websemantics\EntityBuilderExtension\Command\Handler;
+namespace Websemantics\EntityBuilderExtension\Command;
 
 use Websemantics\EntityBuilderExtension\Command\Traits\FileProcessor;
 use Websemantics\EntityBuilderExtension\Command\ModifyModule;
@@ -55,7 +55,7 @@ class ModifyModuleHandler
 
         $destination = $module->getPath();
 
-        $folder = __DIR__.'/../../../resources/assets/module';
+        $folder = __DIR__.'/../../resources/assets/module';
 
         try {
 

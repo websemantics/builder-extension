@@ -1,6 +1,6 @@
 <?php
 
-namespace Websemantics\EntityBuilderExtension\Command\Handler;
+namespace Websemantics\EntityBuilderExtension\Command;
 
 use Websemantics\EntityBuilderExtension\Command\Traits\TemplateProcessor;
 use Websemantics\EntityBuilderExtension\Command\GenerateEntity;
@@ -53,8 +53,8 @@ class GenerateEntityHandler
         $stream = $command->getStream();
         $module = $command->getModule();
 
-        $entityPath = __DIR__.'/../../../resources/assets/entity';
-        $modulePath = __DIR__.'/../../../resources/assets/module';
+        $entityPath = __DIR__.'/../../resources/assets/entity';
+        $modulePath = __DIR__.'/../../resources/assets/module';
 
         $namespace_folder = ebxGetNamespaceFolderTemplate($module);
 

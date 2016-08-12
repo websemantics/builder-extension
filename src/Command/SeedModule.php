@@ -1,5 +1,6 @@
 <?php namespace Websemantics\EntityBuilderExtension\Command;
 
+use Illuminate\Contracts\Bus\SelfHandling;
 use Anomaly\Streams\Platform\Addon\Module\Module;
 
 /**
@@ -13,9 +14,8 @@ use Anomaly\Streams\Platform\Addon\Module\Module;
  * @package   Websemantics\EntityBuilderExtension
  */
 
-class SeedModule
+class SeedModule implements SelfHandling
 {
-
     /**
      * The module class.
      *
@@ -27,6 +27,8 @@ class SeedModule
      * Create a new SeedModule instance.
      *
      * @param Module $module
+     * @param Filesystem  $files
+     * @param Parser      $parser
      */
     public function __construct(Module $module)
     {
@@ -34,12 +36,19 @@ class SeedModule
     }
 
     /**
-     * Get the module instance.
+     * Handle the command.
      *
-     * @return Module
+     * Add a default Module route, language entries etc per Module
+     *
      */
-    public function getModule()
+    public function handle()
     {
-        return $this->module;
+        \Artisan::call(
+            'db:seed',
+            [
+                '--addon' => $this->module->getNamespace(),
+                '--force' => true,
+            ]
+        );
     }
 }

@@ -14,7 +14,7 @@ use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
  */
 class EntityBuilderExtensionServiceProvider extends AddonServiceProvider
 {
-    protected $commands = array('Websemantics\EntityBuilderExtension\Console\MakeModule');
+    protected $commands = array('Websemantics\EntityBuilderExtension\Console\ModuleCreate');
 
     protected $singletons = ['Illuminate\Filesystem\Filesystem' => 'Websemantics\EntityBuilderExtension\Filesystem\Filesystem'];
 
@@ -25,5 +25,3 @@ class EntityBuilderExtensionServiceProvider extends AddonServiceProvider
     ];
 
 }
-
-

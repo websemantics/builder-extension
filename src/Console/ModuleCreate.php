@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
- * Class MakeModule.
+ * Class ModuleCreate.
  *
  *
  * @link      http://websemantics.ca/ibuild
@@ -20,7 +20,7 @@ use Symfony\Component\Console\Input\InputOption;
  * @author    Adnan Sagar <msagar@websemantics.ca>
  * @copyright 2012-2015 Web Semantics, Inc.
  */
-class MakeModule extends Command
+class ModuleCreate extends Command
 {
     use DispatchesJobs;
 
@@ -36,7 +36,7 @@ class MakeModule extends Command
      *
      * @var string
      */
-    protected $description = 'Create a module for the Entity Builder.';
+    protected $description = 'Create a module (for the Entity Builder).';
 
     /**
      * Execute the console command.

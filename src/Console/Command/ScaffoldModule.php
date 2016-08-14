@@ -4,7 +4,7 @@ namespace Websemantics\EntityBuilderExtension\Console\Command;
 
 use Websemantics\EntityBuilderExtension\Command\Traits\FileProcessor;
 use Anomaly\Streams\Platform\Application\Application;
-use Websemantics\EntityBuilderExtension\Console\MakeModule;
+use Websemantics\EntityBuilderExtension\Console\ModuleCreate;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Filesystem\Filesystem;
 use Packaged\Figlet\Figlet;
@@ -64,7 +64,7 @@ class ScaffoldModule implements SelfHandling
      * @param         $slug
      * @param Command $command
      */
-    public function __construct($path, $vendor, $type, $slug, MakeModule $command)
+    public function __construct($path, $vendor, $type, $slug, ModuleCreate $command)
     {
         $this->path = $path;
         $this->slug = $slug;

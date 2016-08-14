@@ -16,7 +16,7 @@
                 | o \  | U |  | |  | |_   | o )  | _|   |   /          `------'
                 |___/  |___|  |_|  |___|  |__/   |___|  |_|\_\    
 
-                Scaffolds modules and streams into working code   - -- --------- -- -
+                Scaffolds modules and streams into working code   - -- -------- -- -
 ```                                                                                             
 > Last update: 12 August 2016
 

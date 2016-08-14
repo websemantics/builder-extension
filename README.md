@@ -3,11 +3,10 @@
                 |         \==\    \   /    /=|          \\================\
                 |    __    |  \    \ /    /  |    __     |                |
                 |   |__)   |   \    V    /   |   |__)    |                |
-                |      ___/     \       /    |          <                 |
-                |     |          |     |     |     |\    \               ┌┴┐
-                |     |          |     |     |     | \    \             /  |
-                |_____|          |_____|     |_____|  \____\           |    \_
-                                                                    __  \     `-_
+                |      ___/     \       /    |          ^                ┌┴┐
+                |     |          |     |     |     |\    \              /  |
+                |     |          |     |     |     | \    \            |    \_
+                |_____|          |_____|     |_____|  \____\        __  \     `-_
                  ___    _  _    _    ___    _    ___   __ __       /   \  ''-.    \
                 | __|  | \| |  | |  |_ _|  | |  |_ _|  \ V /      /    /      \    \
                 | _|   | \\ |  | |   | |   | |   | |    \ /       |   |        |   |
@@ -16,9 +15,8 @@
                 | o )  | | |  | |  | |    |  \   | __|  | o \       '-_        _-'
                 | o \  | U |  | |  | |_   | o )  | _|   |   /          `------'
                 |___/  |___|  |_|  |___|  |__/   |___|  |_|\_\
-
 ```                                                                                             
-> Last update: 8 August 2016
+> Last update: 12 August 2016
 
 Scaffold your PyroCMS Modules in style. This extension once installed, works silently in the background to generate entities for all your streams. It will also configure your module with routes, bindings, language file entries etc, so you don't have to lift a finger
 

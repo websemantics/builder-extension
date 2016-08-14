@@ -43,17 +43,14 @@ class ModuleWasInstalledHandler {
 	{
 		$module = $event->getModule();
 
-		$namespaces = ebxGetNamespaces($module);
+		if(count(ebxGetNamespaces($module)) > 0){
 
-		if(count($namespaces) > 0){
-      		$this->dispatch(new ModifyModule($module));
+        $this->dispatch(new ModifyModule($module));
 
-        	$seeding = ebxSeedingOption($module);
-
-      		/* Allow seeding automatically based on builder config */
-      		if($seeding === 'builder'){
-      			$this->dispatch(new SeedModule($module));
-      		}
+    		/* Allow seeding automatically based on builder config */
+    		if(ebxSeedingOption($module) === 'yes'){
+    			$this->dispatch(new SeedModule($module));
+    		}
 		}
 
 	}

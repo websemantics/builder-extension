@@ -2,5 +2,5 @@
 
 return [
     'name'        => 'Entities Builder',
-    'description' => 'Build entities for your Module streams, in style.',
+    'description' => 'Build entities for your module streams, in style.',
 ];

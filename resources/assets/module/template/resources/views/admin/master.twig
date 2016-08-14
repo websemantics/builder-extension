@@ -1,24 +1,21 @@
 {% extends "theme::layouts/default" %}
 
 {% block content %}
- 
-<div class="inner">
+<div>
     <div class="container-fluid">
-
-	    <div class="panel">
-
-		    <div class="panel-heading">
-		        <h3 class="panel-title">
-		            {module_name} Module
-		        </h3>
-		    </div>
-
-		    <div class="panel-body">
-		        
-		    </div>
-
-			</div>
-		</div>
+        <div class="columns row">
+            <div class="column col-lg-24">
+                <div class="widget card" data-id="1">
+                    <span class="card-label card-label-info">
+                        {module_name} Module
+                    </span>
+                    <div class="card-block">
+                      <!-- content -->
+                    </div>
+                    <div class="card-corner card-corner-info"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
 {% endblock %}

@@ -52,7 +52,7 @@ class GenerateEntity implements SelfHandling
         $this->module = $module;
         $this->setFiles(app('Websemantics\EntityBuilderExtension\Filesystem\Filesystem'));
         $this->setParser(app('Anomaly\Streams\Platform\Support\Parser'));
-}
+    }
 
     /**
      * Handle the command.
@@ -60,7 +60,6 @@ class GenerateEntity implements SelfHandling
      */
     public function handle()
     {
-
         $stream = $this->stream;
         $module = $this->module;
 

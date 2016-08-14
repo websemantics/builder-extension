@@ -12,8 +12,8 @@
  */
 
  /**
-  * Return a true if the array given is associative 
-  * 
+  * Return a true if the array given is associative
+  *
   * @param    array $array
   * @return   boolean
   */
@@ -27,7 +27,7 @@
 
  /**
   * Return a list of namespaces
-  * 
+  *
   * @param    Module - $module
   * @return   array
   */
@@ -43,7 +43,7 @@
 
 /**
   * Return field config params, hide column / form field, view template etc
-  * 
+  *
   * @param    Module - $module
   * @param    String - $namespace_slug
   * @param    String - $field_slug
@@ -69,7 +69,7 @@
 
  /**
   * Return the folder name for the curent namespace or empty
-  * 
+  *
   * @param    Module - $module
   * @param    String - $namespace
   * @param    Bollean - $forward, if true, use forward slash, otherwise backward slash
@@ -83,7 +83,7 @@
 
         $namespaces = array_get(config($module->getNamespace('builder')), 'namespaces', []);
 
-        return array_get(config($module->getNamespace('builder')), 
+        return array_get(config($module->getNamespace('builder')),
                             'namespace_folder', true) ? $namespace : "";
       }
 
@@ -91,7 +91,7 @@
 
  /**
   * Return the folder template for the curent namespace
-  * 
+  *
   * @param    Module - $module
   * @return   string
   */
@@ -99,7 +99,7 @@
   if (!function_exists('ebxGetNamespaceFolderTemplate')) {
 
       function ebxGetNamespaceFolderTemplate($module){
-        return array_get(config($module->getNamespace('builder')), 
+        return array_get(config($module->getNamespace('builder')),
                             'namespace_folder', true) ? "" : "{namespace}/";
       }
 
@@ -107,7 +107,7 @@
 
  /**
   * Return a list of class suffixes that won't be overwritten
-  * 
+  *
   * @param    Module - $module
   * @return   string
   */
@@ -115,15 +115,15 @@
   if (!function_exists('ebxGetAvoidOverwrite')) {
 
       function ebxGetAvoidOverwrite($module, $extra = []){
-        return array_merge(array_get(config($module->getNamespace('builder')), 
+        return array_merge(array_get(config($module->getNamespace('builder')),
                             'avoid_overwrite', []),$extra);
       }
 
   }
 
  /**
-  * Return the seeding option ('no', 'builder' or 'self')
-  * 
+  * Return the seeding option ('yes' or 'no' *default)
+  *
   * @param    Module - $module
   * @return   string
   */
@@ -131,15 +131,15 @@
   if (!function_exists('ebxSeedingOption')) {
 
       function ebxSeedingOption($module){
-        return array_get(config($module->getNamespace('builder')), 
-                            'seeding', 'builder');
+        return array_get(config($module->getNamespace('builder')),
+                            'seeding', 'no');
       }
 
   }
 
  /**
   * Return the folder name for the curent namespace or empty
-  * 
+  *
   * @param    Module - $module
   * @return   string
   */
@@ -147,7 +147,7 @@
   if (!function_exists('ebxGetDocblock')) {
 
       function ebxGetDocblock($module){
-        return array_get(config($module->getNamespace('builder')), 
+        return array_get(config($module->getNamespace('builder')),
                             'docblock', '');
       }
 
@@ -155,15 +155,15 @@
 
  /**
   * Return a string to display for a null relationship entry value
-  * 
+  *
   * @return   string
   */
 
   if (!function_exists('ebxNullRelationshipEntry')) {
 
       function ebxNullRelationshipEntry($module){
-        return array_get(config($module->getNamespace('builder')), 
-                            'null_relationship_entry', 
+        return array_get(config($module->getNamespace('builder')),
+                            'null_relationship_entry',
                             '<span class="label label-default">null</span>');
       }
 
@@ -171,14 +171,14 @@
 
  /**
   * Get the 'extends' string for a possible Super Class for the Entity Repository
-  * 
+  *
   * @return   string
   */
 
   if (!function_exists('ebxExtendsRepository')) {
 
-      function ebxExtendsRepository($module){        
-        $extends_repository = array_get(config($module->getNamespace('builder')), 
+      function ebxExtendsRepository($module){
+        $extends_repository = array_get(config($module->getNamespace('builder')),
                             'extends_repository', '');
 
         if($extends_repository) {
@@ -193,26 +193,26 @@
 
  /**
   * Get the 'use' string for  Super Class for the Entity Repository
-  * 
+  *
   * @return   string
   */
 
   if (!function_exists('ebxExtendsRepositoryUse')) {
 
       function ebxExtendsRepositoryUse($module){
-        $extends_repository =  array_get(config($module->getNamespace('builder')), 
-                            'extends_repository',null);        
+        $extends_repository =  array_get(config($module->getNamespace('builder')),
+                            'extends_repository',null);
         return (!empty($extends_repository))? "use $extends_repository;":"";
       }
 
   }
 
  /**
-  * Extract the class name of the assignment filed type, i.e. TextFieldType, 
-  * Use this to access the field template i.e. 
-  * templates/field/table/TextFieldType.txt, if the 'column_template' is set, 
+  * Extract the class name of the assignment filed type, i.e. TextFieldType,
+  * Use this to access the field template i.e.
+  * templates/field/table/TextFieldType.txt, if the 'column_template' is set,
   * use templates/field/table/template/TextFieldType.txt
-  * 
+  *
   * @param  AssignmentModel $assignment
   * @return   string
   */
@@ -227,9 +227,3 @@
       }
 
   }
-
-
-
-
-
-

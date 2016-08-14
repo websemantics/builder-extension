@@ -53,7 +53,7 @@ php builder-blog-example/artisan extension:install websemantics.extension.entity
 3- Create a new module, 'Blog' (namespace = `blog` by default)
 
 ```
-php builder-blog-example/artisan make:module websemantics blog
+php builder-blog-example/artisan module:create websemantics blog
 ```
 
 This step will also create fields migration file located at `builder-blog-example/addons/default/websemantics/blog-module/migrations`

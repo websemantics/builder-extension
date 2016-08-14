@@ -29,14 +29,14 @@ class MakeModule extends Command
      *
      * @var string
      */
-    protected $name = 'make:module';
+    protected $name = 'module:create';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new module for the Entity Builder.';
+    protected $description = 'Create a module for the Entity Builder.';
 
     /**
      * Execute the console command.

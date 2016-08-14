@@ -111,16 +111,15 @@ class ScaffoldModule implements SelfHandling
         $moduleName = studly_case($this->slug);
         $vendorName = studly_case($this->vendor);
 
-        ;
-
         return [
-            'description' => '* describe your module here *',
+            'description' => 'Describe your module here',
             'docblock' => ' *',
             'vendor_name' => $vendorName,
             'vendor_name_lower' => strtolower($vendorName),
             'namespace' => strtolower($moduleName),
             'module_name' => $moduleName,
-            'figlet_module_name' => Figlet::create($moduleName . ' Module'),
+            'date' => date("Y-n-j"),
+            'figlet_module_name' => Figlet::create($moduleName . ' Module', 'small' /* slant */),
             'module_name_lower' => strtolower($moduleName),
         ];
     }

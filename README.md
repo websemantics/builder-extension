@@ -266,10 +266,13 @@ Make sure that the following folders/files have write permission:
 ### Change Log
 All notable changes to this project will be documented in this section.
 
-#### [0.8.2] - 2016-08-14
+#### [0.8.3] - 2016-08-14
 ##### Changed
-- Remove module automatic seeding after install (Pyro offers seeding after install)
+- Remove automatic seeding after install feature (Pyro does that now)
 - Ensure language files are present in a module
+- Use [Figlet](https://github.com/packaged/figlet) font to print module name in README.md
+- Detailed information in generated module's README.md
+- Rename command `make:module` to `module:create`
 - Bugs fixed
 
 #### [0.8] - 2016-02-26

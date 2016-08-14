@@ -28,7 +28,7 @@ class StreamWasCreatedHandler {
 	 * @return void
 	 */
 	public function __construct(ModuleCollection $moduleCollection)
-	{ 
+	{
 		$this->modules = $moduleCollection->withConfig('builder');
 	}
 
@@ -43,7 +43,7 @@ class StreamWasCreatedHandler {
 		$stream = $event->getStream();
 		foreach ($this->modules as $module) {
 			if(in_array($stream->getNamespace(), ebxGetNamespaces($module))){
-  		    $this->dispatch(new GenerateEntity($module, $stream));
+  		    //$this->dispatch(new GenerateEntity($module, $stream));
 			}
 		}
 	}

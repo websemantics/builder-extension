@@ -1,16 +1,16 @@
 {% extends "theme::layouts/default" %}
 
 {% block content %}
-<div>
+<div id="{vendor_name_lower}-module-{module_name_lower}-home">
     <div class="container-fluid">
         <div class="columns row">
             <div class="column col-lg-24">
                 <div class="widget card" data-id="1">
                     <span class="card-label card-label-info">
-                        {module_name} Module
+                        Tools Module
                     </span>
                     <div class="card-block">
-                      <!-- content -->
+                      {{ readme|markdown }}
                     </div>
                     <div class="card-corner card-corner-info"></div>
                 </div>

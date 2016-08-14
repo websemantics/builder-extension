@@ -49,7 +49,7 @@ class ModuleWasInstalledHandler {
 
     		/* Allow seeding automatically based on builder config */
     		if(ebxSeedingOption($module) === 'yes'){
-    			$this->dispatch(new SeedModule($module));
+    			//$this->dispatch(new SeedModule($module));
     		}
 		}
 

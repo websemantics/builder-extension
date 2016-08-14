@@ -273,6 +273,7 @@ All notable changes to this project will be documented in this section.
 - Use [Figlet](https://github.com/packaged/figlet) font to print module name in README.md
 - Detailed information in generated module's README.md
 - Rename command `make:module` to `module:create`
+- Update ascii logo
 - Bugs fixed
 
 #### [0.8] - 2016-02-26
@@ -314,6 +315,9 @@ All notable changes to this project will be documented in this section.
 
 ## Related Resources
 
-- PyroCMS - https://github.com/pyrocms/pyrocms
+[PyroCMS](https://github.com/pyrocms/pyrocms), an MVC PHP Content Management System built to be easy to use, theme and develop with. It is used by individuals and organizations of all sizes around the world.
+
 - Awesome PyroCMS - https://github.com/websemantics/awesome-pyrocms
-- PyroCMS Cheatsheet - http://websemantics.github.io/pyrocms-cheatsheet
+[PyroCMS Cheatsheet](http://websemantics.github.io/pyrocms-cheatsheet), A list of commands and features for PyroCMS 3.
+
+[Auto Pyro](https://github.com/websemantics/auto-pyro), PyroCMS deploy tool for faster and more pleasurable development experience.

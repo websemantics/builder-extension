@@ -43,30 +43,42 @@ class ModuleCreate extends Command
      */
     public function fire(AddonManager $addons)
     {
-        $type = 'module';
-        $vendor = $this->argument('vendor');
-        $slug = $this->argument('slug');
 
-        if (empty($vendor) || empty($slug)) {
-            throw new \Exception("Provide the vendor and module's slug");
-        }
+      $namespace = $this->argument('namespace');
 
-        $path = $this->dispatch(new MakeAddonPaths($vendor, $type, $slug, $this));
+      if (!str_is('*.*.*', $namespace)) {
+          throw new \Exception("The namespace should be snake case and formatted like: {vendor}.module.{slug}");
+      }
 
-        $this->dispatch(new ScaffoldModule($path, $vendor, $type, $slug, $this));
+      list($vendor, $type, $slug) = array_map(
+          function ($value) {
+              return str_slug(strtolower($value), '_');
+          },
+          explode('.', $namespace)
+      );
 
-        $addons->register();
+      $type = str_singular($type);
 
-        if ($type == 'module') {
-            $this->call(
-                'make:migration',
-                [
-                    'name' => 'create_'.$slug.'_fields',
-                    '--addon' => "{$vendor}.{$type}.{$slug}",
-                    '--fields' => true,
-                ]
-            );
-        }
+      if ($type !== 'module') {
+          throw new \Exception("The namespace should be snake case and formatted like: {vendor}.module.{slug}");
+      }
+
+      $path = $this->dispatch(new MakeAddonPaths($vendor, $type, $slug, $this));
+
+      $this->dispatch(new ScaffoldModule($path, $vendor, $type, $slug, $this));
+
+      $addons->register();
+
+      if ($type == 'module') {
+          $this->call(
+              'make:migration',
+              [
+                  'name' => 'create_'.$slug.'_fields',
+                  '--addon' => "{$vendor}.{$type}.{$slug}",
+                  '--fields' => true,
+              ]
+          );
+      }
     }
 
     /**
@@ -77,8 +89,7 @@ class ModuleCreate extends Command
     protected function getArguments()
     {
         return [
-            ['vendor', InputArgument::REQUIRED, 'The module\'s vendor.'],
-            ['slug', InputArgument::REQUIRED, 'The module\'s slug.'],
+            ['namespace', InputArgument::REQUIRED, 'The addon\'s desired dot namespace.']
         ];
     }
 
@@ -90,7 +101,7 @@ class ModuleCreate extends Command
     protected function getOptions()
     {
         return [
-            ['shared', null, InputOption::VALUE_NONE, 'Indicates if the module should be created in shared addons.'],
+            ['shared', null, InputOption::VALUE_NONE, 'Indicates if the addon should be created in shared addons.']
         ];
     }
 }

@@ -18,7 +18,7 @@ return [
   |    |___ |\ |  |  |  |   \_/     |__] |  | | |    |  \ |___ |__/
   |    |___ | \|  |  |  |    |      |__] |__| | |___ |__/ |___ |  \
   |
-  |    This file contains all the entity builder configs
+  |    This file contains all Entity Builder configs
   |
   */
 
@@ -71,13 +71,12 @@ return [
 	|--------------------------------------------------------------------------
 	| Allow to seed the module after it has installed by:
 	|
-	| (1) The Entity Builder : 'builder'   (*default)
-	| (2) An internal seeder command : 'self'
-	| (3) Disable seeding : 'no'
+	| (1) The Entity Builder : 'yes'
+	| (2) Disable seeding : 'no' (*default)
 	|
 	*/
 
-	'seeding' => 'builder',
+	'seeding' => 'no',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +92,7 @@ return [
 	|--------------------------------------------------------------------------
 	| Namespaces folder
 	|--------------------------------------------------------------------------
-	| Group all streams in one folder
+	| Group all entities (streams) in one folder
 	|
 	*/
 
@@ -130,10 +129,10 @@ return [
 
 	'avoid_overwrite' => [
 		'Model.php',
-		'Repository.php',
-		// 'TableColumns.php', /* uncomment this if you no longer want this to be overwritten */
-	    // 'FormBuilder.php'
-		// 'ModuleSeeder.php'
+		'Repository.php'/* ,
+    'TableColumns.php',
+    'FormBuilder.php'
+    'ModuleSeeder.php' */
 	],
 
 	/*
@@ -145,8 +144,8 @@ return [
 	*/
 
 	'docblock' =>
-' * @link      http://websemantics.ca/ibuild
+' * @link      http://websemantics.ca
  * @link      http://ibuild.io
  * @author    WebSemantics, Inc. <info@websemantics.ca>
- * @author    Adnan Sagar <msagar@websemantics.ca>'
+ * @author    Adnan M.Sagar <adnan@websemantics.ca>'
 ];

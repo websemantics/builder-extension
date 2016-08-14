@@ -46,7 +46,6 @@ class AssignmentWasCreatedHandler {
 		foreach ($this->modules as $module) {
 
 			$namespaces = ebxGetNamespaces($module);
- dd($namespaces);
 			if(in_array($stream->getNamespace(), $namespaces)){
        		  $this->dispatch(new ModifyEntity($module, $stream, $assignment));
 			}

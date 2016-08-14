@@ -159,7 +159,7 @@ This will be added to the Entity Seeder class.
 php builder-blog-example/artisan module:install websemantics.module.blog
 ```
 
-This will install and automatically seed your module, hooray!
+This will install your module, hooray!
 
 You are done. Go to admin panel and check your beautiful new Module in action `admin/blog/posts`
 
@@ -262,6 +262,12 @@ Make sure that the following folders/files have write permission:
 
 ### Change Log
 All notable changes to this project will be documented in this section.
+
+#### [0.8.2] - 2016-08-14
+##### Changed
+- Remove module automatic seeding after install (Pyro offers seeding after install)
+- Ensure language files are present in a module
+- Bugs fixed
 
 #### [0.8] - 2016-02-26
 ##### Changed

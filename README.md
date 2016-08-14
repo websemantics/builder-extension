@@ -53,7 +53,7 @@ php builder-blog-example/artisan extension:install websemantics.extension.entity
 3- Create a new module, 'Blog' (namespace = `blog` by default)
 
 ```
-php builder-blog-example/artisan module:create websemantics blog
+php builder-blog-example/artisan module:create websemantics.module.blog
 ```
 
 This step will also create fields migration file located at `builder-blog-example/addons/default/websemantics/blog-module/migrations`
@@ -272,7 +272,7 @@ All notable changes to this project will be documented in this section.
 - Ensure language files are present in a module
 - Use [Figlet](https://github.com/packaged/figlet) font to print module name in README.md
 - Detailed information in generated module's README.md
-- Rename command `make:module` to `module:create`
+- Rename command `make:module` to `module:create` and use namespace format, `{vendor}.module.{slug}`
 - Update ascii logo
 - Bugs fixed
 

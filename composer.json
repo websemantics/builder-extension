@@ -23,7 +23,8 @@
         "email": "info@websemantics.ca"
     },
     "require":{
-        "nikic/php-parser": "~2.0"
+        "nikic/php-parser": "~2.0",
+        "packaged/figlet": "*"
     },
     "autoload": {
         "psr-4": {

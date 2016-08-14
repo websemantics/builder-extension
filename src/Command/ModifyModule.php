@@ -4,9 +4,7 @@ use Illuminate\Contracts\Bus\SelfHandling;
 use Websemantics\EntityBuilderExtension\Command\Traits\FileProcessor;
 use Websemantics\EntityBuilderExtension\Parser\ModuleNameParser;
 use Websemantics\EntityBuilderExtension\Parser\VendorNameParser;
-use Websemantics\EntityBuilderExtension\Filesystem\Filesystem;
 use Anomaly\Streams\Platform\Addon\Module\Module;
-use Anomaly\Streams\Platform\Support\Parser;
 
 /**
  * Class ModifyModule
@@ -37,13 +35,11 @@ class ModifyModule implements SelfHandling
      * @param Filesystem  $files
      * @param Parser      $parser
      */
-    public function __construct(Module $module,
-                                Filesystem $files,
-                                Parser $parser)
+    public function __construct(Module $module)
     {
         $this->module = $module;
-        $this->setFiles($files);
-        $this->setParser($parser);
+        $this->setFiles(app('Websemantics\EntityBuilderExtension\Filesystem\Filesystem'));
+        $this->setParser(app('Anomaly\Streams\Platform\Support\Parser'));
     }
 
     /**
@@ -54,7 +50,7 @@ class ModifyModule implements SelfHandling
      */
     public function handle()
     {
-        $module = $this->$module;
+        $module = $this->module;
 
         $data = $this->getTemplateData($module);
 

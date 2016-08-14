@@ -22,7 +22,7 @@ class ModuleWasInstalledHandler {
   use DispatchesCommands;
 
 	protected $modules;
-	
+
 	/**
 	 * Create the event handler.
 	 *
@@ -47,7 +47,7 @@ class ModuleWasInstalledHandler {
 
 		if(count($namespaces) > 0){
       		$this->dispatch(new ModifyModule($module));
-        	
+
         	$seeding = ebxSeedingOption($module);
 
       		/* Allow seeding automatically based on builder config */

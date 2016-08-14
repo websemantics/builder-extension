@@ -21,7 +21,7 @@ class StreamWasCreatedHandler {
   use DispatchesCommands;
 
 	protected $modules;
-	
+
 	/**
 	 * Create the event handler.
 	 *
@@ -39,7 +39,7 @@ class StreamWasCreatedHandler {
 	 * @return void
 	 */
 	public function handle(StreamWasCreated $event)
-	{   
+	{
 		$stream = $event->getStream();
 
 		foreach ($this->modules as $module) {
@@ -47,7 +47,6 @@ class StreamWasCreatedHandler {
 			if(in_array($stream->getNamespace(), $namespaces)){
         		$this->dispatch(new GenerateEntity($module, $stream));
 			}
-
 		}
 	}
 

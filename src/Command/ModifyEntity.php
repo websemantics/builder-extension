@@ -3,10 +3,8 @@
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 use Anomaly\Streams\Platform\Assignment\AssignmentModel;
 use Illuminate\Contracts\Bus\SelfHandling;
-use Websemantics\EntityBuilderExtension\Filesystem\Filesystem;
 use Websemantics\EntityBuilderExtension\Command\Traits\TemplateProcessor;
 use Anomaly\Streams\Platform\Addon\Module\Module;
-use Anomaly\Streams\Platform\Support\Parser;
 use Websemantics\EntityBuilderExtension\Parser\EntityNameParser;
 use Websemantics\EntityBuilderExtension\Parser\ModuleNameParser;
 use Websemantics\EntityBuilderExtension\Parser\VendorNameParser;
@@ -61,15 +59,13 @@ class ModifyEntity implements SelfHandling
      */
     public function __construct(Module $module,
                                 StreamInterface $stream,
-                                AssignmentModel $assignment,
-                                Filesystem $files,
-                                Parser $parser)
+                                AssignmentModel $assignment)
     {
+        $this->module = $module;
         $this->stream = $stream;
         $this->assignment = $assignment;
-        $this->module = $module;
-        $this->setFiles($files);
-        $this->setParser($parser);
+        $this->setFiles(app('Websemantics\EntityBuilderExtension\Filesystem\Filesystem'));
+        $this->setParser(app('Anomaly\Streams\Platform\Support\Parser'));
     }
 
     /**
@@ -104,7 +100,7 @@ class ModifyEntity implements SelfHandling
 
         $destination = $module->getPath();
 
-        $entity_destination = $destination.'/src/'.$namespace_folder.'/'.$data['entity_name'];
+        $entity_destination = $destination.'/src/'.$namespace_folder.$data['entity_name'];
 
         // Get the assigned class name, i.e. TextFieldType
         $fieldTypeClassName = ebxGetFieldTypeClassName($assignment);

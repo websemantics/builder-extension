@@ -10,10 +10,10 @@
                   |     |         |     |     |     | \    \      \    `-..-'    /
                   |_____|         |_____|     |_____|  \____\      '-_        _-'
                                                                       `------'
-                  ____ _  _ ___ _ ___ _   _    ___  _  _ _ _    ___  ____ ____ 
-                  |___ |\ |  |  |  |   \_/     |__] |  | | |    |  \ |___ |__/ 
+                  ____ _  _ ___ _ ___ _   _    ___  _  _ _ _    ___  ____ ____
+                  |___ |\ |  |  |  |   \_/     |__] |  | | |    |  \ |___ |__/
                   |___ | \|  |  |  |    |      |__] |__| | |___ |__/ |___ |  \ v0.8
-                                                             
+
 ```                                                                                             
 > Last update: 8 August 2016
 
@@ -21,7 +21,7 @@ Scaffold your PyroCMS Modules in style. This extension once installed, works sil
 
 ### What is an Entity
 
-An Entity is a representation of an Object Type which may correspond with a Stream,.. for example, a Person, a Company or an Animal can all be generated as Pyro Entities. 
+An Entity is a representation of an Object Type which may correspond with a Stream,.. for example, a Person, a Company or an Animal can all be generated as Pyro Entities.
 
 Code generated for an entity includes the Entity Model and Repository, Plugin, Seeder, Contracts, Table and Form Builders.
 
@@ -38,7 +38,7 @@ composer create-project pyrocms/pyrocms=3.0-beta3 --prefer-dist builder-blog-exa
 php builder-blog-example/artisan install
 ```
 
-2- Clone and install this extension, 
+2- Clone and install this extension,
 
 ```
 git clone https://github.com/websemantics/entity_builder-extension builder-blog-example/addons/default/websemantics/entity_builder-extension
@@ -121,10 +121,12 @@ Change class content to:
 
 8- Specify automatic seeding after a module has installed
 
-There are three settings to the seeding option in builder.php, (1) `self` for an internal seeder handler per module, (2) `builder`, and here the entity builder will seed the module after install, (3) `no` for disabling seeding
+There are two settings to the seeding option in builder.php,
+- `yes`, Entity Builder will seed the module after install,
+- `no`, seeding is disabled
 
 ```
-  'seeding' => 'self', /* 'no', 'self' or 'builder' */
+  'seeding' => 'no'
 ```
 
 9- Specify your project docblock to be included with the generated code
@@ -145,7 +147,7 @@ In this example, create post.php (singular file name) at `builder-blog-example/a
 The content must be a list of entry values without the <?php, for example:
 
 ```
-  ['title' => 'Laravel', 'content' => 'PHP framework'], 
+  ['title' => 'Laravel', 'content' => 'PHP framework'],
   ['title' => 'PyroCMS', 'content' => 'PHP CMS']
 ```
 
@@ -169,7 +171,7 @@ After making changes to your migration files, adding / removing streams, adding 
 php builder-blog-example/artisan module:reinstall websemantics.module.blog
 ```
 
-Have fun, 
+Have fun,
 
 #### Inner Working:
 
@@ -182,7 +184,7 @@ Once installed, this extension listens mainly to two types of events *StreamWasC
 Here's an example of the [builder config file](https://github.com/websemantics/example-module/blob/master/resources/config/builder.php) taken from [Boxed](http://websemantics.github.io/boxed) example module github repo. Once that's done, create your Streams migration files as usual. The extension will kick in when it recieives either of the two events mentioned above:
 
 - *StreamWasCreated*
-- *AssignmentWasCreated* 
+- *AssignmentWasCreated*
 
 1- For *StreamWasCreated* event, the extension will generate an entity folder for this stream from the template stored at `entity_builder-extension/resources/assets/entity/code`. The folder map of this entity follows the following structure:
 
@@ -223,7 +225,7 @@ By default, this folder structure would be generated in a subfolder at `src`. Th
     'namespace_folder' => false,
 ```
 
-The extension then will generate a controller per stream at `xyz-module/src/Http/Controller/Admin/AbcController.php` and modify the *Module*, *ServiceProvider*, *Seeder* and language files to setup the entity to work correctly with the module. 
+The extension then will generate a controller per stream at `xyz-module/src/Http/Controller/Admin/AbcController.php` and modify the *Module*, *ServiceProvider*, *Seeder* and language files to setup the entity to work correctly with the module.
 
 2- For *AssignmentWasCreated* event, the extension will modify two files, `AbcTableColumns.php` and `AbcFormBuilder.php` and add a field slug per stream assignment.
 
@@ -244,16 +246,16 @@ Notice that, the name of the entity has been omitted.
 
 Make sure that the following folders/files have write permission:
 
-- `src` 
+- `src`
 - `src/XyzModule.php`
 - `src/XyzServiceProvider.php`
-- `src/XyzModuleSeeder.php` 
+- `src/XyzModuleSeeder.php`
 - `resources/lang/en/addon.php`
 - `src/Http/Controller/Admin`
 
 #### Install:
 
-- Download the code or clone this repo into your addon folder at 
+- Download the code or clone this repo into your addon folder at
 `addons/default/websemantics/entity_builder-extension`
 - Login to your admin
 - Install this extension from Addons/Extensions

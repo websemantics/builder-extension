@@ -16,7 +16,7 @@ use Websemantics\EntityBuilderExtension\Parser\GenericPhpParser;
 
 trait FileProcessor
 {
- 
+
   /**
      * The file system utility.
      *
@@ -30,7 +30,7 @@ trait FileProcessor
      * @var Parser
      */
     protected $parser;
-  
+
     /**
      * Setter for files
      *
@@ -72,13 +72,13 @@ trait FileProcessor
     }
 
     /**
-     * Process a php target file to append PHP syntax-sensitive content 
+     * Process a php target file to append PHP syntax-sensitive content
      * from multiple template sources.
      *
      * @param  string $file, a php file to modify
      * @param  array  $templates list of key (property name), value (template file)
      * @param  string $data used to replace placeholders inside all template files
-     * @param Boolean $front, set location to the front of the array 
+     * @param Boolean $front, set location to the front of the array
      */
     protected function processFile($file, $templates, $data, $front = false)
     {
@@ -89,7 +89,7 @@ trait FileProcessor
         foreach ($templates as $property => $template) {
            $phpParser->parse($property, $template, $front);
         }
-        
+
         $content = $phpParser->prettyPrint();
         if(!is_null($content)){
            $this->files->put($file, $content);

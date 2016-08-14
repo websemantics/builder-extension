@@ -21,7 +21,7 @@ class AssignmentWasCreatedHandler {
   use DispatchesCommands;
 
 	protected $modules;
-	
+
 	/**
 	 * Create the event handler.
 	 *
@@ -44,9 +44,9 @@ class AssignmentWasCreatedHandler {
 		$stream = $assignment->getStream();
 
 		foreach ($this->modules as $module) {
-			
-			$namespaces = ebxGetNamespaces($module);
 
+			$namespaces = ebxGetNamespaces($module);
+ dd($namespaces);
 			if(in_array($stream->getNamespace(), $namespaces)){
        		  $this->dispatch(new ModifyEntity($module, $stream, $assignment));
 			}

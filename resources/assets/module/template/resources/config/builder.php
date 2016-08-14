@@ -1,18 +1,26 @@
 <?php
 
 return [
-    
-    /*
-    |   Entity
-    |    ____        _ _     _           
-    |   | __ ) _   _(_) | __| | ___ _ __ 
-    |   |  _ \| | | | | |/ _` |/ _ \ '__|
-    |   | |_) | |_| | | | (_| |  __/ |   
-    |   |____/ \__,_|_|_|\__,_|\___|_|  Extension . . . 
-    |                                
-    |   This file contains all the entity builder configs
-    |
-    */
+
+ /*
+  |                                                          __
+  |                                                         /  |
+  |    _________  _____     _____ __________               |    \_
+  |    |         \ \    \   /    / |          \         __  \     `-_
+  |    |    __    | \    \ /    /  |    __     |       /   \  ''-.    \
+  |    |   |__)   |  \    V    /   |   |__)    |      /    /      \    \
+  |    |      ___/    \       /    |          <       |   |        |   |
+  |    |     |         |     |     |     |\    \      \    \      /    /
+  |    |     |         |     |     |     | \    \      \    `-..-'    /
+  |    |_____|         |_____|     |_____|  \____\      '-_        _-'
+  |                                                        `------'
+  |    ____ _  _ ___ _ ___ _   _    ___  _  _ _ _    ___  ____ ____
+  |    |___ |\ |  |  |  |   \_/     |__] |  | | |    |  \ |___ |__/
+  |    |___ | \|  |  |  |    |      |__] |__| | |___ |__/ |___ |  \
+  |
+  |    This file contains all the entity builder configs
+  |
+  */
 
 	/*
 	|--------------------------------------------------------------------------
@@ -20,18 +28,18 @@ return [
 	|--------------------------------------------------------------------------
 	| A list of all the Stream Namespaces used in this Module.
 	|
-	| More control over code generated can be established per assignment, 
-	| for example, hide / show table columns and form fields per stream assignment, 
+	| More control over code generated can be established per assignment,
+	| for example, hide / show table columns and form fields per stream assignment,
 	| also table column field view / template.
 	|
-	| for example: 
+	| for example:
 	|
 	|	'namespaces' => [
 	|		'namespace' => [
 	|			'field_slug' => [
 	|				'hide_column' => true,  *optional, (false by default)
 	|				'hide_field'  => false,  *optional, (false by default)
-	|				'column_template'    => 
+	|				'column_template'    =>
 	|     '<span class="label label-default">{value}</span> *optional, ('{value}' by default)
 	|			]
 	|		]
@@ -43,7 +51,7 @@ return [
 	|  			'column_template'    =>  'default'
 	| You can also have your own markup, for that there's two variables {class} & {value}
 	| For example, '<span class="label label-{class}">{value}</span>'
-	| 
+	|
 	|	*/
 
 	'namespaces' => [
@@ -56,7 +64,7 @@ return [
 			// ]
 		]
 	],
-	
+
 	/*
 	|--------------------------------------------------------------------------
 	| Seeding
@@ -65,7 +73,7 @@ return [
 	|
 	| (1) The Entity Builder : 'builder'   (*default)
 	| (2) An internal seeder command : 'self'
-	| (3) Disable seeding : 'no' 
+	| (3) Disable seeding : 'no'
 	|
 	*/
 
@@ -107,11 +115,11 @@ return [
 	| Avoid Overwrite
 	|--------------------------------------------------------------------------
 	|
-	| For development and to avoid overwriting on code added, list all the files 
-	| that should not be overwritten by the builder. Use the last part of the 
+	| For development and to avoid overwriting on code added, list all the files
+	| that should not be overwritten by the builder. Use the last part of the
 	| file name, ..
-	| 
-	| for example: 
+	|
+	| for example:
 	|   -PostModel.php 		  -> 'Model.php'
 	|   -FileTableColumns.php -> 'TableColumns.php'
 	|

@@ -26,6 +26,7 @@ trait TemplateProcessor
      */
     protected function processTemplate($file, $template, $data, $startNeedle, $endNeedle)
     {
+
         if (file_exists($template)) {
             $template = $this->parser->parse($this->files->get($template), $data);
 

@@ -1,19 +1,15 @@
 <?php namespace Websemantics\EntityBuilderExtension\Command;
 
 use Illuminate\Contracts\Bus\SelfHandling;
-use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 use Anomaly\Streams\Platform\Addon\Module\Module;
 use Websemantics\EntityBuilderExtension\Command\Traits\TemplateProcessor;
-use Websemantics\EntityBuilderExtension\Filesystem\Filesystem;
 use Websemantics\EntityBuilderExtension\Parser\EntityNameParser;
 use Websemantics\EntityBuilderExtension\Parser\ModuleNameParser;
 use Websemantics\EntityBuilderExtension\Parser\VendorNameParser;
 use Websemantics\EntityBuilderExtension\Parser\NamespaceParser;
 use Websemantics\EntityBuilderExtension\Parser\SeedersParser;
 use Websemantics\EntityBuilderExtension\Parser\EntityLabelParser;
-use Anomaly\Streams\Platform\Addon\Module\Module;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
-use Anomaly\Streams\Platform\Support\Parser;
 
 /**
  * Class GenerateEntity
@@ -49,17 +45,14 @@ class GenerateEntity implements SelfHandling
      *
      * @param Module $module
      * @param StreamInterface $stream
-     * @param Filesystem  $files
-     * @param Parser      $parser
      */
-    public function __construct(Module $module, StreamInterface $stream,
-                                Filesystem $files, Parser $parser)
+    public function __construct(Module $module, StreamInterface $stream)
     {
         $this->stream = $stream;
         $this->module = $module;
-        $this->setFiles($files);
-        $this->setParser($parser);
-    }
+        $this->setFiles(app('Websemantics\EntityBuilderExtension\Filesystem\Filesystem'));
+        $this->setParser(app('Anomaly\Streams\Platform\Support\Parser'));
+}
 
     /**
      * Handle the command.
@@ -67,6 +60,7 @@ class GenerateEntity implements SelfHandling
      */
     public function handle()
     {
+
         $stream = $this->stream;
         $module = $this->module;
 
@@ -88,8 +82,14 @@ class GenerateEntity implements SelfHandling
         /* Make sure Module's main files are present: Seeder etc
         (TODO, optomize, doesn't have to run everytime) */
         $this->files->parseDirectory(
-            $modulePath.'/src',
+            $modulePath.'/template/src',
             $destination.'/src',
+            $data
+        );
+
+        $this->files->parseDirectory(
+            $modulePath.'/template/resources',
+            $destination.'/resources',
             $data
         );
 

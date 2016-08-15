@@ -1,26 +1,26 @@
 ```
-                 _________   _____     _____  __________
-                |         \==\    \   /    /=|          \\================\
-                |    __    |  \    \ /    /  |    __     |                |
-                |   |__)   |   \    V    /   |   |__)    |                |
-                |      ___/     \       /    |          <                ┌┴┐
-                |     |          |     |     |     |\    \              /  |
-                |     |          |     |     |     | \    \            |    \_
-                |_____|          |_____|     |_____|  \____\        __  \     `-_
-                 ___    _  _    _    ___    _    ___   __ __       /   \  ''-.    \
-                | __|  | \| |  | |  |_ _|  | |  |_ _|  \ V /      /    /      \    \
-                | _|   | \\ |  | |   | |   | |   | |    \ /       |   |        |   |
-                |___|  |_|\_|  |_|   |_|   |_|   |_|    |_|       \    \      /    /
-                 ___    _ _    _    _      __     ___    ___       \    `-..-'    /
-                | o )  | | |  | |  | |    |  \   | __|  | o \       '-_        _-'
-                | o \  | U |  | |  | |_   | o )  | _|   |   /          `------'
-                |___/  |___|  |_|  |___|  |__/   |___|  |_|\_\    
+             __________     _____      _____     ___________
+            |          \====\     \   /    /====|           \\========================\
+            |     __    |    \     \ /    /     |     __     |                        |
+            |    |__)   |     \     V    /      |    |__)    |                        |
+            |       ___/       \        /       |           <                        ┌┴┐
+            |      |            |      |        |      |\    \                      /  |
+            |      |            |      |        |      | \    \                    |    \_
+            |______|            |______|        |______|  \____\               __  \     `-_
+             _____     _  _     _     ___     _     ___    __ __              /   \  ''-.    \
+            |   __|   | \| |   | |   |_ _|   | |   |_ _|   \ V /             /    /      \    \
+            |   _|    | \\ |   | |    | |    | |    | |     \ /              |   |        |   |
+            |_____|   |_|\_|   |_|    |_|    |_|    |_|     |_|              \    \      /    /
+             _____     _ _     _     _       __      ___     ___              \    `-..-'    /
+            |   o )   | | |   | |   | |     |  \    | __|   | o \              '-_        _-'
+            |   o \   | U |   | |   | |_    | o )   | _|    |   /                 `------'
+            |_____/   |___|   |_|   |___|   |__/    |___|   |_|\_\    
 
-                Scaffolds modules and streams into working code   - -- --------- -- -
+            Modules & Streams Scaffolder for Maximum Coding Pleasure         - -- --------- -- -
 ```                                                                                             
-> Last update: 12 August 2016
+> Last update: 25 August 2016
 
-Scaffold your PyroCMS Modules in style. This extension once installed, works silently in the background to generate entities for all your streams. It will also configure your module with routes, bindings, language file entries etc, so you don't have to lift a finger
+This extension once installed becomes your coding companion that helps to generate modules and [stream entities](#what-is-an-entity) for all your projects coding needs. It will also configure your module classes with routes, bindings, language file entries, seeding and much more so you do not have to lift a finger.
 
 ### What is an Entity
 
@@ -53,7 +53,7 @@ php builder-blog-example/artisan extension:install websemantics.extension.entity
 3- Create a new module, 'Blog' (namespace = `blog` by default)
 
 ```
-php builder-blog-example/artisan module:create websemantics.module.blog
+php builder-blog-example/artisan make:addon websemantics.module.blog
 ```
 
 This step will also create fields migration file located at `builder-blog-example/addons/default/websemantics/blog-module/migrations`

@@ -13,7 +13,7 @@ use Websemantics\EntityBuilderExtension\Parser\AssignmentSlugParser;
 use Websemantics\EntityBuilderExtension\Parser\AssignmentLabelParser;
 
 /**
- * Class ModifyEntity
+ * Class ModifyEntity. Generates code for assignements
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
@@ -78,7 +78,7 @@ class ModifyEntity implements SelfHandling
         $stream = $this->stream;
         $assignment = $this->assignment;
 
-        // Get the field config params from build.php
+        /* get the field config params from build.php */
         $field_config = ebxGetFieldConfig(
             $module,
             $stream->getNamespace(),
@@ -87,25 +87,25 @@ class ModifyEntity implements SelfHandling
 
         $entity = __DIR__.'/../../resources/assets/entity';
 
-        // Set a list of files to avoid overwrite
+        /* Set a list of files to avoid overwrite */
         $this->files->setAvoidOverwrite(ebxGetAvoidOverwrite($module));
 
-        // Get the template data
+        /* Get the template data */
         $data = $this->getTemplateData($module, $stream, $assignment, $field_config);
 
         $source = $entity.'/code/{namespace}/';
 
-        // Get the namespace destination folder, if any!
+        /* Get the namespace destination folder, if any! */
         $namespace_folder = ebxGetNamespaceFolder($module, $data['namespace'], true);
 
         $destination = $module->getPath();
 
         $entity_destination = $destination.'/src/'.$namespace_folder.$data['entity_name'];
 
-        // Get the assigned class name, i.e. TextFieldType
+        /* Get the assigned class name, i.e. TextFieldType */
         $fieldTypeClassName = ebxGetFieldTypeClassName($assignment);
 
-        // (1) Process the form builder class
+        /* (1) Process the form builder class */
         if (!$field_config['hide_field']) {
             $this->processFormBuilder(
                 $entity_destination.'/Form/'.
@@ -115,7 +115,7 @@ class ModifyEntity implements SelfHandling
             );
         }
 
-        // (2) Process the table column class
+        /* (2) Process the table column class */
         if (!$field_config['hide_column']) {
             $this->processTableColumns(
                 $entity_destination.'/Table/'.
@@ -125,7 +125,7 @@ class ModifyEntity implements SelfHandling
             );
         }
 
-        // (3) Process the field language file
+        /* (3) Process the field language file */
         $this->processFile(
             $destination.'/resources/lang/en/field.php',
             [$data['field_slug'] => $entity.'/templates/module/field.php'],

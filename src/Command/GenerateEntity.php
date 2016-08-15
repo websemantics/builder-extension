@@ -12,7 +12,7 @@ use Websemantics\EntityBuilderExtension\Parser\EntityLabelParser;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 
 /**
- * Class GenerateEntity
+ * Class GenerateEntity. Generates code from a stream schema
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
@@ -70,64 +70,53 @@ class GenerateEntity implements SelfHandling
 
         $data = $this->getTemplateData($module, $stream);
 
+        /* uncomment the array entries to protect these files from being overwriten or add your own */
         $this->files->setAvoidOverwrite(ebxGetAvoidOverwrite($module, [
-            // $data['module_name'] . 'ModuleSeeder.php',
-            // $data['module_name'] . 'Module.php',
-            // $data['module_name'] . 'ModuleServiceProvider.php',
+              // $data['module_name'] . 'ModuleSeeder.php',
+              // $data['module_name'] . 'Module.php',
+              // $data['module_name'] . 'ModuleServiceProvider.php',
             ]));
 
-        $destination = $module->getPath();
+        $dest = $module->getPath();
 
-        /* Make sure Module's main files are present: Seeder etc
-        (TODO, optomize, doesn't have to run everytime) */
-        $this->files->parseDirectory(
-            $modulePath.'/template/src',
-            $destination.'/src',
-            $data
-        );
-
-        $this->files->parseDirectory(
-            $modulePath.'/template/resources',
-            $destination.'/resources',
-            $data
-        );
-
+        /* initially, copy the template files to the entity's src folder */
         $this->files->parseDirectory(
             $entityPath."/code/$namespace_folder",
-            $destination.'/src',
+            $dest.'/src',
             $data
         );
 
         try {
+
+            /* secondly, stitch the entity with the module classes */
             $this->processFile(
-                $destination.'/src/'.$data['module_name'].'ModuleServiceProvider.php',
+                $dest.'/src/'.$data['module_name'].'ModuleServiceProvider.php',
                 ['routes' => $entityPath.'/templates/module/routes.php',
                  'bindings' => $entityPath.'/templates/module/bindings.php',
-                'singletons' => $entityPath.'/templates/module/singletons.php',
-                ],
+                 'singletons' => $entityPath.'/templates/module/singletons.php'],
                 $data
             );
 
             $this->processFile(
-                $destination.'/src/'.$data['module_name'].'Module.php',
+                $dest.'/src/'.$data['module_name'].'Module.php',
                 ['sections' => $entityPath.'/templates/module/sections.php'],
                 $data
             );
 
             $this->processFile(
-                $destination.'/src/'.$data['module_name'].'ModuleSeeder.php',
+                $dest.'/src/'.$data['module_name'].'ModuleSeeder.php',
                 ['seeders' => $entityPath.'/templates/module/seeding.php'],
                 $data
             );
 
             $this->processFile(
-                $destination.'/resources/lang/en/section.php',
+                $dest.'/resources/lang/en/section.php',
                 [$data['entity_name_lower_plural'] => $entityPath.'/templates/module/section.php'],
                 $data
             );
 
             $this->processFile(
-                $destination.'/resources/lang/en/stream.php',
+                $dest.'/resources/lang/en/stream.php',
                 [$data['stream_slug'] => $entityPath.'/templates/module/stream.php'],
                 $data
             );
@@ -164,7 +153,7 @@ class GenerateEntity implements SelfHandling
         $namespace = (new NamespaceParser())->parse($stream);
         $vendorName = (new VendorNameParser())->parse($module);
 
-        // Wheather we use a grouping folder for all streams with the same namespace
+        /* check if we are using a grouping folder for all generated entities with the same namespace */
         $namespace_folder = ebxGetNamespaceFolder($module, $namespace);
 
         return [

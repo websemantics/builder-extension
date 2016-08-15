@@ -11,12 +11,6 @@ use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 
 class {entity_name}FormBuilder extends FormBuilder
 {
-    /**
-     * The form fields.
-     *
-     * @var array
-     */
-    protected $fields = [];
 
     /**
      * The form fields.

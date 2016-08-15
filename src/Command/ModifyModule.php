@@ -7,7 +7,7 @@ use Websemantics\EntityBuilderExtension\Parser\VendorNameParser;
 use Anomaly\Streams\Platform\Addon\Module\Module;
 
 /**
- * Class ModifyModule
+ * Class ModifyModule.
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
@@ -51,26 +51,20 @@ class ModifyModule implements SelfHandling
     public function handle()
     {
         $module = $this->module;
-
         $data = $this->getTemplateData($module);
-
         $dest = $module->getPath();
-
         $source = __DIR__.'/../../resources/assets/module';
 
         try {
-            $this->files->parseDirectory(
-                $source.'/resources',
-                $dest.'/resources',
-                $data
-            );
 
+            /* adding routes to the module service provider class */
             $this->processFile(
                 $dest.'/src/'.$data['module_name'].'ModuleServiceProvider.php',
                 ['routes' => $source.'/routes.php'],
                 $data
             );
 
+            /* adding sections to the module class */
             $this->processFile(
                 $dest.'/src/'.$data['module_name'].'Module.php',
                 ['sections' => $source.'/sections.php'],

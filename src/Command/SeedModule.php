@@ -4,7 +4,7 @@ use Illuminate\Contracts\Bus\SelfHandling;
 use Anomaly\Streams\Platform\Addon\Module\Module;
 
 /**
- * Class SeedModule
+ * Class SeedModule.
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io

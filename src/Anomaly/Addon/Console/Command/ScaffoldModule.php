@@ -1,6 +1,6 @@
 <?php namespace Websemantics\EntityBuilderExtension\Anomaly\Addon\Console\Command;
 
-use Websemantics\EntityBuilderExtension\Traits\FileProcessor;
+use Websemantics\EntityBuilderExtension\Trait\FileProcessor;
 use Anomaly\Streams\Platform\Application\Application;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Filesystem\Filesystem;

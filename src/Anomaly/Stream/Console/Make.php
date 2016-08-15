@@ -3,7 +3,7 @@
 namespace Websemantics\EntityBuilderExtension\Anomaly\Stream\Console;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Websemantics\EntityBuilderExtension\Traits\JobsDispatcher;
+use Websemantics\EntityBuilderExtension\Trait\JobsDispatcher;
 
 /**
  * Class Make.

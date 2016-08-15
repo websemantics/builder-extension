@@ -1,7 +1,7 @@
 <?php namespace Websemantics\EntityBuilderExtension\Anomaly\Addon\Console;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Websemantics\EntityBuilderExtension\Traits\JobsDispatcher;
+use Websemantics\EntityBuilderExtension\Trait\JobsDispatcher;
 use Websemantics\EntityBuilderExtension\Anomaly\Addon\Console\Command\ScaffoldModule;
 use Anomaly\Streams\Platform\Addon\AddonManager;
 use Anomaly\Streams\Platform\Addon\Console\Command\MakeAddonPaths;

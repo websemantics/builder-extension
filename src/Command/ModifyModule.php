@@ -54,28 +54,26 @@ class ModifyModule implements SelfHandling
 
         $data = $this->getTemplateData($module);
 
-        $destination = $module->getPath();
+        $dest = $module->getPath();
 
-        $folder = __DIR__.'/../../resources/assets/module';
+        $source = __DIR__.'/../../resources/assets/module';
 
         try {
-
-            /* Copy resources */
             $this->files->parseDirectory(
-                $folder.'/resources',
-                $destination.'/resources',
+                $source.'/resources',
+                $dest.'/resources',
                 $data
             );
 
             $this->processFile(
-                $destination.'/src/'.$data['module_name'].'ModuleServiceProvider.php',
-                ['routes' => $folder.'/routes.php'],
+                $dest.'/src/'.$data['module_name'].'ModuleServiceProvider.php',
+                ['routes' => $source.'/routes.php'],
                 $data
             );
 
             $this->processFile(
-                $destination.'/src/'.$data['module_name'].'Module.php',
-                ['sections' => $folder.'/sections.php'],
+                $dest.'/src/'.$data['module_name'].'Module.php',
+                ['sections' => $source.'/sections.php'],
                 $data,
                 true
             );
@@ -86,7 +84,7 @@ class ModifyModule implements SelfHandling
     }
 
     /**
-     * Get the template data from a stream object.
+     * Get template data.
      *
      * @param Module          $module
      * @param StreamInterface $stream
@@ -104,5 +102,4 @@ class ModifyModule implements SelfHandling
             'module_name_lower' => strtolower($moduleName),
         ];
     }
-
 }

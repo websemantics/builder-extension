@@ -16,7 +16,7 @@ use Anomaly\Streams\Platform\Support\Parser;
  * @package   Websemantics\EntityBuilderExtension
  */
 
-class Filesystem extends \Illuminate\Filesystem\Filesystem 
+class Filesystem extends \Illuminate\Filesystem\Filesystem
 {
     /**
      * The parser utility.
@@ -45,8 +45,8 @@ class Filesystem extends \Illuminate\Filesystem\Filesystem
 
     /**
      * Set the avoid overwite list of files,
-     * 
-     * @param arry $avoid_overwrite, a list of files suffixes that should 
+     *
+     * @param arry $avoid_overwrite, a list of files suffixes that should
      *                               not be overwritten
      */
 		public function setAvoidOverwrite($avoid_overwrite){
@@ -71,7 +71,7 @@ class Filesystem extends \Illuminate\Filesystem\Filesystem
 					if($avoid = ends_with($path, $file)){
 						break;
 					}
-			}	
+			}
 
 			if(!($this->exists($path) && $avoid))
 				parent::put($path, $contents, $lock);
@@ -88,8 +88,8 @@ class Filesystem extends \Illuminate\Filesystem\Filesystem
 		 * @return bool
 		 */
 		public function parseDirectory($source, $destination, $data, $options = null)
-		{ 
-			if ( ! $this->isDirectory($source)) return false;
+		{
+			if (!$this->isDirectory($source)) return false;
 
 			$options = $options ?: FilesystemIterator::SKIP_DOTS;
 
@@ -97,7 +97,7 @@ class Filesystem extends \Illuminate\Filesystem\Filesystem
 			// create it recursively, which just gets the destination prepared to copy
 			// the files over. Once we make the source we'll proceed the copying.
 
-			if ( ! $this->isDirectory($destination))
+			if (!$this->isDirectory($destination))
 			{
 				$this->makeDirectory($destination, 0777, true);
 			}
@@ -116,11 +116,11 @@ class Filesystem extends \Illuminate\Filesystem\Filesystem
 				{
 					$path = $item->getPathname();
 
-					if ( ! $this->parseDirectory($path, $target, $data, $options)) return false;
+					if (!$this->parseDirectory($path, $target, $data, $options)) return false;
 				}
 
-				// If the current items is just a regular file, we will just parse its content 
-				// and then copy this to the new location and keep looping. 
+				// If the current items is just a regular file, we will just parse its content
+				// and then copy this to the new location and keep looping.
 				else
 				{
 	        $template = file_get_contents($item->getPathname());
@@ -129,7 +129,6 @@ class Filesystem extends \Illuminate\Filesystem\Filesystem
 
 				}
 			}
-
 			return true;
 		}
 }

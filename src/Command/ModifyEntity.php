@@ -105,8 +105,7 @@ class ModifyEntity implements SelfHandling
         /* (1) process the form builder class */
         if (!$fieldConfig['hide_field']) {
             $this->processFormBuilder(
-                $entityDest.'/Form/'.
-                $data['entity_name'].'FormBuilder.php',
+                $entityDest.'/Form/'. $data['entity_name'].'FormBuilder.php',
                 $entity."/templates/field/form/$fieldTypeClassName.txt",
                 $data
             );
@@ -115,8 +114,7 @@ class ModifyEntity implements SelfHandling
         /* (2) process the table column class */
         if (!$fieldConfig['hide_column']) {
             $this->processTableColumns(
-                $entityDest.'/Table/'.
-                $data['entity_name'].'TableColumns.php',
+                $entityDest.'/Table/'. $data['entity_name'].'TableColumns.php',
                 $entity.'/templates/field/table/'.($data['column_template'] ? 'template/' : '')."$fieldTypeClassName.txt",
                 $data
             );

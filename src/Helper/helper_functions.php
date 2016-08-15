@@ -195,9 +195,9 @@
         if($extends_repository) {
           $extends_repository = explode('\\', $extends_repository);
           return (!empty($extends_repository))?"extends " . end($extends_repository) . " ":"";
-        } else {
-          return '';
         }
+        
+        return '';
       }
   }
 

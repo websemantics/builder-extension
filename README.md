@@ -268,8 +268,10 @@ All notable changes to this project will be documented in this section.
 
 #### [0.8.3] - 2016-08-14
 ##### Changed
-- Remove automatic seeding after install feature (Pyro does that now)
-- Ensure language files are present in a module
+- Major code cleaning and refactoring
+- Enhanced generated code
+- Removal of automatic seeding after install feature (Pyro does that now)
+- Ensure all necessary module files are generated on `make:addon` command
 - Use [Figlet](https://github.com/packaged/figlet) font to print module name in README.md
 - Detailed information in generated module's README.md
 - Rename command `make:module` to `module:create` and use namespace format, `{vendor}.module.{slug}`

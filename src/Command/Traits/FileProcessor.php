@@ -2,7 +2,6 @@
 
 use Websemantics\EntityBuilderExtension\Parser\GenericPhpParser;
 
-
 /**
  * Class FileProcessor
  *

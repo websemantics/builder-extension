@@ -7,7 +7,7 @@
  * @link      http://ibuild.io
  * @author    WebSemantics, Inc. <info@websemantics.ca>
  * @author    Adnan Sagar <msagar@websemantics.ca>
- * @copyright 2012-2015 Web Semantics, Inc.
+ * @copyright 2012-2016 Web Semantics, Inc.
  */
 trait TemplateProcessor
 {

@@ -1,7 +1,7 @@
 <?php namespace Websemantics\EntityBuilderExtension\Command;
 
 use Illuminate\Contracts\Bus\SelfHandling;
-use Websemantics\EntityBuilderExtension\Command\Traits\FileProcessor;
+use Websemantics\EntityBuilderExtension\Traits\FileProcessor;
 use Websemantics\EntityBuilderExtension\Parser\ModuleNameParser;
 use Websemantics\EntityBuilderExtension\Parser\VendorNameParser;
 use Anomaly\Streams\Platform\Addon\Module\Module;

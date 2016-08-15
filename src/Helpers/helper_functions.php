@@ -12,18 +12,48 @@
  */
 
  /**
-  * Return a true if the array given is associative
+  * Resolve a namespace to its parts, {vendor}.{type}.{slug} and the addon path
   *
-  * @param    array $array
+  * @param    string $namespace
+  * @param    boolean $shared
   * @return   boolean
   */
 
-  if (!function_exists('isAssociative')) {
-    function isAssociative($array)
+  if (!function_exists('ebxResolveAddonNamespace')) {
+    function ebxResolveAddonNamespace($namespace, $shared)
     {
-        return ($array !== array_values($array));
+      $shared = $shared ? 'shared' : app('Anomaly\Streams\Platform\Application\Application')->getReference();
+
+      if (!str_is('*.*.*', $namespace)) {
+          throw new \Exception("The namespace should be snake case and formatted like: {vendor}.{type}.{slug}");
+      }
+
+      list($vendor, $type, $slug) = array_map(
+          function ($value) {
+              return str_slug(strtolower($value), '_');
+          },
+          explode('.', $namespace)
+      );
+
+      $type = str_singular($type);
+
+      return [$vendor, $type, $slug,  base_path("addons/{$shared}/{$vendor}/{$slug}-{$type}")];
     }
   }
+
+  /**
+   * Return a true if the array given is associative
+   *
+   * @param    array $array
+   * @return   boolean
+   */
+
+   if (!function_exists('isAssociative')) {
+     function isAssociative($array)
+     {
+         return ($array !== array_values($array));
+     }
+   }
 
  /**
   * Return a list of namespaces

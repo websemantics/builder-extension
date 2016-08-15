@@ -108,12 +108,14 @@ return [
 	|--------------------------------------------------------------------------
 	| Repository Super Class
 	|--------------------------------------------------------------------------
-	| Extend all generated repositories to a common super class, if any!
-	| For example: 'Websemantics\NamedModule\Common\CommonRepository'
-	|
+	| Extend all generated repositories to a common super class,
+  | '\Anomaly\Streams\Platform\Entry\EntryRepository' by default,
+  |
+	| Example: 'Websemantics\NamedModule\Common\CommonRepository'
+  |
 	*/
 
-	'extends_repository' => null,
+	'extends_repository' => '\Anomaly\Streams\Platform\Entry\EntryRepository',
 
 	/*
 	|--------------------------------------------------------------------------

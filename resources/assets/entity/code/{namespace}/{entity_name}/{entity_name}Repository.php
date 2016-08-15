@@ -63,7 +63,7 @@ class {entity_name}Repository {extends_repository}implements {entity_name}Reposi
     public function find($attributes)
     {
         if(is_array($attributes)){
-            return $this->model->where($attributes)->first();  
+            return $this->model->where($attributes)->first();
         }  elseif(is_numeric($id = $attributes)){
             return $this->model->find($id);
         }
@@ -80,7 +80,7 @@ class {entity_name}Repository {extends_repository}implements {entity_name}Reposi
      */
     public function findBy($field, $value, $operation = '=')
     {
-        return $this->model->where($field, $operation, $value)->first(); 
+        return $this->model->where($field, $operation, $value)->first();
     }
 
     /**

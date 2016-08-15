@@ -34,7 +34,7 @@ class ModuleWasInstalledHandler {
 	}
 
 	/**
-	 * Handle the event.
+	 * Dispaches two jobs, 'ModifyModule' and 'SeedModule' *question of configuration
 	 *
 	 * @param  ModuleWasInstalled  $event
 	 * @return void
@@ -47,8 +47,7 @@ class ModuleWasInstalledHandler {
 
         $this->dispatch(new ModifyModule($module));
 
-    		/* Allow seeding automatically based on builder config */
-    		if(ebxSeedingOption($module) === 'yes'){
+        if(ebxSeedingOption($module) === 'yes'){
     			$this->dispatch(new SeedModule($module));
     		}
 		}

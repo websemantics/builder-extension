@@ -1,4 +1,4 @@
-<?php namespace Websemantics\EntityBuilderExtension\Trait;
+<?php namespace Websemantics\EntityBuilderExtension\Traits;
 
 /*
  * Class TemplateProcessor.

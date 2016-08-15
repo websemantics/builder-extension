@@ -267,7 +267,7 @@ Make sure that the following folders/files have write permission:
 - Install this extension from Addons/Extensions
 
 
-## Related Resources
+## Related
 
 [PyroCMS](https://github.com/pyrocms/pyrocms), an MVC PHP Content Management System built to be easy to use, theme and develop with. It is used by individuals and organizations of all sizes around the world.
 

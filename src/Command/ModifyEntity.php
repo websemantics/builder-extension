@@ -3,7 +3,7 @@
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 use Anomaly\Streams\Platform\Assignment\AssignmentModel;
 use Illuminate\Contracts\Bus\SelfHandling;
-use Websemantics\EntityBuilderExtension\Trait\TemplateProcessor;
+use Websemantics\EntityBuilderExtension\Traits\TemplateProcessor;
 use Anomaly\Streams\Platform\Addon\Module\Module;
 use Websemantics\EntityBuilderExtension\Parser\EntityNameParser;
 use Websemantics\EntityBuilderExtension\Parser\ModuleNameParser;
@@ -173,13 +173,14 @@ class ModifyEntity implements SelfHandling
         AssignmentModel $assignment,
         $field_config
     ) {
+
         $entityName = (new EntityNameParser())->parse($stream);
         $moduleName = (new ModuleNameParser())->parse($module);
         $fieldSlug = (new AssignmentSlugParser())->parse($assignment);
         $fieldLabel = (new AssignmentLabelParser())->parse($assignment);
         $namespace = (new NamespaceParser())->parse($stream);
 
-        // Wheather we use a grouping folder for all streams with the same namespace
+        /* wheather we use a grouping folder for all streams with the same namespace */
         $namespace_folder = ebxGetNamespaceFolder($module, $namespace);
 
         return [

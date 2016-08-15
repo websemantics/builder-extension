@@ -1,7 +1,7 @@
 <?php namespace Websemantics\EntityBuilderExtension\Command;
 
 use Illuminate\Contracts\Bus\SelfHandling;
-use Websemantics\EntityBuilderExtension\Trait\FileProcessor;
+use Websemantics\EntityBuilderExtension\Traits\FileProcessor;
 use Websemantics\EntityBuilderExtension\Parser\ModuleNameParser;
 use Websemantics\EntityBuilderExtension\Parser\VendorNameParser;
 use Anomaly\Streams\Platform\Addon\Module\Module;
@@ -54,8 +54,6 @@ class ModifyModule implements SelfHandling
 
         $data = $this->getTemplateData($module);
 
-        $seeding = ebxSeedingOption($module);
-
         $destination = $module->getPath();
 
         $folder = __DIR__.'/../../resources/assets/module';
@@ -81,16 +79,6 @@ class ModifyModule implements SelfHandling
                 $data,
                 true
             );
-
-            if($seeding === 'self'){
-                /* Allow self seeder after a module install, */
-                $this->processFile(
-                    $destination.'/src/Listener/BootstrapHandler.php',
-                    ['jobs' => $folder.'/jobs.php'],
-                    $data,
-                    true
-                );
-            }
 
         } catch (\PhpParser\Error $e) {
             die($e->getMessage());

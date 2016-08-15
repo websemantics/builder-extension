@@ -2,7 +2,7 @@
 
 use Illuminate\Contracts\Bus\SelfHandling;
 use Anomaly\Streams\Platform\Addon\Module\Module;
-use Websemantics\EntityBuilderExtension\Trait\TemplateProcessor;
+use Websemantics\EntityBuilderExtension\Traits\TemplateProcessor;
 use Websemantics\EntityBuilderExtension\Parser\EntityNameParser;
 use Websemantics\EntityBuilderExtension\Parser\ModuleNameParser;
 use Websemantics\EntityBuilderExtension\Parser\VendorNameParser;

@@ -17,6 +17,7 @@
             |_____/   |___|   |_|   |___|   |__/    |___|   |_|\_\    
 
             Modules & Streams Scaffolder for Maximum Coding Pleasure         - -- --------- -- -
+            
 ```                                                                                             
 > Last update: 25 August 2016
 

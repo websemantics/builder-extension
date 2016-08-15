@@ -77,55 +77,52 @@ class ModifyEntity implements SelfHandling
         $module = $this->module;
         $stream = $this->stream;
         $assignment = $this->assignment;
+        $destination = $module->getPath();
+        $entity = __DIR__.'/../../resources/assets/entity';
+        $source = $entity.'/code/{namespace}/';
 
         /* get the field config params from build.php */
-        $field_config = ebxGetFieldConfig(
+        $fieldConfig = ebxGetFieldConfig(
             $module,
             $stream->getNamespace(),
             $assignment->getFieldSlug()
         );
 
-        $entity = __DIR__.'/../../resources/assets/entity';
-
-        /* Set a list of files to avoid overwrite */
+        /* set a list of files to avoid overwrite */
         $this->files->setAvoidOverwrite(ebxGetAvoidOverwrite($module));
 
-        /* Get the template data */
-        $data = $this->getTemplateData($module, $stream, $assignment, $field_config);
+        /* get the template data */
+        $data = $this->getTemplateData($module, $stream, $assignment, $fieldConfig);
 
-        $source = $entity.'/code/{namespace}/';
+        /* get the namespace destination folder, if any! */
+        $namespaceFolder = ebxGetNamespaceFolder($module, $data['namespace'], true);
 
-        /* Get the namespace destination folder, if any! */
-        $namespace_folder = ebxGetNamespaceFolder($module, $data['namespace'], true);
+        $entityDest = $destination.'/src/'.$namespaceFolder.$data['entity_name'];
 
-        $destination = $module->getPath();
-
-        $entity_destination = $destination.'/src/'.$namespace_folder.$data['entity_name'];
-
-        /* Get the assigned class name, i.e. TextFieldType */
+        /* get the assigned class name, i.e. TextFieldType */
         $fieldTypeClassName = ebxGetFieldTypeClassName($assignment);
 
-        /* (1) Process the form builder class */
-        if (!$field_config['hide_field']) {
+        /* (1) process the form builder class */
+        if (!$fieldConfig['hide_field']) {
             $this->processFormBuilder(
-                $entity_destination.'/Form/'.
+                $entityDest.'/Form/'.
                 $data['entity_name'].'FormBuilder.php',
                 $entity."/templates/field/form/$fieldTypeClassName.txt",
                 $data
             );
         }
 
-        /* (2) Process the table column class */
-        if (!$field_config['hide_column']) {
+        /* (2) process the table column class */
+        if (!$fieldConfig['hide_column']) {
             $this->processTableColumns(
-                $entity_destination.'/Table/'.
+                $entityDest.'/Table/'.
                 $data['entity_name'].'TableColumns.php',
                 $entity.'/templates/field/table/'.($data['column_template'] ? 'template/' : '')."$fieldTypeClassName.txt",
                 $data
             );
         }
 
-        /* (3) Process the field language file */
+        /* (3) process the field language file */
         $this->processFile(
             $destination.'/resources/lang/en/field.php',
             [$data['field_slug'] => $entity.'/templates/module/field.php'],
@@ -163,7 +160,7 @@ class ModifyEntity implements SelfHandling
      * @param Module          $module
      * @param StreamInterface $stream
      * @param AssignmentModel $assignment
-     * @param array           $field_config
+     * @param array           $fieldConfig
      *
      * @return array
      */
@@ -171,7 +168,7 @@ class ModifyEntity implements SelfHandling
         Module $module,
         StreamInterface $stream,
         AssignmentModel $assignment,
-        $field_config
+        $fieldConfig
     ) {
 
         $entityName = (new EntityNameParser())->parse($stream);
@@ -181,11 +178,11 @@ class ModifyEntity implements SelfHandling
         $namespace = (new NamespaceParser())->parse($stream);
 
         /* wheather we use a grouping folder for all streams with the same namespace */
-        $namespace_folder = ebxGetNamespaceFolder($module, $namespace);
+        $namespaceFolder = ebxGetNamespaceFolder($module, $namespace);
 
         return [
             'namespace' => $namespace,
-            'namespace_folder' => $namespace_folder,
+            'namespace_folder' => $namespaceFolder,
             'vendor_name' => (new VendorNameParser())->parse($module),
             'module_name' => $moduleName,
             'entity_name' => $entityName,
@@ -193,7 +190,7 @@ class ModifyEntity implements SelfHandling
             'field_label' => $fieldLabel,
             'relation_name' => camel_case($fieldSlug),
             'null_relationship_entry' => ebxNullRelationshipEntry($module),
-            'column_template' => $field_config['column_template'],
+            'column_template' => $fieldConfig['column_template'],
         ];
     }
 }

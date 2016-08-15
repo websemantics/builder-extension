@@ -1,12 +1,12 @@
-<?php namespace Websemantics\EntityBuilderExtension\Handlers;
+<?php namespace Websemantics\EntityBuilderExtension\Handler;
 
 use Illuminate\Foundation\Bus\DispatchesCommands;
-use Anomaly\Streams\Platform\Assignment\Event\AssignmentWasCreated;
+use Anomaly\Streams\Platform\Stream\Event\StreamWasCreated;
 use Anomaly\Streams\Platform\Addon\Module\ModuleCollection;
-use Websemantics\EntityBuilderExtension\Command\ModifyEntity;
+use Websemantics\EntityBuilderExtension\Command\GenerateEntity;
 
 /**
- * Class AssignmentWasCreatedHandler
+ * Class StreamWasCreatedHandler
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
@@ -16,7 +16,7 @@ use Websemantics\EntityBuilderExtension\Command\ModifyEntity;
  * @package   Websemantics\EntityBuilderExtension
  */
 
-class AssignmentWasCreatedHandler {
+class StreamWasCreatedHandler {
 
   use DispatchesCommands;
 
@@ -35,19 +35,16 @@ class AssignmentWasCreatedHandler {
 	/**
 	 * Handle the event.
 	 *
-	 * @param  AssignmentWasCreated  $event
+	 * @param  StreamWasCreated  $event
 	 * @return void
 	 */
-	public function handle(AssignmentWasCreated $event)
+	public function handle(StreamWasCreated $event)
 	{
-		$assignment = $event->getAssignment();
-		$stream = $assignment->getStream();
-
+		$stream = $event->getStream();
 		foreach ($this->modules as $module) {
 			if(in_array($stream->getNamespace(), ebxGetNamespaces($module))){
-     		 $this->dispatch(new ModifyEntity($module, $stream, $assignment));
+  		    $this->dispatch(new GenerateEntity($module, $stream));
 			}
-
 		}
 	}
 

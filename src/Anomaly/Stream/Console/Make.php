@@ -8,7 +8,7 @@ use Websemantics\EntityBuilderExtension\Traits\JobsDispatcher;
 /**
  * Class Make.
  *
- * Override core Stream Make command to avoid conflic with Entity Builder.
+ * Overrides core Stream Make command to avoid conflic with Entity Builder.
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io

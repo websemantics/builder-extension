@@ -22,9 +22,9 @@ class EntityBuilderExtensionServiceProvider extends AddonServiceProvider
     protected $singletons = ['Illuminate\Filesystem\Filesystem' => 'Websemantics\EntityBuilderExtension\Filesystem\Filesystem'];
 
     protected $listeners = [
-        'Anomaly\Streams\Platform\Stream\Event\StreamWasCreated'         => ['Websemantics\EntityBuilderExtension\Handlers\StreamWasCreatedHandler'],
-        'Anomaly\Streams\Platform\Assignment\Event\AssignmentWasCreated' => ['Websemantics\EntityBuilderExtension\Handlers\AssignmentWasCreatedHandler'],
-        'Anomaly\Streams\Platform\Addon\Module\Event\ModuleWasInstalled' => ['Websemantics\EntityBuilderExtension\Handlers\ModuleWasInstalledHandler']
+        'Anomaly\Streams\Platform\Stream\Event\StreamWasCreated'         => ['Websemantics\EntityBuilderExtension\Handler\StreamWasCreatedHandler'],
+        'Anomaly\Streams\Platform\Assignment\Event\AssignmentWasCreated' => ['Websemantics\EntityBuilderExtension\Handler\AssignmentWasCreatedHandler'],
+        'Anomaly\Streams\Platform\Addon\Module\Event\ModuleWasInstalled' => ['Websemantics\EntityBuilderExtension\Handler\ModuleWasInstalledHandler']
     ];
 
 }

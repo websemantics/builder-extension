@@ -1,13 +1,12 @@
-<?php namespace Websemantics\EntityBuilderExtension\Handlers;
+<?php namespace Websemantics\EntityBuilderExtension\Handler;
 
 use Illuminate\Foundation\Bus\DispatchesCommands;
-use Anomaly\Streams\Platform\Addon\Module\Event\ModuleWasInstalled;
+use Anomaly\Streams\Platform\Assignment\Event\AssignmentWasCreated;
 use Anomaly\Streams\Platform\Addon\Module\ModuleCollection;
-use Websemantics\EntityBuilderExtension\Command\ModifyModule;
-use Websemantics\EntityBuilderExtension\Command\SeedModule;
+use Websemantics\EntityBuilderExtension\Command\ModifyEntity;
 
 /**
- * Class ModuleWasInstalledHandler
+ * Class AssignmentWasCreatedHandler
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
@@ -17,7 +16,7 @@ use Websemantics\EntityBuilderExtension\Command\SeedModule;
  * @package   Websemantics\EntityBuilderExtension
  */
 
-class ModuleWasInstalledHandler {
+class AssignmentWasCreatedHandler {
 
   use DispatchesCommands;
 
@@ -36,23 +35,20 @@ class ModuleWasInstalledHandler {
 	/**
 	 * Handle the event.
 	 *
-	 * @param  ModuleWasInstalled  $event
+	 * @param  AssignmentWasCreated  $event
 	 * @return void
 	 */
-	public function handle(ModuleWasInstalled $event)
+	public function handle(AssignmentWasCreated $event)
 	{
-		$module = $event->getModule();
+		$assignment = $event->getAssignment();
+		$stream = $assignment->getStream();
 
-		if(count(ebxGetNamespaces($module)) > 0){
+		foreach ($this->modules as $module) {
+			if(in_array($stream->getNamespace(), ebxGetNamespaces($module))){
+     		 $this->dispatch(new ModifyEntity($module, $stream, $assignment));
+			}
 
-        $this->dispatch(new ModifyModule($module));
-
-    		/* Allow seeding automatically based on builder config */
-    		if(ebxSeedingOption($module) === 'yes'){
-    			$this->dispatch(new SeedModule($module));
-    		}
 		}
-
 	}
 
 }

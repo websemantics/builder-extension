@@ -13,13 +13,6 @@ class {entity_name}FormBuilder extends FormBuilder
 {
 
     /**
-     * The form fields.
-     *
-     * @var array
-     */
-    protected $fields = [];
-
-    /**
      * Fields to skip.
      *
      * @var array
@@ -61,4 +54,10 @@ class {entity_name}FormBuilder extends FormBuilder
      */
     protected $assets = [];
 
+    /**
+     * The form fields.
+     *
+     * @var array
+     */
+    protected $fields = [];
 }

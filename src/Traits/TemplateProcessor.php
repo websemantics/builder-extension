@@ -30,15 +30,15 @@ trait TemplateProcessor
 
             $content = $this->files->get($file);
 
-            // Extract content between start and end neeles,
+            /* extract content between start and end needle */
             $start = strpos($content, $startNeedle) + strlen($startNeedle);
             $end = strrpos($content, $endNeedle);
             $columns = substr($content, $start, $end - $start);
 
-            // Insert column template at the ned,
+            /* insert column template at the needle */
             $columns = $columns.$template;
 
-            // Reinsert into the file,
+            /* reinsert into the file */
             if (strpos($content, $template) === false) {
                 $content = substr_replace(
                     $content,

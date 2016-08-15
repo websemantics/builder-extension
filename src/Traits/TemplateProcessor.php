@@ -17,40 +17,40 @@ trait TemplateProcessor
      * process the table columns or form template and add fields to it.
      *
      * @param string $file,       a php file to modify
-     * @param string $templates   file location
+     * @param string template   file location
      * @param string $data        used to replace placeholders inside all template files
      * @param string $startNeedle used to locate where to add data
      * @param string $endNeedle   used to locate where to add data
+     * @param string $fallback   a fallback template in case the one provided is not supported yet
      */
-    protected function processTemplate($file, $template, $data, $startNeedle, $endNeedle)
+    protected function processTemplate($file, $template, $data, $startNeedle, $endNeedle, $fallback)
     {
-
-        if (file_exists($template)) {
-            $template = $this->parser->parse($this->files->get($template), $data);
-
-            $content = $this->files->get($file);
-
-            /* extract content between start and end needle */
-            $start = strpos($content, $startNeedle) + strlen($startNeedle);
-            $end = strrpos($content, $endNeedle);
-            $columns = substr($content, $start, $end - $start);
-
-            /* insert column template at the needle */
-            $columns = $columns.$template;
-
-            /* reinsert into the file */
-            if (strpos($content, $template) === false) {
-                $content = substr_replace(
-                    $content,
-                    $columns,
-                    $start,
-                    $end - $start
-                );
-            }
-
-            $this->files->put($file, $content);
-        } else {
-            dd('Missing template: '.$template);
+        /* if the template is not supported, fall back to a common template */
+        if (!file_exists($template)) {
+          $template = $fallback;
         }
+
+        $template = $this->parser->parse($this->files->get($template), $data);
+        $content = $this->files->get($file);
+
+        /* extract content between start and end needle */
+        $start = strpos($content, $startNeedle) + strlen($startNeedle);
+        $end = strrpos($content, $endNeedle);
+        $columns = substr($content, $start, $end - $start);
+
+        /* insert column template at the needle */
+        $columns = $columns.$template;
+
+        /* reinsert into the file */
+        if (strpos($content, $template) === false) {
+            $content = substr_replace(
+                $content,
+                $columns,
+                $start,
+                $end - $start
+            );
+        }
+
+        $this->files->put($file, $content);
     }
 }

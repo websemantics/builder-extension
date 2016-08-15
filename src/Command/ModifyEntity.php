@@ -106,8 +106,7 @@ class ModifyEntity implements SelfHandling
         if (!$fieldConfig['hide_field']) {
             $this->processFormBuilder(
                 $entityDest.'/Form/'. $data['entity_name'].'FormBuilder.php',
-                $entity."/templates/field/form/$fieldTypeClassName.txt",
-                $data
+                $entity.'/templates/field/form/', $fieldTypeClassName, $data
             );
         }
 
@@ -115,8 +114,8 @@ class ModifyEntity implements SelfHandling
         if (!$fieldConfig['hide_column']) {
             $this->processTableColumns(
                 $entityDest.'/Table/'. $data['entity_name'].'TableColumns.php',
-                $entity.'/templates/field/table/'.($data['column_template'] ? 'template/' : '')."$fieldTypeClassName.txt",
-                $data
+                $entity.'/templates/field/table/' . ($data['column_template'] ? 'template/' : ''),
+                $fieldTypeClassName, $data
             );
         }
 
@@ -131,25 +130,29 @@ class ModifyEntity implements SelfHandling
     /**
      * process the form builder and add fields to it.
      *
-     * @param string $file,     a php file to modify
-     * @param string $templates file location
-     * @param string $data      used to replace placeholders inside all template files
+     * @param string $file, a php file to modify
+     * @param string $path, path to the templates folder
+     * @param string $ftClsName field type class name
+     * @param string $data used to replace placeholders inside all template files
      */
-    protected function processFormBuilder($file, $template, $data)
+    protected function processFormBuilder($file, $path, $ftClsName, $data)
     {
-        $this->processTemplate($file, $template, $data, 'protected $fields = [', '];');
+        $this->processTemplate($file, $path."$ftClsName.txt", $data,
+        'protected $fields = [', '];', $path."TextFieldType.txt");
     }
 
     /**
      * process the table columns and add fields to it.
      *
-     * @param string $file,     a php file to modify
-     * @param string $templates file location
-     * @param string $data      used to replace placeholders inside all template files
+     * @param string $file, a php file to modify
+     * @param string $path, path to the templates folder
+     * @param string $ftClsName field type class name
+     * @param string $data, used to replace placeholders inside all template files
      */
-    protected function processTableColumns($file, $template, $data)
+    protected function processTableColumns($file, $path, $ftClsName, $data)
     {
-        $this->processTemplate($file, $template, $data, '$builder->setColumns([', ']);');
+        $this->processTemplate($file, $path."$ftClsName.txt", $data,
+        '$builder->setColumns([', ']);', $path."TextFieldType.txt");
     }
 
     /**

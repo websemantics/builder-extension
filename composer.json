@@ -32,7 +32,7 @@
             "PhpParser\\": "vendor/nikic/php-parser/lib/PhpParser/"
         },
         "files": [
-            "src/Helpers/helper_functions.php"
+            "src/Helper/helper_functions.php"
         ]
     },
     "extra": {

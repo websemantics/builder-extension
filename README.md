@@ -53,20 +53,22 @@ The following example is also available here, [blog](https://github.com/webseman
 * Create and install a new PyroCMS project, let's call it `blogger`
 
 ```bash
+# create a fresh pyro project,
 composer create-project pyrocms/pyrocms --prefer-dist blogger
 
 cd blogger
 
+# initiate the install process from the command line,
 php artisan install
 ```
 
 * Install this extension at, `addons/default/websemantics/entity_builder-extension`
 
 ```bash
-# First clone,
+# first clone,
 git clone https://github.com/websemantics/entity_builder-extension  addons/default/websemantics/entity_builder-extension
 
-# Then install
+# then install
 php artisan extension:install websemantics.extension.entity_builder
 ```
 

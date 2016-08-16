@@ -196,7 +196,7 @@ To change this behaviour and store under the module `src/` folder directly, set 
 ```
 'docblock' =>
 ' * @link      http://yourcompany.com
- * @author    Your company, Inc. <info@websemantics.ca>'
+ * @author    name, <name@email.com>'
 ```
 
 More settings are detailed in the [builder.php](https://github.com/websemantics/entity_builder-extension/blob/master/resources/assets/module/template/resources/config/builder.php) file.

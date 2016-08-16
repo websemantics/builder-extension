@@ -61,6 +61,19 @@ trait FileProcessor
     }
 
     /**
+     * Write the contents of a file
+     *
+     * @param  string  $path
+     * @param  string  $contents
+     * @param  bool  $lock
+     * @return int
+     */
+    public function put($path, $contents, $avoid = false, $lock = false)
+    {
+        return $this->files->put($path, $contents, $avoid, $lock);
+    }
+
+    /**
      * True if file exists
      *
      * @param  string $file, a php file template

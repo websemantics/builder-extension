@@ -23,7 +23,7 @@ trait TemplateProcessor
      * @param string $endNeedle   used to locate where to add data
      * @param string $fallback   a fallback template in case the one provided is not supported yet
      */
-    protected function processTemplate($file, $template, $data, $startNeedle, $endNeedle, $fallback)
+    public function processTemplate($file, $template, $data, $startNeedle, $endNeedle, $fallback)
     {
         /* if the template is not supported, fall back to a common template */
         if (!file_exists($template)) {

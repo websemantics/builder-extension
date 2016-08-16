@@ -86,6 +86,9 @@ class GenerateEntity implements SelfHandling
             $data
         );
 
+        /* create an empty seeder if it does not exist */
+        $this->put($dest . '/resources/seeders/' . $data['entity_name_lower']. '.php', '', true);
+
         try {
 
             /* secondly, stitch the entity with the module classes */

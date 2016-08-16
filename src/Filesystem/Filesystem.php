@@ -56,16 +56,15 @@ class Filesystem extends \Illuminate\Filesystem\Filesystem
 
 		/**
 		 * Write the contents of a file. Avoid the ones listed in $avoid_overwrite
+     * attribute or if sent as an argument
 		 *
 		 * @param  string  $path
 		 * @param  string  $contents
 		 * @param  bool  $lock
 		 * @return int
 		 */
-		public function put($path, $contents, $lock = false)
+		public function put($path, $contents, $avoid = false, $lock = false)
 		{
-
-			$avoid = false;
 
 			foreach ($this->avoid_overwrite as $file) {
 					if($avoid = ends_with($path, $file)){
@@ -73,9 +72,9 @@ class Filesystem extends \Illuminate\Filesystem\Filesystem
 					}
 			}
 
-			if(!($this->exists($path) && $avoid))
-				parent::put($path, $contents, $lock);
-
+      if(!$this->exists($path) || ($this->exists($path) && !$avoid)) {
+        return parent::put($path, $contents, $lock);
+      }
 		}
 
 		/**

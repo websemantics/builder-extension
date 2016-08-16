@@ -31,7 +31,7 @@ trait TemplateProcessor
         }
 
         $template = $this->parser->parse($this->files->get($template), $data);
-        $content = $this->files->get($file);
+        $content = $this->get($file);
 
         /* extract content between start and end needle */
         $start = strpos($content, $startNeedle) + strlen($startNeedle);
@@ -51,6 +51,6 @@ trait TemplateProcessor
             );
         }
 
-        $this->files->put($file, $content);
+        $this->put($file, $content);
     }
 }

@@ -104,7 +104,7 @@ trait FileProcessor
 
         $content = $phpParser->prettyPrint();
         if(!is_null($content)){
-           $this->files->put($file, $content);
+           $this->put($file, $content);
         }
     }
 }

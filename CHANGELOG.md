@@ -4,14 +4,13 @@
   - Major code cleaning and refactoring,
   - Enhanced generated code,
   - Generic helper functions for generated modules,
-  - Removal of automatic seeding after install feature (Pyro does that now),
   - Ensure all necessary module files are generated on `make:addon` command,
   - Use [Figlet](https://github.com/packaged/figlet) font to print module name in README.md,
   - Detailed instructions in generated module's README.md,
   - Update the extension ascii logo,
   - Show the module README.md on the module Admin home page,
-  - Bugs fixes
-
+  - Fall back template to unrecognized field types for table and form builder
+  - Many bug fixes
 
 0.8.0
   date: 2016-02-26
@@ -55,5 +54,3 @@
   - Creates streams entities,
   - Allow to group entity code in namespace folder,
   - Seeding streams
-
-  

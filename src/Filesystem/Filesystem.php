@@ -67,12 +67,15 @@ class Filesystem extends \Illuminate\Filesystem\Filesystem
 		{
 
 			foreach ($this->avoid_overwrite as $file) {
-					if($avoid = ends_with($path, $file)){
+					if($avoid ||  $avoid = ends_with($path, $file)){
 						break;
 					}
 			}
 
-      if(!$this->exists($path) || ($this->exists($path) && !$avoid)) {
+      /* write the file if it does not already exists or
+      if was not guraded from override */
+
+      if(!$this->exists($path) || !$avoid) {
         return parent::put($path, $contents, $lock);
       }
 		}

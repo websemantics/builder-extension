@@ -78,12 +78,12 @@ return [
 	|--------------------------------------------------------------------------
 	| Allow to seed the module after it has installed by:
 	|
-	| (1) The Entity Builder : 'yes'
-	| (2) Disable seeding : 'no' (*default)
+	| (1) The Entity Builder : 'yes' (*default)
+	| (2) Disable seeding : 'no'
 	|
 	*/
 
-	'seeding' => 'no',
+	'seeding' => 'yes',
 
 	/*
 	|--------------------------------------------------------------------------

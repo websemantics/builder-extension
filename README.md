@@ -23,51 +23,54 @@
 ```                                                                                             
 > Last update: 25 August 2016
 
-This extension once installed becomes your coding companion that helps to generate modules and [stream entities](#what-is-an-entity) for all your projects coding needs. It will also configure your module classes with routes, bindings, language file entries, seeding and much more so you do not have to lift a finger.
+This PyroCMS extension once installed becomes your coding companion to generate modules and [stream entities](#what-is-an-entity) for all your projects coding needs. It also configure your module classes with routes, bindings, language file entries, seeding and much more so you do not have to lift a finger.
+
 
 ### What is an Entity
 
-An Entity is a representation of an Object Type which may correspond with a Stream,.. for example, a Person, a Company or an Animal can all be generated as Pyro Entities.
+An Entity is a representation of an [Object Type](https://en.wikipedia.org/wiki/Object_type_(object-oriented_programming)) which may correspond with a Stream. For example, a Person, a Company or an Animal can all be represented by Streams and Entities.
 
-Code generated for an entity includes the Entity Model and Repository, Plugin, Seeder, Contracts, Table and Form Builders.
+Code generated for an entity includes an `Entity Model` and `Repository`, `Plugin`, `Seeder`, `Contracts`, `Table Builder` and `Form Builder`.
 
-#### Step by Step Usage:
 
-The following example is also available here, [builder-blog-example](https://github.com/websemantics/builder-blog-example),
+#### Getting Started
 
-1- Create a new Pyro project and install @ folder `builder-blog-example`
+The following example is also available here, [blog](https://github.com/websemantics/blog),
 
-```
-composer create-project pyrocms/pyrocms=3.0-beta3 --prefer-dist builder-blog-example
-```
-```
-php builder-blog-example/artisan install
+1- Create a new PyroCMS project and install at folder `blog`
+
+```bash
+composer create-project pyrocms/pyrocms --prefer-dist blog
+
+cd blog
+
+php artisan install
 ```
 
 2- Clone and install this extension,
 
 ```
-git clone https://github.com/websemantics/entity_builder-extension builder-blog-example/addons/default/websemantics/entity_builder-extension
+git clone https://github.com/websemantics/entity_builder-extension blog/addons/default/websemantics/entity_builder-extension
 ```
 ```
-php builder-blog-example/artisan extension:install websemantics.extension.entity_builder
+php artisan extension:install websemantics.extension.entity_builder
 ```
 
 3- Create a new module, 'Blog' (namespace = `blog` by default)
 
 ```
-php builder-blog-example/artisan make:addon websemantics.module.blog
+php artisan make:addon websemantics.module.blog
 ```
 
-This step will also create fields migration file located at `builder-blog-example/addons/default/websemantics/blog-module/migrations`
+This step will also create fields migration file at `blog/addons/default/websemantics/blog-module/migrations`
 
-4- Use the module's fields migration file created at the previous step, or create a new one
+4- Edit the module's fields migration file created at the previous step, or create a new one
 
 ```
-php builder-blog-example/artisan make:migration create_module_fields --addon=websemantics.module.blog
+php artisan make:migration create_module_fields --addon=websemantics.module.blog
 ```
 
-Change class content to:
+Add the following fields to the `fields` array,
 
 ```
     protected $fields = [
@@ -76,20 +79,13 @@ Change class content to:
     ];
 ```
 
-Also, make sure the class extends,
+5- Create a new stream for `Posts`,
 
 ```
-Anomaly\Streams\Platform\Database\Migration\Migration
+php artisan make:stream posts websemantics.module.blog
 ```
 
-5- Create your module streams migration files, here, let's create `Posts` stream,
-
-```
-php builder-blog-example/artisan make:stream posts websemantics.module.blog
-
-```
-
-Change class content to:
+Edit the generated file and add the following to `$stream` and `$assignments` arrays,
 
 ```
     protected $stream = [
@@ -108,15 +104,14 @@ Change class content to:
     ];
 ```
 
-6- Create or edit the builder config file within your module at `builder-blog-example/addons/default/websemantics/blog-module/resources/config/builder.php` to specify a list of stream namespaces that you wanted to generate entities for,
+6- Edit the builder config file at `blog/addons/default/websemantics/blog-module/resources/config/builder.php` to specify a list of stream namespaces that you wanted to generate entities for,
 
 ```
   'namespaces' => [
     'blog' => [
 
     ]
-  ],
-
+  ]
 ```
 
 7- Specify if you want the streams entities generated grouped in a folder (named after the current namespace)
@@ -132,7 +127,7 @@ There are two settings to the seeding option in builder.php,
 - `no`, seeding is disabled
 
 ```
-  'seeding' => 'no'
+  'seeding' => 'yes'
 ```
 
 9- Specify your project docblock to be included with the generated code
@@ -146,9 +141,9 @@ There are two settings to the seeding option in builder.php,
 
 More settings are detailed in the `builder.php` file.
 
-10- If you have seed data for a particular Entity/Model (abc), place that in, `builder-blog-example/addons/default/websemantics/blog-module/resources/seeders`.
+10- If you have seed data for a particular Entity/Model (abc), place that in, `blog/addons/default/websemantics/blog-module/resources/seeders`.
 
-In this example, create post.php (singular file name) at `builder-blog-example/addons/default/websemantics/blog-module/seeders/post.php`
+In this example, create post.php (singular file name) at `blog/addons/default/websemantics/blog-module/resources/seeders/post.php`
 
 The content must be a list of entry values without the <?php, for example:
 
@@ -157,42 +152,39 @@ The content must be a list of entry values without the <?php, for example:
   ['title' => 'PyroCMS', 'content' => 'PHP CMS']
 ```
 
-This will be added to the Entity Seeder class.
+This will be added to the Entity Seeder class when the code is generated.
 
-11- Install your module,
+11- Install (ore reinstall) your module,
 
 ```
-php builder-blog-example/artisan module:install websemantics.module.blog
+php artisan module:install websemantics.module.blog
 ```
 
 This will install your module, hooray!
 
 You are done. Go to admin panel and check your beautiful new Module in action `admin/blog/posts`
 
-12- Make changes, regenerate and test
+12- Making changes
 
-After making changes to your migration files, adding / removing streams, adding / removing fields, run a reinstall module command and watch how your module's entities get rebuilt with fresh code scaffolded before your eyes,
+After adding changes to your migration files, adding or removing streams, adding or removing fields, run a reinstall module command and watch how your module's entities get rebuilt with fresh code scaffolded before your eyes,
 
 ```
-php builder-blog-example/artisan module:reinstall websemantics.module.blog
+php artisan module:reinstall websemantics.module.blog
 ```
 
-Have fun,
+Have fun, ..
 
 #### Inner Working:
 
-Once installed, this extension listens mainly to two types of events *StreamWasCreated* and *AssignmentWasCreated*. To enable this extension for your current module, creat a config file at `resources/config/builder.php` and list the namespaces you would like the extension to generate code for. You can listen/generate code to multiple namespaces.
+Once installed, this extension listens mainly to three event types, *StreamWasCreated*, *AssignmentWasCreated* and *ModuleWasInstalled*. To enable this extension for your current module, create a config file at `resources/config/builder.php` and list the namespaces you would like the extension to generate code for. You can listen/generate code to multiple namespaces.
 
 ```
     'namespaces' => ['blogger', 'navigation', 'etc']
 ```
 
-Here's an example of the [builder config file](https://github.com/websemantics/example-module/blob/master/resources/config/builder.php) taken from [Boxed](http://websemantics.github.io/boxed) example module github repo. Once that's done, create your Streams migration files as usual. The extension will kick in when it recieives either of the two events mentioned above:
+Here's an example of the [builder config file](https://github.com/websemantics/example-module/blob/master/resources/config/builder.php) taken from [Boxed](http://websemantics.github.io/boxed) example module github repo. Once that's done, create your Streams migration files as usual. The extension will kick in when it receives the events listed above,
 
-- *StreamWasCreated*
-- *AssignmentWasCreated*
-
-1- For *StreamWasCreated* event, the extension will generate an entity folder for this stream from the template stored at `entity_builder-extension/resources/assets/entity/code`. The folder map of this entity follows the following structure:
+1- For *StreamWasCreated* event, the extension will generate an entity folder for the stream from the template stored at `entity_builder-extension/resources/assets/entity/code`. The folder map of this entity is as follows:
 
 ```
 AbcEntity
@@ -225,15 +217,17 @@ AbcEntity
   +---- AbcPlugin.php
 ```
 
-By default, this folder structure would be generated in a subfolder at `src`. The name of the subfolder is the namespace of the current stream. For example, if the stream is called *Blog* and the namespace Blogger then the Stream model will be: `src\Blogger\BlogModle.php`. This behaviour can be changed from the builder config file by setting `namespace_folder` to *false*:
+By default, this folder structure would be generated in a subfolder at `src`. The name of the subfolder is the namespace of the created stream. For example, if the stream is called *Blog* and the namespace *Blogger* then the Entity model will be: `src\Blogger\BlogModle.php`. This behaviour can be changed from the builder config file by setting `namespace_folder` to `false`,
 
 ```
     'namespace_folder' => false,
 ```
 
-The extension then will generate a controller per stream at `xyz-module/src/Http/Controller/Admin/AbcController.php` and modify the *Module*, *ServiceProvider*, *Seeder* and language files to setup the entity to work correctly with the module.
+The extension then will generate a controller per entity at `xyz-module/src/Http/Controller/Admin/AbcController.php` and modify *Module*, *ServiceProvider*, *Seeder* class and language files to setup the entity to work correctly with the module.
 
 2- For *AssignmentWasCreated* event, the extension will modify two files, `AbcTableColumns.php` and `AbcFormBuilder.php` and add a field slug per stream assignment.
+
+3- For *ModuleWasInstalled* event, this will add routes and sections to the module and service provider. It will also seed the module if the builder config file was set accordingly.
 
 Once the entity files have been created and working correctly with Pyro, you might want to modify and develop the classes individually. The extension provides a configuration option to list the files you don't want to overwrite accedentaly (when re-installing a module). For example, if you have edited the `AbcModle.php`, make sure to list that in the builder config file so that the extension will avoid overwrite if it exists. Here's an example,
 

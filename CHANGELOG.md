@@ -1,3 +1,10 @@
+0.9.1
+  date: 2016-08-16
+  changes:
+  - Generate entity seeder when a stream is created,
+  - Better documentation and simpler examples to follow,
+  - Update logo, again!
+
 0.9.0
   date: 2016-08-15
   changes:

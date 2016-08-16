@@ -37,26 +37,25 @@ Code generated for an entity includes an `Entity Model` and `Repository`, `Plugi
 
 The following example is also available here, [blog](https://github.com/websemantics/blog),
 
-1- Create a new PyroCMS project and install at folder `blog`
+1. Create a new PyroCMS project and store at folder `blog`
 
 ```bash
-composer create-project pyrocms/pyrocms --prefer-dist blog
+composer create-project pyrocms/pyrocms --prefer-dist blogger
 
-cd blog
+cd blogger
 
 php artisan install
 ```
 
-2- Clone and install this extension,
+2. Install this extension at `addons/default/websemantics`
 
-```
-git clone https://github.com/websemantics/entity_builder-extension blog/addons/default/websemantics/entity_builder-extension
-```
-```
+```bash
+git clone https://github.com/websemantics/entity_builder-extension  addons/default/websemantics/entity_builder-extension
+
 php artisan extension:install websemantics.extension.entity_builder
 ```
 
-3- Create a new module, 'Blog' (namespace = `blog` by default)
+3. Create a new module, 'Blog' (namespace = `blog` by default)
 
 ```
 php artisan make:addon websemantics.module.blog
@@ -64,7 +63,7 @@ php artisan make:addon websemantics.module.blog
 
 This step will also create fields migration file at `blog/addons/default/websemantics/blog-module/migrations`
 
-4- Edit the module's fields migration file created at the previous step, or create a new one
+4. Edit the module's fields migration file created at the previous step, or create a new one
 
 ```
 php artisan make:migration create_module_fields --addon=websemantics.module.blog
@@ -79,7 +78,7 @@ Add the following fields to the `fields` array,
     ];
 ```
 
-5- Create a new stream for `Posts`,
+5. Create a new stream for `Posts`,
 
 ```
 php artisan make:stream posts websemantics.module.blog
@@ -104,7 +103,7 @@ Edit the generated file and add the following to `$stream` and `$assignments` ar
     ];
 ```
 
-6- Edit the builder config file at `blog/addons/default/websemantics/blog-module/resources/config/builder.php` to specify a list of stream namespaces that you wanted to generate entities for,
+6. Edit the builder config file at `blog/addons/default/websemantics/blog-module/resources/config/builder.php` to specify a list of stream namespaces that you wanted to generate entities for,
 
 ```
   'namespaces' => [
@@ -114,13 +113,13 @@ Edit the generated file and add the following to `$stream` and `$assignments` ar
   ]
 ```
 
-7- Specify if you want the streams entities generated grouped in a folder (named after the current namespace)
+7. Specify if you want the streams entities generated grouped in a folder (named after the current namespace)
 
 ```
   'namespace_folder' => true,
 ```
 
-8- Specify automatic seeding after a module has installed
+8. Specify automatic seeding after a module has installed
 
 There are two settings to the seeding option in builder.php,
 - `yes`, Entity Builder will seed the module after install,
@@ -130,18 +129,16 @@ There are two settings to the seeding option in builder.php,
   'seeding' => 'yes'
 ```
 
-9- Specify your project docblock to be included with the generated code
+9. Specify your project docblock to be included with the generated code
 ```
 'docblock' =>
-' * @link      http://websemantics.ca/ibuild
- * @link      http://ibuild.io
- * @author    WebSemantics, Inc. <info@websemantics.ca>
- * @author    Adnan Sagar <msagar@websemantics.ca>'
+' * @link      http://yourcompany.com
+ * @author    Your company, Inc. <info@websemantics.ca>'
 ```
 
 More settings are detailed in the `builder.php` file.
 
-10- If you have seed data for a particular Entity/Model (abc), place that in, `blog/addons/default/websemantics/blog-module/resources/seeders`.
+10. If you have seed data for a particular Entity/Model (abc), place that in, `blog/addons/default/websemantics/blog-module/resources/seeders`.
 
 In this example, create post.php (singular file name) at `blog/addons/default/websemantics/blog-module/resources/seeders/post.php`
 
@@ -154,7 +151,7 @@ The content must be a list of entry values without the <?php, for example:
 
 This will be added to the Entity Seeder class when the code is generated.
 
-11- Install (ore reinstall) your module,
+11. Install (ore reinstall) your module,
 
 ```
 php artisan module:install websemantics.module.blog
@@ -164,7 +161,7 @@ This will install your module, hooray!
 
 You are done. Go to admin panel and check your beautiful new Module in action `admin/blog/posts`
 
-12- Making changes
+12. Making changes
 
 After adding changes to your migration files, adding or removing streams, adding or removing fields, run a reinstall module command and watch how your module's entities get rebuilt with fresh code scaffolded before your eyes,
 
@@ -174,7 +171,7 @@ php artisan module:reinstall websemantics.module.blog
 
 Have fun, ..
 
-#### Inner Working:
+#### Inner Working
 
 Once installed, this extension listens mainly to three event types, *StreamWasCreated*, *AssignmentWasCreated* and *ModuleWasInstalled*. To enable this extension for your current module, create a config file at `resources/config/builder.php` and list the namespaces you would like the extension to generate code for. You can listen/generate code to multiple namespaces.
 
@@ -229,6 +226,7 @@ The extension then will generate a controller per entity at `xyz-module/src/Http
 
 3- For *ModuleWasInstalled* event, this will add routes and sections to the module and service provider. It will also seed the module if the builder config file was set accordingly.
 
+
 #### Development
 
 Once the entity files have been created and working correctly with Pyro, you might want to modify and develop the classes individually.
@@ -250,21 +248,19 @@ Here's an example,
 Notice that, the name of the entity has been omitted so that this can be applied globally.
 
 
-#### Install:
+## Contribution
 
-- Download the code or clone this repo into your addon folder at
-`addons/default/websemantics/entity_builder-extension`
--
- Login to your admin
-- Install this extension from Addons/Extensions or install from the command line,
+We are more than happy to accept external contributions to the project in the form of feedback, bug reports and even better - pull requests :)
 
 
-```
-php artisan extension:install websemantics.extension.entity_builder
-```
+## Support
+
+Need help or have a question? post a questions at [StackOverflow](https://stackoverflow.com/questions/tagged/entity_builder-extension)
+
+*Please don't use the issue trackers for support/questions.*
 
 
-## Related
+## Links
 
 [PyroCMS](https://github.com/pyrocms/pyrocms), an MVC PHP Content Management System built to be easy to use, theme and develop with. It is used by individuals and organizations of all sizes around the world.
 
@@ -273,3 +269,9 @@ php artisan extension:install websemantics.extension.entity_builder
 [PyroCMS Cheatsheet](http://websemantics.github.io/pyrocms-cheatsheet), A list of commands and features for PyroCMS 3.
 
 [Auto Pyro](https://github.com/websemantics/auto-pyro), PyroCMS deploy tool for faster and more pleasurable development experience.
+
+
+## License
+
+[MIT license](http://opensource.org/licenses/mit-license.php)
+Copyright (c) Web Semantics, Inc.

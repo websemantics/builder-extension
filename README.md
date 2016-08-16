@@ -34,7 +34,7 @@
 
 
 ```                                                                                             
-> Last update: 25 August 2016
+> Last update: 16 August 2016
 
 This PyroCMS extension once installed becomes your coding companion to generate modules and [Stream Entities](#what-is-an-entity) for all of your projects coding needs. It will also help configure your module classes with routes, bindings, language file entries, seeding and much more, so you do not have to lift a finger.
 

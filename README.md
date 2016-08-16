@@ -229,7 +229,15 @@ The extension then will generate a controller per entity at `xyz-module/src/Http
 
 3- For *ModuleWasInstalled* event, this will add routes and sections to the module and service provider. It will also seed the module if the builder config file was set accordingly.
 
-Once the entity files have been created and working correctly with Pyro, you might want to modify and develop the classes individually. The extension provides a configuration option to list the files you don't want to overwrite accedentaly (when re-installing a module). For example, if you have edited the `AbcModle.php`, make sure to list that in the builder config file so that the extension will avoid overwrite if it exists. Here's an example,
+#### Development
+
+Once the entity files have been created and working correctly with Pyro, you might want to modify and develop the classes individually.
+
+The extension provides a configuration option to list the files that you don't want to overwrite accidentally when re-installing a module and regenerating entity code.
+
+For example, if you have edited the `AbcModle.php`, make sure to list that in the builder config file so that the extension will avoid overwrite it if it exists.
+
+Here's an example,
 
 ```
   'avoid_overwrite' => [
@@ -239,26 +247,21 @@ Once the entity files have been created and working correctly with Pyro, you mig
   ],
 ```
 
-Notice that, the name of the entity has been omitted.
+Notice that, the name of the entity has been omitted so that this can be applied globally.
 
-
-#### Notice:
-
-Make sure that the following folders/files have write permission:
-
-- `src`
-- `src/XyzModule.php`
-- `src/XyzServiceProvider.php`
-- `src/XyzModuleSeeder.php`
-- `resources/lang/en/addon.php`
-- `src/Http/Controller/Admin`
 
 #### Install:
 
 - Download the code or clone this repo into your addon folder at
 `addons/default/websemantics/entity_builder-extension`
-- Login to your admin
-- Install this extension from Addons/Extensions
+-
+ Login to your admin
+- Install this extension from Addons/Extensions or install from the command line,
+
+
+```
+php artisan extension:install websemantics.extension.entity_builder
+```
 
 
 ## Related

@@ -39,14 +39,14 @@
 This PyroCMS extension once installed becomes your coding companion to generate modules and [Stream Entities](#what-is-an-entity) for all of your projects coding needs. It will also help configure your module classes with routes, bindings, language file entries, seeding and much more, so you do not have to lift a finger. This extension will also scaffold your modules with helper function, default home page, language and other essential files.
 
 
-### What is an Entity
+## What is an Entity
 
 An Entity is a representation of an [Object Type](https://en.wikipedia.org/wiki/Object_type_(object-oriented_programming)) which may correspond with a Stream. For example, a **Person**, a **Company** or an **Animal** can all be represented by Streams and Entities.
 
 The code generated for an entity includes an `Entity Model` and `Repository`, `Plugin`, `Seeder`, `Contracts`, `Table Builder` and `Form Builder`.
 
 
-#### Getting Started
+## Getting Started
 
 The following example is also available here, [blog](https://github.com/websemantics/blog),
 
@@ -136,7 +136,7 @@ Check the admin panel to see the new Module in action, url: `admin/blog/posts`.
 Have fun, ..
 
 
-#### Development
+## Development
 
 Once the entity files have been created and working correctly with Pyro, you might want to modify and develop the classes individually adding custom code.
 
@@ -157,7 +157,7 @@ Here's an example,
 Notice that we used the last part of the file name (omitted the entity name) so that this can be applied globally to all generated entities of the same type.
 
 
-#### Configuration
+## Configuration
 
 The Entity Builder offers many configuration options to fine-tune and enhance your development experience which can be found at `blog-module/resources/config/builder.php`.
 
@@ -202,7 +202,7 @@ To change this behaviour and store under the module `src/` folder directly, set 
 More settings are detailed in the [builder.php](https://github.com/websemantics/entity_builder-extension/blob/master/resources/assets/module/template/resources/config/builder.php) file.
 
 
-#### Inner Working
+## Inner Working
 
 Once installed, this extension listens mainly to three event types, *StreamWasCreated*, *AssignmentWasCreated* and *ModuleWasInstalled*.
 

@@ -1,9 +1,10 @@
-<?php
-
-namespace Websemantics\EntityBuilderExtension\Anomaly\Stream\Console;
+<?php namespace Websemantics\EntityBuilderExtension\Anomaly\Stream\Console;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Anomaly\Streams\Platform\Addon\Addon;
+use Anomaly\Streams\Platform\Addon\AddonCollection;
 use Websemantics\EntityBuilderExtension\Traits\JobsDispatcher;
+use Websemantics\EntityBuilderExtension\Anomaly\Stream\Console\Command\MakeStream;
 
 /**
  * Class Make.
@@ -20,5 +21,20 @@ class Make extends \Anomaly\Streams\Platform\Stream\Console\Make
 {
     use DispatchesJobs, JobsDispatcher {
        JobsDispatcher::dispatch insteadof DispatchesJobs;
+    }
+
+    /**
+     * Execute the console command.
+     */
+    public function fire(AddonCollection $addons)
+    {
+      parent::fire($addons);
+
+      $slug  = $this->argument('slug');
+      $addon = $addons->get($this->argument('addon'));
+      $path = $addon->getPath();
+
+      /* after a successful stream migration, create a seeder template file */
+      $this->dispatch(new MakeStream($slug, $path));
     }
 }

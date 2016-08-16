@@ -1,9 +1,22 @@
 ```
 
-             __________     _____      _____     ___________
-            |          \====\     \   /    /====|           \\========================\
-            |     __    |    \     \ /    /     |     __     |                        |
-            |    |__)   |     \     V    /      |    |__)    |                        |
+                                             /'\
+                                            /   \
+                                           /     \
+                         _                /   ..' \_                      /\/'\
+                        / \              / './       \                   /     \
+                      _/   \            /             \        _        /       \
+\           /'\      /  '._'\          /               \      / \      /      /''\
+ \         /   \    /        \        /      /          \    /   \    / \_ ..'    \
+  \    /'./     \  /          \__    /      /            \  /     \__/             \     /'\
+   \  /          \/              \  /      /              \/__     \                \   /   \
+    \/            \               \/    __/                   \     \                \_/      \     /'\
+    /   /          \              /    /                       \     \                /        \   /   \
+       /                              /                               \__            /          \ /
+      /      __________     _____      _____     ___________             \                       /
+    _/      |          \====\     \   /    /====|           \\========================\         /   
+   /        |     __    |    \     \ /    /     |     __     |             \           |           
+            |    |__)   |     \     V    /      |    |__)    |              \          |            
             |       ___/       \        /       |           <                        ┌┴┐
             |      |            |      |        |      |\    \                      /  |
             |      |            |      |        |      | \    \                    |    \_
@@ -37,7 +50,7 @@ Code generated for an entity includes an `Entity Model` and `Repository`, `Plugi
 
 The following example is also available here, [blog](https://github.com/websemantics/blog),
 
-1. Create a new PyroCMS project and store at folder `blog`
+1. Create and install a new PyroCMS project, `blogger`
 
 ```bash
 composer create-project pyrocms/pyrocms --prefer-dist blogger
@@ -47,7 +60,7 @@ cd blogger
 php artisan install
 ```
 
-2. Install this extension at `addons/default/websemantics`
+2. Install this extension at, `addons/default/websemantics/entity_builder-extension`
 
 ```bash
 git clone https://github.com/websemantics/entity_builder-extension  addons/default/websemantics/entity_builder-extension
@@ -55,38 +68,30 @@ git clone https://github.com/websemantics/entity_builder-extension  addons/defau
 php artisan extension:install websemantics.extension.entity_builder
 ```
 
-3. Create a new module, 'Blog' (namespace = `blog` by default)
+3. Create a new module, `blog`
 
-```
+```bash
 php artisan make:addon websemantics.module.blog
 ```
 
-This step will also create fields migration file at `blog/addons/default/websemantics/blog-module/migrations`
+4. Add `title` and `content` fields to the module's fields migration file at `blog/addons/default/websemantics/blog-module/migrations`,
 
-4. Edit the module's fields migration file created at the previous step, or create a new one
-
-```
-php artisan make:migration create_module_fields --addon=websemantics.module.blog
-```
-
-Add the following fields to the `fields` array,
-
-```
+```php
     protected $fields = [
         'title'                      => 'anomaly.field_type.text',
         'content'                    => 'anomaly.field_type.text'
     ];
 ```
 
-5. Create a new stream for `Posts`,
+5. Create a `posts` stream,
 
-```
+```bash
 php artisan make:stream posts websemantics.module.blog
 ```
 
-Edit the generated file and add the following to `$stream` and `$assignments` arrays,
+6. Edit `posts` stream migration file generated at `blog/addons/default/websemantics/blog-module/migrations`, and add the following to `$stream` and `$assignments` arrays,
 
-```
+```php
     protected $stream = [
         'slug'         => 'posts',
         'title_column' => 'title'
@@ -103,73 +108,91 @@ Edit the generated file and add the following to `$stream` and `$assignments` ar
     ];
 ```
 
-6. Edit the builder config file at `blog/addons/default/websemantics/blog-module/resources/config/builder.php` to specify a list of stream namespaces that you wanted to generate entities for,
+7. Add seeder data to, `blog/addons/default/websemantics/blog-module/resources/seeders/post.php` (singular file name)
+
+```php
+  ['title' => 'Laravel', 'content' => 'PHP framework'],
+  ['title' => 'PyroCMS', 'content' => 'PHP CMS']
+```
+
+The content must be a list of entry values without `<?php`. This will be added to the Entity Seeder class when the code is generated.
+
+8. Install/reinstall module,
+
+```bash
+php artisan module:reinstall websemantics.module.blog
+```
+
+Check the admin panel and check your beautiful new Module in action `admin/blog/posts`
+
+Have fun, ..
+
+
+#### Development
+
+Once the entity files have been created and working correctly with Pyro, you might want to modify and develop the classes individually adding custom code.
+
+The extension provides a configuration option to list the files that you don't want to overwrite accidentally when re-installing a module to regenerating the entity code.
+
+For example, if you have edited the `blog-module/src/Blog/Post/PostModel.php`, make sure to list that in the builder config file, `blog-module/resources/config/builder.php` so that the extension will avoid overwrite the files if it exists.
+
+Here's an example,
 
 ```
-  'namespaces' => [
-    'blog' => [
+  'avoid_overwrite' => [
+    'Model.php',
+    'Repository.php',
+    'TableColumns.php'
+  ],
+```
 
-    ]
+Notice that we use the last part of the file name and have omitted the entity name so that this can be applied globally to all generated entities.
+
+
+#### Configuration
+
+The Entity Builder offers many configuration options to fine-tune and enhance your development experience which can be found at `blog-module/resources/config/builder.php`.
+
+1. Add a list of namespaces supported,
+
+```php
+  'namespaces' => [
+    'blog' => [],
+    'discussion' => []
   ]
 ```
 
-7. Specify if you want the streams entities generated grouped in a folder (named after the current namespace)
+This indicates to the builder extension the stream `namespaces` that your module supports. Add namespaces to this list as appropriate.
+
+2. Group entities code under a namespace folder,
+
+When code is generated for an entity, the builder extension saves it under `src/{namespace}`. This is useful when your module handles streams from different namespaces.
+
+To change this behaviour and store under the `src/` folder directly, set `namespace_folder` to `false`,
 
 ```
   'namespace_folder' => true,
 ```
 
-8. Specify automatic seeding after a module has installed
+3. There are two settings to the seeding option in `builder.php`,
 
-There are two settings to the seeding option in builder.php,
 - `yes`, Entity Builder will seed the module after install,
-- `no`, seeding is disabled
+- `no`, Seeding is disabled
 
 ```
   'seeding' => 'yes'
 ```
 
-9. Specify your project docblock to be included with the generated code
+4. Specify your project docblock to be included with the generated classes,
+
 ```
 'docblock' =>
 ' * @link      http://yourcompany.com
  * @author    Your company, Inc. <info@websemantics.ca>'
 ```
 
-More settings are detailed in the `builder.php` file.
+More settings are detailed in the [builder.php](https://github.com/websemantics/entity_builder-extension/blob/master/resources/assets/module/template/resources/config/builder.php) file.
 
-10. If you have seed data for a particular Entity/Model (abc), place that in, `blog/addons/default/websemantics/blog-module/resources/seeders`.
-
-In this example, create post.php (singular file name) at `blog/addons/default/websemantics/blog-module/resources/seeders/post.php`
-
-The content must be a list of entry values without the <?php, for example:
-
-```
-  ['title' => 'Laravel', 'content' => 'PHP framework'],
-  ['title' => 'PyroCMS', 'content' => 'PHP CMS']
-```
-
-This will be added to the Entity Seeder class when the code is generated.
-
-11. Install (ore reinstall) your module,
-
-```
-php artisan module:install websemantics.module.blog
-```
-
-This will install your module, hooray!
-
-You are done. Go to admin panel and check your beautiful new Module in action `admin/blog/posts`
-
-12. Making changes
-
-After adding changes to your migration files, adding or removing streams, adding or removing fields, run a reinstall module command and watch how your module's entities get rebuilt with fresh code scaffolded before your eyes,
-
-```
-php artisan module:reinstall websemantics.module.blog
-```
-
-Have fun, ..
 
 #### Inner Working
 
@@ -225,27 +248,6 @@ The extension then will generate a controller per entity at `xyz-module/src/Http
 2- For *AssignmentWasCreated* event, the extension will modify two files, `AbcTableColumns.php` and `AbcFormBuilder.php` and add a field slug per stream assignment.
 
 3- For *ModuleWasInstalled* event, this will add routes and sections to the module and service provider. It will also seed the module if the builder config file was set accordingly.
-
-
-#### Development
-
-Once the entity files have been created and working correctly with Pyro, you might want to modify and develop the classes individually.
-
-The extension provides a configuration option to list the files that you don't want to overwrite accidentally when re-installing a module and regenerating entity code.
-
-For example, if you have edited the `AbcModle.php`, make sure to list that in the builder config file so that the extension will avoid overwrite it if it exists.
-
-Here's an example,
-
-```
-  'avoid_overwrite' => [
-    'Model.php',
-    'Repository.php',
-    'TableColumns.php'
-  ],
-```
-
-Notice that, the name of the entity has been omitted so that this can be applied globally.
 
 
 ## Contribution

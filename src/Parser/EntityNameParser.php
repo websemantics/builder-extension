@@ -19,11 +19,11 @@ class EntityNameParser
     /**
      * Return the entity name.
      *
-     * @param  StreamInterface $stream
+     * @param  StreamInterface / string $stream
      * @return string
      */
-    public function parse(StreamInterface $stream)
+    public function parse($stream)
     {
-        return studly_case(str_singular($stream->getSlug()));
+        return studly_case(str_singular(is_string($stream)? $stream :$stream->getSlug()));
     }
 }

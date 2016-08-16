@@ -9,11 +9,14 @@ use Packaged\Figlet\Figlet;
 /**
  * Class ScaffoldModule.
  *
- * @link          http://anomaly.is/streams-platform
- *
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link      http://websemantics.ca/ibuild
+ * @link      http://ibuild.io
+ * @author    WebSemantics, Inc. <info@websemantics.ca>
+ * @author    Adnan Sagar <msagar@websemantics.ca>
+ * @copyright 2012-2016 Web Semantics, Inc.
+ * @package   Websemantics\EntityBuilderExtension\Anomaly\Addon\Console\Command
  */
+
 class ScaffoldModule implements SelfHandling
 {
     use FileProcessor;

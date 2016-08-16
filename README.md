@@ -78,7 +78,7 @@ php artisan extension:install websemantics.extension.entity_builder
 php artisan make:addon websemantics.module.blog
 ```
 
-** Note: ** Entity Builder overrides the core `make:addon` command for type `module` only in order to generate all the required files.
+**Note:** Entity Builder overrides the core `make:addon` command for type `module` only in order to generate all the required files.
 
 * Add `title` and `content` fields to the module's fields migration file at `blog/addons/default/websemantics/blog-module/migrations`,
 

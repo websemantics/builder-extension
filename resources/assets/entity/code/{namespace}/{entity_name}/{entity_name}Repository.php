@@ -30,32 +30,6 @@ class {entity_name}Repository {extends_repository}implements {entity_name}Reposi
     }
 
     /**
-     * Truncate {entity_name_lower}.
-     */
-    public function truncate()
-    {
-        return $this->model->truncate();
-    }
-
-    /**
-     * Create a new {entity_name_lower}.
-     *
-     * @param array $attributes
-     */
-    public function create(array $attributes)
-    {
-        return $this->model->create($attributes);
-    }
-
-    /**
-     * Return model.
-     */
-    public function model()
-    {
-        return $this->model;
-    }
-
-    /**
      * Find a model by id or list of attributes
      *
      * @param int / array $attributes, value of record (id) or list of (attributes)
@@ -63,12 +37,10 @@ class {entity_name}Repository {extends_repository}implements {entity_name}Reposi
     public function find($attributes)
     {
         if(is_array($attributes)){
-            return $this->model->where($attributes)->first();  
-        }  elseif(is_numeric($id = $attributes)){
-            return $this->model->find($id);
+            return $this->model->where($attributes)->first();
         }
 
-        return null;
+        return parent::find(/* $id */ $attributes);
     }
 
     /**
@@ -80,7 +52,7 @@ class {entity_name}Repository {extends_repository}implements {entity_name}Reposi
      */
     public function findBy($field, $value, $operation = '=')
     {
-        return $this->model->where($field, $operation, $value)->first(); 
+        return $this->model->where($field, $operation, $value)->first();
     }
 
     /**

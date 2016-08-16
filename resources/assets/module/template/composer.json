@@ -4,7 +4,10 @@
     "autoload": {
         "psr-4": {
             "{vendor_name}\\{module_name}Module\\": "src/"
-        }
+        },
+        "files": [
+            "src/Helpers/helper_functions.php"
+        ]
     },
     "require": {
     }

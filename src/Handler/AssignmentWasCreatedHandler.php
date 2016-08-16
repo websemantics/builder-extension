@@ -1,4 +1,4 @@
-<?php namespace Websemantics\EntityBuilderExtension\Handlers\Events;
+<?php namespace Websemantics\EntityBuilderExtension\Handler;
 
 use Illuminate\Foundation\Bus\DispatchesCommands;
 use Anomaly\Streams\Platform\Assignment\Event\AssignmentWasCreated;
@@ -12,7 +12,7 @@ use Websemantics\EntityBuilderExtension\Command\ModifyEntity;
  * @link      http://ibuild.io
  * @author    WebSemantics, Inc. <info@websemantics.ca>
  * @author    Adnan Sagar <msagar@websemantics.ca>
- * @copyright 2012-2015 Web Semantics, Inc.
+ * @copyright 2012-2016 Web Semantics, Inc.
  * @package   Websemantics\EntityBuilderExtension
  */
 
@@ -21,7 +21,7 @@ class AssignmentWasCreatedHandler {
   use DispatchesCommands;
 
 	protected $modules;
-	
+
 	/**
 	 * Create the event handler.
 	 *
@@ -44,11 +44,8 @@ class AssignmentWasCreatedHandler {
 		$stream = $assignment->getStream();
 
 		foreach ($this->modules as $module) {
-			
-			$namespaces = ebxGetNamespaces($module);
-
-			if(in_array($stream->getNamespace(), $namespaces)){
-       		  $this->dispatch(new ModifyEntity($module, $stream, $assignment));
+			if(in_array($stream->getNamespace(), ebxGetNamespaces($module))){
+     		 $this->dispatch(new ModifyEntity($module, $stream, $assignment));
 			}
 
 		}

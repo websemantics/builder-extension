@@ -1,7 +1,6 @@
-<?php namespace Websemantics\EntityBuilderExtension\Command\Traits;
+<?php namespace Websemantics\EntityBuilderExtension\Traits;
 
 use Websemantics\EntityBuilderExtension\Parser\GenericPhpParser;
-
 
 /**
  * Class FileProcessor
@@ -10,13 +9,13 @@ use Websemantics\EntityBuilderExtension\Parser\GenericPhpParser;
  * @link      http://ibuild.io
  * @author    WebSemantics, Inc. <info@websemantics.ca>
  * @author    Adnan Sagar <msagar@websemantics.ca>
- * @copyright 2012-2015 Web Semantics, Inc.
+ * @copyright 2012-2016 Web Semantics, Inc.
  * @package   Websemantics\EntityBuilderExtension
  */
 
 trait FileProcessor
 {
- 
+
   /**
      * The file system utility.
      *
@@ -30,7 +29,7 @@ trait FileProcessor
      * @var Parser
      */
     protected $parser;
-  
+
     /**
      * Setter for files
      *
@@ -62,6 +61,19 @@ trait FileProcessor
     }
 
     /**
+     * Write the contents of a file
+     *
+     * @param  string  $path
+     * @param  string  $contents
+     * @param  bool  $lock
+     * @return int
+     */
+    public function put($path, $contents, $avoid = false, $lock = false)
+    {
+        return $this->files->put($path, $contents, $avoid, $lock);
+    }
+
+    /**
      * True if file exists
      *
      * @param  string $file, a php file template
@@ -72,13 +84,13 @@ trait FileProcessor
     }
 
     /**
-     * Process a php target file to append PHP syntax-sensitive content 
+     * Process a php target file to append PHP syntax-sensitive content
      * from multiple template sources.
      *
      * @param  string $file, a php file to modify
      * @param  array  $templates list of key (property name), value (template file)
      * @param  string $data used to replace placeholders inside all template files
-     * @param Boolean $front, set location to the front of the array 
+     * @param Boolean $front, set location to the front of the array
      */
     protected function processFile($file, $templates, $data, $front = false)
     {
@@ -89,10 +101,10 @@ trait FileProcessor
         foreach ($templates as $property => $template) {
            $phpParser->parse($property, $template, $front);
         }
-        
+
         $content = $phpParser->prettyPrint();
         if(!is_null($content)){
-           $this->files->put($file, $content);
+           $this->put($file, $content);
         }
     }
 }

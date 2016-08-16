@@ -1,5 +1,7 @@
 <?php namespace {vendor_name}\{module_name}Module\{namespace_folder}{entity_name}\Contract;
 
+use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
+
 /**
  * Interface {entity_name}RepositoryInterface
  *
@@ -7,7 +9,7 @@
  * @package   {vendor_name}\{module_name}Module\{namespace_folder}{entity_name}\Contract
  */
 
-interface {entity_name}RepositoryInterface
+interface {entity_name}RepositoryInterface extends EntryRepositoryInterface
 {
 
     /**

@@ -2,7 +2,7 @@
     "name": "websemantics/entity_builder-extension",
     "minimum-stability": "dev",
     "type": "streams-addon",
-    "description": "Scaffold your PyroCMS Modules in style",
+    "description": "Modules & Streams Scaffolder for Maximum Coding Pleasure",
     "keywords": [
         "ibuild",
         "streams",
@@ -23,7 +23,8 @@
         "email": "info@websemantics.ca"
     },
     "require":{
-        "nikic/php-parser": "~2.0"
+        "nikic/php-parser": "~2.0",
+        "packaged/figlet": "*"
     },
     "autoload": {
         "psr-4": {
@@ -31,7 +32,7 @@
             "PhpParser\\": "vendor/nikic/php-parser/lib/PhpParser/"
         },
         "files": [
-            "src/Helpers/helper_functions.php"
+            "src/Helper/helper_functions.php"
         ]
     },
     "extra": {

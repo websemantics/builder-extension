@@ -1,18 +1,33 @@
 <?php
 
 return [
-    
-    /*
-    |   Entity
-    |    ____        _ _     _           
-    |   | __ ) _   _(_) | __| | ___ _ __ 
-    |   |  _ \| | | | | |/ _` |/ _ \ '__|
-    |   | |_) | |_| | | | (_| |  __/ |   
-    |   |____/ \__,_|_|_|\__,_|\___|_|  Extension . . . 
-    |                                
-    |   This file contains all the entity builder configs
-    |
-    */
+
+  /*
+  |
+  |    __________     _____      _____     ___________
+  |   |          \====\     \   /    /====|           \\==========================\
+  |   |     __    |    \     \ /    /     |     __     |                          |
+  |   |    |__)   |     \     V    /      |    |__)    |                          |
+  |   |       ___/       \        /       |           <                           |
+  |   |      |            |      |        |      |\    \                          |
+  |   |      |            |      |        |      | \    \                         |
+  |   |______|            |______|        |______|  \____\                       ┌┴┐
+  |    _____     _  _     _     ___     _     ___    __ __                      /  |
+  |   |   __|   | \| |   | |   |_ _|   | |   |_ _|   \ V /                     |    \_
+  |   |   _|    | \\ |   | |    | |    | |    | |     \ /                  __   \     `-_
+  |   |_____|   |_|\_|   |_|    |_|    |_|    |_|     |_|                 /   \  ''-.    \
+  |    _____     _ _     _     _       __      ___     ___              /    /      \    \
+  |   |   o )   | | |   | |   | |     |  \    | __|   | o \             |   |        |   |
+  |   |   o \   | U |   | |   | |_    | o )   | _|    |   /             \    \      /    /
+  |   |_____/   |___|   |_|   |___|   |__/    |___|   |_|\_\             \    `-..-'    /
+  |     ____     ___    ___   ___    _    _  _     __    __               '-_        _-'
+  |    /  __|   | __|  |_ _| |_ _|  | |  | \| |   / _|  / _|                 `------'
+  |    \_   \   | _|    | |   | |   | |  | \\ |  ( |_n  \_ \
+  |    |____/   |___|   |_|   |_|   |_|  |_|\_|   \__/  |__/
+  |
+  |   Modules & Streams Scaffolder for Maximum Coding Pleasure          - -- --------- -- -
+  |
+  */
 
 	/*
 	|--------------------------------------------------------------------------
@@ -20,18 +35,18 @@ return [
 	|--------------------------------------------------------------------------
 	| A list of all the Stream Namespaces used in this Module.
 	|
-	| More control over code generated can be established per assignment, 
-	| for example, hide / show table columns and form fields per stream assignment, 
+	| More control over code generated can be established per assignment,
+	| for example, hide / show table columns and form fields per stream assignment,
 	| also table column field view / template.
 	|
-	| for example: 
+	| for example:
 	|
 	|	'namespaces' => [
 	|		'namespace' => [
 	|			'field_slug' => [
 	|				'hide_column' => true,  *optional, (false by default)
 	|				'hide_field'  => false,  *optional, (false by default)
-	|				'column_template'    => 
+	|				'column_template'    =>
 	|     '<span class="label label-default">{value}</span> *optional, ('{value}' by default)
 	|			]
 	|		]
@@ -43,7 +58,7 @@ return [
 	|  			'column_template'    =>  'default'
 	| You can also have your own markup, for that there's two variables {class} & {value}
 	| For example, '<span class="label label-{class}">{value}</span>'
-	| 
+	|
 	|	*/
 
 	'namespaces' => [
@@ -56,20 +71,19 @@ return [
 			// ]
 		]
 	],
-	
+
 	/*
 	|--------------------------------------------------------------------------
 	| Seeding
 	|--------------------------------------------------------------------------
 	| Allow to seed the module after it has installed by:
 	|
-	| (1) The Entity Builder : 'builder'   (*default)
-	| (2) An internal seeder command : 'self'
-	| (3) Disable seeding : 'no' 
+	| (1) The Entity Builder : 'yes' (*default)
+	| (2) Disable seeding : 'no'
 	|
 	*/
 
-	'seeding' => 'builder',
+	'seeding' => 'yes',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -85,7 +99,7 @@ return [
 	|--------------------------------------------------------------------------
 	| Namespaces folder
 	|--------------------------------------------------------------------------
-	| Group all streams in one folder
+	| Group all entities (streams) in one folder
 	|
 	*/
 
@@ -95,23 +109,25 @@ return [
 	|--------------------------------------------------------------------------
 	| Repository Super Class
 	|--------------------------------------------------------------------------
-	| Extend all generated repositories to a common super class, if any!
-	| For example: 'Websemantics\NamedModule\Common\CommonRepository'
-	|
+	| Extend all generated repositories to a common super class,
+  | '\Anomaly\Streams\Platform\Entry\EntryRepository' by default,
+  |
+	| Example: 'Websemantics\NamedModule\Common\CommonRepository'
+  |
 	*/
 
-	'extends_repository' => null,
+	'extends_repository' => '\Anomaly\Streams\Platform\Entry\EntryRepository',
 
 	/*
 	|--------------------------------------------------------------------------
 	| Avoid Overwrite
 	|--------------------------------------------------------------------------
 	|
-	| For development and to avoid overwriting on code added, list all the files 
-	| that should not be overwritten by the builder. Use the last part of the 
+	| For development and to avoid overwriting on code added, list all the files
+	| that should not be overwritten by the builder. Use the last part of the
 	| file name, ..
-	| 
-	| for example: 
+	|
+	| for example:
 	|   -PostModel.php 		  -> 'Model.php'
 	|   -FileTableColumns.php -> 'TableColumns.php'
 	|
@@ -122,23 +138,23 @@ return [
 
 	'avoid_overwrite' => [
 		'Model.php',
-		'Repository.php',
-		// 'TableColumns.php', /* uncomment this if you no longer want this to be overwritten */
-	    // 'FormBuilder.php'
-		// 'ModuleSeeder.php'
+		'Repository.php'/* ,
+    'TableColumns.php',
+    'FormBuilder.php'
+    'ModuleSeeder.php' */
 	],
 
 	/*
 	|--------------------------------------------------------------------------
 	| Docblock
 	|--------------------------------------------------------------------------
-	|	Docblock text to include with generated files
+	|	Docblock text to include with entity generated files
 	|
 	*/
 
 	'docblock' =>
-' * @link      http://websemantics.ca/ibuild
+' * @link      http://websemantics.ca
  * @link      http://ibuild.io
  * @author    WebSemantics, Inc. <info@websemantics.ca>
- * @author    Adnan Sagar <msagar@websemantics.ca>'
+ * @author    Adnan M.Sagar <adnan@websemantics.ca>'
 ];

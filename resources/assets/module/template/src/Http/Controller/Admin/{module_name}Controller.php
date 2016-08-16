@@ -11,13 +11,13 @@ use Anomaly\Streams\Platform\Http\Controller\AdminController;
 
 class {module_name}Controller extends AdminController
 {
- /**
-   * Return master admin view.
+  /**
+   * Return admin home view.
    *
    * @return \Illuminate\View\View|\Symfony\Component\HttpFoundation\Response
    */
   public function index()
   {
-       return view('{vendor_name_lower}.module.{module_name_lower}::admin.master');
+    return moduleView('admin.home', ['readme' => strip_tags(file_get_contents(modulePath('README.md')))]);
   }
 }

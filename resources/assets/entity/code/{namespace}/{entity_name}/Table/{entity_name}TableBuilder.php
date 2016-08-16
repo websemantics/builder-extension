@@ -12,21 +12,57 @@ use Anomaly\Streams\Platform\Ui\Table\TableBuilder;
 class {entity_name}TableBuilder extends TableBuilder
 {
 
-    /**
-     * The table buttons.
-     *
-     * @var array
-     */
-    protected $buttons = [
-        'edit'
-    ];
+  /**
+   * The table views.
+   *
+  * @var array
+   */
+  protected $views = [];
 
-    /**
-     * The table actions.
-     *
-     * @var array
-     */
-    public $actions = [
-        'delete'
-    ];
+  /**
+   * The table filters.
+   *
+  * @var array
+   */
+  protected $filters = [];
+
+  /**
+   * The table columns.
+   *
+  * @var array
+   */
+  protected $columns = [];
+
+  /**
+   * The table buttons.
+   *
+  * @var array
+   */
+  protected $buttons = [
+      'edit'
+  ];
+
+  /**
+   * The table actions.
+   *
+  * @var array
+   */
+  protected $actions = [
+      'delete'
+  ];
+
+  /**
+   * The table options.
+   *
+   * @var array
+   */
+  protected $options = [];
+
+  /**
+   * The table assets.
+   *
+   * @var array
+   */
+  protected $assets = [];
+
 }

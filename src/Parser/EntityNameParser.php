@@ -9,7 +9,7 @@ use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
  * @link      http://ibuild.io
  * @author    WebSemantics, Inc. <info@websemantics.ca>
  * @author    Adnan Sagar <msagar@websemantics.ca>
- * @copyright 2012-2015 Web Semantics, Inc.
+ * @copyright 2012-2016 Web Semantics, Inc.
  * @package   Websemantics\EntityBuilderExtension
  */
 
@@ -19,11 +19,11 @@ class EntityNameParser
     /**
      * Return the entity name.
      *
-     * @param  StreamInterface $stream
+     * @param  StreamInterface / string $stream
      * @return string
      */
-    public function parse(StreamInterface $stream)
+    public function parse($stream)
     {
-        return studly_case(str_singular($stream->getSlug()));
+        return studly_case(str_singular(is_string($stream)? $stream :$stream->getSlug()));
     }
 }

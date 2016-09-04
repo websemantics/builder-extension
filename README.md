@@ -78,7 +78,7 @@ php artisan extension:install websemantics.extension.entity_builder
 php artisan make:addon websemantics.module.blog
 ```
 
-**Note:** Entity Builder overrides the core `make:addon` command for type `module` only in order to generate all the required files.
+**Note:** Builder extension overrides the core `make:addon` command for type `module` only in order to generate all the required files.
 
 * Add `title` and `content` fields to the module's fields migration file at `blog/addons/default/websemantics/blog-module/migrations`,
 
@@ -159,7 +159,7 @@ Notice that we used the last part of the file name (omitted the entity name) so 
 
 ## Configuration
 
-The Entity Builder offers many configuration options to fine-tune and enhance your development experience which can be found at `blog-module/resources/config/builder.php`.
+The Builder extension offers many configuration options to fine-tune and enhance your development experience which can be found at `blog-module/resources/config/builder.php`.
 
 * Add a list of namespaces supported,
 
@@ -184,7 +184,7 @@ To change this behaviour and store under the module `src/` folder directly, set 
 
 * There are two settings to the seeding option in `builder.php`,
 
-- `yes`, Entity Builder will seed the module after install,
+- `yes`, Builder extension will seed the module after install,
 - `no`, Seeding is disabled
 
 ```

@@ -1,6 +1,6 @@
 <?php namespace Websemantics\EntityBuilderExtension\Handler;
 
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Anomaly\Streams\Platform\Stream\Event\StreamWasCreated;
 use Anomaly\Streams\Platform\Addon\Module\ModuleCollection;
 use Websemantics\EntityBuilderExtension\Command\GenerateEntity;
@@ -18,7 +18,7 @@ use Websemantics\EntityBuilderExtension\Command\GenerateEntity;
 
 class StreamWasCreatedHandler {
 
-  use DispatchesCommands;
+  use DispatchesJobs;
 
 	protected $modules;
 

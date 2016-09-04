@@ -3,7 +3,7 @@
 /**
  * Class JobsDispatcher.
  *
- * Override DispatchesJobs trait to avoid conflic with Entity Builder.
+ * Override DispatchesJobs trait to avoid conflic with Builder extension.
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io

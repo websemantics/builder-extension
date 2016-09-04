@@ -1,6 +1,6 @@
 <?php namespace Websemantics\EntityBuilderExtension\Handler;
 
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Anomaly\Streams\Platform\Addon\Module\Event\ModuleWasInstalled;
 use Anomaly\Streams\Platform\Addon\Module\ModuleCollection;
 use Websemantics\EntityBuilderExtension\Command\ModifyModule;
@@ -19,7 +19,7 @@ use Websemantics\EntityBuilderExtension\Command\SeedModule;
 
 class ModuleWasInstalledHandler {
 
-  use DispatchesCommands;
+  use DispatchesJobs;
 
 	protected $modules;
 

@@ -9,7 +9,7 @@ use Websemantics\EntityBuilderExtension\Traits\JobsDispatcher;
 /**
  * Class MakeAddon.
  *
- * Override core MakeAddon command to generate module files that are compatible with Entity Builder.
+ * Override core MakeAddon command to generate module files that are compatible with Builder extension.
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
@@ -23,11 +23,13 @@ use Websemantics\EntityBuilderExtension\Traits\JobsDispatcher;
        JobsDispatcher::dispatch insteadof DispatchesJobs;
     }
 
+    protected $name = 'make:addon';
+
     /**
      * Execute the console command.
      */
     public function fire(AddonManager $addons)
-    {   dd('Die Here');
+    {   
         list($vendor, $type, $slug, $path) =
             ebxResolveAddonNamespace($this->argument('namespace'), $this->option('shared'));
 

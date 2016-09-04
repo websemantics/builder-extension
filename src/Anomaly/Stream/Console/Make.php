@@ -9,7 +9,7 @@ use Websemantics\EntityBuilderExtension\Anomaly\Stream\Console\Command\MakeStrea
 /**
  * Class Make.
  *
- * Overrides core Stream Make command to avoid conflic with Entity Builder.
+ * Overrides core Stream Make command to avoid conflic with Builder extension.
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io

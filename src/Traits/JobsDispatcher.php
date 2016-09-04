@@ -1,4 +1,4 @@
-<?php namespace Websemantics\EntityBuilderExtension\Traits;
+<?php namespace Websemantics\BuilderExtension\Traits;
 
 /**
  * Class JobsDispatcher.

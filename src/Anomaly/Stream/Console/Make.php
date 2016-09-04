@@ -1,10 +1,10 @@
-<?php namespace Websemantics\EntityBuilderExtension\Anomaly\Stream\Console;
+<?php namespace Websemantics\BuilderExtension\Anomaly\Stream\Console;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Anomaly\Streams\Platform\Addon\Addon;
 use Anomaly\Streams\Platform\Addon\AddonCollection;
-use Websemantics\EntityBuilderExtension\Traits\JobsDispatcher;
-use Websemantics\EntityBuilderExtension\Anomaly\Stream\Console\Command\MakeStream;
+use Websemantics\BuilderExtension\Traits\JobsDispatcher;
+use Websemantics\BuilderExtension\Anomaly\Stream\Console\Command\MakeStream;
 
 /**
  * Class Make.

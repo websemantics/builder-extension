@@ -1,19 +1,19 @@
-<?php namespace Websemantics\EntityBuilderExtension;
+<?php namespace Websemantics\BuilderExtension;
 
 use Anomaly\Streams\Platform\Addon\Extension\Extension;
 
 /**
- * Class EntityBuilderExtension
+ * Class BuilderExtension
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
  * @author    WebSemantics, Inc. <info@websemantics.ca>
  * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
  * @copyright 2012-2016 Web Semantics, Inc.
- * @package   Websemantics\EntityBuilderExtension
+ * @package   Websemantics\BuilderExtension
  */
 
-class EntityBuilderExtension extends Extension
+class BuilderExtension extends Extension
 {
 
 }

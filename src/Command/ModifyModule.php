@@ -1,8 +1,8 @@
-<?php namespace Websemantics\EntityBuilderExtension\Command;
+<?php namespace Websemantics\BuilderExtension\Command;
 
-use Websemantics\EntityBuilderExtension\Traits\FileProcessor;
-use Websemantics\EntityBuilderExtension\Parser\ModuleNameParser;
-use Websemantics\EntityBuilderExtension\Parser\VendorNameParser;
+use Websemantics\BuilderExtension\Traits\FileProcessor;
+use Websemantics\BuilderExtension\Parser\ModuleNameParser;
+use Websemantics\BuilderExtension\Parser\VendorNameParser;
 use Anomaly\Streams\Platform\Addon\Module\Module;
 
 /**
@@ -13,7 +13,7 @@ use Anomaly\Streams\Platform\Addon\Module\Module;
  * @author    WebSemantics, Inc. <info@websemantics.ca>
  * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
  * @copyright 2012-2016 Web Semantics, Inc.
- * @package   Websemantics\EntityBuilderExtension
+ * @package   Websemantics\BuilderExtension
  */
 
 class ModifyModule
@@ -37,7 +37,7 @@ class ModifyModule
     public function __construct(Module $module)
     {
         $this->module = $module;
-        $this->setFiles(app('Websemantics\EntityBuilderExtension\Filesystem\Filesystem'));
+        $this->setFiles(app('Websemantics\BuilderExtension\Filesystem\Filesystem'));
         $this->setParser(app('Anomaly\Streams\Platform\Support\Parser'));
     }
 

@@ -1,6 +1,6 @@
-<?php namespace Websemantics\EntityBuilderExtension\Traits;
+<?php namespace Websemantics\BuilderExtension\Traits;
 
-use Websemantics\EntityBuilderExtension\Parser\GenericPhpParser;
+use Websemantics\BuilderExtension\Parser\GenericPhpParser;
 
 /**
  * Class FileProcessor
@@ -10,7 +10,7 @@ use Websemantics\EntityBuilderExtension\Parser\GenericPhpParser;
  * @author    WebSemantics, Inc. <info@websemantics.ca>
  * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
  * @copyright 2012-2016 Web Semantics, Inc.
- * @package   Websemantics\EntityBuilderExtension
+ * @package   Websemantics\BuilderExtension
  */
 
 trait FileProcessor

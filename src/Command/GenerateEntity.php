@@ -1,13 +1,13 @@
-<?php namespace Websemantics\EntityBuilderExtension\Command;
+<?php namespace Websemantics\BuilderExtension\Command;
 
 use Anomaly\Streams\Platform\Addon\Module\Module;
-use Websemantics\EntityBuilderExtension\Traits\TemplateProcessor;
-use Websemantics\EntityBuilderExtension\Parser\EntityNameParser;
-use Websemantics\EntityBuilderExtension\Parser\ModuleNameParser;
-use Websemantics\EntityBuilderExtension\Parser\VendorNameParser;
-use Websemantics\EntityBuilderExtension\Parser\NamespaceParser;
-use Websemantics\EntityBuilderExtension\Parser\SeedersParser;
-use Websemantics\EntityBuilderExtension\Parser\EntityLabelParser;
+use Websemantics\BuilderExtension\Traits\TemplateProcessor;
+use Websemantics\BuilderExtension\Parser\EntityNameParser;
+use Websemantics\BuilderExtension\Parser\ModuleNameParser;
+use Websemantics\BuilderExtension\Parser\VendorNameParser;
+use Websemantics\BuilderExtension\Parser\NamespaceParser;
+use Websemantics\BuilderExtension\Parser\SeedersParser;
+use Websemantics\BuilderExtension\Parser\EntityLabelParser;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 
 /**
@@ -18,7 +18,7 @@ use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
  * @author    WebSemantics, Inc. <info@websemantics.ca>
  * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
  * @copyright 2012-2016 Web Semantics, Inc.
- * @package   Websemantics\EntityBuilderExtension
+ * @package   Websemantics\BuilderExtension
  */
 
 class GenerateEntity
@@ -49,7 +49,7 @@ class GenerateEntity
     {
         $this->stream = $stream;
         $this->module = $module;
-        $this->setFiles(app('Websemantics\EntityBuilderExtension\Filesystem\Filesystem'));
+        $this->setFiles(app('Websemantics\BuilderExtension\Filesystem\Filesystem'));
         $this->setParser(app('Anomaly\Streams\Platform\Support\Parser'));
     }
 

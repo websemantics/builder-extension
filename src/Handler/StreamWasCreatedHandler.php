@@ -1,9 +1,9 @@
-<?php namespace Websemantics\EntityBuilderExtension\Handler;
+<?php namespace Websemantics\BuilderExtension\Handler;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Anomaly\Streams\Platform\Stream\Event\StreamWasCreated;
 use Anomaly\Streams\Platform\Addon\Module\ModuleCollection;
-use Websemantics\EntityBuilderExtension\Command\GenerateEntity;
+use Websemantics\BuilderExtension\Command\GenerateEntity;
 
 /**
  * Class StreamWasCreatedHandler
@@ -13,7 +13,7 @@ use Websemantics\EntityBuilderExtension\Command\GenerateEntity;
  * @author    WebSemantics, Inc. <info@websemantics.ca>
  * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
  * @copyright 2012-2016 Web Semantics, Inc.
- * @package   Websemantics\EntityBuilderExtension
+ * @package   Websemantics\BuilderExtension
  */
 
 class StreamWasCreatedHandler {

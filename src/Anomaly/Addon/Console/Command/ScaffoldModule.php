@@ -1,6 +1,6 @@
-<?php namespace Websemantics\EntityBuilderExtension\Anomaly\Addon\Console\Command;
+<?php namespace Websemantics\BuilderExtension\Anomaly\Addon\Console\Command;
 
-use Websemantics\EntityBuilderExtension\Traits\FileProcessor;
+use Websemantics\BuilderExtension\Traits\FileProcessor;
 use Anomaly\Streams\Platform\Application\Application;
 use Illuminate\Filesystem\Filesystem;
 use Packaged\Figlet\Figlet;
@@ -13,7 +13,7 @@ use Packaged\Figlet\Figlet;
  * @author    WebSemantics, Inc. <info@websemantics.ca>
  * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
  * @copyright 2012-2016 Web Semantics, Inc.
- * @package   Websemantics\EntityBuilderExtension\Anomaly\Addon\Console\Command
+ * @package   Websemantics\BuilderExtension\Anomaly\Addon\Console\Command
  */
 
 class ScaffoldModule

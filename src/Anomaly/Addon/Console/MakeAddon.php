@@ -1,10 +1,10 @@
-<?php namespace Websemantics\EntityBuilderExtension\Anomaly\Addon\Console;
+<?php namespace Websemantics\BuilderExtension\Anomaly\Addon\Console;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Websemantics\EntityBuilderExtension\Anomaly\Addon\Console\Command\ScaffoldModule;
+use Websemantics\BuilderExtension\Anomaly\Addon\Console\Command\ScaffoldModule;
 use Anomaly\Streams\Platform\Addon\AddonManager;
 use Anomaly\Streams\Platform\Addon\Console\Command\MakeAddonPaths;
-use Websemantics\EntityBuilderExtension\Traits\JobsDispatcher;
+use Websemantics\BuilderExtension\Traits\JobsDispatcher;
 
 /**
  * Class MakeAddon.
@@ -29,7 +29,7 @@ use Websemantics\EntityBuilderExtension\Traits\JobsDispatcher;
      * Execute the console command.
      */
     public function fire(AddonManager $addons)
-    {   
+    {
         list($vendor, $type, $slug, $path) =
             ebxResolveAddonNamespace($this->argument('namespace'), $this->option('shared'));
 

@@ -1,10 +1,10 @@
-<?php namespace Websemantics\EntityBuilderExtension\Handler;
+<?php namespace Websemantics\BuilderExtension\Handler;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Anomaly\Streams\Platform\Addon\Module\Event\ModuleWasInstalled;
 use Anomaly\Streams\Platform\Addon\Module\ModuleCollection;
-use Websemantics\EntityBuilderExtension\Command\ModifyModule;
-use Websemantics\EntityBuilderExtension\Command\SeedModule;
+use Websemantics\BuilderExtension\Command\ModifyModule;
+use Websemantics\BuilderExtension\Command\SeedModule;
 
 /**
  * Class ModuleWasInstalledHandler
@@ -14,7 +14,7 @@ use Websemantics\EntityBuilderExtension\Command\SeedModule;
  * @author    WebSemantics, Inc. <info@websemantics.ca>
  * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
  * @copyright 2012-2016 Web Semantics, Inc.
- * @package   Websemantics\EntityBuilderExtension
+ * @package   Websemantics\BuilderExtension
  */
 
 class ModuleWasInstalledHandler {

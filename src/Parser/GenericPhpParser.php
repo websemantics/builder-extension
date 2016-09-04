@@ -1,8 +1,8 @@
 <?php
 
-namespace Websemantics\EntityBuilderExtension\Parser;
+namespace Websemantics\BuilderExtension\Parser;
 
-use Websemantics\EntityBuilderExtension\PhpParser\Helper;
+use Websemantics\BuilderExtension\PhpParser\Helper;
 use PhpParser\PrettyPrinter\Standard;
 use PhpParser\Lexer;
 use PhpParser\ParserFactory;

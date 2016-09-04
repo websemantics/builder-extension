@@ -1,5 +1,5 @@
 {
-    "name": "websemantics/entity_builder-extension",
+    "name": "websemantics/builder-extension",
     "minimum-stability": "dev",
     "type": "streams-addon",
     "description": "Addons scaffolder for maximum coding pleasure",
@@ -28,7 +28,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Websemantics\\EntityBuilderExtension\\": "src/",
+            "Websemantics\\BuilderExtension\\": "src/",
             "PhpParser\\": "vendor/nikic/php-parser/lib/PhpParser/"
         },
         "files": [

@@ -1,8 +1,9 @@
 0.9.2
   date: 2016-09-04
   changes:
+  - Rebranded as `Pyro Builder`, a generic Addons scaffolder,
   - Remove references to `SelfHandling` interface for Laravel 5.3/Pyro 3.1,
-  - Rename to `Builder`, a generic Addons scaffolder,
+  - Other fixes for Laravel 5.3
 
 0.9.1
   date: 2016-08-16

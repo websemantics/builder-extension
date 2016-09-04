@@ -1,6 +1,6 @@
 <?php
 
-namespace Websemantics\EntityBuilderExtension\PhpParser;
+namespace Websemantics\BuilderExtension\PhpParser;
 
 use PhpParser\Node\Expr\ArrayItem;
 use PhpParser\Node\Scalar\String_;

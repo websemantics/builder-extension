@@ -1,6 +1,6 @@
-<?php namespace Websemantics\EntityBuilderExtension\Anomaly\Stream\Console\Command;
+<?php namespace Websemantics\BuilderExtension\Anomaly\Stream\Console\Command;
 
-use Websemantics\EntityBuilderExtension\Parser\EntityNameParser;
+use Websemantics\BuilderExtension\Parser\EntityNameParser;
 use Illuminate\Filesystem\Filesystem;
 
 /**
@@ -11,7 +11,7 @@ use Illuminate\Filesystem\Filesystem;
  * @author    WebSemantics, Inc. <info@websemantics.ca>
  * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
  * @copyright 2012-2016 Web Semantics, Inc.
- * @package   Websemantics\EntityBuilderExtension\Anomaly\Stream\Console\Command
+ * @package   Websemantics\BuilderExtension\Anomaly\Stream\Console\Command
  */
 
 class MakeStream

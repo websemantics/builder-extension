@@ -1,4 +1,4 @@
-<?php namespace Websemantics\EntityBuilderExtension\Filesystem;
+<?php namespace Websemantics\BuilderExtension\Filesystem;
 
 use FilesystemIterator;
 use Anomaly\Streams\Platform\Support\Parser;
@@ -13,7 +13,7 @@ use Anomaly\Streams\Platform\Support\Parser;
  * @author    WebSemantics, Inc. <info@websemantics.ca>
  * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
  * @copyright 2012-2016 Web Semantics, Inc.
- * @package   Websemantics\EntityBuilderExtension
+ * @package   Websemantics\BuilderExtension
  */
 
 class Filesystem extends \Illuminate\Filesystem\Filesystem

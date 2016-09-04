@@ -1,15 +1,15 @@
-<?php namespace Websemantics\EntityBuilderExtension\Command;
+<?php namespace Websemantics\BuilderExtension\Command;
 
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 use Anomaly\Streams\Platform\Assignment\AssignmentModel;
-use Websemantics\EntityBuilderExtension\Traits\TemplateProcessor;
+use Websemantics\BuilderExtension\Traits\TemplateProcessor;
 use Anomaly\Streams\Platform\Addon\Module\Module;
-use Websemantics\EntityBuilderExtension\Parser\EntityNameParser;
-use Websemantics\EntityBuilderExtension\Parser\ModuleNameParser;
-use Websemantics\EntityBuilderExtension\Parser\VendorNameParser;
-use Websemantics\EntityBuilderExtension\Parser\NamespaceParser;
-use Websemantics\EntityBuilderExtension\Parser\AssignmentSlugParser;
-use Websemantics\EntityBuilderExtension\Parser\AssignmentLabelParser;
+use Websemantics\BuilderExtension\Parser\EntityNameParser;
+use Websemantics\BuilderExtension\Parser\ModuleNameParser;
+use Websemantics\BuilderExtension\Parser\VendorNameParser;
+use Websemantics\BuilderExtension\Parser\NamespaceParser;
+use Websemantics\BuilderExtension\Parser\AssignmentSlugParser;
+use Websemantics\BuilderExtension\Parser\AssignmentLabelParser;
 
 /**
  * Class ModifyEntity. Generates code for assignements
@@ -19,7 +19,7 @@ use Websemantics\EntityBuilderExtension\Parser\AssignmentLabelParser;
  * @author    WebSemantics, Inc. <info@websemantics.ca>
  * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
  * @copyright 2012-2016 Web Semantics, Inc.
- * @package   Websemantics\EntityBuilderExtension
+ * @package   Websemantics\BuilderExtension
  */
 
 class ModifyEntity
@@ -63,7 +63,7 @@ class ModifyEntity
         $this->module = $module;
         $this->stream = $stream;
         $this->assignment = $assignment;
-        $this->setFiles(app('Websemantics\EntityBuilderExtension\Filesystem\Filesystem'));
+        $this->setFiles(app('Websemantics\BuilderExtension\Filesystem\Filesystem'));
         $this->setParser(app('Anomaly\Streams\Platform\Support\Parser'));
     }
 

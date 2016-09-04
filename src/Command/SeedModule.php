@@ -1,6 +1,5 @@
 <?php namespace Websemantics\EntityBuilderExtension\Command;
 
-use Illuminate\Contracts\Bus\SelfHandling;
 use Anomaly\Streams\Platform\Addon\Module\Module;
 
 /**
@@ -14,7 +13,7 @@ use Anomaly\Streams\Platform\Addon\Module\Module;
  * @package   Websemantics\EntityBuilderExtension
  */
 
-class SeedModule implements SelfHandling
+class SeedModule
 {
     /**
      * The module class.

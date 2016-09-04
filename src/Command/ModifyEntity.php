@@ -2,7 +2,6 @@
 
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 use Anomaly\Streams\Platform\Assignment\AssignmentModel;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Websemantics\EntityBuilderExtension\Traits\TemplateProcessor;
 use Anomaly\Streams\Platform\Addon\Module\Module;
 use Websemantics\EntityBuilderExtension\Parser\EntityNameParser;
@@ -23,7 +22,7 @@ use Websemantics\EntityBuilderExtension\Parser\AssignmentLabelParser;
  * @package   Websemantics\EntityBuilderExtension
  */
 
-class ModifyEntity implements SelfHandling
+class ModifyEntity
 {
   use TemplateProcessor;
 

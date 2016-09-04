@@ -1,6 +1,5 @@
 <?php namespace Websemantics\EntityBuilderExtension\Command;
 
-use Illuminate\Contracts\Bus\SelfHandling;
 use Anomaly\Streams\Platform\Addon\Module\Module;
 use Websemantics\EntityBuilderExtension\Traits\TemplateProcessor;
 use Websemantics\EntityBuilderExtension\Parser\EntityNameParser;
@@ -22,7 +21,7 @@ use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
  * @package   Websemantics\EntityBuilderExtension
  */
 
-class GenerateEntity implements SelfHandling
+class GenerateEntity
 {
   use TemplateProcessor;
 

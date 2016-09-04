@@ -2,7 +2,6 @@
 
 use Websemantics\EntityBuilderExtension\Traits\FileProcessor;
 use Anomaly\Streams\Platform\Application\Application;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Filesystem\Filesystem;
 use Packaged\Figlet\Figlet;
 
@@ -17,7 +16,7 @@ use Packaged\Figlet\Figlet;
  * @package   Websemantics\EntityBuilderExtension\Anomaly\Addon\Console\Command
  */
 
-class ScaffoldModule implements SelfHandling
+class ScaffoldModule
 {
     use FileProcessor;
 

@@ -1,7 +1,6 @@
 <?php namespace Websemantics\EntityBuilderExtension\Anomaly\Stream\Console\Command;
 
 use Websemantics\EntityBuilderExtension\Parser\EntityNameParser;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Filesystem\Filesystem;
 
 /**
@@ -15,7 +14,7 @@ use Illuminate\Filesystem\Filesystem;
  * @package   Websemantics\EntityBuilderExtension\Anomaly\Stream\Console\Command
  */
 
-class MakeStream implements SelfHandling
+class MakeStream
 {
     /**
      * The entity name lower case

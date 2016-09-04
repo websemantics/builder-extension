@@ -1,3 +1,8 @@
+0.9.2
+  date: 2016-09-04
+  changes:
+  - Remove references to `SelfHandling` interface for Laravel 5.3/Pyro 3.1,
+
 0.9.1
   date: 2016-08-16
   changes:

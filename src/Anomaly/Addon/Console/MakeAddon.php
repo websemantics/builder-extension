@@ -14,7 +14,7 @@ use Websemantics\EntityBuilderExtension\Traits\JobsDispatcher;
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
  * @author    WebSemantics, Inc. <info@websemantics.ca>
- * @author    Adnan Sagar <msagar@websemantics.ca>
+ * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
  * @copyright 2012-2016 Web Semantics, Inc.
  */
  class MakeAddon extends \Anomaly\Streams\Platform\Addon\Console\MakeAddon

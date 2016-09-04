@@ -30,7 +30,7 @@
             |   o \   | U |   | |   | |_    | o )   | _|    |   /   - -- -        `------'
             |_____/   |___|   |_|   |___|   |__/    |___|   |_|\_\    
 
-            Modules & Streams Scaffolder for Maximum Coding Pleasure         - -- --------- -- -
+            Addons scaffolder for maximum coding pleasure         - -- --------- -- -
 
 
 ```                                                                                             

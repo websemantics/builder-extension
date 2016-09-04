@@ -2,7 +2,7 @@
     "name": "websemantics/entity_builder-extension",
     "minimum-stability": "dev",
     "type": "streams-addon",
-    "description": "Modules & Streams Scaffolder for Maximum Coding Pleasure",
+    "description": "Addons scaffolder for maximum coding pleasure",
     "keywords": [
         "ibuild",
         "streams",

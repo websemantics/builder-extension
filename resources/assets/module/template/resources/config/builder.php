@@ -25,7 +25,7 @@ return [
   |    \_   \   | _|    | |   | |   | |  | \\ |  ( |_n  \_ \
   |    |____/   |___|   |_|   |_|   |_|  |_|\_|   \__/  |__/
   |
-  |   Modules & Streams Scaffolder for Maximum Coding Pleasure          - -- --------- -- -
+  |   Addons scaffolder for maximum coding pleasure          - -- --------- -- -
   |
   */
 

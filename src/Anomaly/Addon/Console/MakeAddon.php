@@ -27,7 +27,7 @@ use Websemantics\EntityBuilderExtension\Traits\JobsDispatcher;
      * Execute the console command.
      */
     public function fire(AddonManager $addons)
-    {
+    {   dd('Die Here');
         list($vendor, $type, $slug, $path) =
             ebxResolveAddonNamespace($this->argument('namespace'), $this->option('shared'));
 

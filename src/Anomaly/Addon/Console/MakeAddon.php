@@ -5,6 +5,7 @@ use Websemantics\BuilderExtension\Anomaly\Addon\Console\Command\ScaffoldModule;
 use Anomaly\Streams\Platform\Addon\AddonManager;
 use Anomaly\Streams\Platform\Addon\Console\Command\MakeAddonPaths;
 use Websemantics\BuilderExtension\Traits\JobsDispatcher;
+use Github\Client;
 
 /**
  * Class MakeAddon.
@@ -30,6 +31,27 @@ use Websemantics\BuilderExtension\Traits\JobsDispatcher;
      */
     public function fire(AddonManager $addons)
     {
+
+      $this->info('Available templates');
+      $this->error('Stuff this on the screen');
+      $this->line('Display this on the screen');
+
+      $headers = ['Name', 'Email'];
+      $users = \Anomaly\UsersModule\User\UserModel::all(['display_name', 'email'])->toArray();
+      $this->table($headers, $users);
+
+      dd('hhh');
+      die();
+
+      $client = new Client();
+      $repos = $client->api('user')->repositories('pyrocms-templates');
+
+      foreach ($repos as $repo) {
+        dump($repo['description']);
+      }
+
+      die();
+
         list($vendor, $type, $slug, $path) =
             ebxResolveAddonNamespace($this->argument('namespace'), $this->option('shared'));
 

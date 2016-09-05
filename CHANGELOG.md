@@ -1,7 +1,10 @@
 0.9.2
   date: 2016-09-04
   changes:
-  - Rebranded as `Pyro Builder`, a generic Addons scaffolder,
+  - Rebrand as `Pyro Builder`, a generic Addons scaffolder,
+  - Link to a PyroCMS Addon registry via Github,
+  - Add `builder:list` command to list available Builder addon templates,
+  - Add `builder:init` command to create a PyroCMS addon from a Builder template,
   - Remove references to `SelfHandling` interface for Laravel 5.3/Pyro 3.1,
   - Other fixes for Laravel 5.3
 

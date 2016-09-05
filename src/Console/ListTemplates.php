@@ -42,28 +42,27 @@ class ListTemplates extends Spinner
 
       $type = $this->argument('addon');
       $filter = in_array($type, config('streams::addons.types'));
-      $bar = $this->createProgressIndicator();
       $logo = view('websemantics.extension.builder::logo')->render();
 
-      $this->output->block($logo, null, 'fg=green;bg=black', ' ', true);
+      $this->output->block($logo, null, 'fg=green;bg=black');
 
+       /* Get a list of all repositories from pyrocms templates registry */
+       $repos = $client->api('user')->repositories(config("websemantics.extension.builder::templates.username"));
 
-      $bar->start('Loading Builder templates ...');
-
-      /* Worin In Progres */
-      // $repos = $client->api('user')->repositories(config("websemantics.extension.builder::templates.username"));
-
-      $repos = [
-        [
-          'name' => 'default-module',
-          'description' => 'Default module template for Pyro Builder Extension'
-        ],
-        [
-          'name' => 'default-extension',
-          'description' => 'Default extension template for Pyro Builder Extension',
-          'type' => 'Extension'
-        ]
-      ];
+      /* To test,
+        $repos = [
+          [
+            'name' => 'default-module',
+            'description' => 'Default module template for Pyro Builder Extension',
+            'type' => 'Module'
+          ],
+          [
+            'name' => 'default-extension',
+            'description' => 'Default extension template for Pyro Builder Extension',
+            'type' => 'Extension'
+          ]
+        ];
+      */
 
       $repos = collect($repos)->map(function ($values) {
         return array_only($values, ['name', 'description']);
@@ -71,9 +70,10 @@ class ListTemplates extends Spinner
           return $filter ? str_contains($repo['name'], "-$type") : true;
       });
 
-      $bar->finish('Available ' . title_case($filter ? "$type " : ''). 'templates                ');
+      $this->output->block('Available ' . title_case($filter ? "$type " : ''). 'templates                ',
+                           null, 'fg=yellow;bg=black');
+
       $headers = ['Name', 'Description'];
       $this->table($headers, $repos);
-
     }
 }

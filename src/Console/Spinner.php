@@ -9,6 +9,18 @@ use Symfony\Component\Console\Helper\ProgressIndicator;
  * Keeps the user entertained while waiting,
  * Credits: https://github.com/helloIAmPau/node-spinner
  *
+ * EXAMPLE:
+ *
+ *  $bar = $this->createProgressIndicator($spinnerTemplate);
+ *  $bar->start('Loading ...');
+ *
+ *  while () {
+ *     $bar->advance();
+ *  }
+ *
+ *  $bar->finish('Done');
+ *
+ *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
  * @author    WebSemantics, Inc. <info@websemantics.ca>

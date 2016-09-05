@@ -6,7 +6,7 @@ use Github\Client;
 /**
  * Class List.
  *
- * List available builder templates.
+ * List available Builder templates.
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
@@ -50,6 +50,7 @@ class ListTemplates extends Spinner
 
       $bar->start('Loading Builder templates ...');
 
+      /* Worin In Progres */
       // $repos = $client->api('user')->repositories(config("websemantics.extension.builder::templates.username"));
 
       $repos = [
@@ -69,7 +70,6 @@ class ListTemplates extends Spinner
       })->filter(function ($repo) use ($filter, $type){
           return $filter ? str_contains($repo['name'], "-$type") : true;
       });
-
 
       $bar->finish('Available ' . title_case($filter ? "$type " : ''). 'templates                ');
       $headers = ['Name', 'Description'];

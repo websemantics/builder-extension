@@ -1,8 +1,5 @@
 <?php namespace Websemantics\BuilderExtension\Console;
 
-use Illuminate\Console\Command;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-
 /**
  * Class List.
  *
@@ -17,8 +14,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 
 class MakeTemplates extends Registry
 {
-  use DispatchesJobs;
-
   /**
    * The console command signature.
    *
@@ -32,13 +27,13 @@ class MakeTemplates extends Registry
    *
    * @var string
    */
-  protected $description = 'Create a Builder template';
+  protected $description = 'Create an addon from a Builder template';
 
   /**
    * Execute the console command.
    */
   public function handle(Client $client)
   {
-    /* Work in progress */
+
   }
 }

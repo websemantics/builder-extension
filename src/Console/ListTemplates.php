@@ -1,8 +1,5 @@
 <?php namespace Websemantics\BuilderExtension\Console;
 
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Github\Client;
-
 /**
  * Class List.
  *
@@ -17,8 +14,6 @@ use Github\Client;
 
 class ListTemplates extends Registry
 {
-    use DispatchesJobs;
-
     /**
      * The console command signature.
      *
@@ -32,12 +27,12 @@ class ListTemplates extends Registry
      *
      * @var string
      */
-    protected $description = 'List available Builder templates';
+    protected $description = 'List available Builder addon templates';
 
     /**
      * Execute the console command.
      */
-    public function handle(Client $client)
+    public function handle()
     {
       $this->list($this->argument('addon'));
     }

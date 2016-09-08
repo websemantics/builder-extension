@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Helper Functions
+ * Builder extension helper functions
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
@@ -12,12 +12,40 @@
  */
 
  /**
-  * Resolve a namespace to its parts, {vendor}.{type}.{slug} and the addon {path}
+  * Shorthand for config helper
   *
-  * @param    string $namespace
-  * @param    boolean $shared
-  * @return   array [$vendor, $type, $slug, $path]
+  * @param    string $path, config path
+  * @return   *,
   */
+
+  if (!function_exists('bxConfig')) {
+    function bxConfig($path)
+    {
+      return config('websemantics.extension.builder::' . $path);
+    }
+  }
+
+  /**
+   * Shorthand for view helper
+   *
+   * @param    string $path, view path
+   * @return   Illuminate\View\View
+   */
+
+   if (!function_exists('bxView')) {
+     function bxView($path)
+     {
+       return view('websemantics.extension.builder::' . $path);
+     }
+   }
+
+  /**
+   * Resolve a namespace to its parts, {vendor}.{type}.{slug} and the addon {path}
+   *
+   * @param    string $namespace
+   * @param    boolean $shared
+   * @return   array [$vendor, $type, $slug, $path]
+   */
 
   if (!function_exists('bxResolveAddonNamespace')) {
     function bxResolveAddonNamespace($namespace, $shared)
@@ -196,7 +224,7 @@
           $extends_repository = explode('\\', $extends_repository);
           return (!empty($extends_repository))?"extends " . end($extends_repository) . " ":"";
         }
-        
+
         return '';
       }
   }

@@ -15,7 +15,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  * @copyright 2012-2016 Web Semantics, Inc.
  */
 
-class InitTemplates extends Command
+class MakeTemplates extends Command
 {
   use DispatchesJobs;
 
@@ -25,7 +25,7 @@ class InitTemplates extends Command
    * @var string
    */
 
-  protected $signature = 'builder:init {template : template name}';
+  protected $signature = 'builder:make {template : template name}';
 
   /**
    * The console command description.

@@ -49,21 +49,6 @@ class ListTemplates extends Spinner
        /* Get a list of all repositories from pyrocms templates registry */
        $repos = $client->api('user')->repositories(config("websemantics.extension.builder::templates.username"));
 
-      /* To test,
-        $repos = [
-          [
-            'name' => 'default-module',
-            'description' => 'Default module template for Pyro Builder Extension',
-            'type' => 'Module'
-          ],
-          [
-            'name' => 'default-extension',
-            'description' => 'Default extension template for Pyro Builder Extension',
-            'type' => 'Extension'
-          ]
-        ];
-      */
-
       $repos = collect($repos)->map(function ($values) {
         return array_only($values, ['name', 'description']);
       })->filter(function ($repo) use ($filter, $type){

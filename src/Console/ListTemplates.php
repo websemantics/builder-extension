@@ -15,7 +15,7 @@ use Github\Client;
  * @copyright 2012-2016 Web Semantics, Inc.
  */
 
-class ListTemplates extends Spinner
+class ListTemplates extends Registry
 {
     use DispatchesJobs;
 
@@ -39,26 +39,6 @@ class ListTemplates extends Spinner
      */
     public function handle(Client $client)
     {
-
-      $type = $this->argument('addon');
-      $filter = in_array($type, config('streams::addons.types'));
-      $logo = view('websemantics.extension.builder::logo')->render();
-
-      $this->output->block($logo, null, 'fg=green;bg=black');
-
-       /* Get a list of all repositories from pyrocms templates registry */
-       $repos = $client->api('user')->repositories(config("websemantics.extension.builder::templates.username"));
-
-      $repos = collect($repos)->map(function ($values) {
-        return array_only($values, ['name', 'description']);
-      })->filter(function ($repo) use ($filter, $type){
-          return $filter ? str_contains($repo['name'], "-$type") : true;
-      });
-
-      $this->output->block('Available ' . title_case($filter ? "$type " : ''). 'templates                ',
-                           null, 'fg=yellow;bg=black');
-
-      $headers = ['Name', 'Description'];
-      $this->table($headers, $repos);
+      $this->list($this->argument('addon'));
     }
 }

@@ -65,12 +65,12 @@ class GenerateEntity
         $entityPath = __DIR__.'/../../resources/assets/entity';
         $modulePath = __DIR__.'/../../resources/assets/module';
 
-        $namespace_folder = ebxGetNamespaceFolderTemplate($module);
+        $namespace_folder = bxGetNamespaceFolderTemplate($module);
 
         $data = $this->getTemplateData($module, $stream);
 
         /* uncomment the array entries to protect these files from being overwriten or add your own */
-        $this->files->setAvoidOverwrite(ebxGetAvoidOverwrite($module, [
+        $this->files->setAvoidOverwrite(bxGetAvoidOverwrite($module, [
               // $data['module_name'] . 'ModuleSeeder.php',
               // $data['module_name'] . 'Module.php',
               // $data['module_name'] . 'ModuleServiceProvider.php',
@@ -156,10 +156,10 @@ class GenerateEntity
         $vendorName = (new VendorNameParser())->parse($module);
 
         /* check if we are using a grouping folder for all generated entities with the same namespace */
-        $namespace_folder = ebxGetNamespaceFolder($module, $namespace);
+        $namespace_folder = bxGetNamespaceFolder($module, $namespace);
 
         return [
-            'docblock' => ebxGetDocblock($module),
+            'docblock' => bxGetDocblock($module),
             'namespace' => $namespace,
             'seeder_data' => (new SeedersParser())->parse($module, $stream),
             'namespace_folder' => $namespace_folder,
@@ -175,8 +175,8 @@ class GenerateEntity
             'entity_name_plural' => str_plural($entityName),
             'entity_name_lower' => strtolower($entityName),
             'entity_name_lower_plural' => strtolower(str_plural($entityName)),
-            'extends_repository' => ebxExtendsRepository($module),
-            'extends_repository_use' => ebxExtendsRepositoryUse($module),
+            'extends_repository' => bxExtendsRepository($module),
+            'extends_repository_use' => bxExtendsRepositoryUse($module),
 
         ];
     }

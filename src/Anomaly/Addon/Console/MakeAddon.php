@@ -31,7 +31,7 @@ use Websemantics\BuilderExtension\Traits\JobsDispatcher;
     public function fire(AddonManager $addons)
     {
         list($vendor, $type, $slug, $path) =
-            ebxResolveAddonNamespace($this->argument('namespace'), $this->option('shared'));
+            bxResolveAddonNamespace($this->argument('namespace'), $this->option('shared'));
 
         if ($type === 'module') {
             $this->dispatch(new ScaffoldModule($vendor, $type, $slug, $path));

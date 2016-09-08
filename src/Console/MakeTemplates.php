@@ -15,7 +15,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  * @copyright 2012-2016 Web Semantics, Inc.
  */
 
-class MakeTemplates extends Command
+class MakeTemplates extends Registry
 {
   use DispatchesJobs;
 

@@ -81,25 +81,25 @@ class ModifyEntity
         $source = $entity.'/code/{namespace}/';
 
         /* get the field config params from build.php */
-        $fieldConfig = ebxGetFieldConfig(
+        $fieldConfig = bxGetFieldConfig(
             $module,
             $stream->getNamespace(),
             $assignment->getFieldSlug()
         );
 
         /* set a list of files to avoid overwrite */
-        $this->files->setAvoidOverwrite(ebxGetAvoidOverwrite($module));
+        $this->files->setAvoidOverwrite(bxGetAvoidOverwrite($module));
 
         /* get the template data */
         $data = $this->getTemplateData($module, $stream, $assignment, $fieldConfig);
 
         /* get the namespace destination folder, if any! */
-        $namespaceFolder = ebxGetNamespaceFolder($module, $data['namespace'], true);
+        $namespaceFolder = bxGetNamespaceFolder($module, $data['namespace'], true);
 
         $entityDest = $destination.'/src/'.$namespaceFolder.$data['entity_name'];
 
         /* get the assigned class name, i.e. TextFieldType */
-        $fieldTypeClassName = ebxGetFieldTypeClassName($assignment);
+        $fieldTypeClassName = bxGetFieldTypeClassName($assignment);
 
         /* (1) process the form builder class */
         if (!$fieldConfig['hide_field']) {
@@ -178,7 +178,7 @@ class ModifyEntity
         $namespace = (new NamespaceParser())->parse($stream);
 
         /* wheather we use a grouping folder for all streams with the same namespace */
-        $namespaceFolder = ebxGetNamespaceFolder($module, $namespace);
+        $namespaceFolder = bxGetNamespaceFolder($module, $namespace);
 
         return [
             'namespace' => $namespace,
@@ -189,7 +189,7 @@ class ModifyEntity
             'field_slug' => $fieldSlug,
             'field_label' => $fieldLabel,
             'relation_name' => camel_case($fieldSlug),
-            'null_relationship_entry' => ebxNullRelationshipEntry($module),
+            'null_relationship_entry' => bxNullRelationshipEntry($module),
             'column_template' => $fieldConfig['column_template'],
         ];
     }

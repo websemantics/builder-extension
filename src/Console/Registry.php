@@ -83,6 +83,54 @@ class Registry extends Command
     }
 
     /**
+     * Get cache key
+     *
+     * @return string
+     */
+    protected function getCacheKey($key)
+    {
+        return md5("builder_extension_$key");
+    }
+
+    /**
+     * Get the Builder storage path (create if it doesn't exist)
+     *
+     * @param string path,
+     * @return string
+     */
+    protected function getBuilderPath($path = '')
+    {
+        $path = $this->application->getStoragePath(bxConfig('config.path') . ($path?"/$path":""));
+
+        /* make sure the parent folder is a directory or parent directory is a folder */
+        if (!$this->files->isDirectory($parent = dirname($path))) {
+            $this->files->makeDirectory($parent, 0777, true);
+        }
+
+        return $path;
+    }
+
+    /**
+     * Flush cache and delete all templates
+     *
+     * @return void
+     */
+    protected function flush($key)
+    {
+      app('cache')->forget($key);
+    }
+
+    /**
+     * Print ascii logo
+     *
+     * @return void
+     */
+    protected function logo()
+    {
+      $this->block(bxView('ascii.logo')->render(), 'cyan');
+    }
+
+    /**
      * Print a block.
      *
      * @param string $message, user message
@@ -96,81 +144,82 @@ class Registry extends Command
     }
 
     /**
-     * Get cache key
-     *
-     * @return string
-     */
-    protected function getCacheKey($key)
-    {
-        return md5("builder_extension_$key");
-    }
-
-    /**
-     * Get the builder public path (create if it doesn't exist)
-     *
-     * @param string path,
-     * @return string
-     */
-    protected function getBuilderPath($path = '')
-    {
-        $path = $this->application->getStoragePath(bxConfig('config.path') . ($path?"/$path":""));
-
-        /*
-          make sure the parent folder is a directory or vice versa (parent directory is a folder)
-        */
-        if (!$this->files->isDirectory($parent = dirname($path))) {
-            $this->files->makeDirectory($parent, 0777, true);
-        }
-
-        return $path;
-    }
-
-    /**
-     * Flush cache and delete all templates
-     *
-     * @return void
-     */
-    public function flush($key)
-    {
-      app('cache')->forget($key);
-    }
-
-    /**
-     * Print ascii logo
-     *
-     * @return void
-     */
-    public function logo()
-    {
-      $this->block(bxView('ascii.logo')->render(), 'yellow');
-    }
-
-    /**
      * Download a Builder template from the registery,
      *
      * @param string $template, the selected template
-     * @return boolean
+     * @param boolean $force, force download if the template already exists
+     * @return boolean (true = success)
      */
-    public function download($template)
+    protected function download($template, $force = false)
     {
-      $dist = $this->getBuilderPath($template);
-      $src = bxRender(bxConfig('config.archive'), [
-                          'registry' => $this->registry,
-                          'template' => $template]);
+      $dist = $this->getBuilderPath();
+      $path = "$dist/$template";
 
-      /* get a temp folder to download the template zip to */
-      $tmp = $this->getBuilderPath(bxConfig('config.tmp'));
+      if(!$this->files->exists($path) || $force){
+        $bar = $this->createProgressIndicator();
+        $src = bxRender(bxConfig('config.archive'), [
+                            'registry' => $this->registry,
+                            'template' => $template]);
 
-      try {
-        /* download the template zip file, uncompress and remove */
-        $this->files->put($tmp, file_get_contents($src));
-        $this->zip->open($tmp);
-        $this->zip->extractTo($dist);
-        $this->files->deleteDirectory(dirname($tmp));
-      } catch (\Github\Exception\RuntimeException $e) {
-        $this->error('Builder template not found');
-        return false;
+        /* get a temp folder to download the template zip to */
+        $tmp = $this->getBuilderPath(bxConfig('config.tmp'));
+
+        try {
+          /* download the template zip file, show progress, uncompress and remove */
+          $bar->start(" Downloading '$template' ... ");
+
+          $this->files->put($tmp, file_get_contents($src, false, stream_context_create([],
+          ['notification' => function($notification_code) use($bar){
+              if(in_array($notification_code,[STREAM_NOTIFY_CONNECT,STREAM_NOTIFY_PROGRESS])){
+                $bar->advance();
+              }
+            }])));
+          $this->zip->open($tmp);
+          $this->zip->extractTo($dist);
+          $this->zip->close();
+          $this->files->moveDirectory("$path-master", $path, true);
+          $this->files->deleteDirectory(dirname($tmp));
+          $bar->finish(" Download '$template' was successful                               ");
+        } catch (\Github\Exception\RuntimeException $e) {
+          $this->error('Builder template not found');
+          return false;
+        }
+      } else {
+        $this->comment("Builder template '$template' already exists. \nUse --force option to get a fresh copy.");
       }
       return true;
+    }
+
+    /**
+     * Load the template metadata
+     *
+     * @param string $template, the Builder template
+     * @return array
+     */
+    protected function getTemplateMetadata($template)
+    {
+      if($this->files->exists($path = $this->getBuilderPath("$template/builder.json"))){
+        return json_decode($this->files->get($path), true);
+      }
+      return [];
+    }
+
+      /**
+       * Parse Builder template schema, interact with the user and return the context object,
+       *
+       * @param string $metadata, the Builder metadata
+       * @return array
+       */
+      protected function getContext($metadata = [])
+      {
+      $context = [];
+
+      foreach (isset($metadata['schema']) ? $metadata['schema']:[] as $property => $schema) {
+        $question = $schema['label'] ? : $property;
+        $default = isset($schema['default']) ? $schema['default'] : null;
+        $context[$property] = $this->ask($question.'?', $default);
+      }
+
+      return $context;
     }
 }

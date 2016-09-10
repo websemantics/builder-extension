@@ -44,6 +44,7 @@ class ListTemplates extends Registry
         Get a list of all repositories from cache or builder templates registry.
         Return all addon types or filter on $type provided
       */
+      $this->info("Retrieving a list of avilable $title");
 
       $repos = app('cache')->remember($this->getCacheKey($this->registry), $this->ttl,
         function() use($type, $filter) {
@@ -57,10 +58,9 @@ class ListTemplates extends Registry
       );
 
       if($repos->count() > 0) {
-        $this->block("Available $title");
         $this->table(['Name', 'Description'], $repos);
       } else {
-        $this->block("There are no available $title");
+        $this->comment("There are no available $title");
       }
     }
 }

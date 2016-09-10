@@ -1,7 +1,5 @@
 <?php namespace Websemantics\BuilderExtension\Console;
 
-//   - Support for interactive user experience
-
 /**
  * Class List.
  *
@@ -22,7 +20,7 @@ class MakeTemplates extends Registry
    * @var string
    */
 
-  protected $signature = 'builder:make {template : template name}';
+  protected $signature = 'builder:make {template : template name} {--force}';
 
   /**
    * The console command description.
@@ -32,14 +30,17 @@ class MakeTemplates extends Registry
   protected $description = 'Create an addon from a Builder template';
 
   /**
-   * download and make an addon from a Builder template.
+   * Download and make an addon from a Builder template.
+   * --force will re-download an exist template
    */
   public function handle()
   {
     $this->logo();
 
-    if($this->download($this->argument('template'))){
-      $this->info('yayyyy');
+    if($this->download($template = $this->argument('template'), $this->option('force'))){
+      /* read the Builder template metadata and return the templaet context object */
+      $context = $this->getContext($this->getTemplateMetadata($template));
+      dd($context);
     }
   }
 }

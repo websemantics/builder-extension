@@ -5,7 +5,7 @@ use Symfony\Component\Console\Helper\ProgressIndicator;
 /**
   * Spinner trait.
   *
-  * Keeps the user entertained while waiting,
+  * Indicates progress during file download so the user doesn't get bored, .. Keep'em happy!
   * Credits: https://github.com/helloIAmPau/node-spinner
   *
   * EXAMPLE:

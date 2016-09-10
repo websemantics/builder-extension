@@ -1,5 +1,9 @@
 <?php namespace Websemantics\BuilderExtension\Console;
 
+use Illuminate\Console\Command;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Websemantics\BuilderExtension\Traits\Registry;
+
 /**
  * Class Clear Templates.
  *
@@ -12,8 +16,12 @@
  * @copyright 2012-2016 Web Semantics, Inc.
  */
 
-class ClearTemplates extends Registry
+class ClearTemplates extends Command
 {
+
+  use DispatchesJobs;
+  use Registry;
+
   /**
    * The console command signature.
    *
@@ -35,6 +43,8 @@ class ClearTemplates extends Registry
   public function handle()
   {
     $this->logo();
+
+    // dd(app('commands'));
 
     // app('cache')->forget($key);
     $this->files->cleanDirectory($this->getBuilderPath());

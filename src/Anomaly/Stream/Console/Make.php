@@ -4,7 +4,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Anomaly\Streams\Platform\Addon\Addon;
 use Anomaly\Streams\Platform\Addon\AddonCollection;
 use Websemantics\BuilderExtension\Traits\JobsDispatcher;
-use Websemantics\BuilderExtension\Anomaly\Stream\Console\Command\MakeStream;
+use Websemantics\BuilderExtension\Command\MakeStream;
 
 /**
  * Class Make.

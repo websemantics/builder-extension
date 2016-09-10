@@ -77,7 +77,7 @@ class ScaffoldModule
         $path = $this->path;
         // $modulePath = __DIR__.'/../../../../../resources/assets/module';
 
-        $modulePath = '/EUsers/adnan/apps/auto-pyro/storage/streams/default/builder/default-module/template/module';
+        $modulePath = '/Users/adnan/apps/auto-pyro/storage/streams/default/builder/default-module/template/module';
 
 
 

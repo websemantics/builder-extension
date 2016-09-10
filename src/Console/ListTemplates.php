@@ -1,5 +1,9 @@
 <?php namespace Websemantics\BuilderExtension\Console;
 
+use Illuminate\Console\Command;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Websemantics\BuilderExtension\Traits\Registry;
+
 /**
  * Class List.
  *
@@ -12,8 +16,11 @@
  * @copyright 2012-2016 Web Semantics, Inc.
  */
 
-class ListTemplates extends Registry
+class ListTemplates extends Command
 {
+    use DispatchesJobs;
+    use Registry;
+
     /**
      * The console command signature.
      *

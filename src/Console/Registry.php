@@ -8,6 +8,15 @@ use Anomaly\Streams\Platform\Application\Application;
 use Websemantics\BuilderExtension\Filesystem\Filesystem;
 
 /**
+ * Class Registry.
+ *
+ * Use a Github organization as the Builder registry.
+ *
+ * @link      http://websemantics.ca/ibuild
+ * @link      http://ibuild.io
+ * @author    WebSemantics, Inc. <info@websemantics.ca>
+ * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
+ * @copyright 2012-2016 Web Semantics, Inc.
  */
 
 class Registry extends Command
@@ -15,7 +24,7 @@ class Registry extends Command
     use DispatchesJobs;
 
     /*
-    * This might be useful in the future for multi-threading
+    * Indicate progress during download so the user doesn't get bored, .. Keep'em happy!
     */
     use Spinner;
 
@@ -71,15 +80,16 @@ class Registry extends Command
       parent::__construct();
 
       /* Check for ZipArchive */
-      if (!class_exists('ZipArchive'))
-          throw new Exception('Error, ZipArchive class is not avilable');
+      if (!class_exists('ZipArchive')){
+        throw new Exception('Error, ZipArchive class is not avilable, unable to recover!');        
+      }
 
       $this->zip = new \ZipArchive();
       $this->client = $client;
       $this->files = $files;
       $this->application = $application;
-      $this->registry = bxConfig('config.registry');
-      $this->ttl = bxConfig('config.ttl');
+      $this->registry = _config('config.registry');
+      $this->ttl = _config('config.ttl');
     }
 
     /**
@@ -100,7 +110,7 @@ class Registry extends Command
      */
     protected function getBuilderPath($path = '')
     {
-        $path = $this->application->getStoragePath(bxConfig('config.path') . ($path?"/$path":""));
+        $path = $this->application->getStoragePath(_config('config.path') . ($path?"/$path":""));
 
         /* make sure the parent folder is a directory or parent directory is a folder */
         if (!$this->files->isDirectory($parent = dirname($path))) {
@@ -127,7 +137,7 @@ class Registry extends Command
      */
     protected function logo()
     {
-      $this->block(bxView('ascii.logo')->render(), 'cyan');
+      $this->block(_view('ascii.logo')->render(), 'cyan');
     }
 
     /**
@@ -157,12 +167,12 @@ class Registry extends Command
 
       if(!$this->files->exists($path) || $force){
         $bar = $this->createProgressIndicator();
-        $src = bxRender(bxConfig('config.archive'), [
+        $src = _render(_config('config.archive'), [
                             'registry' => $this->registry,
                             'template' => $template]);
 
         /* get a temp folder to download the template zip to */
-        $tmp = $this->getBuilderPath(bxConfig('config.tmp'));
+        $tmp = $this->getBuilderPath(_config('config.tmp'));
 
         try {
           /* download the template zip file, show progress, uncompress and remove */

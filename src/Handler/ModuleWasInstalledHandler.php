@@ -43,11 +43,11 @@ class ModuleWasInstalledHandler {
 	{
 		$module = $event->getModule();
 
-		if(count(bxGetNamespaces($module)) > 0){
+		if(count(_getNamespaces($module)) > 0){
 
         $this->dispatch(new ModifyModule($module));
 
-        if(bxSeedingOption($module) === 'yes'){
+        if(_seedingOption($module) === 'yes'){
     			$this->dispatch(new SeedModule($module));
     		}
 		}

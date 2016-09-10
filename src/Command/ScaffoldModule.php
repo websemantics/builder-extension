@@ -1,4 +1,4 @@
-<?php namespace Websemantics\BuilderExtension\Anomaly\Addon\Console\Command;
+<?php namespace Websemantics\BuilderExtension\Command;
 
 use Websemantics\BuilderExtension\Traits\FileProcessor;
 use Anomaly\Streams\Platform\Application\Application;
@@ -75,7 +75,11 @@ class ScaffoldModule
     public function handle(Filesystem $filesystem, Application $application)
     {
         $path = $this->path;
-        $modulePath = __DIR__.'/../../../../../resources/assets/module';
+        // $modulePath = __DIR__.'/../../../../../resources/assets/module';
+
+        $modulePath = '/EUsers/adnan/apps/auto-pyro/storage/streams/default/builder/default-module/template/module';
+
+
 
         $data = $this->getTemplateData();
 

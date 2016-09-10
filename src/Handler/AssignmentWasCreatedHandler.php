@@ -44,7 +44,7 @@ class AssignmentWasCreatedHandler {
 		$stream = $assignment->getStream();
 
 		foreach ($this->modules as $module) {
-			if(in_array($stream->getNamespace(), bxGetNamespaces($module))){
+			if(in_array($stream->getNamespace(), _getNamespaces($module))){
      		 $this->dispatch(new ModifyEntity($module, $stream, $assignment));
 			}
 

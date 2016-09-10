@@ -81,25 +81,25 @@ class ModifyEntity
         $source = $entity.'/code/{namespace}/';
 
         /* get the field config params from build.php */
-        $fieldConfig = bxGetFieldConfig(
+        $fieldConfig = _getFieldConfig(
             $module,
             $stream->getNamespace(),
             $assignment->getFieldSlug()
         );
 
         /* set a list of files to avoid overwrite */
-        $this->files->setAvoidOverwrite(bxGetAvoidOverwrite($module));
+        $this->files->setAvoidOverwrite(_getAvoidOverwrite($module));
 
         /* get the template data */
         $data = $this->getTemplateData($module, $stream, $assignment, $fieldConfig);
 
         /* get the namespace destination folder, if any! */
-        $namespaceFolder = bxGetNamespaceFolder($module, $data['namespace'], true);
+        $namespaceFolder = _getNamespaceFolder($module, $data['namespace'], true);
 
         $entityDest = $destination.'/src/'.$namespaceFolder.$data['entity_name'];
 
         /* get the assigned class name, i.e. TextFieldType */
-        $fieldTypeClassName = bxGetFieldTypeClassName($assignment);
+        $fieldTypeClassName = _getFieldTypeClassName($assignment);
 
         /* (1) process the form builder class */
         if (!$fieldConfig['hide_field']) {
@@ -178,7 +178,7 @@ class ModifyEntity
         $namespace = (new NamespaceParser())->parse($stream);
 
         /* wheather we use a grouping folder for all streams with the same namespace */
-        $namespaceFolder = bxGetNamespaceFolder($module, $namespace);
+        $namespaceFolder = _getNamespaceFolder($module, $namespace);
 
         return [
             'namespace' => $namespace,
@@ -189,7 +189,7 @@ class ModifyEntity
             'field_slug' => $fieldSlug,
             'field_label' => $fieldLabel,
             'relation_name' => camel_case($fieldSlug),
-            'null_relationship_entry' => bxNullRelationshipEntry($module),
+            'null_relationship_entry' => _nullRelationshipEntry($module),
             'column_template' => $fieldConfig['column_template'],
         ];
     }

@@ -38,9 +38,12 @@ class MakeTemplates extends Registry
     $this->logo();
 
     if($this->download($template = $this->argument('template'), $this->option('force'))){
-      /* read the Builder template metadata and return the templaet context object */
+
+      /*
+        read the Builder template metadata and return the templaet context object
+      */
       $context = $this->getContext($this->getTemplateMetadata($template));
-      dd($context);
+
     }
   }
 }

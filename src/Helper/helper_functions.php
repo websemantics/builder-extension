@@ -19,8 +19,8 @@
   * @return   string
   */
 
-  if (!function_exists('bxRender')) {
-    function bxRender($template, $context)
+  if (!function_exists('_render')) {
+    function _render($template, $context)
     {
       return (new \Twig_Environment(new \Twig_Loader_String))->render($template, $context);
     }
@@ -33,8 +33,8 @@
    * @return   *,
    */
 
-   if (!function_exists('bxConfig')) {
-     function bxConfig($path)
+   if (!function_exists('_config')) {
+     function _config($path)
      {
        return config('websemantics.extension.builder::' . $path);
      }
@@ -47,8 +47,8 @@
    * @return   Illuminate\View\View
    */
 
-   if (!function_exists('bxView')) {
-     function bxView($path)
+   if (!function_exists('_view')) {
+     function _view($path)
      {
        return view('websemantics.extension.builder::' . $path);
      }
@@ -62,8 +62,8 @@
    * @return   array [$vendor, $type, $slug, $path]
    */
 
-  if (!function_exists('bxResolveAddonNamespace')) {
-    function bxResolveAddonNamespace($namespace, $shared)
+  if (!function_exists('_resolveAddonNamespace')) {
+    function _resolveAddonNamespace($namespace, $shared)
     {
       $shared = $shared ? 'shared' : app('Anomaly\Streams\Platform\Application\Application')->getReference();
 
@@ -91,8 +91,8 @@
    * @return   boolean
    */
 
-   if (!function_exists('bxIsAssociative')) {
-     function bxIsAssociative($array)
+   if (!function_exists('_isAssociative')) {
+     function _isAssociative($array)
      {
          return ($array !== array_values($array));
      }
@@ -105,10 +105,10 @@
   * @return   array
   */
 
-  if (!function_exists('bxGetNamespaces')) {
-      function bxGetNamespaces($module){
+  if (!function_exists('_getNamespaces')) {
+      function _getNamespaces($module){
         $namespaces = array_get(config($module->getNamespace('builder')), 'namespaces', []);
-        return bxIsAssociative($namespaces) ? array_keys($namespaces) : $namespaces;
+        return _isAssociative($namespaces) ? array_keys($namespaces) : $namespaces;
       }
   }
 
@@ -121,8 +121,8 @@
   * @return   array [$hide_column, $hide_field, $column_template]
   */
 
-  if (!function_exists('bxGetFieldConfig')) {
-      function bxGetFieldConfig($module, $namespace_slug, $field_slug){
+  if (!function_exists('_getFieldConfig')) {
+      function _getFieldConfig($module, $namespace_slug, $field_slug){
         $namespaces = array_get(config($module->getNamespace('builder')), 'namespaces', []);
         $namespace = array_get($namespaces, $namespace_slug, []);
         $field = array_get($namespace, $field_slug, []);
@@ -144,8 +144,8 @@
   * @return   string
   */
 
-  if (!function_exists('bxGetNamespaceFolder')) {
-      function bxGetNamespaceFolder($module, $namespace, $forward = false){
+  if (!function_exists('_getNamespaceFolder')) {
+      function _getNamespaceFolder($module, $namespace, $forward = false){
         $namespace = ($forward) ? "$namespace/": "$namespace\\";
 
         $namespaces = array_get(config($module->getNamespace('builder')), 'namespaces', []);
@@ -162,8 +162,8 @@
   * @return   string
   */
 
-  if (!function_exists('bxGetNamespaceFolderTemplate')) {
-      function bxGetNamespaceFolderTemplate($module){
+  if (!function_exists('_getNamespaceFolderTemplate')) {
+      function _getNamespaceFolderTemplate($module){
         return array_get(config($module->getNamespace('builder')),
                             'namespace_folder', true) ? "" : "{namespace}/";
       }
@@ -176,8 +176,8 @@
   * @return   string
   */
 
-  if (!function_exists('bxGetAvoidOverwrite')) {
-      function bxGetAvoidOverwrite($module, $extra = []){
+  if (!function_exists('_getAvoidOverwrite')) {
+      function _getAvoidOverwrite($module, $extra = []){
         return array_merge(array_get(config($module->getNamespace('builder')),
                             'avoid_overwrite', []),$extra);
       }
@@ -190,8 +190,8 @@
   * @return   string
   */
 
-  if (!function_exists('bxSeedingOption')) {
-      function bxSeedingOption($module){
+  if (!function_exists('_seedingOption')) {
+      function _seedingOption($module){
         return array_get(config($module->getNamespace('builder')), 'seeding', 'no');
       }
   }
@@ -203,8 +203,8 @@
   * @return   string
   */
 
-  if (!function_exists('bxGetDocblock')) {
-      function bxGetDocblock($module){
+  if (!function_exists('_getDocblock')) {
+      function _getDocblock($module){
         return array_get(config($module->getNamespace('builder')),
                             'docblock', '');
       }
@@ -216,8 +216,8 @@
   * @return   string
   */
 
-  if (!function_exists('bxNullRelationshipEntry')) {
-      function bxNullRelationshipEntry($module){
+  if (!function_exists('_nullRelationshipEntry')) {
+      function _nullRelationshipEntry($module){
         return array_get(config($module->getNamespace('builder')),
                             'null_relationship_entry',
                             '<span class="label label-default">null</span>');
@@ -230,8 +230,8 @@
   * @return   string
   */
 
-  if (!function_exists('bxExtendsRepository')) {
-      function bxExtendsRepository($module){
+  if (!function_exists('_extendsRepository')) {
+      function _extendsRepository($module){
         $extends_repository = array_get(config($module->getNamespace('builder')),
                             'extends_repository', '');
 
@@ -250,8 +250,8 @@
   * @return   string
   */
 
-  if (!function_exists('bxExtendsRepositoryUse')) {
-      function bxExtendsRepositoryUse($module){
+  if (!function_exists('_extendsRepositoryUse')) {
+      function _extendsRepositoryUse($module){
         $extends_repository =  array_get(config($module->getNamespace('builder')),
                             'extends_repository',null);
         return (!empty($extends_repository))? "use $extends_repository;":"";
@@ -267,8 +267,8 @@
   * @return   string
   */
 
-  if (!function_exists('bxGetFieldTypeClassName')) {
-      function bxGetFieldTypeClassName($assignment){
+  if (!function_exists('_getFieldTypeClassName')) {
+      function _getFieldTypeClassName($assignment){
         $fieldTypeClassName = get_class($assignment->getFieldType());
         return substr($fieldTypeClassName,strrpos($fieldTypeClassName, '\\') + 1);
       }

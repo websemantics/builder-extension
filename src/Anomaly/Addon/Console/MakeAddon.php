@@ -1,7 +1,7 @@
 <?php namespace Websemantics\BuilderExtension\Anomaly\Addon\Console;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Websemantics\BuilderExtension\Anomaly\Addon\Console\Command\ScaffoldModule;
+use Websemantics\BuilderExtension\Command\ScaffoldModule;
 use Anomaly\Streams\Platform\Addon\AddonManager;
 use Anomaly\Streams\Platform\Addon\Console\Command\MakeAddonPaths;
 use Websemantics\BuilderExtension\Traits\JobsDispatcher;
@@ -31,7 +31,7 @@ use Websemantics\BuilderExtension\Traits\JobsDispatcher;
     public function fire(AddonManager $addons)
     {
         list($vendor, $type, $slug, $path) =
-            bxResolveAddonNamespace($this->argument('namespace'), $this->option('shared'));
+            _resolveAddonNamespace($this->argument('namespace'), $this->option('shared'));
 
         if ($type === 'module') {
             $this->dispatch(new ScaffoldModule($vendor, $type, $slug, $path));

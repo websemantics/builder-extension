@@ -30,10 +30,37 @@ class ListTemplates extends Registry
     protected $description = 'List available Builder addon templates';
 
     /**
-     * Execute the console command.
+     * List the Builder's registery templates.
      */
     public function handle()
     {
-      $this->list($this->argument('addon'));
+      $this->logo();
+
+      $type = $this->argument('addon');
+      $filter = in_array($type, config('streams::addons.types'));
+      $title = title_case($filter ? "$type " : ''). 'templates                ';
+
+      /*
+        Get a list of all repositories from cache or builder templates registry.
+        Return all addon types or filter on $type provided
+      */
+
+      $repos = app('cache')->remember($this->getCacheKey($this->registry), $this->ttl,
+        function() use($type, $filter) {
+          return collect($this->client->api('user')->repositories($this->registry))
+            ->map(function ($values) {
+              return array_only($values, ['name', 'description']);
+            })->filter(function ($repo) use ($filter, $type){
+              return $filter ? str_contains($repo['name'], "-$type") : true;
+          });
+        }
+      );
+
+      if($repos->count() > 0) {
+        $this->block("Available $title");
+        $this->table(['Name', 'Description'], $repos);
+      } else {
+        $this->block("There are no available $title");
+      }
     }
 }

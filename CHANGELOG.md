@@ -3,6 +3,7 @@
   changes:
   - Rebrand as `Pyro Builder`, a generic Addons scaffolder,
   - Link to a PyroCMS Addon registry via Github,
+  - Add `builder:clear` command to clear Builder cache and stored templates,
   - Add `builder:list` command to list available Builder addon templates,
   - Add `builder:make` command to create a PyroCMS addon from a Builder template,
   - Cache Api calls to avoid Github Api Rate Limit,

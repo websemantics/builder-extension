@@ -72,8 +72,8 @@ class Filesystem extends \Illuminate\Filesystem\Filesystem
 					}
 			}
 
-      /* write the file if it does not already exists or
-      if was not guraded from override */
+      /* Write the file if it does not already exists or
+      if was not guraded from overwrite */
 
       if(!$this->exists($path) || !$avoid) {
         return parent::put($path, $contents, $lock);

@@ -12,18 +12,33 @@
  */
 
  /**
-  * Shorthand for config helper
+  * Render a string view template
   *
-  * @param    string $path, config path
-  * @return   *,
+  * @param    string $template, view template
+  * @param    object/array $context, values
+  * @return   string
   */
 
-  if (!function_exists('bxConfig')) {
-    function bxConfig($path)
+  if (!function_exists('bxRender')) {
+    function bxRender($template, $context)
     {
-      return config('websemantics.extension.builder::' . $path);
+      return (new \Twig_Environment(new \Twig_Loader_String))->render($template, $context);
     }
   }
+
+  /**
+   * Shorthand for config helper
+   *
+   * @param    string $path, config path
+   * @return   *,
+   */
+
+   if (!function_exists('bxConfig')) {
+     function bxConfig($path)
+     {
+       return config('websemantics.extension.builder::' . $path);
+     }
+   }
 
   /**
    * Shorthand for view helper

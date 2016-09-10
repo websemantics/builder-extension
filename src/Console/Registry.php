@@ -4,6 +4,8 @@ use Github\Client;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Websemantics\BuilderExtension\Traits\Spinner;
+use Anomaly\Streams\Platform\Application\Application;
+use Websemantics\BuilderExtension\Filesystem\Filesystem;
 
 /**
  */
@@ -16,6 +18,13 @@ class Registry extends Command
     * This might be useful in the future for multi-threading
     */
     use Spinner;
+
+    /**
+     * The zip archive
+     *
+     * @var ZipArchive
+     */
+    protected $zip;
 
     /**
      * The Github api client.
@@ -39,15 +48,36 @@ class Registry extends Command
     protected $ttl = false;
 
     /**
+     * The application instance
+     *
+     * @var Application
+     */
+    protected $application;
+
+    /**
+     * The file system
+     *
+     * @var Filesystem
+     */
+    protected $files;
+
+    /**
      * Create a new console command instance.
      *
      * @return void
      */
-    public function __construct(Client $client)
+    public function __construct(Application $application, Filesystem $files, Client $client)
     {
       parent::__construct();
 
+      /* Check for ZipArchive */
+      if (!class_exists('ZipArchive'))
+          throw new Exception('Error, ZipArchive class is not avilable');
+
+      $this->zip = new \ZipArchive();
       $this->client = $client;
+      $this->files = $files;
+      $this->application = $application;
       $this->registry = bxConfig('config.registry');
       $this->ttl = bxConfig('config.ttl');
     }
@@ -76,49 +106,71 @@ class Registry extends Command
     }
 
     /**
-     * Flush cache
+     * Get the builder public path (create if it doesn't exist)
      *
-     * @return void
+     * @param string path,
+     * @return string
      */
-    public function flush()
+    protected function getBuilderPath($path = '')
     {
-      app('cache')->forget($this->registry);
+        $path = $this->application->getStoragePath(bxConfig('config.path') . ($path?"/$path":""));
+
+        /*
+          make sure the parent folder is a directory or vice versa (parent directory is a folder)
+        */
+        if (!$this->files->isDirectory($parent = dirname($path))) {
+            $this->files->makeDirectory($parent, 0777, true);
+        }
+
+        return $path;
     }
 
     /**
-     * List the Builder's registery templates.
+     * Flush cache and delete all templates
      *
-     * @param string $type, addon type
+     * @return void
      */
-    public function list($type)
+    public function flush($key)
     {
-      $filter = in_array($type, config('streams::addons.types'));
-      $title = title_case($filter ? "$type " : ''). 'templates                ';
-      $client = $this->client;
+      app('cache')->forget($key);
+    }
 
-      $this->block(bxView('ascii.logo')->render(), 'green');
+    /**
+     * Print ascii logo
+     *
+     * @return void
+     */
+    public function logo()
+    {
+      $this->block(bxView('ascii.logo')->render(), 'yellow');
+    }
 
-      /*
-        Get a list of all repositories from cache or builder templates registry.
-        Return all addon types or filter on $type provided  */
+    /**
+     * Download a Builder template from the registery,
+     *
+     * @param string $template, the selected template
+     * @return boolean
+     */
+    public function download($template)
+    {
+      $dist = $this->getBuilderPath($template);
+      $src = bxRender(bxConfig('config.archive'), [
+                          'registry' => $this->registry,
+                          'template' => $template]);
 
-      $repos = app('cache')->remember($this->getCacheKey($this->registry), $this->ttl,
-        function() use($type, $filter, $client) {
-          return collect($client->api('user')->repositories($this->registry))
-            ->map(function ($values) {
-            return array_only($values, ['name', 'description']);
-            })->filter(function ($repo) use ($filter, $type){
-              return $filter ? str_contains($repo['name'], "-$type") : true;
-          });
-        }
-      );
+      /* get a temp folder to download the template zip to */
+      $tmp = $this->getBuilderPath(bxConfig('config.tmp'));
 
-      if($repos->count() > 0) {
-        $this->block("Available $title");
-        $headers = ['Name', 'Description'];
-        $this->table($headers, $repos);
-      } else {
-        $this->block("There are no available $title");
+      try {
+        /* download the template zip file, uncompress and remove */
+        $this->files->put($tmp, file_get_contents($src));
+        $this->zip->open($tmp);
+        $this->zip->extractTo($dist);
+        $this->files->deleteDirectory(dirname($tmp));
+      } catch (\Github\Exception\RuntimeException $e) {
+        $this->error('Builder template not found');
+        return false;
       }
+      return true;
     }
 }

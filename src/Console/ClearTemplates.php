@@ -1,11 +1,9 @@
 <?php namespace Websemantics\BuilderExtension\Console;
 
-//   - Support for interactive user experience
-
 /**
- * Class List.
+ * Class Clear Templates.
  *
- * Create a Builder template.
+ * Flush the Builder cache and clear all templates
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
@@ -14,7 +12,7 @@
  * @copyright 2012-2016 Web Semantics, Inc.
  */
 
-class MakeTemplates extends Registry
+class ClearTemplates extends Registry
 {
   /**
    * The console command signature.
@@ -22,24 +20,24 @@ class MakeTemplates extends Registry
    * @var string
    */
 
-  protected $signature = 'builder:make {template : template name}';
+  protected $signature = 'builder:clear';
 
   /**
    * The console command description.
    *
    * @var string
    */
-  protected $description = 'Create an addon from a Builder template';
+  protected $description = "Clear Builder's cache and all stored templates";
 
   /**
-   * download and make an addon from a Builder template.
+   * Do it, now!
    */
   public function handle()
   {
     $this->logo();
 
-    if($this->download($this->argument('template'))){
-      $this->info('yayyyy');
-    }
+    // app('cache')->forget($key);
+    $this->files->cleanDirectory($this->getBuilderPath());
+    $this->info('Builder cache and all stored templates are cleared successfully');
   }
 }

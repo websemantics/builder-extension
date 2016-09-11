@@ -2,6 +2,7 @@
 
 use Websemantics\BuilderExtension\Traits\FileProcessor;
 use Anomaly\Streams\Platform\Application\Application;
+use Websemantics\BuilderExtension\Traits\Registry;
 use Illuminate\Filesystem\Filesystem;
 use Packaged\Figlet\Figlet;
 
@@ -19,6 +20,7 @@ use Packaged\Figlet\Figlet;
 class ScaffoldModule
 {
     use FileProcessor;
+    use Registry;
 
     /**
      * The addon path.
@@ -67,27 +69,22 @@ class ScaffoldModule
     /**
      * Handle the command.
      *
-     * @param Filesystem  $filesystem
-     * @param Application $application
-     *
      * @return string
      */
-    public function handle(Filesystem $filesystem, Application $application)
+    public function handle()
     {
         $path = $this->path;
         // $modulePath = __DIR__.'/../../../../../resources/assets/module';
 
         $modulePath = '/Users/adnan/apps/auto-pyro/storage/streams/default/builder/default-module/template/module';
 
-
-
         $data = $this->getTemplateData();
 
         /* Make module's folder */
-        $filesystem->makeDirectory($path, 0755, true, true);
+        $this->files->makeDirectory($path, 0755, true, true);
 
         /* Copy module template files */
-        $filesystem->parseDirectory($modulePath.'/template', $path.'/', $data);
+        $this->files->parseDirectory($modulePath.'/template', $path.'/', $data);
 
         return $path;
     }

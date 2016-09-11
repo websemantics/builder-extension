@@ -196,7 +196,7 @@ trait Registry
           return false;
         }
       } else {
-        $this->comment("Builder template '$template' already exists. \nUse --force option to get a fresh copy.");
+        $this->output->note("Builder template '$template' already exists. \nUse --force option to get a fresh copy.");
       }
       return true;
     }

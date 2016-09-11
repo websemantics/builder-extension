@@ -24,6 +24,25 @@ class Make extends \Anomaly\Streams\Platform\Stream\Console\Make
     }
 
     /**
+     * List of jobs to skip.
+     *
+     * @var  array  $skip
+     */
+    protected $skip = [
+      'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityCollection',
+      'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityController',
+      'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityFormBuilder',
+      'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityModel',
+      'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityModelInterface',
+      'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityObserver',
+      'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityPresenter',
+      'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityRepository',
+      'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityRepositoryInterface',
+      'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityRoutes',
+      'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityTableBuilder'
+    ];
+
+    /**
      * Execute the console command.
      */
     public function fire(AddonCollection $addons)

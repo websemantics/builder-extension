@@ -1,7 +1,7 @@
 <?php namespace Websemantics\BuilderExtension\Traits;
 
 /**
- * Class JobsDispatcher.
+ * Class IgnoreJobs.
  *
  * Override DispatchesJobs trait to avoid conflic with Builder extension.
  *
@@ -12,7 +12,7 @@
  * @copyright 2012-2016 Web Semantics, Inc.
  */
 
-trait JobsDispatcher
+trait IgnoreJobs
 {
   /**
    * List of jobs to skip.

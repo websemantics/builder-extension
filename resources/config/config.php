@@ -14,6 +14,18 @@ return [
 
       /*
       |--------------------------------------------------------------------------
+      | Default Module
+      |--------------------------------------------------------------------------
+      |
+      | The default Builder template used by make:addon command to generate
+      | a module that's compatible with the Builder extension entities 
+      |
+      |
+      */
+      'default-module' => env('BUILDER_DEFAULT_MODULE', 'default-module'),
+
+      /*
+      |--------------------------------------------------------------------------
       | Cache Minutes
       |--------------------------------------------------------------------------
       |

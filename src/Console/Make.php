@@ -1,9 +1,9 @@
-<?php namespace Websemantics\BuilderExtension\Anomaly\Stream\Console;
+<?php namespace Websemantics\BuilderExtension\Console;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Anomaly\Streams\Platform\Addon\Addon;
 use Anomaly\Streams\Platform\Addon\AddonCollection;
-use Websemantics\BuilderExtension\Traits\JobsDispatcher;
+use Websemantics\BuilderExtension\Traits\IgnoreJobs;
 use Websemantics\BuilderExtension\Command\MakeStream;
 
 /**
@@ -19,8 +19,8 @@ use Websemantics\BuilderExtension\Command\MakeStream;
  */
 class Make extends \Anomaly\Streams\Platform\Stream\Console\Make
 {
-    use DispatchesJobs, JobsDispatcher {
-       JobsDispatcher::dispatch insteadof DispatchesJobs;
+    use DispatchesJobs, IgnoreJobs {
+       IgnoreJobs::dispatch insteadof DispatchesJobs;
     }
 
     /**

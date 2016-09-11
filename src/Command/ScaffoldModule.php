@@ -2,8 +2,7 @@
 
 use Websemantics\BuilderExtension\Traits\FileProcessor;
 use Anomaly\Streams\Platform\Application\Application;
-use Websemantics\BuilderExtension\Traits\Registry;
-use Illuminate\Filesystem\Filesystem;
+use Websemantics\BuilderExtension\Filesystem\Filesystem;
 use Packaged\Figlet\Figlet;
 
 /**
@@ -20,7 +19,6 @@ use Packaged\Figlet\Figlet;
 class ScaffoldModule
 {
     use FileProcessor;
-    use Registry;
 
     /**
      * The addon path.
@@ -53,17 +51,21 @@ class ScaffoldModule
     /**
      * Create a new ScaffoldModule instance.
      *
-     * @param         $vendor
-     * @param         $type
-     * @param         $slug
-     * @param         path
+     * @param string, $vendor
+     * @param string, $type
+     * @param string, $slug
+     * @param string, $path
+     * @param string, $src, Builder default-module template path
+     * @param array, $context, Builder template context/data object/array
      */
-    public function __construct($vendor, $type, $slug, $path)
+    public function __construct($vendor, $type, $slug, $path, $src, $context)
     {
-        $this->path = $path;
-        $this->slug = $slug;
-        $this->type = $type;
         $this->vendor = $vendor;
+        $this->type = $type;
+        $this->slug = $slug;
+        $this->path = $path;
+        $this->src = $src;
+        $this->context = $context;
     }
 
     /**
@@ -71,22 +73,17 @@ class ScaffoldModule
      *
      * @return string
      */
-    public function handle()
+    public function handle(Filesystem $files)
     {
-        $path = $this->path;
-        // $modulePath = __DIR__.'/../../../../../resources/assets/module';
-
-        $modulePath = '/Users/adnan/apps/auto-pyro/storage/streams/default/builder/default-module/template/module';
-
         $data = $this->getTemplateData();
 
         /* Make module's folder */
-        $this->files->makeDirectory($path, 0755, true, true);
+        $files->makeDirectory($this->path, 0755, true, true);
 
         /* Copy module template files */
-        $this->files->parseDirectory($modulePath.'/template', $path.'/', $data);
+        $files->parseDirectory($this->src.'/template', $this->path.'/', $data);
 
-        return $path;
+        return $this->path;
     }
 
     /**

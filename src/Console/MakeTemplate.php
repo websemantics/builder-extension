@@ -2,7 +2,10 @@
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 use Websemantics\BuilderExtension\Traits\Registry;
+use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
 
 /**
  * Class List.
@@ -22,12 +25,12 @@ class MakeTemplate extends Command
   use Registry;
 
   /**
-   * The console command signature.
+   * The console command name.
    *
    * @var string
    */
 
-  protected $signature = 'builder:make {template : template name} {--force}';
+  protected $name = 'builder:make';
 
   /**
    * The console command description.
@@ -49,18 +52,44 @@ class MakeTemplate extends Command
       /* read the Builder template metadata and return the templaet context object */
       $context = $this->getTemplateContext($template);
 
-      $this->dispatch(new ScaffoldTemplate(
-                         $context['vendor'],
-                         $this->getTemplateType($template),
-                         $context['slug'],
+      list($vendor, $type, $slug, $path) =
+        _resolveAddonNamespace(_render('{{ vendor }}.{{ type }}.{{ slug }}', $context),
+          $this->option('shared'));
+
+      $this->dispatch(new ScaffoldTemplate($vendor, $type, $slug,
                          $this->getBuilderPath('default-module'),
-                         $path,
-                         $context));
+                         $path,$context));
 
       $this->info("Builder has successfully created an addon from '$template'");
 
     } else {
-      $this->output->error('Builder template not found');
+      $this->output->error("Builder template not found. Use 'builder:list' command for a list of avilable templates.");
     }
+  }
+
+  /**
+   * Get the command arguments.
+   *
+   * @return array
+   */
+  protected function getArguments()
+  {
+      return [
+          ['template', InputArgument::REQUIRED, 'The template name to scaffold.'],
+      ];
+  }
+
+  /**
+   * Get the console command options.
+   *
+   * @return array
+   */
+  protected function getOptions()
+  {
+    return [
+      ['force', null, InputOption::VALUE_NONE, "Indicates whether to force a fresh download of the addon Builder's template."],
+      ['shared', null, InputOption::VALUE_NONE, 'Indicates if the addon should be created in shared addons.'],
+      ['migration', null, InputOption::VALUE_NONE, 'Indicates if a fields migration should be created.'],
+    ];
   }
 }

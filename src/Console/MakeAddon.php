@@ -52,22 +52,24 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
         _resolveAddonNamespace($this->argument('namespace'), $this->option('shared'));
 
       if ($type === 'module') {
-          $this->logo();
 
-      /* Get the default module template from the registry */
-      if ($this->download($template = _config('config.default-module'), $this->option('force'))) {
-          $context = $this->getTemplateContext($template,
-          ['vendor' => $vendor, 'slug' => $slug], true);
+        $this->logo();
 
-          $this->dispatch(new ScaffoldTemplate($vendor, $type, $slug,
-                              $this->getBuilderPath(_config('config.default-module')),
-                              $path, $context));
+        /* Get the default module template from the registry */
+        if ($this->download($template = _config('config.default-module'), $this->option('force'))) {
 
-          $this->info("Builder has successfully created a module addon from '$template'");
-      } else {
-          /* When things go wrong - which does happen sometimes - fallback to Pyro make:addon */
-        $this->ignoreJobs = false;
-      }
+            $context = $this->getTemplateContext($template,
+            ['vendor' => $vendor, 'slug' => $slug], true);
+
+            $this->dispatch(new ScaffoldTemplate($vendor, $type, $slug,
+                                $this->getBuilderPath(_config('config.default-module')),
+                                $path, $context));
+
+            $this->info("Builder has successfully created a module addon from '$template'");
+        } else {
+            /* When things go wrong - which does happen sometimes - fallback to Pyro make:addon */
+          $this->ignoreJobs = false;
+        }
       }
 
       parent::fire($addons);

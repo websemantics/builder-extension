@@ -222,7 +222,7 @@ trait Registry
      * @return string
      */
     protected function getTemplateType($template)
-    { 
+    {
         $parts = explode('-', $template);
         return array_pop($parts);
     }
@@ -248,6 +248,9 @@ trait Registry
             $context[$property] = ($ignore && isset($defults[$property])) ? $default :
                                $this->ask($question.'?', $default);
         }
+
+        /* Add the addon type */
+        $context['type'] = $this->getTemplateType($template);
 
         return $context;
     }

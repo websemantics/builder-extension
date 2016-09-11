@@ -35,16 +35,63 @@
 > This PyroCMS extension once installed becomes your coding companion to generate PyroCMS addons including modules, themes, extensions and [stream entities](#what-is-an-entity). In addition to scaffolding the initial code for the different types of addons, this extension uses a PHP parser to configure module classes with routes, bindings, language file entries and even seeding so you do not have to lift a finger. As a bonus, the scaffolded code for the module addon type comes with helper functions, default home page, language and other essential files.
 
 
-## What is an Entity
+## Getting Started
+
+This extension offers three new `artisan` commands,
+
+- `builder:list`
+
+This command will list all available addon templates,
+
+```bash
+php artisan builder:list
+```
+
+Result,
+
+```bash
++----------------+----------------------------------------------------+
+| Name           | Description                                        |
++----------------+----------------------------------------------------+
+| default-module | Default module template for Pyro Builder Extension |
++----------------+----------------------------------------------------+
+```
+
+- `builder:make`
+
+This command will download and scaffold the selected addon template. A downloaded
+template will be used by default unless the `--force` option is used to force
+a fresh copy of the template.
+
+```bash
+php artisan builder:make default-module --force
+```
+
+This command also supports `--shared` and `--migrate` options.
+
+- `builder:clear`
+
+This command will clear the Builder cache and delete all downloaded templates.
+
+```bash
+php artisan builder:clear
+```
+
+## Stream Entities
+
+In addition to scaffolding addons from Builder templates, this extension offers generating stream entities from migrations (working code).
 
 An Entity is a representation of an [Object Type](https://en.wikipedia.org/wiki/Object_type_(object-oriented_programming)) which may correspond with a Stream. For example, a **Person**, a **Company** or an **Animal** can all be represented by Streams and Entities.
 
 The code generated for an entity includes an `Entity Model` and `Repository`, `Plugin`, `Seeder`, `Contracts`, `Table Builder` and `Form Builder`.
 
+Please follow the next section for a better understanding of the process.
 
-## Getting Started
+## Build a Blog
 
-The following example is also available here, [blog](https://github.com/websemantics/blog),
+The following example is also available here, [blog](https://github.com/websemantics/blog). The idea is to build a module with the least amount of effort and understad how the Builder extension does its work.
+
+**TODO**, use Builder commands here, `builder:list`, `builder:make` and `builder:clear`.
 
 * Create and install a new PyroCMS project, let's call it `blogger`
 

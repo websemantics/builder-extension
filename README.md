@@ -39,7 +39,7 @@
 
 This extension offers three new `artisan` commands,
 
-- `builder:list`
+- List Templates
 
 This command will list all available addon templates,
 
@@ -57,7 +57,7 @@ Result,
 +----------------+----------------------------------------------------+
 ```
 
-- `builder:make`
+- Make Template
 
 This command will download and scaffold the selected addon template. A downloaded
 template will be used by default unless the `--force` option is used to force
@@ -69,7 +69,7 @@ php artisan builder:make default-module --force
 
 This command also supports `--shared` and `--migrate` options.
 
-- `builder:clear`
+- Clear
 
 This command will clear the Builder cache and delete all downloaded templates.
 

@@ -15,29 +15,30 @@
 trait IgnoreJobs
 {
     /**
-     * Optionally turn off jobs ignorance, hahah ...
+     * Optionally turn it off and start showing these jobs some respect,
      *
-     * @var  array  $skip
+     * @var  array  $ignore
      */
     protected $ignoreJobs = true;
 
     /**
-     * Expected list of jobs to skip to be defined in the class using this Trait,
+     * Expected list of qualified classes names for jobs to ignore,
+     * This is must be defined in the class using this Trait.
      *
-     * @var  array  $skip = [];
+     * @var  array  $ignore = [];
      */
 
     /**
-    * Dispatch a job to its appropriate handler yet skip some!
+    * Dispatch a job to its appropriate handler yet ignore some!
     *
     * @param  mixed  $job
     * @return mixed
     */
     protected function dispatch($job)
     {
-     foreach ($this->skip as $cls) {
+     foreach ($this->ignore as $cls) {
          if ($this->ignoreJobs && is_a($job, $cls)) {
-           return null;
+           return null; /* no hard feeling! */
          }
      }
      return app('Illuminate\Contracts\Bus\Dispatcher')->dispatch($job);

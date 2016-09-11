@@ -24,11 +24,12 @@ class Make extends \Anomaly\Streams\Platform\Stream\Console\Make
     }
 
     /**
-     * List of jobs to skip.
+     * List of jobs to give the cold shoulder,
      *
-     * @var  array  $skip
+     * @var  array  $ignore
      */
-    protected $skip = [
+
+    protected $ignore = [
       'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityCollection',
       'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityController',
       'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityFormBuilder',

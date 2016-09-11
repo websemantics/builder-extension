@@ -28,12 +28,12 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
     }
 
     /**
-     * List of jobs to skip.
+     * List of jobs to give the cold shoulder,
      *
-     * @var  array  $skip
+     * @var  array  $ignore
      */
 
-    protected $skip = [
+    protected $ignore = [
       'Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonClass',
       'Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonComposer',
       'Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonLang',
@@ -57,12 +57,10 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
             $context = $this->getContext($this->getTemplateMetadata($template),[
               'vendor' => $vendor], true);
             $this->dispatch(new ScaffoldTemplate($vendor, $type, $slug, $path,
-                                $this->getBuilderPath('default-module/template/module'), $context));
+                                $this->getBuilderPath('default-module'), $context));
             $this->info("Builder has successfully created a module addon from '$template'");
-
-            return;
         } else {
-          /* If anything goes wrong - which happens - fallback to Pyro make:addon */
+          /* If anything goes wrong - which happens sometimes - fallback to Pyro make:addon */
           $this->ignoreJobs = false;
         }
       }

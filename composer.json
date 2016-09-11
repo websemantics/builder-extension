@@ -30,7 +30,8 @@
     "autoload": {
         "psr-4": {
             "Websemantics\\BuilderExtension\\": "src/",
-            "PhpParser\\": "vendor/nikic/php-parser/lib/PhpParser/"
+            "PhpParser\\": "vendor/nikic/php-parser/lib/PhpParser/",
+            "Colors\\": "vendor/kevinlebrun/colors.php/src/Colors/"
         },
         "psr-0": {
             "Github\\": "vendor/vendor/knplabs/github-api/lib/"

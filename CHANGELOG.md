@@ -6,6 +6,7 @@
   - Add `builder:clear` command to clear Builder cache and stored templates,
   - Add `builder:list` command to list available Builder addon templates,
   - Add `builder:make` command to create a PyroCMS addon from a Builder template,
+  - Link `make:addon` command with `builder:make` command,
   - Cache Api calls to avoid Github Api Rate Limit,
   - Remove references to `SelfHandling` interface for Laravel 5.3/Pyro 3.1,
   - Other fixes for Laravel 5.3

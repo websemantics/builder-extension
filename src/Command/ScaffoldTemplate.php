@@ -6,7 +6,7 @@ use Websemantics\BuilderExtension\Filesystem\Filesystem;
 use Packaged\Figlet\Figlet;
 
 /**
- * Class ScaffoldModule.
+ * Class ScaffoldTemplate.
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
@@ -16,7 +16,7 @@ use Packaged\Figlet\Figlet;
  * @package   Websemantics\BuilderExtension\Anomaly\Addon\Console\Command
  */
 
-class ScaffoldModule
+class ScaffoldTemplate
 {
     use FileProcessor;
 
@@ -49,7 +49,7 @@ class ScaffoldModule
     private $vendor;
 
     /**
-     * Create a new ScaffoldModule instance.
+     * Create a new ScaffoldTemplate instance.
      *
      * @param string, $vendor
      * @param string, $type

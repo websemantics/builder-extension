@@ -5,7 +5,7 @@ use Anomaly\Streams\Platform\Addon\AddonManager;
 use Symfony\Component\Console\Input\InputOption;
 use Websemantics\BuilderExtension\Traits\Registry;
 use Websemantics\BuilderExtension\Traits\IgnoreJobs;
-use Websemantics\BuilderExtension\Command\ScaffoldModule;
+use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
 
 /**
  * Class MakeAddon.
@@ -56,7 +56,7 @@ use Websemantics\BuilderExtension\Command\ScaffoldModule;
             $this->logo();
             $context = $this->getContext($this->getTemplateMetadata($template),[
               'vendor' => $vendor], true);
-            $this->dispatch(new ScaffoldModule($vendor, $type, $slug, $path,
+            $this->dispatch(new ScaffoldTemplate($vendor, $type, $slug, $path,
                                 $this->getBuilderPath('default-module/template/module'), $context));
             $this->info("Builder has successfully created a module addon from '$template'");
 

@@ -219,16 +219,21 @@ trait Registry
        * Parse Builder template schema, interact with the user and return the context object,
        *
        * @param string $metadata, the Builder metadata
+       * @param string $defults, list of defults (override the schema defults)
+       * @param string $ignore, if true, ignore asking a question for the provided defults
        * @return array
        */
-      protected function getContext($metadata = [])
+      protected function getContext($metadata = [], $defults = [], $ignore = false)
       {
       $context = [];
 
       foreach (isset($metadata['schema']) ? $metadata['schema']:[] as $property => $schema) {
-        $question = $schema['label'] ? : $property;
-        $default = isset($schema['default']) ? $schema['default'] : null;
-        $context[$property] = $this->ask($question.'?', $default);
+
+          $question = !empty($schema['label']) ? $schema['label'] : $property;
+          $default = isset($defults[$property]) ? $defults[$property] :
+                    (isset($schema['default']) ? $schema['default'] : null);
+          $context[$property] = ($ignore && isset($defults[$property])) ? $default :
+                                 $this->ask($question.'?', $default);
       }
 
       return $context;

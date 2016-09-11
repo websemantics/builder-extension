@@ -75,13 +75,13 @@ class ScaffoldModule
      */
     public function handle(Filesystem $files)
     {
-        $data = $this->getTemplateData();
+        $context = array_merge($this->getTemplateData(), $this->context);
 
         /* Make module's folder */
         $files->makeDirectory($this->path, 0755, true, true);
 
         /* Copy module template files */
-        $files->parseDirectory($this->src.'/template', $this->path.'/', $data);
+        $files->parseDirectory($this->src.'/template', $this->path.'/', $context);
 
         return $this->path;
     }
@@ -100,15 +100,15 @@ class ScaffoldModule
         $vendorName = studly_case($this->vendor);
 
         return [
-            'description' => 'Describe your module here',
-            'docblock' => ' *',
-            'vendor_name' => $vendorName,
-            'vendor_name_lower' => strtolower($vendorName),
-            'namespace' => strtolower($moduleName),
-            'module_name' => $moduleName,
-            'date' => date("Y-n-j"),
-            'figlet_module_name' => Figlet::create($moduleName . ' Module', 'small' /* slant */),
-            'module_name_lower' => strtolower($moduleName),
+          'description' => 'Describe your module here',
+          'docblock' => ' *',
+          'vendor_name' => $vendorName,
+          'vendor_name_lower' => strtolower($vendorName),
+          'namespace' => strtolower($moduleName),
+          'module_name' => $moduleName,
+          'date' => date("Y-n-j"),
+          'figlet_module_name' => Figlet::create(strtoupper($moduleName . ' Module'), 'small' /* slant */),
+          'module_name_lower' => strtolower($moduleName),
         ];
     }
 }

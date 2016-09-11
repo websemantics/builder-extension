@@ -54,10 +54,12 @@ use Websemantics\BuilderExtension\Command\ScaffoldModule;
         if($this->download($template = _config('config.default-module'), $this->option('force'))){
 
             $this->logo();
-            $context = $this->getContext($this->getTemplateMetadata($template));
-            $this->dispatch(new ScaffoldModule($vendor, $type, $slug, $path, $this->getBuilderPath('default-module/template/module'), []));
+            $context = $this->getContext($this->getTemplateMetadata($template),[
+              'vendor' => $vendor], true);
+            $this->dispatch(new ScaffoldModule($vendor, $type, $slug, $path,
+                                $this->getBuilderPath('default-module/template/module'), $context));
             $this->info("Builder has successfully created a module addon from '$template'");
-            
+
             return;
         } else {
           /* If anything goes wrong - which happens - fallback to Pyro make:addon */

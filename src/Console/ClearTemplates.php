@@ -1,6 +1,5 @@
 <?php namespace Websemantics\BuilderExtension\Console;
 
-use Colors\Color;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Websemantics\BuilderExtension\Traits\Registry;

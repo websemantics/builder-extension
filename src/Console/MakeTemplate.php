@@ -57,7 +57,7 @@ class MakeTemplate extends Command
           $this->option('shared'));
 
       $this->dispatch(new ScaffoldTemplate($vendor, $type, $slug,
-                         $this->getBuilderPath('default-module'),
+                         $this->getBuilderPath($template),
                          $path,$context));
 
       $this->info("Builder has successfully created an addon from '$template'");

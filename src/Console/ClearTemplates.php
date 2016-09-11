@@ -19,7 +19,6 @@ use Websemantics\BuilderExtension\Traits\Registry;
 
 class ClearTemplates extends Command
 {
-
   use DispatchesJobs;
   use Registry;
 
@@ -44,28 +43,6 @@ class ClearTemplates extends Command
   public function handle()
   {
     $this->logo();
-
-//     // $this->output->writeln('<info>Title</info>');
-//     // $this->output->writeln('<error>Error</error>');
-//
-//     $this->output->getFormatter()->setStyle('p', new OutputFormatterStyle('magenta', 'black'));
-//     $this->output->getFormatter()->setStyle('t', new OutputFormatterStyle('white', 'black'));
-// // 61269e
-//     $this->output->writeln(_view('ascii.logo')->render());
-
-    // $this->block(_view('ascii.logo')->render(), 'cyan');
-    //
-    // $this->output->warning('title');
-    // $this->output->section('section');
-    // $this->output->listing(['hi','hello','yes','no']);
-    // highlight('green') === bg('green') === bg_green()
-    // white() === fg('white')
-    // echo $c('Hello World!')->white()->bold()->highlight('green') . PHP_EOL;
-
-    die();
-    // dd(app('commands'));
-
-    // app('cache')->forget($key);
     $this->files->cleanDirectory($this->getBuilderPath());
     $this->info('Builder cache and all stored templates are cleared successfully');
   }

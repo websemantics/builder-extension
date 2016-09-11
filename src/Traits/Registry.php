@@ -191,8 +191,8 @@ trait Registry
           $this->files->moveDirectory("$path-master", $path, true);
           $this->files->deleteDirectory(dirname($tmp));
           $bar->finish(" Download '$template' was successful                               ");
-        } catch (\Github\Exception\RuntimeException $e) {
-          $this->error('Builder template not found');
+        } catch (\ErrorException $e) {
+          $this->output->error('Builder template not found');
           return false;
         }
       } else {

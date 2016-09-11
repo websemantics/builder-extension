@@ -19,12 +19,13 @@ use Websemantics\BuilderExtension\Command\MakeStream;
  */
 class Make extends \Anomaly\Streams\Platform\Stream\Console\Make
 {
+    /* Black magic */
     use DispatchesJobs, IgnoreJobs {
        IgnoreJobs::dispatch insteadof DispatchesJobs;
     }
 
     /**
-     * List of jobs to give the cold shoulder,
+     * Give the cold shoulder to these jobs,
      *
      * @var  array  $ignore
      */
@@ -54,7 +55,7 @@ class Make extends \Anomaly\Streams\Platform\Stream\Console\Make
       $addon = $addons->get($this->argument('addon'));
       $path = $addon->getPath();
 
-      /* after a successful stream migration, create a seeder template file */
+      /* After a successful stream migration, create a seeder template file */
       $this->dispatch(new MakeStream($slug, $path));
     }
 }

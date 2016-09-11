@@ -46,10 +46,18 @@ class MakeTemplate extends Command
 
     if($this->download($template = $this->argument('template'), $this->option('force'))){
 
-      /*
-        read the Builder template metadata and return the templaet context object
-      */
-      $context = $this->getContext($this->getTemplateMetadata($template));
+      /* read the Builder template metadata and return the templaet context object */
+      $context = $this->getTemplateContext($template);
+
+      $this->dispatch(new ScaffoldTemplate(
+                         $context['vendor'],
+                         $this->getTemplateType($template),
+                         $context['slug'],
+                         $this->getBuilderPath('default-module'),
+                         $path,
+                         $context));
+
+      $this->info("Builder has successfully created an addon from '$template'");
 
     } else {
       $this->output->error('Builder template not found');

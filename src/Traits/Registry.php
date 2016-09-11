@@ -1,4 +1,6 @@
-<?php namespace Websemantics\BuilderExtension\Traits;
+<?php
+
+namespace Websemantics\BuilderExtension\Traits;
 
 use Github\Client;
 use Anomaly\Streams\Platform\Application\Application;
@@ -16,17 +18,17 @@ use Symfony\Component\Console\Formatter\OutputFormatterStyle;
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
+ *
  * @author    WebSemantics, Inc. <info@websemantics.ca>
  * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
- * @copyright 2012-2016 Web Semantics, Inc.
+ * @copyright 2012-2016 Web Semantics, Inc
  */
-
 trait Registry
 {
     use Spinner;
 
     /**
-     * The zip archive
+     * The zip archive.
      *
      * @var ZipArchive
      */
@@ -40,28 +42,28 @@ trait Registry
     protected $client;
 
     /**
-     * The Github registery organization
+     * The Github registery organization.
      *
      * @var string
      */
     protected $registry;
 
     /**
-     * The number of minutes to cache api calls
+     * The number of minutes to cache api calls.
      *
      * @var null|false|int
      */
     protected $ttl = false;
 
     /**
-     * The application instance
+     * The application instance.
      *
      * @var Application
      */
     protected $application;
 
     /**
-     * The file system
+     * The file system.
      *
      * @var Filesystem
      */
@@ -69,28 +71,26 @@ trait Registry
 
     /**
      * Create a new console command instance.
-     *
-     * @return void
      */
     public function __construct(Application $application, Filesystem $files, Client $client)
     {
-      parent::__construct();
+        parent::__construct();
 
       /* Check for ZipArchive */
-      if (!class_exists('ZipArchive')){
-        throw new Exception('Error, ZipArchive class is not avilable, unable to recover!');
+      if (!class_exists('ZipArchive')) {
+          throw new Exception('Error, ZipArchive class is not avilable, unable to recover!');
       }
 
-      $this->zip = new \ZipArchive();
-      $this->client = $client;
-      $this->files = $files;
-      $this->application = $application;
-      $this->registry = _config('config.registry');
-      $this->ttl = _config('config.ttl');
+        $this->zip = new \ZipArchive();
+        $this->client = $client;
+        $this->files = $files;
+        $this->application = $application;
+        $this->registry = _config('config.registry');
+        $this->ttl = _config('config.ttl');
     }
 
     /**
-     * Get cache key
+     * Get cache key.
      *
      * @return string
      */
@@ -100,14 +100,15 @@ trait Registry
     }
 
     /**
-     * Get the Builder storage path (create if it doesn't exist)
+     * Get the Builder storage path (create if it doesn't exist).
      *
      * @param string path,
+     *
      * @return string
      */
     protected function getBuilderPath($path = '')
     {
-        $path = $this->application->getStoragePath(_config('config.path') . ($path?"/$path":""));
+        $path = $this->application->getStoragePath(_config('config.path').($path ? "/$path" : ''));
 
         /* make sure the parent folder is a directory or parent directory is a folder */
         if (!$this->files->isDirectory($parent = dirname($path))) {
@@ -118,123 +119,136 @@ trait Registry
     }
 
     /**
-     * Flush cache and delete all templates
-     *
-     * @return void
+     * Flush cache and delete all templates.
      */
     protected function flush($key)
     {
-      app('cache')->forget($key);
+        app('cache')->forget($key);
     }
 
     /**
-     * Print ascii logo
-     *
-     * @return void
+     * Print ascii logo.
      */
     protected function logo()
     {
-      /* Get some theme going */
+        /* Get some theme going */
       $this->output->getFormatter()->setStyle('p', new OutputFormatterStyle('magenta', 'black'));
-      $this->output->getFormatter()->setStyle('t', new OutputFormatterStyle('white', 'black'));
+        $this->output->getFormatter()->setStyle('t', new OutputFormatterStyle('white', 'black'));
 
-      $this->output->writeln(_view('ascii.logo')->render());
+        $this->output->writeln(_view('ascii.logo')->render());
     }
 
     /**
      * Print a block.
      *
-     * @param string $message, user message
-     * @param string $color, text color
+     * @param string $message,    user message
+     * @param string $color,      text color
      * @param string $background, background color
-     * @return void
      */
     protected function block($message, $color = 'yellow', $background = 'black')
     {
-      $this->output->block($message, null, "fg=$color;bg=$background");
+        $this->output->block($message, null, "fg=$color;bg=$background");
     }
 
     /**
-     * Download a Builder template from the registery,
+     * Download a Builder template from the registery,.
      *
      * @param string $template, the selected template
-     * @param boolean $force, force download if the template already exists
-     * @return boolean (true = success)
+     * @param bool   $force,    force download if the template already exists
+     *
+     * @return bool (true = success)
      */
     protected function download($template, $force = false)
     {
-      $dist = $this->getBuilderPath();
-      $path = "$dist/$template";
+        $dist = $this->getBuilderPath();
+        $path = "$dist/$template";
 
-      if(!$this->files->exists($path) || $force){
-        $bar = $this->createProgressIndicator();
-        $src = _render(_config('config.archive'), [
+        if (!$this->files->exists($path) || $force) {
+            $bar = $this->createProgressIndicator();
+            $src = _render(_config('config.archive'), [
                             'registry' => $this->registry,
-                            'template' => $template]);
+                            'template' => $template, ]);
 
         /* get a temp folder to download the template zip to */
         $tmp = $this->getBuilderPath(_config('config.tmp'));
 
-        try {
-          /* download the template zip file, show progress, uncompress and remove */
+            try {
+                /* download the template zip file, show progress, uncompress and remove */
           $bar->start(" Downloading '$template' ... ");
 
-          $this->files->put($tmp, file_get_contents($src, false, stream_context_create([],
-          ['notification' => function($notification_code) use($bar){
-              if(in_array($notification_code,[STREAM_NOTIFY_CONNECT,STREAM_NOTIFY_PROGRESS])){
-                $bar->advance();
+                $this->files->put($tmp, file_get_contents($src, false, stream_context_create([],
+          ['notification' => function ($notification_code) use ($bar) {
+              if (in_array($notification_code, [STREAM_NOTIFY_CONNECT, STREAM_NOTIFY_PROGRESS])) {
+                  $bar->advance();
               }
-            }])));
-          $this->zip->open($tmp);
-          $this->zip->extractTo($dist);
-          $this->zip->close();
-          $this->files->moveDirectory("$path-master", $path, true);
-          $this->files->deleteDirectory(dirname($tmp));
-          $bar->finish(" Download '$template' was successful                               ");
-        } catch (\ErrorException $e) {
-          return false;
+          }])));
+                $this->zip->open($tmp);
+                $this->zip->extractTo($dist);
+                $this->zip->close();
+                $this->files->moveDirectory("$path-master", $path, true);
+                $this->files->deleteDirectory(dirname($tmp));
+                $bar->finish(" Download '$template' was successful                               ");
+            } catch (\ErrorException $e) {
+                return false;
+            }
+        } else {
+            $this->output->note("Builder template '$template' already exists. \nUse --force option to get a fresh copy.");
         }
-      } else {
-        $this->output->note("Builder template '$template' already exists. \nUse --force option to get a fresh copy.");
-      }
-      return true;
+
+        return true;
     }
 
     /**
-     * Load the template metadata
+     * Load the template metadata.
      *
      * @param string $template, the Builder template
+     *
      * @return array
      */
     protected function getTemplateMetadata($template)
     {
-      if($this->files->exists($path = $this->getBuilderPath("$template/builder.json"))){
-        return json_decode($this->files->get($path), true);
-      }
-      return [];
+        if ($this->files->exists($path = $this->getBuilderPath("$template/builder.json"))) {
+            return json_decode($this->files->get($path), true);
+        }
+
+        return [];
     }
 
-      /**
-       * Parse Builder template schema, interact with the user and return the context object,
-       *
-       * @param string $metadata, the Builder metadata
-       * @param string $defults, list of defults (override the schema defults)
-       * @param string $ignore, if true, ignore asking a question for the provided defults
-       * @return array
-       */
-      protected function getContext($metadata = [], $defults = [], $ignore = false)
-      {
-      $context = [];
+    /**
+     * Get the template type (module, field_type, extension etc).
+     *
+     * @param string $template, the Builder template name
+     *
+     * @return string
+     */
+    protected function getTemplateType($template)
+    { 
+        $parts = explode('-', $template);
+        return array_pop($parts);
+    }
 
-      foreach (isset($metadata['schema']) ? $metadata['schema']:[] as $property => $schema) {
+    /**
+     * Parse Builder template schema, interact with the user and return the context object,.
+     *
+     * @param string $template, the Builder template name
+     * @param string $defults,  list of defults (override the schema defults)
+     * @param string $ignore,   if true, ignore asking a question for the provided defults
+     *
+     * @return array
+     */
+    protected function getTemplateContext($template = [], $defults = [], $ignore = false)
+    {
+        $context = [];
+        $metadata = $this->getTemplateMetadata($template);
 
-          $question = !empty($schema['label']) ? $schema['label'] : $property;
-          $default = isset($defults[$property]) ? $defults[$property] :
-                    (isset($schema['default']) ? $schema['default'] : null);
-          $context[$property] = ($ignore && isset($defults[$property])) ? $default :
-                                 $this->ask($question.'?', $default);
-      }
+        foreach (isset($metadata['schema']) ? $metadata['schema'] : [] as $property => $schema) {
+            $question = !empty($schema['label']) ? $schema['label'] : $property;
+            $default = isset($defults[$property]) ? $defults[$property] :
+                  (isset($schema['default']) ? $schema['default'] : null);
+            $context[$property] = ($ignore && isset($defults[$property])) ? $default :
+                               $this->ask($question.'?', $default);
+        }
 
-      return $context;
+        return $context;
     }
 }

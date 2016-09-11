@@ -1,4 +1,6 @@
-<?php namespace Websemantics\BuilderExtension\Console;
+<?php
+
+namespace Websemantics\BuilderExtension\Console;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Anomaly\Streams\Platform\Addon\AddonManager;
@@ -8,36 +10,37 @@ use Websemantics\BuilderExtension\Traits\IgnoreJobs;
 use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
 
 /**
- * Class MakeAddon.
- *
- * Override core MakeAddon command to generate module files that are
- * compatible with Builder extension.
- *
- * @link      http://websemantics.ca/ibuild
- * @link      http://ibuild.io
- * @author    WebSemantics, Inc. <info@websemantics.ca>
- * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
- * @copyright 2012-2016 Web Semantics, Inc.
- */
+  * Class MakeAddon.
+  *
+  * Override core MakeAddon command to generate module files that are
+  * compatible with the Builder extension.
+  *
+  * @link      http://websemantics.ca/ibuild
+  * @link      http://ibuild.io
+  *
+  * @author    WebSemantics, Inc. <info@websemantics.ca>
+  * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
+  * @copyright 2012-2016 Web Semantics, Inc
+  */
  class MakeAddon extends \Anomaly\Streams\Platform\Addon\Console\MakeAddon
-{
-    use Registry;
+ {
+     use Registry;
 
+    /* Black magic */
     use DispatchesJobs, IgnoreJobs {
        IgnoreJobs::dispatch insteadof DispatchesJobs;
     }
 
     /**
-     * List of jobs to give the cold shoulder,
+     * Give the cold shoulder to these jobs,.
      *
-     * @var  array  $ignore
+     * @var array
      */
-
     protected $ignore = [
       'Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonClass',
       'Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonComposer',
       'Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonLang',
-      'Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonServiceProvider'
+      'Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonServiceProvider',
     ];
 
     /**
@@ -46,24 +49,27 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
     public function fire(AddonManager $addons)
     {
       list($vendor, $type, $slug, $path) =
-          _resolveAddonNamespace($this->argument('namespace'), $this->option('shared'));
+        _resolveAddonNamespace($this->argument('namespace'), $this->option('shared'));
 
       if ($type === 'module') {
+          $this->logo();
 
-        /* Get the default module template from the registry */
-        if($this->download($template = _config('config.default-module'), $this->option('force'))){
+      /* Get the default module template from the registry */
+      if ($this->download($template = _config('config.default-module'), $this->option('force'))) {
+          $context = $this->getTemplateContext($template,
+          ['vendor' => $vendor, 'slug' => $slug], true);
 
-            $this->logo();
-            $context = $this->getContext($this->getTemplateMetadata($template),[
-              'vendor' => $vendor], true);
-            $this->dispatch(new ScaffoldTemplate($vendor, $type, $slug, $path,
-                                $this->getBuilderPath('default-module'), $context));
-            $this->info("Builder has successfully created a module addon from '$template'");
-        } else {
-          /* If anything goes wrong - which happens sometimes - fallback to Pyro make:addon */
-          $this->ignoreJobs = false;
-        }
+          $this->dispatch(new ScaffoldTemplate($vendor, $type, $slug,
+                              $this->getBuilderPath(_config('config.default-module')),
+                              $path, $context));
+
+          $this->info("Builder has successfully created a module addon from '$template'");
+      } else {
+          /* When things go wrong - which does happen sometimes - fallback to Pyro make:addon */
+        $this->ignoreJobs = false;
       }
+      }
+
       parent::fire($addons);
     }
 
@@ -74,10 +80,10 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
      */
     protected function getOptions()
     {
-        return [
-          ['force', null, InputOption::VALUE_NONE, "Indicates whether to force a fresh download of the 'default-module'."],
-          ['shared', null, InputOption::VALUE_NONE, 'Indicates if the addon should be created in shared addons.'],
-          ['migration', null, InputOption::VALUE_NONE, 'Indicates if a fields migration should be created.'],
-        ];
+      return [
+        ['force', null, InputOption::VALUE_NONE, "Indicates whether to force a fresh download of the '"._config('config.default-module')."'."],
+        ['shared', null, InputOption::VALUE_NONE, 'Indicates if the addon should be created in shared addons.'],
+        ['migration', null, InputOption::VALUE_NONE, 'Indicates if a fields migration should be created.'],
+      ];
     }
-}
+ }

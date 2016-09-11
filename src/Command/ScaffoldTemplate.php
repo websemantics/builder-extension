@@ -25,7 +25,7 @@ class ScaffoldTemplate
      *
      * @var string
      */
-    private $path;
+    private $dist;
 
     /**
      * The addon slug.
@@ -54,17 +54,17 @@ class ScaffoldTemplate
      * @param string, $vendor
      * @param string, $type
      * @param string, $slug
-     * @param string, $path
+     * @param string, $dist
      * @param string, $src, Builder default-module template path
      * @param array, $context, Builder template context/data object/array
      */
-    public function __construct($vendor, $type, $slug, $path, $src, $context)
+    public function __construct($vendor, $type, $slug, $src, $dist, $context)
     {
         $this->vendor = $vendor;
         $this->type = $type;
         $this->slug = $slug;
-        $this->path = $path;
         $this->src = $src;
+        $this->dist = $dist;
         $this->context = $context;
     }
 
@@ -77,13 +77,13 @@ class ScaffoldTemplate
     {
         $context = array_merge($this->getTemplateData(), $this->context);
 
-        /* Make module's folder */
-        $files->makeDirectory($this->path, 0755, true, true);
+        /* Create addon folder */
+        $files->makeDirectory($this->dist, 0755, true, true);
 
-        /* Copy module template files */
-        $files->parseDirectory($this->src.'/template', $this->path.'/', $context);
+        /* Copy/parse Builder's template files */
+        $files->parseDirectory($this->src.'/template', $this->dist.'/', $context);
 
-        return $this->path;
+        return $this->dist;
     }
 
     /**

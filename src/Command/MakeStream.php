@@ -6,6 +6,8 @@ use Illuminate\Filesystem\Filesystem;
 /**
  * Class MakeStream.
  *
+ * Currently, creates an empty seeder file at 'path-to-addon/resources/seeders/'
+ *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
  * @author    WebSemantics, Inc. <info@websemantics.ca>
@@ -43,15 +45,20 @@ class MakeStream
     }
 
     /**
-     * Handle the command, plant the seed
+     * Handle the command, plant a seed,
      *
-     * @param Filesystem  $fm
+     * @param Filesystem  $files
      *
      * @return string
      */
-    public function handle(Filesystem $fm)
+    public function handle(Filesystem $files)
     {
-        /* create an empty seeder if it does not exist */
-        $fm->put($this->path . '/resources/seeders/' . $this->entity . '.php', '', true);
+      $seeder = $this->path . '/resources/seeders/' . $this->entity . '.php';
+
+      if (!$files->isDirectory($parent = dirname($seeder))) {
+          $files->makeDirectory($parent, 0777, true);
+      }
+
+      $files->put($seeder, '', true);
     }
 }

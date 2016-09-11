@@ -16,7 +16,7 @@ use Websemantics\BuilderExtension\Traits\Registry;
  * @copyright 2012-2016 Web Semantics, Inc.
  */
 
-class MakeTemplates extends Command
+class MakeTemplate extends Command
 {
   use DispatchesJobs;
   use Registry;
@@ -51,6 +51,8 @@ class MakeTemplates extends Command
       */
       $context = $this->getContext($this->getTemplateMetadata($template));
 
+    } else {
+      $this->output->error('Builder template not found');
     }
   }
 }

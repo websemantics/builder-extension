@@ -44,6 +44,6 @@ class ClearTemplates extends Command
   {
     $this->logo();
     $this->files->cleanDirectory($this->getBuilderPath());
-    $this->info('Builder cache and all stored templates are cleared successfully');
+    $this->info('Builder cache and templates have been cleared successfully');
   }
 }

@@ -192,7 +192,6 @@ trait Registry
           $this->files->deleteDirectory(dirname($tmp));
           $bar->finish(" Download '$template' was successful                               ");
         } catch (\ErrorException $e) {
-          $this->output->error('Builder template not found');
           return false;
         }
       } else {

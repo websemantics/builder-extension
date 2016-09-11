@@ -24,7 +24,7 @@ class BuilderExtensionServiceProvider extends AddonServiceProvider
       'Anomaly\Streams\Platform\Addon\Console\MakeAddon' => 'Websemantics\BuilderExtension\Console\MakeAddon',
       'Anomaly\Streams\Platform\Stream\Console\Make' => 'Websemantics\BuilderExtension\Console\Make',
       'Websemantics\BuilderExtension\Console\ListTemplates' => 'Websemantics\BuilderExtension\Console\ListTemplates',
-      'Websemantics\BuilderExtension\Console\MakeTemplates' => 'Websemantics\BuilderExtension\Console\MakeTemplates',
+      'Websemantics\BuilderExtension\Console\MakeTemplate' => 'Websemantics\BuilderExtension\Console\MakeTemplate',
       'Websemantics\BuilderExtension\Console\ClearTemplates' => 'Websemantics\BuilderExtension\Console\ClearTemplates'
     ];
 

@@ -7,7 +7,7 @@ return [
       | Github Registry Username
       |--------------------------------------------------------------------------
       |
-      | The default Builder Extension registery organization
+      | The default Builder Extension registery
       |
       */
       'registry'           => env('BUILDER_REGISTRY', 'pyrocms-templates'),
@@ -17,8 +17,8 @@ return [
       | Default Module
       |--------------------------------------------------------------------------
       |
-      | The default Builder template used by make:addon command to generate
-      | a module that's compatible with the Builder extension entities 
+      | The default Builder module template used by make:addon overridden command
+      | to generate a module that's compatible with the Builder extension entities
       |
       |
       */
@@ -53,7 +53,7 @@ return [
       | Builder template archive url
       |--------------------------------------------------------------------------
       |
-      | Url template used to download a template from its repo
+      | Url template used to download a compressed template from its repo
       |
       |
       */

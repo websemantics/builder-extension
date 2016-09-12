@@ -52,7 +52,7 @@ class ModifyModule
         $module = $this->module;
         $data = $this->getTemplateData($module);
         $dest = $module->getPath();
-        $source = __DIR__.'/../../resources/assets/module';
+        $source = __DIR__.'/../../resources/stubs/module';
 
         try {
 

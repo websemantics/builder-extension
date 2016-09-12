@@ -77,7 +77,7 @@ class ModifyEntity
         $stream = $this->stream;
         $assignment = $this->assignment;
         $destination = $module->getPath();
-        $entity = __DIR__.'/../../resources/assets/entity';
+        $entity = __DIR__.'/../../resources/stubs/entity';
         $source = $entity.'/code/{namespace}/';
 
         /* get the field config params from build.php */

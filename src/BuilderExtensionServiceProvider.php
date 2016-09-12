@@ -53,6 +53,7 @@ class BuilderExtensionServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $singletons = [
+      'migration.creator' => 'Websemantics\BuilderExtension\Database\Migration\MigrationCreator',
       'Illuminate\Filesystem\Filesystem' => 'Websemantics\BuilderExtension\Filesystem\Filesystem'
     ];
 }

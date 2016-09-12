@@ -62,8 +62,8 @@ class GenerateEntity
         $stream = $this->stream;
         $module = $this->module;
 
-        $entityPath = __DIR__.'/../../resources/assets/entity';
-        $modulePath = __DIR__.'/../../resources/assets/module';
+        $entityPath = __DIR__.'/../../resources/stubs/entity';
+        $modulePath = __DIR__.'/../../resources/stubs/module';
 
         $namespace_folder = _getNamespaceFolderTemplate($module);
 

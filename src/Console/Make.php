@@ -41,7 +41,9 @@ class Make extends \Anomaly\Streams\Platform\Stream\Console\Make
       'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityRepository',
       'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityRepositoryInterface',
       'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityRoutes',
-      'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityTableBuilder'
+      'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityTableBuilder',
+      'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityRouter',
+      'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityCriteria'
     ];
 
     /**

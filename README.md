@@ -79,9 +79,7 @@ php artisan builder:clear
 
 ## Stream Entities
 
-In addition to scaffolding addons from Builder templates, this extension offers generating stream entities from migrations (working code).
-
-An Entity is a representation of an [Object Type](https://en.wikipedia.org/wiki/Object_type_(object-oriented_programming)) which may correspond with a Stream. For example, a **Person**, a **Company** or an **Animal** can all be represented by Streams and Entities.
+In addition to scaffolding addons from Builder templates, this extension offers generating stream entities from migrations (i.e. working code). An Entity is a representation of an [Object Type](https://en.wikipedia.org/wiki/Object_type_(object-oriented_programming)) which may correspond with a Stream. For example, a **Person**, a **Company** or an **Animal** can all be represented by Streams and Entities.
 
 The code generated for an entity includes an `Entity Model` and `Repository`, `Plugin`, `Seeder`, `Contracts`, `Table Builder` and `Form Builder`.
 

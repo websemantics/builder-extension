@@ -181,7 +181,7 @@ class MigrationCreator extends \Anomaly\Streams\Platform\Database\Migration\Migr
                                               "'anomaly.field_type.text'";
 
         $fields .= "\n\t\t\t\t".str_pad($assignment['slug'],
-                   _config('config.padding')) . "=> $type";
+                   _config('config.padding')) . "=> $type,";
 
       }
 

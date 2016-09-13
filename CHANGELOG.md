@@ -1,4 +1,9 @@
 1.0.0
+  date: 2016-09-12
+  changes:
+  - Make `make:migration` accept fields to generate Stream Assignments,  
+
+1.0.0
   date: 2016-09-11
   changes:
   - Rebrand as `Pyro Builder`, a generic Addons & Entities scaffolder,

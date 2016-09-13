@@ -10,9 +10,7 @@ class {class} extends Migration
      *
      * @var array
      */
-    protected $stream = [
-        'slug' => '{stream}'
-    ];
+    protected $stream = [{stream}];
 
     /**
      * The stream assignments.

@@ -5,6 +5,7 @@ use Anomaly\Streams\Platform\Addon\Addon;
 use Anomaly\Streams\Platform\Addon\AddonCollection;
 use Websemantics\BuilderExtension\Traits\IgnoreJobs;
 use Websemantics\BuilderExtension\Command\MakeStream;
+use Symfony\Component\Console\Input\InputArgument;
 
 /**
  * Class Make.
@@ -51,13 +52,45 @@ class Make extends \Anomaly\Streams\Platform\Stream\Console\Make
      */
     public function fire(AddonCollection $addons)
     {
-      parent::fire($addons);
-
-      $slug  = $this->argument('slug');
+      $schema  = $this->argument('schema');
+      $slug = explode(':', trim($schema))[0];
       $addon = $addons->get($this->argument('addon'));
       $path = $addon->getPath();
+
+      $this->call(
+          'make:migration',
+          [
+              'name'     => 'create_' . $slug . '_stream',
+              '--addon'  => $addon->getNamespace(),
+              '--stream' => $schema,
+          ]
+      );
+
+      $this->call(
+          'make:migration',
+          [
+              'name'     => 'create_' . $addon->getSlug() . '_fields',
+              '--addon'  => $addon->getNamespace(),
+              '--stream' => $schema,
+              '--fields' => true,
+          ]
+      );
 
       /* After a successful stream migration, create a seeder template file */
       $this->dispatch(new MakeStream($slug, $path));
     }
+
+    /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments()
+    {
+        return [
+            ['schema', InputArgument::REQUIRED, 'The entity\'s stream slug or schema (Builder extension).'],
+            ['addon', InputArgument::REQUIRED, 'The addon in which to put the new entity namespace.'],
+        ];
+    }
+
 }

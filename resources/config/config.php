@@ -71,5 +71,17 @@ return [
       */
       'tmp' => env('BUILDER_TMP', 'tmp/master.zip'),
 
+      /*
+      |--------------------------------------------------------------------------
+      | Migration attributes spacing
+      |--------------------------------------------------------------------------
+      |
+      | Padding (number of chars) between the 'key', 'value' of
+      | associative arrays inside a migration files (keep'me tidy)
+      |
+      |
+      */
+      'padding' => env('MIGRATION_PADDING', '30'),
+
 
 ];

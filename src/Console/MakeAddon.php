@@ -66,6 +66,8 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
                                 $path, $context));
 
             $this->info("Builder has successfully created a module addon from '$template'");
+
+            return;
         } else {
             /* When things go wrong - which does happen sometimes - fallback to Pyro make:addon */
           $this->ignoreJobs = false;

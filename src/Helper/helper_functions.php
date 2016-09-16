@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Helper Functions
+ * Builder extension helper functions
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
@@ -12,15 +12,58 @@
  */
 
  /**
-  * Resolve a namespace to its parts, {vendor}.{type}.{slug} and the addon {path}
+  * Render a string view template
   *
-  * @param    string $namespace
-  * @param    boolean $shared
-  * @return   array [$vendor, $type, $slug, $path]
+  * @param    string $template, view template
+  * @param    object/array $context, values
+  * @return   string
   */
 
-  if (!function_exists('ebxResolveAddonNamespace')) {
-    function ebxResolveAddonNamespace($namespace, $shared)
+  if (!function_exists('_render')) {
+    function _render($template, $context)
+    {
+      return (new \Twig_Environment(new \Twig_Loader_String))->render($template, $context);
+    }
+  }
+
+  /**
+   * Shorthand for config helper
+   *
+   * @param    string $path, config path
+   * @return   *,
+   */
+
+   if (!function_exists('_config')) {
+     function _config($path)
+     {
+       return config('websemantics.extension.builder::' . $path);
+     }
+   }
+
+  /**
+   * Shorthand for view helper
+   *
+   * @param    string $path, view path
+   * @return   Illuminate\View\View
+   */
+
+   if (!function_exists('_view')) {
+     function _view($path)
+     {
+       return view('websemantics.extension.builder::' . $path);
+     }
+   }
+
+  /**
+   * Resolve a namespace to its parts, {vendor}.{type}.{slug} and the addon {path}
+   *
+   * @param    string $namespace
+   * @param    boolean $shared
+   * @return   array [$vendor, $type, $slug, $path]
+   */
+
+  if (!function_exists('_resolveAddonNamespace')) {
+    function _resolveAddonNamespace($namespace, $shared)
     {
       $shared = $shared ? 'shared' : app('Anomaly\Streams\Platform\Application\Application')->getReference();
 
@@ -48,8 +91,8 @@
    * @return   boolean
    */
 
-   if (!function_exists('ebxIsAssociative')) {
-     function ebxIsAssociative($array)
+   if (!function_exists('_isAssociative')) {
+     function _isAssociative($array)
      {
          return ($array !== array_values($array));
      }
@@ -62,10 +105,10 @@
   * @return   array
   */
 
-  if (!function_exists('ebxGetNamespaces')) {
-      function ebxGetNamespaces($module){
+  if (!function_exists('_getNamespaces')) {
+      function _getNamespaces($module){
         $namespaces = array_get(config($module->getNamespace('builder')), 'namespaces', []);
-        return ebxIsAssociative($namespaces) ? array_keys($namespaces) : $namespaces;
+        return _isAssociative($namespaces) ? array_keys($namespaces) : $namespaces;
       }
   }
 
@@ -78,8 +121,8 @@
   * @return   array [$hide_column, $hide_field, $column_template]
   */
 
-  if (!function_exists('ebxGetFieldConfig')) {
-      function ebxGetFieldConfig($module, $namespace_slug, $field_slug){
+  if (!function_exists('_getFieldConfig')) {
+      function _getFieldConfig($module, $namespace_slug, $field_slug){
         $namespaces = array_get(config($module->getNamespace('builder')), 'namespaces', []);
         $namespace = array_get($namespaces, $namespace_slug, []);
         $field = array_get($namespace, $field_slug, []);
@@ -101,8 +144,8 @@
   * @return   string
   */
 
-  if (!function_exists('ebxGetNamespaceFolder')) {
-      function ebxGetNamespaceFolder($module, $namespace, $forward = false){
+  if (!function_exists('_getNamespaceFolder')) {
+      function _getNamespaceFolder($module, $namespace, $forward = false){
         $namespace = ($forward) ? "$namespace/": "$namespace\\";
 
         $namespaces = array_get(config($module->getNamespace('builder')), 'namespaces', []);
@@ -119,8 +162,8 @@
   * @return   string
   */
 
-  if (!function_exists('ebxGetNamespaceFolderTemplate')) {
-      function ebxGetNamespaceFolderTemplate($module){
+  if (!function_exists('_getNamespaceFolderTemplate')) {
+      function _getNamespaceFolderTemplate($module){
         return array_get(config($module->getNamespace('builder')),
                             'namespace_folder', true) ? "" : "{namespace}/";
       }
@@ -133,8 +176,8 @@
   * @return   string
   */
 
-  if (!function_exists('ebxGetAvoidOverwrite')) {
-      function ebxGetAvoidOverwrite($module, $extra = []){
+  if (!function_exists('_getAvoidOverwrite')) {
+      function _getAvoidOverwrite($module, $extra = []){
         return array_merge(array_get(config($module->getNamespace('builder')),
                             'avoid_overwrite', []),$extra);
       }
@@ -147,8 +190,8 @@
   * @return   string
   */
 
-  if (!function_exists('ebxSeedingOption')) {
-      function ebxSeedingOption($module){
+  if (!function_exists('_seedingOption')) {
+      function _seedingOption($module){
         return array_get(config($module->getNamespace('builder')), 'seeding', 'no');
       }
   }
@@ -160,8 +203,8 @@
   * @return   string
   */
 
-  if (!function_exists('ebxGetDocblock')) {
-      function ebxGetDocblock($module){
+  if (!function_exists('_getDocblock')) {
+      function _getDocblock($module){
         return array_get(config($module->getNamespace('builder')),
                             'docblock', '');
       }
@@ -173,8 +216,8 @@
   * @return   string
   */
 
-  if (!function_exists('ebxNullRelationshipEntry')) {
-      function ebxNullRelationshipEntry($module){
+  if (!function_exists('_nullRelationshipEntry')) {
+      function _nullRelationshipEntry($module){
         return array_get(config($module->getNamespace('builder')),
                             'null_relationship_entry',
                             '<span class="label label-default">null</span>');
@@ -187,8 +230,8 @@
   * @return   string
   */
 
-  if (!function_exists('ebxExtendsRepository')) {
-      function ebxExtendsRepository($module){
+  if (!function_exists('_extendsRepository')) {
+      function _extendsRepository($module){
         $extends_repository = array_get(config($module->getNamespace('builder')),
                             'extends_repository', '');
 
@@ -196,7 +239,7 @@
           $extends_repository = explode('\\', $extends_repository);
           return (!empty($extends_repository))?"extends " . end($extends_repository) . " ":"";
         }
-        
+
         return '';
       }
   }
@@ -207,8 +250,8 @@
   * @return   string
   */
 
-  if (!function_exists('ebxExtendsRepositoryUse')) {
-      function ebxExtendsRepositoryUse($module){
+  if (!function_exists('_extendsRepositoryUse')) {
+      function _extendsRepositoryUse($module){
         $extends_repository =  array_get(config($module->getNamespace('builder')),
                             'extends_repository',null);
         return (!empty($extends_repository))? "use $extends_repository;":"";
@@ -224,8 +267,8 @@
   * @return   string
   */
 
-  if (!function_exists('ebxGetFieldTypeClassName')) {
-      function ebxGetFieldTypeClassName($assignment){
+  if (!function_exists('_getFieldTypeClassName')) {
+      function _getFieldTypeClassName($assignment){
         $fieldTypeClassName = get_class($assignment->getFieldType());
         return substr($fieldTypeClassName,strrpos($fieldTypeClassName, '\\') + 1);
       }

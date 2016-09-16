@@ -1,14 +1,13 @@
-<?php namespace Websemantics\EntityBuilderExtension\Command;
+<?php namespace Websemantics\BuilderExtension\Command;
 
-use Illuminate\Contracts\Bus\SelfHandling;
 use Anomaly\Streams\Platform\Addon\Module\Module;
-use Websemantics\EntityBuilderExtension\Traits\TemplateProcessor;
-use Websemantics\EntityBuilderExtension\Parser\EntityNameParser;
-use Websemantics\EntityBuilderExtension\Parser\ModuleNameParser;
-use Websemantics\EntityBuilderExtension\Parser\VendorNameParser;
-use Websemantics\EntityBuilderExtension\Parser\NamespaceParser;
-use Websemantics\EntityBuilderExtension\Parser\SeedersParser;
-use Websemantics\EntityBuilderExtension\Parser\EntityLabelParser;
+use Websemantics\BuilderExtension\Traits\TemplateProcessor;
+use Websemantics\BuilderExtension\Parser\EntityNameParser;
+use Websemantics\BuilderExtension\Parser\ModuleNameParser;
+use Websemantics\BuilderExtension\Parser\VendorNameParser;
+use Websemantics\BuilderExtension\Parser\NamespaceParser;
+use Websemantics\BuilderExtension\Parser\SeedersParser;
+use Websemantics\BuilderExtension\Parser\EntityLabelParser;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 
 /**
@@ -17,12 +16,12 @@ use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
  * @author    WebSemantics, Inc. <info@websemantics.ca>
- * @author    Adnan Sagar <msagar@websemantics.ca>
+ * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
  * @copyright 2012-2016 Web Semantics, Inc.
- * @package   Websemantics\EntityBuilderExtension
+ * @package   Websemantics\BuilderExtension
  */
 
-class GenerateEntity implements SelfHandling
+class GenerateEntity
 {
   use TemplateProcessor;
 
@@ -50,7 +49,7 @@ class GenerateEntity implements SelfHandling
     {
         $this->stream = $stream;
         $this->module = $module;
-        $this->setFiles(app('Websemantics\EntityBuilderExtension\Filesystem\Filesystem'));
+        $this->setFiles(app('Websemantics\BuilderExtension\Filesystem\Filesystem'));
         $this->setParser(app('Anomaly\Streams\Platform\Support\Parser'));
     }
 
@@ -63,15 +62,15 @@ class GenerateEntity implements SelfHandling
         $stream = $this->stream;
         $module = $this->module;
 
-        $entityPath = __DIR__.'/../../resources/assets/entity';
-        $modulePath = __DIR__.'/../../resources/assets/module';
+        $entityPath = __DIR__.'/../../resources/stubs/entity';
+        $modulePath = __DIR__.'/../../resources/stubs/module';
 
-        $namespace_folder = ebxGetNamespaceFolderTemplate($module);
+        $namespace_folder = _getNamespaceFolderTemplate($module);
 
         $data = $this->getTemplateData($module, $stream);
 
         /* uncomment the array entries to protect these files from being overwriten or add your own */
-        $this->files->setAvoidOverwrite(ebxGetAvoidOverwrite($module, [
+        $this->files->setAvoidOverwrite(_getAvoidOverwrite($module, [
               // $data['module_name'] . 'ModuleSeeder.php',
               // $data['module_name'] . 'Module.php',
               // $data['module_name'] . 'ModuleServiceProvider.php',
@@ -157,10 +156,10 @@ class GenerateEntity implements SelfHandling
         $vendorName = (new VendorNameParser())->parse($module);
 
         /* check if we are using a grouping folder for all generated entities with the same namespace */
-        $namespace_folder = ebxGetNamespaceFolder($module, $namespace);
+        $namespace_folder = _getNamespaceFolder($module, $namespace);
 
         return [
-            'docblock' => ebxGetDocblock($module),
+            'docblock' => _getDocblock($module),
             'namespace' => $namespace,
             'seeder_data' => (new SeedersParser())->parse($module, $stream),
             'namespace_folder' => $namespace_folder,
@@ -176,8 +175,8 @@ class GenerateEntity implements SelfHandling
             'entity_name_plural' => str_plural($entityName),
             'entity_name_lower' => strtolower($entityName),
             'entity_name_lower_plural' => strtolower(str_plural($entityName)),
-            'extends_repository' => ebxExtendsRepository($module),
-            'extends_repository_use' => ebxExtendsRepositoryUse($module),
+            'extends_repository' => _extendsRepository($module),
+            'extends_repository_use' => _extendsRepositoryUse($module),
 
         ];
     }

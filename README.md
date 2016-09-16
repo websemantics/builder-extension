@@ -13,42 +13,83 @@
     \/            \               \/    __/                   \     \                \_/      \     /'\
     /   /          \              /    /                       \     \                /        \   /   \
        /                              /                               \__            /          \ /
-      /      __________     _____      _____     ___________             \                       /
-    _/      |          \====\     \   /    /====|           \\========\================\         /   
-   /        |     __    |    \     \ /    /     |     __     |        |    \          |           
-            |    |__)   |     \     V    /      |    |__)    |        |     \         |            
-            |       ___/       \        /       |           <        ┌┴┐             ┌┴┐
-            |      |            |      |        |      |\    \      _ \ \           /  |
-            |      |            |      |        |      | \    \    | \_| |         |    \_
-            |______|            |______|        |______|  \____\    \___/      __   \     `-_
-             _____     _  _     _     ___     _     ___    __ __              /   \  ''-.    \
-            |   __|   | \| |   | |   |_ _|   | |   |_ _|   \ V /             /    /      \    \
-            |   _|    | \\ |   | |    | |    | |    | |     \ /              |   |        |   |
-            |_____|   |_|\_|   |_|    |_|    |_|    |_|     |_|              \    \      /    /
-             _____     _ _     _     _       __      ___     ___              \    `-..-'    /
-            |   o )   | | |   | |   | |     |  \    | __|   | o \              '-_        _-'
-            |   o \   | U |   | |   | |_    | o )   | _|    |   /   - -- -        `------'
-            |_____/   |___|   |_|   |___|   |__/    |___|   |_|\_\    
+      /      ____________     ______      ______     _____________             \                       /
+    _/      |            \====\      \   /     /====|             \\==========\================\        /   
+   /        |     __      |    \      \ /     /     |      __      |          |    \          |           
+            |    |__)     |     \      V     /      |     |__)     |          |     \         |            
+            |             |      \          /       |             <          ┌┴┐             ┌┴┐
+            |         ___/        |        |        |              \        _ \ \           /  |
+            |        |            |        |        |       |\      \      | \_| |         |    \_
+            |        |            |        |        |       | \      \      \___/      __   \     `-_
+            |________|            |________|        |_______|  \______\               /   \  ''-.    \
+             _______  __   __  ___   ___      ______   _______  ________             /    /      \    \
+            |  _    ||  | |  ||   | |   |    |      | |       ||    _   |            |   |        |   |
+            | |_|   ||  | |  ||   | |   |    |  _    ||    ___||   | |  |            \    \      /    /
+            |       ||  |_|  ||   | |   |    | | |   ||   |___ |   |_| <              \    `-..-'    /
+            |  _   | |       ||   | |   |___ | |_|   ||    ___||       |               '-_        _-'
+            | |_|   ||       ||   | |       ||       ||   |___ |   |\   \    - -- -       `------'
+            |_______||_______||___| |_______||______| |_______||___| \___\     
 
-            Modules & Streams Scaffolder for Maximum Coding Pleasure         - -- --------- -- -
-
-
+            Addons scaffolder for maximum coding pleasure                            - -- --------- -- -
 ```                                                                                             
-> Last update: 16 August 2016
-
-This PyroCMS extension once installed becomes your coding companion to generate modules and [Stream Entities](#what-is-an-entity) for all of your projects coding needs. It will also help configure your module classes with routes, bindings, language file entries, seeding and much more, so you do not have to lift a finger. This extension will also scaffold your modules with helper function, default home page, language and other essential files.
-
-
-## What is an Entity
-
-An Entity is a representation of an [Object Type](https://en.wikipedia.org/wiki/Object_type_(object-oriented_programming)) which may correspond with a Stream. For example, a **Person**, a **Company** or an **Animal** can all be represented by Streams and Entities.
-
-The code generated for an entity includes an `Entity Model` and `Repository`, `Plugin`, `Seeder`, `Contracts`, `Table Builder` and `Form Builder`.
+> This PyroCMS extension once installed becomes your coding companion to generate PyroCMS addons including modules, themes, extensions and [stream entities](#what-is-an-entity). In addition to scaffolding the initial code for the different types of addons, this extension uses a PHP parser to configure module classes with routes, bindings, language file entries and even seeding so you do not have to lift a finger. As a bonus, the scaffolded code for the module addon type comes with helper functions, default home page, language and other essential files.
 
 
 ## Getting Started
 
-The following example is also available here, [blog](https://github.com/websemantics/blog),
+This extension offers three new `artisan` commands,
+
+#### List Templates
+
+This command will list all available addon templates,
+
+```bash
+php artisan builder:list
+```
+
+Result,
+
+```bash
++----------------+----------------------------------------------------+
+| Name           | Description                                        |
++----------------+----------------------------------------------------+
+| default-module | Default module template for Pyro Builder Extension |
++----------------+----------------------------------------------------+
+```
+
+#### Make Template
+
+This command will download and scaffold the selected addon template. A downloaded
+template will be used by default unless the `--force` option is used to force
+a fresh copy of the template.
+
+```bash
+php artisan builder:make default-module --force
+```
+
+This command also supports `--shared` and `--migrate` options.
+
+#### Clear
+
+This command will clear the Builder cache and delete all downloaded templates.
+
+```bash
+php artisan builder:clear
+```
+
+## Stream Entities
+
+In addition to scaffolding addons from Builder templates, this extension offers generating stream entities from migrations (i.e. working code). An Entity is a representation of an [Object Type](https://en.wikipedia.org/wiki/Object_type_(object-oriented_programming)) which may correspond with a Stream. For example, a **Person**, a **Company** or an **Animal** can all be represented by Streams and Entities.
+
+The code generated for an entity includes an `Entity Model` and `Repository`, `Plugin`, `Seeder`, `Contracts`, `Table Builder` and `Form Builder`.
+
+Please follow the next section for a better understanding of the process.
+
+## Build a Blog
+
+The following example is also available here, [blog](https://github.com/websemantics/blog). The idea is to build a module with the least amount of effort and understad how the Builder extension does its work.
+
+**TODO**, use Builder commands here, `builder:list`, `builder:make` and `builder:clear`.
 
 * Create and install a new PyroCMS project, let's call it `blogger`
 
@@ -62,11 +103,11 @@ cd blogger
 php artisan install
 ```
 
-* Install this extension at, `addons/default/websemantics/entity_builder-extension`
+* Install this extension at, `addons/default/websemantics/builder-extension`
 
 ```bash
 # first clone,
-git clone https://github.com/websemantics/entity_builder-extension  addons/default/websemantics/entity_builder-extension
+git clone https://github.com/websemantics/builder-extension  addons/default/websemantics/builder-extension
 
 # then install
 php artisan extension:install websemantics.extension.entity_builder
@@ -78,7 +119,7 @@ php artisan extension:install websemantics.extension.entity_builder
 php artisan make:addon websemantics.module.blog
 ```
 
-**Note:** Entity Builder overrides the core `make:addon` command for type `module` only in order to generate all the required files.
+**Note:** Builder extension overrides the core `make:addon` command for type `module` only in order to generate all the required files.
 
 * Add `title` and `content` fields to the module's fields migration file at `blog/addons/default/websemantics/blog-module/migrations`,
 
@@ -159,7 +200,7 @@ Notice that we used the last part of the file name (omitted the entity name) so 
 
 ## Configuration
 
-The Entity Builder offers many configuration options to fine-tune and enhance your development experience which can be found at `blog-module/resources/config/builder.php`.
+The Builder extension offers many configuration options to fine-tune and enhance your development experience which can be found at `blog-module/resources/config/builder.php`.
 
 * Add a list of namespaces supported,
 
@@ -184,7 +225,7 @@ To change this behaviour and store under the module `src/` folder directly, set 
 
 * There are two settings to the seeding option in `builder.php`,
 
-- `yes`, Entity Builder will seed the module after install,
+- `yes`, Builder extension will seed the module after install,
 - `no`, Seeding is disabled
 
 ```
@@ -199,7 +240,7 @@ To change this behaviour and store under the module `src/` folder directly, set 
  * @author    name, <name@email.com>'
 ```
 
-More settings are detailed in the [builder.php](https://github.com/websemantics/entity_builder-extension/blob/master/resources/assets/module/template/resources/config/builder.php) file.
+More settings are detailed in the [builder.php](https://github.com/websemantics/builder-extension/blob/master/resources/assets/module/template/resources/config/builder.php) file.
 
 
 ## Inner Working
@@ -216,7 +257,7 @@ Here's an example of the [builder config file](https://github.com/websemantics/e
 
 Once that's done, create your Streams migration files as usual. The extension will kick in when it receives the events listed above,
 
-* For *StreamWasCreated* event, the extension will generate an entity folder for the stream from the template stored at `entity_builder-extension/resources/assets/entity/code`. The folder map of the entity is as follows:
+* For *StreamWasCreated* event, the extension will generate an entity folder for the stream from the template stored at `builder-extension/resources/assets/entity/code`. The folder map of the entity is as follows:
 
 ```
 BlogEntity
@@ -260,7 +301,7 @@ The extension will then generate a controller per entity at `blog-module/src/Htt
 
 ## Support
 
-Need help or have a question? post a questions at [StackOverflow](https://stackoverflow.com/questions/tagged/entity_builder-extension)
+Need help or have a question? post a questions at [StackOverflow](https://stackoverflow.com/questions/tagged/builder-extension)
 
 *Please don't use the issue trackers for support/questions.*
 

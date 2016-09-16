@@ -1,4 +1,4 @@
-<?php namespace Websemantics\EntityBuilderExtension\Parser;
+<?php namespace Websemantics\BuilderExtension\Parser;
 
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 use Anomaly\Streams\Platform\Addon\Module\Module;
@@ -9,9 +9,9 @@ use Anomaly\Streams\Platform\Addon\Module\Module;
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
  * @author    WebSemantics, Inc. <info@websemantics.ca>
- * @author    Adnan Sagar <msagar@websemantics.ca>
+ * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
  * @copyright 2012-2016 Web Semantics, Inc.
- * @package   Websemantics\EntityBuilderExtension
+ * @package   Websemantics\BuilderExtension
  */
 
 class SeedersParser

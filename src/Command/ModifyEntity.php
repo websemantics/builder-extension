@@ -1,16 +1,15 @@
-<?php namespace Websemantics\EntityBuilderExtension\Command;
+<?php namespace Websemantics\BuilderExtension\Command;
 
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 use Anomaly\Streams\Platform\Assignment\AssignmentModel;
-use Illuminate\Contracts\Bus\SelfHandling;
-use Websemantics\EntityBuilderExtension\Traits\TemplateProcessor;
+use Websemantics\BuilderExtension\Traits\TemplateProcessor;
 use Anomaly\Streams\Platform\Addon\Module\Module;
-use Websemantics\EntityBuilderExtension\Parser\EntityNameParser;
-use Websemantics\EntityBuilderExtension\Parser\ModuleNameParser;
-use Websemantics\EntityBuilderExtension\Parser\VendorNameParser;
-use Websemantics\EntityBuilderExtension\Parser\NamespaceParser;
-use Websemantics\EntityBuilderExtension\Parser\AssignmentSlugParser;
-use Websemantics\EntityBuilderExtension\Parser\AssignmentLabelParser;
+use Websemantics\BuilderExtension\Parser\EntityNameParser;
+use Websemantics\BuilderExtension\Parser\ModuleNameParser;
+use Websemantics\BuilderExtension\Parser\VendorNameParser;
+use Websemantics\BuilderExtension\Parser\NamespaceParser;
+use Websemantics\BuilderExtension\Parser\AssignmentSlugParser;
+use Websemantics\BuilderExtension\Parser\AssignmentLabelParser;
 
 /**
  * Class ModifyEntity. Generates code for assignements
@@ -18,12 +17,12 @@ use Websemantics\EntityBuilderExtension\Parser\AssignmentLabelParser;
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
  * @author    WebSemantics, Inc. <info@websemantics.ca>
- * @author    Adnan Sagar <msagar@websemantics.ca>
+ * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
  * @copyright 2012-2016 Web Semantics, Inc.
- * @package   Websemantics\EntityBuilderExtension
+ * @package   Websemantics\BuilderExtension
  */
 
-class ModifyEntity implements SelfHandling
+class ModifyEntity
 {
   use TemplateProcessor;
 
@@ -64,7 +63,7 @@ class ModifyEntity implements SelfHandling
         $this->module = $module;
         $this->stream = $stream;
         $this->assignment = $assignment;
-        $this->setFiles(app('Websemantics\EntityBuilderExtension\Filesystem\Filesystem'));
+        $this->setFiles(app('Websemantics\BuilderExtension\Filesystem\Filesystem'));
         $this->setParser(app('Anomaly\Streams\Platform\Support\Parser'));
     }
 
@@ -78,29 +77,29 @@ class ModifyEntity implements SelfHandling
         $stream = $this->stream;
         $assignment = $this->assignment;
         $destination = $module->getPath();
-        $entity = __DIR__.'/../../resources/assets/entity';
+        $entity = __DIR__.'/../../resources/stubs/entity';
         $source = $entity.'/code/{namespace}/';
 
         /* get the field config params from build.php */
-        $fieldConfig = ebxGetFieldConfig(
+        $fieldConfig = _getFieldConfig(
             $module,
             $stream->getNamespace(),
             $assignment->getFieldSlug()
         );
 
         /* set a list of files to avoid overwrite */
-        $this->files->setAvoidOverwrite(ebxGetAvoidOverwrite($module));
+        $this->files->setAvoidOverwrite(_getAvoidOverwrite($module));
 
         /* get the template data */
         $data = $this->getTemplateData($module, $stream, $assignment, $fieldConfig);
 
         /* get the namespace destination folder, if any! */
-        $namespaceFolder = ebxGetNamespaceFolder($module, $data['namespace'], true);
+        $namespaceFolder = _getNamespaceFolder($module, $data['namespace'], true);
 
         $entityDest = $destination.'/src/'.$namespaceFolder.$data['entity_name'];
 
         /* get the assigned class name, i.e. TextFieldType */
-        $fieldTypeClassName = ebxGetFieldTypeClassName($assignment);
+        $fieldTypeClassName = _getFieldTypeClassName($assignment);
 
         /* (1) process the form builder class */
         if (!$fieldConfig['hide_field']) {
@@ -179,7 +178,7 @@ class ModifyEntity implements SelfHandling
         $namespace = (new NamespaceParser())->parse($stream);
 
         /* wheather we use a grouping folder for all streams with the same namespace */
-        $namespaceFolder = ebxGetNamespaceFolder($module, $namespace);
+        $namespaceFolder = _getNamespaceFolder($module, $namespace);
 
         return [
             'namespace' => $namespace,
@@ -190,7 +189,7 @@ class ModifyEntity implements SelfHandling
             'field_slug' => $fieldSlug,
             'field_label' => $fieldLabel,
             'relation_name' => camel_case($fieldSlug),
-            'null_relationship_entry' => ebxNullRelationshipEntry($module),
+            'null_relationship_entry' => _nullRelationshipEntry($module),
             'column_template' => $fieldConfig['column_template'],
         ];
     }

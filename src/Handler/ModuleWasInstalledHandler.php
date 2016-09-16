@@ -1,10 +1,10 @@
-<?php namespace Websemantics\EntityBuilderExtension\Handler;
+<?php namespace Websemantics\BuilderExtension\Handler;
 
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Anomaly\Streams\Platform\Addon\Module\Event\ModuleWasInstalled;
 use Anomaly\Streams\Platform\Addon\Module\ModuleCollection;
-use Websemantics\EntityBuilderExtension\Command\ModifyModule;
-use Websemantics\EntityBuilderExtension\Command\SeedModule;
+use Websemantics\BuilderExtension\Command\ModifyModule;
+use Websemantics\BuilderExtension\Command\SeedModule;
 
 /**
  * Class ModuleWasInstalledHandler
@@ -12,14 +12,14 @@ use Websemantics\EntityBuilderExtension\Command\SeedModule;
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
  * @author    WebSemantics, Inc. <info@websemantics.ca>
- * @author    Adnan Sagar <msagar@websemantics.ca>
+ * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
  * @copyright 2012-2016 Web Semantics, Inc.
- * @package   Websemantics\EntityBuilderExtension
+ * @package   Websemantics\BuilderExtension
  */
 
 class ModuleWasInstalledHandler {
 
-  use DispatchesCommands;
+  use DispatchesJobs;
 
 	protected $modules;
 
@@ -43,11 +43,11 @@ class ModuleWasInstalledHandler {
 	{
 		$module = $event->getModule();
 
-		if(count(ebxGetNamespaces($module)) > 0){
+		if(count(_getNamespaces($module)) > 0){
 
         $this->dispatch(new ModifyModule($module));
 
-        if(ebxSeedingOption($module) === 'yes'){
+        if(_seedingOption($module) === 'yes'){
     			$this->dispatch(new SeedModule($module));
     		}
 		}

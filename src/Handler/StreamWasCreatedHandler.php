@@ -1,9 +1,9 @@
-<?php namespace Websemantics\EntityBuilderExtension\Handler;
+<?php namespace Websemantics\BuilderExtension\Handler;
 
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Anomaly\Streams\Platform\Stream\Event\StreamWasCreated;
 use Anomaly\Streams\Platform\Addon\Module\ModuleCollection;
-use Websemantics\EntityBuilderExtension\Command\GenerateEntity;
+use Websemantics\BuilderExtension\Command\GenerateEntity;
 
 /**
  * Class StreamWasCreatedHandler
@@ -11,14 +11,14 @@ use Websemantics\EntityBuilderExtension\Command\GenerateEntity;
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
  * @author    WebSemantics, Inc. <info@websemantics.ca>
- * @author    Adnan Sagar <msagar@websemantics.ca>
+ * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
  * @copyright 2012-2016 Web Semantics, Inc.
- * @package   Websemantics\EntityBuilderExtension
+ * @package   Websemantics\BuilderExtension
  */
 
 class StreamWasCreatedHandler {
 
-  use DispatchesCommands;
+  use DispatchesJobs;
 
 	protected $modules;
 
@@ -42,7 +42,7 @@ class StreamWasCreatedHandler {
 	{
 		$stream = $event->getStream();
 		foreach ($this->modules as $module) {
-			if(in_array($stream->getNamespace(), ebxGetNamespaces($module))){
+			if(in_array($stream->getNamespace(), _getNamespaces($module))){
   		    $this->dispatch(new GenerateEntity($module, $stream));
 			}
 		}

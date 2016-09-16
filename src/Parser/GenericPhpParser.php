@@ -1,8 +1,8 @@
 <?php
 
-namespace Websemantics\EntityBuilderExtension\Parser;
+namespace Websemantics\BuilderExtension\Parser;
 
-use Websemantics\EntityBuilderExtension\PhpParser\Helper;
+use Websemantics\BuilderExtension\PhpParser\Helper;
 use PhpParser\PrettyPrinter\Standard;
 use PhpParser\Lexer;
 use PhpParser\ParserFactory;
@@ -20,7 +20,7 @@ use PhpParser\ParserFactory;
  * @link      http://websemantics.ca
  *
  * @author    WebSemantics, Inc. <info@websemantics.ca>
- * @author    Adnan Sagar <msagar@websemantics.ca>
+ * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
  * @copyright 2012-2016 Web Semantics, Inc.
  */
 class GenericPhpParser

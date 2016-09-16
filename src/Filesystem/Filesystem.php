@@ -1,4 +1,4 @@
-<?php namespace Websemantics\EntityBuilderExtension\Filesystem;
+<?php namespace Websemantics\BuilderExtension\Filesystem;
 
 use FilesystemIterator;
 use Anomaly\Streams\Platform\Support\Parser;
@@ -11,9 +11,9 @@ use Anomaly\Streams\Platform\Support\Parser;
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
  * @author    WebSemantics, Inc. <info@websemantics.ca>
- * @author    Adnan Sagar <msagar@websemantics.ca>
+ * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
  * @copyright 2012-2016 Web Semantics, Inc.
- * @package   Websemantics\EntityBuilderExtension
+ * @package   Websemantics\BuilderExtension
  */
 
 class Filesystem extends \Illuminate\Filesystem\Filesystem
@@ -72,8 +72,8 @@ class Filesystem extends \Illuminate\Filesystem\Filesystem
 					}
 			}
 
-      /* write the file if it does not already exists or
-      if was not guraded from override */
+      /* Write the file if it does not already exists or
+      if was not guraded from overwrite */
 
       if(!$this->exists($path) || !$avoid) {
         return parent::put($path, $contents, $lock);

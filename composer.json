@@ -1,8 +1,8 @@
 {
-    "name": "websemantics/entity_builder-extension",
+    "name": "websemantics/builder-extension",
     "minimum-stability": "dev",
     "type": "streams-addon",
-    "description": "Modules & Streams Scaffolder for Maximum Coding Pleasure",
+    "description": "Addons scaffolder for maximum coding pleasure",
     "keywords": [
         "ibuild",
         "streams",
@@ -24,12 +24,16 @@
     },
     "require":{
         "nikic/php-parser": "~2.0",
-        "packaged/figlet": "*"
+        "packaged/figlet": "*",
+        "knplabs/github-api": "^1.3"
     },
     "autoload": {
         "psr-4": {
-            "Websemantics\\EntityBuilderExtension\\": "src/",
+            "Websemantics\\BuilderExtension\\": "src/",
             "PhpParser\\": "vendor/nikic/php-parser/lib/PhpParser/"
+          },
+        "psr-0": {
+            "Github\\": "vendor/vendor/knplabs/github-api/lib/"
         },
         "files": [
             "src/Helper/helper_functions.php"
@@ -39,6 +43,5 @@
         "branch-alias": {
             "dev-master": "1.0.x-dev"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }

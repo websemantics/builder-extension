@@ -60,19 +60,19 @@ class Make extends \Anomaly\Streams\Platform\Stream\Console\Make
       $this->call(
           'make:migration',
           [
-              'name'     => 'create_' . $slug . '_stream',
+              'name'     => 'create_' . $addon->getSlug() . '_fields',
               '--addon'  => $addon->getNamespace(),
               '--stream' => $schema,
+              '--fields' => true,
           ]
       );
 
       $this->call(
           'make:migration',
           [
-              'name'     => 'create_' . $addon->getSlug() . '_fields',
+              'name'     => 'create_' . $slug . '_stream',
               '--addon'  => $addon->getNamespace(),
               '--stream' => $schema,
-              '--fields' => true,
           ]
       );
 

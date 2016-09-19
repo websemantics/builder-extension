@@ -81,6 +81,8 @@ class MigrationCreator extends \Anomaly\Streams\Platform\Database\Migration\Migr
     protected function populateStub($name, $stub, $table){
       $class = $this->getClassName($name);
 
+dd($class);
+
       list($stream, $fields, $assignments) =
         $this->getData($this->input->getOption('stream'));
 

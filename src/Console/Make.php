@@ -69,6 +69,10 @@ class Make extends \Anomaly\Streams\Platform\Stream\Console\Make
           ]
       );
 
+        /* Sleep for 10 seconds to make sure fields migration has a different/ealier
+        time tagto the stream migration file */
+        sleep(10);
+
         $this->call(
           'make:migration',
           [

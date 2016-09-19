@@ -1,11 +1,11 @@
 1.0.1
   date: 2016-09-17
   changes:
-  - Extend `make:migration` command to accept field schemas to generate stream assignments,  
+  - Extend `make:migration` command to accept field schemas to generate stream assignments,.
   - Change order of creating fields/stream migrations to creating fields migration first.
   - Prevent command `make:addon` from creating a fields migration by default, fields migrations are now created per stream migration.
   - Fix issues [#8](https://github.com/websemantics/builder-extension/issues/8) and [#11](https://github.com/websemantics/builder-extension/issues/11).
-  - Publish as composer package
+  - Publish as composer package.
 
 1.0.0
   date: 2016-09-11

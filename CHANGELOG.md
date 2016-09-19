@@ -1,9 +1,9 @@
-1.0.2
+1.0.3
   date: 2016-09-19
   changes:
   - Add stream slug to filename of fields migrations.
   - Fix bug when stream migration file is first in order before fields migration file due to matching timestamps by introducing a 10 second delay between generating the two.
-  
+
 1.0.1
   date: 2016-09-17
   changes:

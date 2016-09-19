@@ -1,4 +1,4 @@
-1.0.3
+1.0.4
   date: 2016-09-19
   changes:
   - Add stream slug to filename of fields migrations.

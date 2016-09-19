@@ -1,4 +1,6 @@
-<?php namespace Websemantics\BuilderExtension\Console;
+<?php
+
+namespace Websemantics\BuilderExtension\Console;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Anomaly\Streams\Platform\Addon\Addon;
@@ -14,9 +16,10 @@ use Symfony\Component\Console\Input\InputArgument;
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
+ *
  * @author    WebSemantics, Inc. <info@websemantics.ca>
  * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
- * @copyright 2012-2016 Web Semantics, Inc.
+ * @copyright 2012-2016 Web Semantics, Inc
  */
 class Make extends \Anomaly\Streams\Platform\Stream\Console\Make
 {
@@ -26,11 +29,10 @@ class Make extends \Anomaly\Streams\Platform\Stream\Console\Make
     }
 
     /**
-     * Give the cold shoulder to these jobs,
+     * Give the cold shoulder to these jobs,.
      *
-     * @var  array  $ignore
+     * @var array
      */
-
     protected $ignore = [
       'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityCollection',
       'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityController',
@@ -44,7 +46,7 @@ class Make extends \Anomaly\Streams\Platform\Stream\Console\Make
       'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityRoutes',
       'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityTableBuilder',
       'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityRouter',
-      'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityCriteria'
+      'Anomaly\Streams\Platform\Stream\Console\Command\WriteEntityCriteria',
     ];
 
     /**
@@ -52,26 +54,26 @@ class Make extends \Anomaly\Streams\Platform\Stream\Console\Make
      */
     public function fire(AddonCollection $addons)
     {
-      $schema  = $this->argument('schema');
-      $slug = explode(':', trim($schema))[0];
-      $addon = $addons->get($this->argument('addon'));
-      $path = $addon->getPath();
+        $schema = $this->argument('schema');
+        $slug = explode(':', trim($schema))[0];
+        $addon = $addons->get($this->argument('addon'));
+        $path = $addon->getPath();
 
-      $this->call(
+        $this->call(
           'make:migration',
           [
-              'name'     => 'create_' . $addon->getSlug() . '_fields',
-              '--addon'  => $addon->getNamespace(),
+              'name' => 'create_'.$addon->getSlug().'_fields',
+              '--addon' => $addon->getNamespace(),
               '--stream' => $schema,
               '--fields' => true,
           ]
       );
 
-      $this->call(
+        $this->call(
           'make:migration',
           [
-              'name'     => 'create_' . $slug . '_stream',
-              '--addon'  => $addon->getNamespace(),
+              'name' => 'create_'.$slug.'_stream',
+              '--addon' => $addon->getNamespace(),
               '--stream' => $schema,
           ]
       );
@@ -92,5 +94,4 @@ class Make extends \Anomaly\Streams\Platform\Stream\Console\Make
             ['addon', InputArgument::REQUIRED, 'The addon in which to put the new entity namespace.'],
         ];
     }
-
 }

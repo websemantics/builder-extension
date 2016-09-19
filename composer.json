@@ -2,7 +2,7 @@
     "name": "websemantics/builder-extension",
     "minimum-stability": "dev",
     "type": "streams-addon",
-    "description": "Addons scaffolder for maximum coding pleasure",
+    "description": "Pyro 3 Addons scaffolder for maximum coding pleasure",
     "keywords": [
         "ibuild",
         "streams",

@@ -103,9 +103,9 @@ php artisan builder:make default-module --force
 
 This command also supports `--shared` and `--migrate` options. More addon templates will be available shortly.
 
-#### Clear
+#### Clear Template & Cache
 
-This command will clear the Builder cache and delete all downloaded templates and local cache.
+This command will clear the Builder cache and delete all downloaded templates.
 
 ```bash
 php artisan builder:clear

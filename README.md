@@ -123,7 +123,7 @@ php make:stream 'task:tc(name),name,description:t(anomaly.field_type.textarea),c
 
 Instead of just the stream slug, the new command accepts a comma-separated list of fields following the stream slug and options.
 
-A colon-separated list of options following the stream or field slugs can now be specified to customize the generated stream / fields migration files. Values if applicable are provided between parentheses.
+The following is the complete colon-separated list of options appended after the stream or field slugs. They can be used to customize the generated stream / fields migration files. Option values - if applicable - are provided between parentheses (see example below),
 
 | Property        | Shorthand           | Inheritable |
 | ------------- |:-------------:|:-------------:|
@@ -140,25 +140,30 @@ A colon-separated list of options following the stream or field slugs can now be
 The `Inheritable` column indicates the properties a stream would inherit if one of its fields has it set to true.  For example,
 
 ```bash
-php make:stream 'comment:title_column(name),name:trans' vendor.module.name
+# First, generate the module
+php artisan make:addon vendor.module.name
+# Then generate the stream migration files
+php artisan make:stream 'comment:title_column(name),name:trans' vendor.module.name
 # This can also be expressed as
-php make:stream 'comment:title_column(name),name:translatable(true)' vendor.module.name
+php artisan make:stream 'comment:title_column(name),name:translatable(true)' vendor.module.name
 # Or
-php make:stream 'comment:title_column(name):translatable(true),name:type(anomaly.field_type.text):translatable(true)' vendor.module.name
+php artisan make:stream 'comment:title_column(name):translatable(true),name:type(anomaly.field_type.text):translatable(true)' vendor.module.name
 ```
 
 The previous will generate a streams migration with as follows,
 
 ```php
-protected $stream = [
-    'slug'                        => 'comment',
-    'title_column'                => 'name',
-    'translatable'                => true,
-];
+  protected $stream = [
+			'slug'                        => 'comment',
+			'title_column'                => 'name',
+			'translatable'                => true
+	];
 
-protected $assignments = [
-    'name'                      
-];
+  protected $assignments = [
+			'name'                          => [
+					'translatable'              => true
+			]
+	];
 ```
 
 If the `type` property of a field is not set, the Builder extension will assume, `anomaly.field_type.text` as default.

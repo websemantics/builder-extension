@@ -180,8 +180,6 @@ Please follow the next section for a better understanding of the process.
 
 The following example is also available here, [blog](https://github.com/websemantics/blog). The idea is to build a module with the least amount of effort and understad how the Builder extension does its work.
 
-**TODO**, use Builder commands here, `builder:list`, `builder:make` and `builder:clear`.
-
 * Create and install a new PyroCMS project, let's call it `blogger`
 
 ```bash
@@ -194,14 +192,11 @@ cd blogger
 php artisan install
 ```
 
-* Install this extension at, `addons/default/websemantics/builder-extension`
+* Install the Builder extension,
 
 ```bash
-# first clone,
-git clone https://github.com/websemantics/builder-extension  addons/default/websemantics/builder-extension
-
-# then install
-php artisan extension:install websemantics.extension.entity_builder
+composer require websemantics/builder-extension
+php artisan extension:install websemantics.extension.builder
 ```
 
 * Create a new module, `blog`
@@ -210,26 +205,15 @@ php artisan extension:install websemantics.extension.entity_builder
 php artisan make:addon websemantics.module.blog
 ```
 
-**Note:** Builder extension overrides the core `make:addon` command for type `module` only in order to generate all the required files.
-
-* Add `title` and `content` fields to the module's fields migration file at `blog/addons/default/websemantics/blog-module/migrations`,
-
-```php
-    protected $fields = [
-        'title'                      => 'anomaly.field_type.text',
-        'content'                    => 'anomaly.field_type.text'
-    ];
-```
-
-* Create `posts` stream,
+* Create `posts` stream and its fields,
 
 ```bash
-php artisan make:stream posts websemantics.module.blog
+php artisan make:stream 'posts:tc(title),title:r:u,content:r' websemantics.module.blog
 ```
 
 This command will also generate a seeder template for this entity (see below).
 
-* Edit `posts` stream migration file generated at `blog/addons/default/websemantics/blog-module/migrations`, and add the following to `$stream` and `$assignments` arrays,
+The result,
 
 ```php
     protected $stream = [
@@ -264,9 +248,6 @@ php artisan module:reinstall websemantics.module.blog
 ```
 
 Check the admin panel to see the new Module in action, url: `admin/blog/posts`.
-
-Have fun, ..
-
 
 ## The Registry
 

@@ -115,13 +115,13 @@ php artisan builder:clear
 
 This is an enhanced version of Pyro 3 default `make:stream` command. It introduces the ability to specify stream fields and properties.
 
-Using the example in [Auto-pyro](https://github.com/websemantics/auto-pyro) to create a [todo module](https://github.com/websemantics/auto-pyro/blob/1.0.0/local.properties#L97), the following make:stream will create a Task stream ,
+Using the example in [Auto-pyro](https://github.com/websemantics/auto-pyro) to create a [todo module](https://github.com/websemantics/auto-pyro/blob/1.0.0/local.properties#L97), the following `make:stream` command will create a `Task` stream,
 
 ```bash
 php make:stream 'task:tc(name),name,description:t(anomaly.field_type.textarea),completed:t(anomaly.field_type.boolean)' websemantics.module.todo
 ```
 
-Instead of just the stream slug, the new command accepts a comma-separated list of the stream as first instance, and its fields to follow.
+Instead of just the stream slug, the new command accepts a comma-separated list of fields following the stream slug and options.
 
 A colon-separated list of options following the stream or field slugs can now be specified to customize the generated stream / fields migration files. Values if applicable are provided between parentheses.
 

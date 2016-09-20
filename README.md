@@ -127,15 +127,15 @@ A colon-separated list of options following the stream or field slugs can now be
 
 | Property        | Shorthand           | Inheritable |
 | ------------- |:-------------:|:-------------:|
-| title_column | `tc` | [ ] |
-| type | `t` | [ ] |
-| required | `r` | [ ] |
-| unique | `u` | [ ] |
-| searchable | `s` | [ ] |
-| locked | `l` | [ ] |
-| translatable | `trans` | [x] |
-| trashable | `trash` | [x] |
-| sortable | `sor` | [x] |
+| title_column | `tc` | :white_medium_square: |
+| type | `t` | :white_medium_square: |
+| required | `r` | :white_medium_square: |
+| unique | `u` | :white_medium_square: |
+| searchable | `s` | :white_medium_square: |
+| locked | `l` | :white_medium_square: |
+| translatable | `trans` | :white_check_mark: |
+| trashable | `trash` | :white_check_mark: |
+| sortable | `sor` | :white_check_mark: |
 
 The `Inheritable` column indicates the properties a stream would inherit if one of its fields has it set to true.  For example,
 

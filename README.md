@@ -113,7 +113,7 @@ php artisan builder:clear
 
 #### Make Stream
 
-This is an enhanced version of Pyro 3 default `make:stream`. It introduces the ability to specify a stream fields and properties.
+This is an enhanced version of Pyro 3 default `make:stream`. It introduces the ability to specify stream fields and properties.
 
 Using the example in [Auto-pyro](https://github.com/websemantics/auto-pyro) to create a [todo module](https://github.com/websemantics/auto-pyro/blob/1.0.0/local.properties#L97), the following make:stream will create a Task stream ,
 

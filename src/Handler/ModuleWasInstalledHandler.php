@@ -45,13 +45,13 @@ class ModuleWasInstalledHandler {
 
 		if(count(_getNamespaces($module)) > 0){
 
-        $this->dispatch(new ModifyModule($module));
+        if(_landingPageOption($module)){
+          $this->dispatch(new ModifyModule($module));
+        }
 
         if(_seedingOption($module) === 'yes'){
     			$this->dispatch(new SeedModule($module));
     		}
 		}
-
 	}
-
 }

@@ -2,6 +2,7 @@
   date: 2016-09-25
   changes:
   - Add support to Language filed type for Table and Form fields,
+  - Make module landing page optional,
 
 1.0.4
   date: 2016-09-19

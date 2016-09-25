@@ -55,15 +55,16 @@ class ModifyModule
         $source = __DIR__.'/../../resources/stubs/module';
 
         try {
-
-            /* adding routes to the module service provider class */
+            /* adding routes to the module service provider class
+            (currently, just for the optional landing (home) page) */
             $this->processFile(
                 $dest.'/src/'.$data['module_name'].'ModuleServiceProvider.php',
                 ['routes' => $source.'/routes.php'],
                 $data
             );
 
-            /* adding sections to the module class */
+            /* adding sections to the module class
+            (currently, just for the optional landing (home) page)*/
             $this->processFile(
                 $dest.'/src/'.$data['module_name'].'Module.php',
                 ['sections' => $source.'/sections.php'],

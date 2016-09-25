@@ -196,6 +196,19 @@
       }
   }
 
+  /**
+   * Return the landing (home) page option (true *default)
+   *
+   * @param    Module - $module
+   * @return   boolean
+   */
+
+   if (!function_exists('_landingPageOption')) {
+       function _landingPageOption($module){
+         return array_get(config($module->getNamespace('builder')), 'landing_page', true);
+       }
+   }
+
  /**
   * Return the DocBlock from the module's build config file
   *

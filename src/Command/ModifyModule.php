@@ -1,6 +1,6 @@
 <?php namespace Websemantics\BuilderExtension\Command;
 
-use Websemantics\BuilderExtension\Traits\FileProcessor;
+use Websemantics\BuilderExtension\Traits\TemplateProcessor;
 use Websemantics\BuilderExtension\Parser\ModuleNameParser;
 use Websemantics\BuilderExtension\Parser\VendorNameParser;
 use Anomaly\Streams\Platform\Addon\Module\Module;
@@ -18,7 +18,7 @@ use Anomaly\Streams\Platform\Addon\Module\Module;
 
 class ModifyModule
 {
-  use FileProcessor;
+  use TemplateProcessor;
 
     /**
      * The module class.
@@ -74,6 +74,11 @@ class ModifyModule
                 true
             );
           }
+
+          /* adding module icon */
+          $this->processVariable($dest.'/src/'.$data['module_name'].'Module.php',
+          ' "'._iconOption($module).'"','protected $icon =', ';');
+
         } catch (\PhpParser\Error $e) {
             die($e->getMessage());
         }

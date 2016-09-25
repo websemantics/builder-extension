@@ -197,6 +197,20 @@
   }
 
   /**
+   * Return icon option
+   *
+   * @param    Module - $module
+   * @return   string
+   */
+
+   if (!function_exists('_iconOption')) {
+       function _iconOption($module){
+         return array_get(config($module->getNamespace('builder')), 'icon', 'fa fa-puzzle-piece');
+       }
+   }
+
+
+  /**
    * Return the landing (home) page option (true *default)
    *
    * @param    Module - $module

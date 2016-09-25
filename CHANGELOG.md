@@ -3,6 +3,7 @@
   changes:
   - Add support to Language filed type for Table and Form fields,
   - Make module landing page optional,
+  - Fix an issue with module entity section entry by adding href attribute (occurs @ 1st section),
 
 1.0.4
   date: 2016-09-19

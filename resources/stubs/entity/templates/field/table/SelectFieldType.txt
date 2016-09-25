@@ -1,2 +1,2 @@
 
-				'{field_slug}',
+				'entry.{field_slug}.value',

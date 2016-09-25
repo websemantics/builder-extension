@@ -55,6 +55,8 @@ class ModifyModule
         $source = __DIR__.'/../../resources/stubs/module';
 
         try {
+          if(_landingPageOption($module)){
+
             /* adding routes to the module service provider class
             (currently, just for the optional landing (home) page) */
             $this->processFile(
@@ -71,7 +73,7 @@ class ModifyModule
                 $data,
                 true
             );
-
+          }
         } catch (\PhpParser\Error $e) {
             die($e->getMessage());
         }

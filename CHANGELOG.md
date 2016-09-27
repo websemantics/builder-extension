@@ -5,6 +5,7 @@
   - Make module landing page optional (work in progress),
   - Add module icon per the builder config file,
   - Fix an issue with module entity section entry by adding href attribute (occurs @ 1st section),
+  - Show repository stars when using `builder:list`
 
 1.0.4
   date: 2016-09-19

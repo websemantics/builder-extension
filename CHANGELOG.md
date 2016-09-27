@@ -1,8 +1,8 @@
 1.0.5
   date: 2016-09-25
   changes:
-  - Add support to Language and Select filed types (for Table and Form builders),
-  - Make module landing page optional,
+  - Add support to Language and Select filed types when generating entities (for Table and Form builders),
+  - Make module landing page optional (work in progress),
   - Add module icon per the builder config file,
   - Fix an issue with module entity section entry by adding href attribute (occurs @ 1st section),
 

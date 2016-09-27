@@ -127,14 +127,13 @@ trait Registry
     }
 
     /**
-     * Print ascii logo.
+     * Print Builder ascii logo
      */
     protected function logo()
     {
         /* Get some theme going */
-      $this->output->getFormatter()->setStyle('p', new OutputFormatterStyle('magenta', 'black'));
+        $this->output->getFormatter()->setStyle('p', new OutputFormatterStyle('magenta', 'black'));
         $this->output->getFormatter()->setStyle('t', new OutputFormatterStyle('white', 'black'));
-
         $this->output->writeln(_view('ascii.logo')->render());
     }
 

@@ -53,11 +53,13 @@ class ListTemplates extends Command
       */
       $this->info("Retrieving a list of avilable $title");
 
+      $this->flush($this->getCacheKey($this->registry));
+
       $repos = app('cache')->remember($this->getCacheKey($this->registry), $this->ttl,
         function() use($type, $filter) {
           return collect($this->client->api('user')->repositories($this->registry))
             ->map(function ($values) {
-              return array_only($values, ['name', 'description']);
+              return array_only($values, ['name', 'stargazers_count', 'description']);
             })->filter(function ($repo) use ($filter, $type){
               return $filter ? str_contains($repo['name'], "-$type") : true;
           });
@@ -65,7 +67,7 @@ class ListTemplates extends Command
       );
 
       if($repos->count() > 0) {
-        $this->table(['Name', 'Description'], $repos);
+        $this->table(['Name', 'Description','★'], $repos);
       } else {
         $this->comment("There are no available $title");
       }

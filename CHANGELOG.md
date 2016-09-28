@@ -1,6 +1,7 @@
 1.0.5
   date: 2016-09-25
   changes:
+  - Use Twig parser with extension functions,
   - Add support to Language and Select filed types when generating entities (for Table and Form builders),
   - Make module landing page optional (work in progress),
   - Add module icon per the builder config file,

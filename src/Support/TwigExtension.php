@@ -22,9 +22,7 @@
   public function getFunctions()
   {
       return [
-          new \Twig_SimpleFunction('config', [[], 'get']),
-          new \Twig_SimpleFunction('config_get', [[], 'get']),
-          new \Twig_SimpleFunction('config_has', [[], 'has']),
+          new \Twig_SimpleFunction('figlet', [[], 'get'])
       ];
   }
 

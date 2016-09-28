@@ -17,6 +17,8 @@ use PhpParser\ParserFactory;
  * Parsing code is never easy, hence, this class isn't doing a great job at being
  * easy to follow, .. go figure!
  *
+ * 25 Sept 2016, looking at this again, disaster!
+ *
  * @link      http://websemantics.ca
  *
  * @author    WebSemantics, Inc. <info@websemantics.ca>

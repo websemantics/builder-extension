@@ -1,6 +1,5 @@
 <?php namespace Websemantics\BuilderExtension\Command;
 
-use Websemantics\BuilderExtension\Traits\FileProcessor;
 use Anomaly\Streams\Platform\Application\Application;
 use Websemantics\BuilderExtension\Filesystem\Filesystem;
 use Packaged\Figlet\Figlet;
@@ -18,8 +17,6 @@ use Packaged\Figlet\Figlet;
 
 class ScaffoldTemplate
 {
-    use FileProcessor;
-
     /**
      * The addon path.
      *

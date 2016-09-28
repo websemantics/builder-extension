@@ -13,6 +13,7 @@ use Websemantics\BuilderExtension\Parser\AssignmentLabelParser;
 
 /**
  * Class ModifyEntity. Generates code for assignements
+ * TODO: Replace 'Anomaly\Streams\Platform\Support\Parser' with 'Websemantics\BuilderExtension\Support\TwigParser'
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io

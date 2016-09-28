@@ -2,7 +2,7 @@
 
 namespace Websemantics\BuilderExtension\Parser;
 
-use Websemantics\BuilderExtension\PhpParser\Helper;
+use Websemantics\BuilderExtension\Support\Helper;
 use PhpParser\PrettyPrinter\Standard;
 use PhpParser\Lexer;
 use PhpParser\ParserFactory;

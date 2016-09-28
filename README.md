@@ -34,7 +34,6 @@
 ```                                                                                             
 > This PyroCMS 3 extension once installed becomes your coding companion to scaffold Pyro modules, themes, extensions and [stream entities](#stream-entities).
 
-
 ## Motivation
 
 From the prospective of a developer, Pyro 3 reduces complexity and introduces simplicity and structure into building large scale web applications with its [modular design](https://en.wikipedia.org/wiki/Modular_design), Modules, Extension, etc and data structure abstraction ([ATD](https://en.wikipedia.org/wiki/Abstract_data_type)), realized in the [Stream Platform](https://github.com/anomalylabs/streams-platform).
@@ -44,7 +43,6 @@ However, with structure comes repetition and the need to use boilerplate code co
 This extension tries to remove some of that tedious work so that the developer can focus on writing business logic of the application. To achieve that, the Builder extension offers a number of commands and provide scaffolders for the different aspects of building a Pyro application.
 
 For examples, once installed, the extension will scaffold a software structure called [Entity](#stream-entities) for every stream migration generated with the `make:stream` command. The code generated includes `Models`, `Repositories`, `Table Builders`, `Form Builders`, `Admin Controllers`, `Seeders` to name a few. And with the help of a [PHP parser](https://github.com/nikic/PHP-Parser), it will configure the module classes with routes, bindings, language file entries and even seeding and even helper functions.
-
 
 ## Install
 
@@ -255,7 +253,6 @@ The idea is to have a collection of reusable Pyro 3 addon templates that can be 
 
 For a full list of what's available through the Builder extension, check the registry at, [PyroCMS Templates](https://github.com/pyrocms-templates) or use `builder:list` artisan command.
 
-
 ## Development
 
 Once the entity files have been created and working correctly with Pyro, you might want to modify and develop the classes individually adding custom code.
@@ -275,7 +272,6 @@ Here's an example,
 ```
 
 Notice that we used the last part of the file name (omitted the entity name) so that this can be applied globally to all generated entities of the same type.
-
 
 ## Configuration
 
@@ -320,7 +316,6 @@ To change this behaviour and store under the module `src/` folder directly, set 
 ```
 
 More settings are detailed in the [builder.php](https://github.com/websemantics/builder-extension/blob/master/resources/assets/module/template/resources/config/builder.php) file.
-
 
 ## Inner Working
 
@@ -377,18 +372,15 @@ The extension will then generate a controller per entity at `blog-module/src/Htt
 
 * For *ModuleWasInstalled* event, this will add `routes` and `sections` to the module and service provider. It will also seed the module if the builder config file was set accordingly.
 
-
 ## Support
 
 Need help or have a question? post a questions at [StackOverflow](https://stackoverflow.com/questions/tagged/builder-extension)
 
 *Please don't use the issue trackers for support/questions.*
 
-
 ## Contribution
 
 Well finally, we are more than happy to accept external contributions to the project in the form of feedback, bug reports and even better - pull requests :)
-
 
 ## Screencasts
 
@@ -421,7 +413,6 @@ Copy the generated file `asciicast.gif` from the current directory to the desire
 [PyroCMS Cheatsheet](http://websemantics.github.io/pyrocms-cheatsheet), A list of commands and features for PyroCMS 3.
 
 [Auto Pyro](https://github.com/websemantics/auto-pyro), PyroCMS deploy tool for faster and more pleasurable development experience.
-
 
 ## License
 

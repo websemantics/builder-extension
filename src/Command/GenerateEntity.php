@@ -12,6 +12,7 @@ use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 
 /**
  * Class GenerateEntity. Generates code from a stream schema
+ * TODO: Replace 'Anomaly\Streams\Platform\Support\Parser' with 'Websemantics\BuilderExtension\Support\TwigParser'
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io

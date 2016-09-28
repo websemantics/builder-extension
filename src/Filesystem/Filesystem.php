@@ -1,7 +1,7 @@
 <?php namespace Websemantics\BuilderExtension\Filesystem;
 
 use FilesystemIterator;
-use Anomaly\Streams\Platform\Support\Parser;
+use Websemantics\BuilderExtension\Support\TwigParser;
 
 /**
  * Class Filesystem
@@ -38,7 +38,7 @@ class Filesystem extends \Illuminate\Filesystem\Filesystem
      * @param Parser      $parser
      * @param Application $application
      */
-    function __construct(Parser $parser)
+    function __construct(TwigParser $parser)
     {
         $this->parser      		 = $parser;
     }

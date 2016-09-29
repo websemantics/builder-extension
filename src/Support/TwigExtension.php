@@ -60,15 +60,7 @@
                 $arguments = array_slice(func_get_args(), 1);
                 return call_user_func_array([$this->str, camel_case($text)], $arguments);
             }
-        ),
-        new \Twig_SimpleFunction(
-            'figlet',
-            function ($name) {
-                $arguments = array_slice(func_get_args(), 1);
-                return call_user_func_array([$this->str, camel_case($name)], $arguments);
-            }
-        ),
-        new \Twig_SimpleFunction('test', [[], 'get'])
+        )
       ];
   }
   /**

@@ -1,12 +1,13 @@
 1.0.5
-  date: 2016-09-25
+  date: 2016-09-29
   changes:
-  - Use Twig parser with extension functions,
-  - Add support to Language and Select filed types when generating entities (for Table and Form builders),
+  - Use Twig parser with filters and functions,
+  - Add support to `anomaly.field_type.language` and `anomaly.field_type.select` for generated entities,
   - Make module landing page optional (work in progress),
   - Add module icon per the builder config file,
   - Fix an issue with module entity section entry by adding href attribute (occurs @ 1st section),
-  - Show repository stars when using `builder:list`
+  - Show repository stars when using `builder:list`,
+  - Support for `choice` and `confirm` question types when using `options` in builder schema,
 
 1.0.4
   date: 2016-09-19

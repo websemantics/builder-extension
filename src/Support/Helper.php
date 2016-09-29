@@ -1,7 +1,7 @@
 <?php namespace Websemantics\BuilderExtension\Support;
 
 use PhpParser\Node\Expr\ArrayItem;
-use PhpParser\Node\Scalar\String_;  Websemantics\BuilderExtension\Support\TwigParser
+use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Builder\Property;
 

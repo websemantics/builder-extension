@@ -2,7 +2,6 @@
 
 use Anomaly\Streams\Platform\Application\Application;
 use Websemantics\BuilderExtension\Filesystem\Filesystem;
-use Packaged\Figlet\Figlet;
 
 /**
  * Class ScaffoldTemplate.
@@ -72,40 +71,12 @@ class ScaffoldTemplate
      */
     public function handle(Filesystem $files)
     {
-        $context = array_merge($this->getTemplateData(), $this->context);
-
         /* Create addon folder */
         $files->makeDirectory($this->dist, 0755, true, true);
 
         /* Copy/parse Builder's template files */
-        $files->parseDirectory($this->src.'/template', $this->dist.'/', $context);
+        $files->parseDirectory($this->src.'/template', $this->dist.'/', $this->context);
 
         return $this->dist;
-    }
-
-    /**
-     * Get the template data from a stream object.
-     *
-     * @param Module          $module
-     * @param StreamInterface $stream
-     *
-     * @return array
-     */
-    protected function getTemplateData()
-    {
-        $moduleName = studly_case($this->slug);
-        $vendorName = studly_case($this->vendor);
-
-        return [
-          'description' => 'Describe your module here',
-          'docblock' => ' *',
-          'vendor_name' => $vendorName,
-          'vendor_name_lower' => strtolower($vendorName),
-          'namespace' => strtolower($moduleName),
-          'module_name' => $moduleName,
-          'date' => date("Y-n-j"),
-          'figlet_module_name' => Figlet::create(strtoupper($moduleName . ' Module'), 'small' /* slant */),
-          'module_name_lower' => strtolower($moduleName),
-        ];
     }
 }

@@ -90,7 +90,7 @@ class Filesystem extends \Illuminate\Filesystem\Filesystem
 		 * @return bool
 		 */
 		public function parseDirectory($source, $destination, $data, $options = null)
-		{
+		{ 
 			if (!$this->isDirectory($source)) return false;
 
 			$options = $options ?: FilesystemIterator::SKIP_DOTS;

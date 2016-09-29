@@ -1,8 +1,6 @@
 <?php namespace Websemantics\BuilderExtension\Command;
 
 use Websemantics\BuilderExtension\Traits\TemplateProcessor;
-use Websemantics\BuilderExtension\Parser\ModuleNameParser;
-use Websemantics\BuilderExtension\Parser\VendorNameParser;
 use Anomaly\Streams\Platform\Addon\Module\Module;
 
 /**
@@ -94,12 +92,10 @@ class ModifyModule
      */
     protected function getTemplateData(Module $module)
     {
-        $moduleName = (new ModuleNameParser())->parse($module);
 
         return [
-            'vendor_name' => (new VendorNameParser())->parse($module),
-            'namespace' => $moduleName,
-            'module_name' => $moduleName
+            'vendor_name' => studly_case($module->getVendor()),
+            'module_name' => studly_case($module->getSlug()),
         ];
     }
 }

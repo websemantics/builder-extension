@@ -4,12 +4,6 @@ use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 use Anomaly\Streams\Platform\Assignment\AssignmentModel;
 use Websemantics\BuilderExtension\Traits\TemplateProcessor;
 use Anomaly\Streams\Platform\Addon\Module\Module;
-use Websemantics\BuilderExtension\Parser\EntityNameParser;
-use Websemantics\BuilderExtension\Parser\ModuleNameParser;
-use Websemantics\BuilderExtension\Parser\VendorNameParser;
-use Websemantics\BuilderExtension\Parser\NamespaceParser;
-use Websemantics\BuilderExtension\Parser\AssignmentSlugParser;
-use Websemantics\BuilderExtension\Parser\AssignmentLabelParser;
 
 /**
  * Class ModifyEntity. Generates code for assignements
@@ -171,11 +165,9 @@ class ModifyEntity
         $fieldConfig
     ) {
 
-        $entityName = (new EntityNameParser())->parse($stream);
-        $moduleName = (new ModuleNameParser())->parse($module);
-        $fieldSlug = (new AssignmentSlugParser())->parse($assignment);
-        $fieldLabel = (new AssignmentLabelParser())->parse($assignment);
-        $namespace = (new NamespaceParser())->parse($stream);
+        $fieldSlug = $assignment->getFieldSlug();
+        $fieldLabel = ucwords(str_replace('_',' ', $assignment->getFieldSlug()));
+        $namespace = studly_case($stream->getNamespace());
 
         /* wheather we use a grouping folder for all streams with the same namespace */
         $namespaceFolder = _getNamespaceFolder($module, $namespace);
@@ -183,9 +175,9 @@ class ModifyEntity
         return [
             'namespace' => $namespace,
             'namespace_folder' => $namespaceFolder,
-            'vendor_name' => (new VendorNameParser())->parse($module),
-            'module_name' => $moduleName,
-            'entity_name' => $entityName,
+            'vendor_name' => studly_case($module->getVendor()),
+            'module_name' => studly_case($module->getSlug()),
+            'entity_name' => studly_case(str_singular($stream->getSlug())),
             'field_slug' => $fieldSlug,
             'field_label' => $fieldLabel,
             'relation_name' => camel_case($fieldSlug),

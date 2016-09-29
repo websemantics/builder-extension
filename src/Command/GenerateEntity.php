@@ -2,12 +2,7 @@
 
 use Anomaly\Streams\Platform\Addon\Module\Module;
 use Websemantics\BuilderExtension\Traits\TemplateProcessor;
-use Websemantics\BuilderExtension\Parser\EntityNameParser;
-use Websemantics\BuilderExtension\Parser\ModuleNameParser;
-use Websemantics\BuilderExtension\Parser\VendorNameParser;
-use Websemantics\BuilderExtension\Parser\NamespaceParser;
 use Websemantics\BuilderExtension\Parser\SeedersParser;
-use Websemantics\BuilderExtension\Parser\EntityLabelParser;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 
 /**
@@ -149,11 +144,8 @@ class GenerateEntity
      */
     protected function getTemplateData(Module $module, StreamInterface $stream)
     {
-        $entityName = (new EntityNameParser())->parse($stream);
-        $entityLabel = (new EntityLabelParser())->parse($stream);
-        $moduleName = (new ModuleNameParser())->parse($module);
-        $namespace = (new NamespaceParser())->parse($stream);
-        $vendorName = (new VendorNameParser())->parse($module);
+        $namespace = studly_case($stream->getNamespace());
+        $seeder_data = (new SeedersParser())->parse($module, $stream);
 
         /* check if we are using a grouping folder for all generated entities with the same namespace */
         $namespace_folder = _getNamespaceFolder($module, $namespace);
@@ -161,13 +153,13 @@ class GenerateEntity
         return [
             'docblock' => _getDocblock($module),
             'namespace' => $namespace,
-            'seeder_data' => (new SeedersParser())->parse($module, $stream),
+            'seeder_data' => $seeder_data,
             'namespace_folder' => $namespace_folder,
-            'vendor_name' => $vendorName,
-            'module_name' => $moduleName,
+            'vendor_name' => studly_case($module->getVendor()),
+            'module_name' => studly_case($module->getSlug()),
             'stream_slug' => $stream->getSlug(),
-            'entity_label' => $entityLabel,
-            'entity_name' => $entityName,
+            'entity_label' => ucwords(str_replace('_',' ', $stream->getSlug())),
+            'entity_name' => studly_case(str_singular($stream->getSlug())),
             'extends_repository' => _extendsRepository($module),
             'extends_repository_use' => _extendsRepositoryUse($module),
 

@@ -1,6 +1,5 @@
 <?php namespace Websemantics\BuilderExtension\Command;
 
-use Websemantics\BuilderExtension\Parser\EntityNameParser;
 use Illuminate\Filesystem\Filesystem;
 
 /**
@@ -40,7 +39,8 @@ class MakeStream
      */
     public function __construct($slug, $path)
     {
-      $this->entity = strtolower((new EntityNameParser())->parse($slug));
+
+      $this->entity = strtolower(str_singular($slug));
       $this->path = $path;
     }
 

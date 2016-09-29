@@ -12,18 +12,18 @@ use Illuminate\Routing\Redirector;
  * @package   {{vendor_name}}\{{module_name}}Module\Http\Controller\Admin
  */
 
-class {{entity_name_plural}}Controller extends AdminController
+class {{entity_name|str_plural}}Controller extends AdminController
 {
 
     /**
-     * Redirect to {{entity_name_lower_plural}}.
+     * Redirect to {{entity_name|lower|str_plural}}.
      *
      * @param Redirector $redirector
      * @return \Illuminate\Http\RedirectResponse
      */
     public function redirect(Redirector $redirector)
     {
-        return $redirector->to('admin/{{module_name_lower}}/{{entity_name_lower_plural}}');
+        return $redirector->to('admin/{{module_name|lower}}/{{entity_name|lower|str_plural}}');
     }
 
     /**

@@ -13,7 +13,7 @@ use {{vendor_name}}\{{module_name}}Module\{{namespace_folder}}{{entity_name}}\Co
 class {{entity_name}}Repository {{extends_repository}}implements {{entity_name}}RepositoryInterface
 {
     /**
-     * The {{entity_name_lower}} model.
+     * The {{entity_name|lower}} model.
      *
      * @var {{entity_name}}Model
      */

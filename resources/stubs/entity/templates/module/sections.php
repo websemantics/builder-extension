@@ -1,5 +1,5 @@
-<?php ['{{entity_name_lower_plural}}'  => [
-            'href' => 'admin/{{module_name_lower}}/{{entity_name_lower_plural}}',
+<?php ['{{entity_name|lower|str_plural}}'  => [
+            'href' => 'admin/{{module_name|lower}}/{{entity_name|lower|str_plural}}',
             'buttons' => [
                 'create'
             ]

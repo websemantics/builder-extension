@@ -1,7 +1,7 @@
 <?php namespace {{vendor_name}}\{{module_name}}Module\{{namespace_folder}}{{entity_name}};
 
 use {{vendor_name}}\{{module_name}}Module\{{namespace_folder}}{{entity_name}}\Contract\{{entity_name}}Interface;
-use Anomaly\Streams\Platform\Model\{{namespace}}\{{namespace}}{{studly_case_stream_slug}}EntryModel;
+use Anomaly\Streams\Platform\Model\{{namespace}}\{{namespace}}{{stream_slug|studly_case}}EntryModel;
 
 /**
  * Class {{entity_name}}Model
@@ -10,7 +10,7 @@ use Anomaly\Streams\Platform\Model\{{namespace}}\{{namespace}}{{studly_case_stre
  * @package   {{vendor_name}}\{{module_name}}Module\{{namespace_folder}}{{entity_name}}
  */
 
-class {{entity_name}}Model extends {{namespace}}{{studly_case_stream_slug}}EntryModel implements {{entity_name}}Interface
+class {{entity_name}}Model extends {{namespace}}{{stream_slug|studly_case}}EntryModel implements {{entity_name}}Interface
 {
     /**
      * Disable timestamps for this model.

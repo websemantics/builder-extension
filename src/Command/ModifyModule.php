@@ -99,8 +99,7 @@ class ModifyModule
         return [
             'vendor_name' => (new VendorNameParser())->parse($module),
             'namespace' => $moduleName,
-            'module_name' => $moduleName,
-            'module_name_lower' => strtolower($moduleName),
+            'module_name' => $moduleName
         ];
     }
 }

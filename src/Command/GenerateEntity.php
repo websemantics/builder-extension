@@ -86,7 +86,7 @@ class GenerateEntity
         );
 
         /* create an empty seeder if it does not exist */
-        $this->put($dest . '/resources/seeders/' . $data['entity_name_lower']. '.php', '', true);
+        $this->put($dest . '/resources/seeders/' . strtolower($data['entity_name']). '.php', '', true);
 
         try {
 
@@ -113,7 +113,7 @@ class GenerateEntity
 
             $this->processFile(
                 $dest.'/resources/lang/en/section.php',
-                [$data['entity_name_lower_plural'] => $entityPath.'/templates/module/section.php'],
+                [str_plural(strtolower($data['entity_name'])) => $entityPath.'/templates/module/section.php'],
                 $data
             );
 
@@ -164,17 +164,10 @@ class GenerateEntity
             'seeder_data' => (new SeedersParser())->parse($module, $stream),
             'namespace_folder' => $namespace_folder,
             'vendor_name' => $vendorName,
-            'vendor_name_lower' => strtolower($vendorName),
             'module_name' => $moduleName,
-            'module_name_lower' => strtolower($moduleName),
             'stream_slug' => $stream->getSlug(),
-            'studly_case_stream_slug' => studly_case($stream->getSlug()),
             'entity_label' => $entityLabel,
-            'entity_label_plural' => str_plural($entityLabel),
             'entity_name' => $entityName,
-            'entity_name_plural' => str_plural($entityName),
-            'entity_name_lower' => strtolower($entityName),
-            'entity_name_lower_plural' => strtolower(str_plural($entityName)),
             'extends_repository' => _extendsRepository($module),
             'extends_repository_use' => _extendsRepositoryUse($module),
 

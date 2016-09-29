@@ -13,14 +13,14 @@ interface {{entity_name}}RepositoryInterface extends EntryRepositoryInterface
 {
 
     /**
-     * Truncate {{entity_name_lower}}.
+     * Truncate {{entity_name|lower}}.
      *
      * @return static
      */
     public function truncate();
 
     /**
-     * Create a new {{entity_name_lower}}.
+     * Create a new {{entity_name|lower}}.
      *
      * @param array $attributes
      * @return static

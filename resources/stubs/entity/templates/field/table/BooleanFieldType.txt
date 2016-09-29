@@ -1,2 +1,7 @@
 
-				'{{field_slug}}',
+                [   'heading' => '{{field_slug}}',
+                    'value'   => function ({{entity_name}}Model $entry) {
+												return $entry->{{field_slug}} ? '<span class="label label-success">True</span>' :
+												       '<span class="label label-danger">False</span>';
+                    }
+                ],

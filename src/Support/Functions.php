@@ -219,7 +219,7 @@
 
    if (!function_exists('_landingPageOption')) {
        function _landingPageOption($module){
-         return array_get(config($module->getNamespace('builder')), 'landing_page', 'yes') === 'yes';
+         return array_get(config($module->getNamespace('builder')), 'landing_page', true);
        }
    }
 

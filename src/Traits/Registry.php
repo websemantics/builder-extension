@@ -249,9 +249,14 @@ trait Registry
             $default = isset($defults[$property]) ? $defults[$property] :
                       (isset($schema['default']) ? $schema['default'] : null);
 
-            $context[$property] = ($ignore && isset($defults[$property])) ? $default :
-                                  (!isset($schema['options']) ? $this->ask($question, $default) :
-                                  $this->choice($question, $schema['options'], $default));
+            if($ignore && isset($defults[$property])){
+              $context[$property] = $default;
+            } else {
+              $context[$property] = !isset($schema['options']) ? $this->ask($question, $default) :
+                      ((count(array_diff($schema['options'], ['yes','no'])) == 0 ) ?
+                      ($this->confirm($question, $default) ? 'true' : 'false') :
+                      $this->choice($question, $schema['options'], array_search($default, $schema['options'])));
+            }
         }
 
         /* append addon type */

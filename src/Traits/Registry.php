@@ -244,15 +244,12 @@ trait Registry
 
         foreach (isset($metadata['schema']) ? $metadata['schema'] : [] as $property => $schema) {
 
-            $method = !isset($schema['options']) ? 'ask' : 'choice';
-
             $question = (!empty($schema['label']) ? $schema['label'] : $property) . '?';
 
             $default = isset($defults[$property]) ? $defults[$property] :
                       (isset($schema['default']) ? $schema['default'] : null);
 
-            $context[$property] = ($ignore && isset($defults[$property])) ?
-                                  $default :
+            $context[$property] = ($ignore && isset($defults[$property])) ? $default :
                                   (!isset($schema['options']) ? $this->ask($question, $default) :
                                   $this->choice($question, $schema['options'], $default));
         }

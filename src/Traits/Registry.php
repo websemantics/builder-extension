@@ -227,7 +227,9 @@ trait Registry
     }
 
     /**
-     * Parse Builder template schema, interact with the user and return the context object,.
+     * Parse Builder template schema, interact with the user and return the context object,
+     * Use console command 'ask' method by default unless a list of options are provided,
+     * in which case use 'choice' for generic list oe 'confirm' for ['yes','no'] list,
      *
      * @param string $template, the Builder template name
      * @param string $defults,  list of defults (override the schema defults)
@@ -241,14 +243,21 @@ trait Registry
         $metadata = $this->getTemplateMetadata($template);
 
         foreach (isset($metadata['schema']) ? $metadata['schema'] : [] as $property => $schema) {
-            $question = !empty($schema['label']) ? $schema['label'] : $property;
+
+            $method = !isset($schema['options']) ? 'ask' : 'choice';
+
+            $question = (!empty($schema['label']) ? $schema['label'] : $property) . '?';
+
             $default = isset($defults[$property]) ? $defults[$property] :
-                  (isset($schema['default']) ? $schema['default'] : null);
-            $context[$property] = ($ignore && isset($defults[$property])) ? $default :
-                               $this->ask($question.'?', $default);
+                      (isset($schema['default']) ? $schema['default'] : null);
+
+            $context[$property] = ($ignore && isset($defults[$property])) ?
+                                  $default :
+                                  (!isset($schema['options']) ? $this->ask($question, $default) :
+                                  $this->choice($question, $schema['options'], $default));
         }
 
-        /* Add the addon type */
+        /* append addon type */
         $context['type'] = $this->getTemplateType($template);
 
         return $context;

@@ -4,7 +4,6 @@ namespace Websemantics\BuilderExtension\Database\Migration;
 
 /**
  * Class MigrationCreator.
- * TODO: Replace 'Anomaly\Streams\Platform\Support\Parser' with 'Websemantics\BuilderExtension\Support\TwigParser'
  *
  * Extend the functionality of the Stream migrator
  *
@@ -85,7 +84,7 @@ class MigrationCreator extends \Anomaly\Streams\Platform\Database\Migration\Migr
       list($stream, $fields, $assignments) =
         $this->getData($this->input->getOption('stream'));
 
-      return app('Anomaly\Streams\Platform\Support\Parser')
+      return app('Websemantics\BuilderExtension\Support\TwigParser')
       ->parse($stub, compact('class', 'table', 'stream', 'fields', 'assignments'));
     }
 

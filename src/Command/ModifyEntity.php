@@ -13,7 +13,6 @@ use Websemantics\BuilderExtension\Parser\AssignmentLabelParser;
 
 /**
  * Class ModifyEntity. Generates code for assignements
- * TODO: Replace 'Anomaly\Streams\Platform\Support\Parser' with 'Websemantics\BuilderExtension\Support\TwigParser'
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
@@ -65,7 +64,7 @@ class ModifyEntity
         $this->stream = $stream;
         $this->assignment = $assignment;
         $this->setFiles(app('Websemantics\BuilderExtension\Filesystem\Filesystem'));
-        $this->setParser(app('Anomaly\Streams\Platform\Support\Parser'));
+        $this->setParser(app('Websemantics\BuilderExtension\Support\TwigParser'));
     }
 
     /**

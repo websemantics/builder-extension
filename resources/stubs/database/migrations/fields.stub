@@ -10,6 +10,6 @@ class {{class}} extends Migration
      *
      * @var array
      */
-    protected $fields = [{{fields}}];
+    protected $fields = [{{fields|raw}}];
 
 }

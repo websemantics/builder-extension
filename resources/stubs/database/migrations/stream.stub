@@ -10,13 +10,13 @@ class {{class}} extends Migration
      *
      * @var array
      */
-    protected $stream = [{stream}];
+    protected $stream = [{{stream|raw}}];
 
     /**
      * The stream assignments.
      *
      * @var array
      */
-    protected $assignments = [{{assignments}}];
+    protected $assignments = [{{assignments|raw}}];
 
 }

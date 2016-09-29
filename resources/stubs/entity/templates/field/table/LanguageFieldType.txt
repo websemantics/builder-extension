@@ -1,6 +1,6 @@
 
-                [   'heading' => '{field_slug}',
-                    'value'   => function ({entity_name}Model $entry) {
-                        return trans("streams::locale.".$entry->{field_slug} . ".name")
+                [   'heading' => '{{field_slug}}',
+                    'value'   => function ({{entity_name}}Model $entry) {
+                        return trans("streams::locale.".$entry->{{field_slug}} . ".name")
                     }
                 ],

@@ -1,8 +1,8 @@
 <?php
 
 [
-            'name' => '{field_label}',
-            'label' => '{field_label}',
+            'name' => '{{field_label}}',
+            'label' => '{{field_label}}',
             'placeholder' => '',
             'instructions' => '',
             'warning' => '',

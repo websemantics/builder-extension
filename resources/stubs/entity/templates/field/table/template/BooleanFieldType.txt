@@ -1,9 +1,9 @@
 
-                [   'heading' => '{field_slug}',
-                    'value'   => function ({entity_name}Model $entry) {
-                        $template = '{column_template}';
-                        return str_replace("{value}",  $entry->{field_slug} ? 'Yes' : 'No', 
-                               str_replace("{class}",  $entry->{field_slug} ? 'success' : 'danger', 
+                [   'heading' => '{{field_slug}}',
+                    'value'   => function ({{entity_name}}Model $entry) {
+                        $template = '{{column_template}}';
+                        return str_replace("{value}",  $entry->{{field_slug}} ? 'Yes' : 'No',
+                               str_replace("{class}",  $entry->{{field_slug}} ? 'success' : 'danger',
                                ($template == 'default') ? '<span class="label label-{class}">{value}</span>' : $template));
 
                     }

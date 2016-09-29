@@ -1,30 +1,30 @@
-<?php namespace {vendor_name}\{module_name}Module\{namespace_folder}{entity_name};
+<?php namespace {{vendor_name}}\{{module_name}}Module\{{namespace_folder}}{{entity_name}};
 
-use {vendor_name}\{module_name}Module\{namespace_folder}{entity_name}\Contract\{entity_name}RepositoryInterface;
-{extends_repository_use}
+use {{vendor_name}}\{{module_name}}Module\{{namespace_folder}}{{entity_name}}\Contract\{{entity_name}}RepositoryInterface;
+{{extends_repository_use}}
 
 /**
- * Class {entity_name}Repository
+ * Class {{entity_name}}Repository
  *
-{docblock}
- * @package   {vendor_name}\{module_name}Module\{namespace_folder}{entity_name}
+{{docblock}}
+ * @package   {{vendor_name}}\{{module_name}}Module\{{namespace_folder}}{{entity_name}}
  */
 
-class {entity_name}Repository {extends_repository}implements {entity_name}RepositoryInterface
+class {{entity_name}}Repository {{extends_repository}}implements {{entity_name}}RepositoryInterface
 {
     /**
-     * The {entity_name_lower} model.
+     * The {{entity_name_lower}} model.
      *
-     * @var {entity_name}Model
+     * @var {{entity_name}}Model
      */
     protected $model;
 
     /**
-     * Create a new {entity_name}Repository instance.
+     * Create a new {{entity_name}}Repository instance.
      *
-     * @param {entity_name}Model $model
+     * @param {{entity_name}}Model $model
      */
-    public function __construct({entity_name}Model $model)
+    public function __construct({{entity_name}}Model $model)
     {
         $this->model = $model;
     }

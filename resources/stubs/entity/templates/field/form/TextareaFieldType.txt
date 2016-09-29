@@ -1,2 +1,2 @@
 
-						'{field_slug}',
+						'{{field_slug}}',

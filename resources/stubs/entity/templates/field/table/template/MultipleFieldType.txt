@@ -1,9 +1,9 @@
 
-                [   'heading' => '{field_slug}',
-                    'value'   => function ({entity_name}Model $entry) {
-    					$result = ($entry->{field_slug}) ? '' : '<span class="label label-default">null</span>';
+                [   'heading' => '{{field_slug}}',
+                    'value'   => function ({{entity_name}}Model $entry) {
+    					$result = ($entry->{{field_slug}}) ? '' : '<span class="label label-default">null</span>';
 
-					    foreach ($entry->{field_slug} as $item) {
+					    foreach ($entry->{{field_slug}} as $item) {
 					        $result .= '<span class="label label-default">' . $item->getTitle() . '</span>&nbsp;';
 					    }
     					return $result;

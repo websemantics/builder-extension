@@ -1,8 +1,8 @@
 
-                [   'heading' => '{field_slug}',
-                    'value'   => function ({entity_name}Model $entry) {
+                [   'heading' => '{{field_slug}}',
+                    'value'   => function ({{entity_name}}Model $entry) {
 
-	                    return str_replace("{value}",  trans("streams::locale.".$entry->{field_slug} . ".name"),
-	                    	'{column_template}');
+	                    return str_replace("{value}",  trans("streams::locale.".$entry->{{field_slug}} . ".name"),
+	                    	'{{column_template}}');
                     }
                 ],

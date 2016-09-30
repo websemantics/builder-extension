@@ -1,1 +1,1 @@
-<?php ['{{entity_name}}'  => '{{vendor|studly_case}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\{% endif %}{{entity_name}}\{{entity_name}}Seeder'];
+<?php ['{{entity_name}}'  => '{{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace}}\{% endif %}{{entity_name}}\{{entity_name}}Seeder'];

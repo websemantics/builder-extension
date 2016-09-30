@@ -72,7 +72,7 @@ class ModifyEntity
         $assignment = $this->assignment;
         $destination = $module->getPath();
         $entity = __DIR__.'/../../resources/stubs/entity';
-        $source = $entity.'/code/{namespace}/';
+        $source = $entity.'/code/{{namespace}}/';
 
         /* get the field config params from build.php */
         $fieldConfig = _getFieldConfig(
@@ -86,6 +86,7 @@ class ModifyEntity
 
         /* get the template data */
         $data = $this->getTemplateData($module, $stream, $assignment, $fieldConfig);
+        $module_name = studly_case($data['module_slug']);
 
         $entityDest = $destination.'/src/'.
         (config($module->getNamespace('builder.namespace_folder')) ? $data['namespace'].'/' : '')
@@ -112,11 +113,8 @@ class ModifyEntity
         }
 
         /* (3) process the field language file */
-        $this->processFile(
-            $destination.'/resources/lang/en/field.php',
-            [$data['field_slug'] => $entity.'/templates/module/field.php'],
-            $data
-        );
+        $this->processFile($destination.'/resources/lang/en/field.php',
+            [$data['field_slug'] => $entity.'/templates/module/field.php'], $data);
     }
 
     /**
@@ -161,10 +159,11 @@ class ModifyEntity
                                        AssignmentModel $assignment,$fieldConfig) {
         return [
             'config' => config($module->getNamespace('builder')),
-            'vendor' => $module->getVendor(),
             'field_slug' => $assignment->getFieldSlug(),
-            'namespace' => studly_case($stream->getNamespace()),
-            'module_name' => studly_case($module->getSlug()),
+            'vendor' => $module->getVendor(),
+            'module_slug' => $module->getSlug(),
+            'namespace' => $stream->getNamespace(),
+            'stream_slug' => $stream->getSlug(),
             'entity_name' => studly_case(str_singular($stream->getSlug())),
             'column_template' => $fieldConfig['column_template'],
         ];

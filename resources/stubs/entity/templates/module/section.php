@@ -1,3 +1,3 @@
 <?php [
-	    'title' => '{{entity_label|str_plural}}'
+	    'title' => '{{entity_name|replace({'_':' '})|str_plural|title}}'
 	];

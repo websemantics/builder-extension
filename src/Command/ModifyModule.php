@@ -49,32 +49,25 @@ class ModifyModule
     {
         $module = $this->module;
         $data = $this->getTemplateData($module);
-        $dest = $module->getPath();
-        $source = __DIR__.'/../../resources/stubs/module';
+        $module_name = studly_case($data['module']['slug']);
+        $src = __DIR__.'/../../resources/stubs/module';
 
         try {
           if(config($module->getNamespace('builder.landing_page'))){
 
             /* adding routes to the module service provider class
             (currently, just for the optional landing (home) page) */
-            $this->processFile(
-                $dest.'/src/'.$data['module_name'].'ModuleServiceProvider.php',
-                ['routes' => $source.'/routes.php'],
-                $data
-            );
+            $this->processFile($module->getPath().'/src/'.$module_name.'ModuleServiceProvider.php',
+                ['routes' => $src.'/routes.php'], $data);
 
             /* adding sections to the module class
             (currently, just for the optional landing (home) page)*/
-            $this->processFile(
-                $dest.'/src/'.$data['module_name'].'Module.php',
-                ['sections' => $source.'/sections.php'],
-                $data,
-                true
-            );
+            $this->processFile($module->getPath().'/src/'.$module_name.'Module.php',
+                              ['sections' => $src.'/sections.php'], $data, true);
           }
 
           /* adding module icon */
-          $this->processVariable($dest.'/src/'.$data['module_name'].'Module.php',
+          $this->processVariable($module->getPath().'/src/'.$module_name.'Module.php',
           ' "'.config($module->getNamespace('builder.icon')).'"','protected $icon =', ';');
 
         } catch (\PhpParser\Error $e) {
@@ -92,10 +85,10 @@ class ModifyModule
      */
     protected function getTemplateData(Module $module)
     {
-
-        return [
+      return [
+          'config' => config($module->getNamespace('builder')),
           'vendor' => $module->getVendor(),
-          'module_name' => studly_case($module->getSlug()),
-        ];
+          'module_slug' => $module->getSlug()
+      ];
     }
 }

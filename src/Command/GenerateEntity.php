@@ -61,12 +61,13 @@ class GenerateEntity
         $modulePath = __DIR__.'/../../resources/stubs/module';
 
         $data = $this->getTemplateData($module, $stream);
+        $module_name = studly_case($data['module_slug']);
 
         /* uncomment the array entries to protect these files from being overwriten or add your own */
         $this->files->setAvoidOverwrite(_getAvoidOverwrite($module, [
-              // $data['module_name'] . 'ModuleSeeder.php',
-              // $data['module_name'] . 'Module.php',
-              // $data['module_name'] . 'ModuleServiceProvider.php',
+              // $module_name . 'ModuleSeeder.php',
+              // $module_name . 'Module.php',
+              // $module_name . 'ModuleServiceProvider.php',
             ]));
 
         $dest = $module->getPath();
@@ -75,7 +76,7 @@ class GenerateEntity
         if(config($module->getNamespace('builder.namespace_folder'))){
           $this->files->parseDirectory($entityPath."/code/", $dest.'/src', $data);
         } else {
-          $this->files->parseDirectory($entityPath."/code/{{namespace}}/", $dest.'/src', $data);
+          $this->files->parseDirectory($entityPath."/code/{{namespace|studly_case}}/", $dest.'/src', $data);
           $this->files->parseDirectory($entityPath."/code/Http", $dest.'/src/Http', $data);
         }
 
@@ -86,36 +87,26 @@ class GenerateEntity
 
             /* secondly, stitch the entity with the module classes */
             $this->processFile(
-                $dest.'/src/'.$data['module_name'].'ModuleServiceProvider.php',
+                $dest.'/src/'.$module_name.'ModuleServiceProvider.php',
                 ['routes' => $entityPath.'/templates/module/routes.php',
                  'bindings' => $entityPath.'/templates/module/bindings.php',
-                 'singletons' => $entityPath.'/templates/module/singletons.php'],
-                $data
-            );
+                 'singletons' => $entityPath.'/templates/module/singletons.php'], $data);
 
             $this->processFile(
-                $dest.'/src/'.$data['module_name'].'Module.php',
-                ['sections' => $entityPath.'/templates/module/sections.php'],
-                $data
-            );
+                $dest.'/src/'.$module_name.'Module.php',
+                ['sections' => $entityPath.'/templates/module/sections.php'], $data);
 
             $this->processFile(
-                $dest.'/src/'.$data['module_name'].'ModuleSeeder.php',
-                ['seeders' => $entityPath.'/templates/module/seeding.php'],
-                $data
-            );
+                $dest.'/src/'.$module_name.'ModuleSeeder.php',
+                ['seeders' => $entityPath.'/templates/module/seeding.php'], $data );
 
             $this->processFile(
                 $dest.'/resources/lang/en/section.php',
-                [str_plural(strtolower($data['entity_name'])) => $entityPath.'/templates/module/section.php'],
-                $data
-            );
+                [str_plural(strtolower($data['entity_name'])) => $entityPath.'/templates/module/section.php'], $data);
 
             $this->processFile(
                 $dest.'/resources/lang/en/stream.php',
-                [$data['stream_slug'] => $entityPath.'/templates/module/stream.php'],
-                $data
-            );
+                [$data['stream_slug'] => $entityPath.'/templates/module/stream.php'], $data);
         } catch (\PhpParser\Error $e) {
             die($e->getMessage());
         }
@@ -146,13 +137,11 @@ class GenerateEntity
         return [
             'config' => config($module->getNamespace('builder')),
             'vendor' => $module->getVendor(),
-            'namespace' => studly_case($stream->getNamespace()),
-            'seeder_data' => (new SeedersParser())->parse($module, $stream),
-            'module_name' => studly_case($module->getSlug()),
+            'module_slug' => $module->getSlug(),
+            'namespace' => $stream->getNamespace(),
             'stream_slug' => $stream->getSlug(),
             'entity_name' => studly_case(str_singular($stream->getSlug())),
-            'entity_label' => ucwords(str_replace('_',' ', $stream->getSlug()))
-
+            'seeder_data' => (new SeedersParser())->parse($module, $stream)
         ];
     }
 }

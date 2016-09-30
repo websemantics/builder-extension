@@ -115,7 +115,7 @@ This command will clear the Builder cache and delete all downloaded templates.
 php artisan builder:clear
 ```
 
-#### Create a Templates
+#### Create Templates
 
 To create a Builder template that can used in your own projects using `builder:make`, run the following command,
 

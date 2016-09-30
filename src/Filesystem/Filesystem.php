@@ -119,7 +119,7 @@ class Filesystem extends \Illuminate\Filesystem\Filesystem
           // If the current items is just a regular text file, we will just parse its content
   				// and then copy this to the new location and keep looping, otherwise, just copy file.
           if(substr(finfo_file(finfo_open(FILEINFO_MIME_TYPE), $item->getPathname()), 0, 4) === 'text'){
-            $this->put($target, $this->parser->parse($template, $data));
+            $this->put($target, $this->parser->parse(file_get_contents($item->getPathname()), $data));
           } else {
             $this->copy($item->getPathname(), $target);
           }

@@ -168,7 +168,7 @@ php artisan make:stream 'comment:title_column(name),name:translatable(true)' ven
 php artisan make:stream 'comment:title_column(name):translatable(true),name:type(anomaly.field_type.text):translatable(true)' vendor.module.name
 ```
 
-The previous will generate a streams migration with as follows,
+The previous will generate a stream migration with as follows,
 
 ```php
   protected $stream = [

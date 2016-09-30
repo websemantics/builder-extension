@@ -91,7 +91,7 @@ Retrieving a list of available templates
 +-------------------+----------------------------------------------------------+---+
 | Name              | Description                                              | ★ |
 +-------------------+----------------------------------------------------------+---+
-| default-module    | Default module template for Pyro Builder Extension       | 1 |
+| default-module    | The default module template for Pyro Builder             | 1 |
 | pyrocms-theme     | A customized release of the official PyroCMS admin theme | 1 |
 | template-template | Starter template for building a Pyro Builder template    | 1 |
 +-------------------+----------------------------------------------------------+---+

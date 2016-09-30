@@ -143,13 +143,10 @@ class GenerateEntity
      */
     protected function getTemplateData(Module $module, StreamInterface $stream)
     {
-        $namespace = studly_case($stream->getNamespace());
-        $seeder_data = (new SeedersParser())->parse($module, $stream);
-
         return [
             'config' => config($module->getNamespace('builder')),
-            'namespace' => $namespace,
-            'seeder_data' => $seeder_data,
+            'namespace' => studly_case($stream->getNamespace()),
+            'seeder_data' => (new SeedersParser())->parse($module, $stream),
             'vendor_name' => studly_case($module->getVendor()),
             'module_name' => studly_case($module->getSlug()),
             'stream_slug' => $stream->getSlug(),
@@ -162,7 +159,6 @@ class GenerateEntity
 
 
   // 'field_slug' => $fieldSlug,
-  // 'relation_name' => camel_case($fieldSlug),
   // 'null_relationship_entry' => _nullRelationshipEntry($module),
   // 'column_template' => $fieldConfig['column_template'],
   // 'namespace' => $namespace,

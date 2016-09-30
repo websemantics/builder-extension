@@ -2,8 +2,8 @@
                 [   'heading' => '{{field_slug}}',
                     'value'   => function ({{entity_name}}Model $entry) {
                     
-	                    return ($entry->{{relation_name}})? 
-	                    str_replace("{value}",  $entry->{{relation_name}}->getTitle(), 
+	                    return ($entry->{{field_slug|camel_case}})? 
+	                    str_replace("{value}",  $entry->{{field_slug|camel_case}}->getTitle(), 
 	                    	'{{column_template}}') :
 	                    	'{{null_relationship_entry}}';
                     }

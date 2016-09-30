@@ -163,17 +163,12 @@ class ModifyEntity
         AssignmentModel $assignment,
         $fieldConfig
     ) {
-
-        $fieldSlug = $assignment->getFieldSlug();
-        $namespace = studly_case($stream->getNamespace());
-
         return [
-            'namespace' => $namespace,
+            'namespace' => studly_case($stream->getNamespace()),
             'vendor_name' => studly_case($module->getVendor()),
             'module_name' => studly_case($module->getSlug()),
             'entity_name' => studly_case(str_singular($stream->getSlug())),
-            'field_slug' => $fieldSlug,
-            'relation_name' => camel_case($fieldSlug),
+            'field_slug' => $assignment->getFieldSlug(),
             'null_relationship_entry' => _nullRelationshipEntry($module),
             'column_template' => $fieldConfig['column_template'],
         ];

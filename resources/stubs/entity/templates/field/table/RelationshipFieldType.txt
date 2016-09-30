@@ -1,7 +1,7 @@
 
                 [   'heading' => '{{field_slug}}',
                     'value'   => function ({{entity_name}}Model $entry) {
-                        return ($entry->{{relation_name}}) ? $entry->{{relation_name}}->getTitle() :
+                        return ($entry->{{field_slug|camel_case}}) ? $entry->{{field_slug|camel_case}}->getTitle() :
                         '{{null_relationship_entry}}';
                     }
                 ],

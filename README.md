@@ -328,14 +328,13 @@ To change this behaviour and store under the module `src/` folder directly, set 
   'group' => true,
 ```
 
-* There are two settings to the seeding option in `builder.php`,
-
-- `yes`, Builder extension will seed the module after install,
-- `no`, Seeding is disabled
+* There is an option to turn module seeding on after it has installed successfully in `builder.php`,
 
 ```
-  'seeding' => 'yes'
+  'seed' => true
 ```
+
+Turn on and off with `true` / `false` values.
 
 * Specify your project docblock to be included with the generated classes,
 
@@ -434,15 +433,14 @@ The `asciinema` command will generate a url to the recording, for example,  `htt
 
 Copy the generated file `asciicast.gif` from the current directory to the desired location.
 
-## Links
+## Resources
 
-[PyroCMS](https://github.com/pyrocms/pyrocms), an MVC PHP Content Management System built to be easy to use, theme and develop with. It is used by individuals and organizations of all sizes around the world.
-
-[Awesome PyroCMS](https://github.com/websemantics/awesome-pyrocms), A curated list of PyroCMS addons and resources.
-
-[PyroCMS Cheatsheet](http://websemantics.github.io/pyrocms-cheatsheet), A list of commands and features for PyroCMS 3.
-
-[Auto Pyro](https://github.com/websemantics/auto-pyro), PyroCMS deploy tool for faster and more pleasurable development experience.
+- [Auto Pyro](https://github.com/websemantics/auto-pyro), a PyroCMS deploy tool for faster development experience.
+- [Template Template](https://github.com/pyrocms-templates/template-template), The default Pyro Builder template for building Pyro Builder templates.
+- [Registry](https://github.com/pyrocms-templates),a list of all Pyro Builder available template.
+- [Awesome PyroCMS](https://github.com/websemantics/awesome-pyrocms), a curated list of PyroCMS addons and resources.
+- [PyroCMS Cheatsheet](http://websemantics.github.io/pyrocms-cheatsheet), A list of commands and features for PyroCMS 3.
+- [PyroCMS](https://github.com/pyrocms/pyrocms), an MVC PHP Content Management System built to be easy to use, theme and develop with. It is used by individuals and organizations of all sizes around the world.
 
 ## License
 

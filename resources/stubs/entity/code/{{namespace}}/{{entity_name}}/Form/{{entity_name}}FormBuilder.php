@@ -1,4 +1,4 @@
-<?php namespace {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\\{% endif %}{{entity_name}}\Form;
+<?php namespace {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\{% endif %}{{entity_name}}\Form;
 
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 
@@ -6,7 +6,7 @@ use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
  * Class {{entity_name}}FormBuilder
  *
 {{config.docblock}}
- * @package   {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\\{% endif %}{{entity_name}}\Form
+ * @package   {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\{% endif %}{{entity_name}}\Form
  */
 
 class {{entity_name}}FormBuilder extends FormBuilder

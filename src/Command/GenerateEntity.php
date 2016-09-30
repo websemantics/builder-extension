@@ -154,7 +154,7 @@ class GenerateEntity
             'module_name' => studly_case($module->getSlug()),
             'stream_slug' => $stream->getSlug(),
             'entity_name' => studly_case(str_singular($stream->getSlug())),
-            'entity_label' => ucwords(str_replace('_',' ', $stream->getSlug()))//,
+            'entity_label' => ucwords(str_replace('_',' ', $stream->getSlug()))
 
         ];
     }

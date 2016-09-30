@@ -1,13 +1,13 @@
-<?php namespace {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\\{% endif %}{{entity_name}};
+<?php namespace {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\{% endif %}{{entity_name}};
 
-use {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\\{% endif %}{{entity_name}}\Contract\{{entity_name}}RepositoryInterface;
+use {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\{% endif %}{{entity_name}}\Contract\{{entity_name}}RepositoryInterface;
 use {{config.extends_repository}};
 
 /**
  * Class {{entity_name}}Repository
  *
 {{config.docblock}}
- * @package   {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\\{% endif %}{{entity_name}}
+ * @package   {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\{% endif %}{{entity_name}}
  */
 
 class {{entity_name}}Repository extends {{config.extends_repository|split('\\')|last}} implements {{entity_name}}RepositoryInterface

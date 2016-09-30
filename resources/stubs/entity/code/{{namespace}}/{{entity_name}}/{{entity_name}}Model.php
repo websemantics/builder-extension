@@ -1,13 +1,13 @@
-<?php namespace {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\\{% endif %}{{entity_name}};
+<?php namespace {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\{% endif %}{{entity_name}};
 
-use {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\\{% endif %}{{entity_name}}\Contract\{{entity_name}}Interface;
+use {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\{% endif %}{{entity_name}}\Contract\{{entity_name}}Interface;
 use Anomaly\Streams\Platform\Model\{{namespace}}\{{namespace}}{{stream_slug|studly_case}}EntryModel;
 
 /**
  * Class {{entity_name}}Model
  *
 {{config.docblock}}
- * @package   {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\\{% endif %}{{entity_name}}
+ * @package   {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\{% endif %}{{entity_name}}
  */
 
 class {{entity_name}}Model extends {{namespace}}{{stream_slug|studly_case}}EntryModel implements {{entity_name}}Interface

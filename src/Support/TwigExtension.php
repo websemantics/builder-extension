@@ -104,18 +104,17 @@ use Packaged\Figlet\Figlet;
          */
         function (\Twig_Environment $env, $text, $font = null, $fontDir = null) {
 
-          if ($font === null) {
+            $figlet = new Figlet();
 
-            $font = $env->getExtension('builder')->getDefaultFigletFont();
+            if ($font === null) {
 
-            $fontDir = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR .
-                      'resources' . DIRECTORY_SEPARATOR . 'figlet' . DIRECTORY_SEPARATOR;
-          }
+              $font = $env->getExtension('builder')->getDefaultFigletFont();
+              $fontDir = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR .
+                        'resources' . DIRECTORY_SEPARATOR . 'figlet' . DIRECTORY_SEPARATOR;
+            }
 
-          $figlet = new Figlet();
-          $figlet->loadFont($font, $fontDir);
-
-          return $figlet->render($text);
+            $figlet->loadFont($font, $fontDir);
+            return $figlet->render($text);
         }, ['needs_environment' => true])
     ];
   }

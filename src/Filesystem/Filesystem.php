@@ -116,12 +116,12 @@ class Filesystem extends \Illuminate\Filesystem\Filesystem
               return false;
           }
 				} else {
-          // If the current items is just a regular file, we will just parse its content
-  				// and then copy this to the new location and keep looping.
-          if($this->parser->isTemplate($template = file_get_contents($item->getPathname()))){
-              $this->put($target, $this->parser->parse($template, $data));
+          // If the current items is just a regular text file, we will just parse its content
+  				// and then copy this to the new location and keep looping, otherwise, just copy file.
+          if(substr(finfo_file(finfo_open(FILEINFO_MIME_TYPE), $item->getPathname()), 0, 4) === 'text'){
+            $this->put($target, $this->parser->parse($template, $data));
           } else {
-              $this->copy($item->getPathname(), $target);
+            $this->copy($item->getPathname(), $target);
           }
 				}
 			}

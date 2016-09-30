@@ -1,5 +1,7 @@
 <?php namespace Websemantics\BuilderExtension\Support;
 
+use Packaged\Figlet\Figlet;
+
 /**
  * Class Twig Extension for the Builder .
  *
@@ -19,7 +21,7 @@
    *
    * @var string
    */
-  protected $figletFont = 'small';
+  protected $figletFont = 'crawford';
 
   /**
    * @var string|object
@@ -100,11 +102,20 @@
          *
          * @return string The formatted text
          */
-        function (\Twig_Environment $env, $text, $font = null) {
+        function (\Twig_Environment $env, $text, $font = null, $fontDir = null) {
+
           if ($font === null) {
-              $font = $env->getExtension('builder')->getDefaultFigletFont();
+
+            $font = $env->getExtension('builder')->getDefaultFigletFont();
+
+            $fontDir = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR .
+                      'resources' . DIRECTORY_SEPARATOR . 'figlet' . DIRECTORY_SEPARATOR;
           }
-          return \Packaged\Figlet\Figlet::create($text, $font);
+
+          $figlet = new Figlet();
+          $figlet->loadFont($font, $fontDir);
+
+          return $figlet->render($text);
         }, ['needs_environment' => true])
     ];
   }

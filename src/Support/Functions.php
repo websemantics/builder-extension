@@ -150,19 +150,6 @@
   }
 
  /**
-  * Return the seeding option ('yes' or 'no' *default)
-  *
-  * @param    Module - $module
-  * @return   string
-  */
-
-  if (!function_exists('_seedingOption')) {
-      function _seedingOption($module){
-        return array_get(config($module->getNamespace('builder')), 'seeding', 'no');
-      }
-  }
-
- /**
   * Extract the class name of the assignment filed type, i.e. TextFieldType to
   * access the field template i.e. 'templates/field/table/TextFieldType.txt'
   * If the 'column_template' is set, use 'templates/field/table/template/TextFieldType.txt'

@@ -1,4 +1,4 @@
-<?php namespace {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}}\Table;
+<?php namespace {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.group == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}}\Table;
 
 use Anomaly\Streams\Platform\Ui\Table\TableBuilder;
 
@@ -6,7 +6,7 @@ use Anomaly\Streams\Platform\Ui\Table\TableBuilder;
  * Class {{entity_name}}TableBuilder
  *
 {{config.docblock}}
- * @package   {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}}\Table
+ * @package   {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.group == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}}\Table
  */
 
 class {{entity_name}}TableBuilder extends TableBuilder

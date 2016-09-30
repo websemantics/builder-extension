@@ -1,4 +1,4 @@
-<?php namespace {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}};
+<?php namespace {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.group == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}};
 
 use Anomaly\Streams\Platform\Addon\Plugin\Plugin;
 
@@ -6,7 +6,7 @@ use Anomaly\Streams\Platform\Addon\Plugin\Plugin;
  * Class {{entity_name}}Plugin
  *
 {{config.docblock}}
- * @package   {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}}
+ * @package   {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.group == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}}
  */
 
 class {{entity_name}}Plugin extends Plugin

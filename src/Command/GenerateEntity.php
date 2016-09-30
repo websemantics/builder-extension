@@ -60,7 +60,18 @@ class GenerateEntity
         $modulePath = __DIR__.'/../../resources/stubs/module';
         $dest = $module->getPath();
 
-        $data = $this->getTemplateData($module, $stream);
+        /* seed file path for this entity */
+        $seedFile = "$dest/resources/seeders/".strtolower(str_singular($stream->getSlug())).".php";
+
+        $data = [
+            'config' => config($module->getNamespace('builder')),
+            'vendor' => $module->getVendor(),
+            'namespace' => $stream->getNamespace(),
+            'module_slug' => $module->getSlug(),
+            'stream_slug' => $stream->getSlug(),
+            'entity_name' => studly_case(str_singular($stream->getSlug())),
+            'seeder_data' => file_exists($seedFile) ? file_get_contents($seedFile) : ''
+        ];
         $moduleName = studly_case($data['module_slug']);
 
         /* uncomment the array entries to protect these files from being overwriten or add your own */
@@ -71,38 +82,34 @@ class GenerateEntity
             ]));
 
         /* initially, copy the entity template files to the module src folder */
-        if(config($module->getNamespace('builder.namespace_folder'))){
-          $this->files->parseDirectory($entityPath."/code/", $dest.'/src', $data);
+        if(config($module->getNamespace('builder.group'))){
+          $this->files->parseDirectory($entityPath."/code/", "$dest/src", $data);
         } else {
-          $this->files->parseDirectory($entityPath."/code/{{namespace|studly_case}}/", $dest.'/src', $data);
-          $this->files->parseDirectory($entityPath."/code/Http", $dest.'/src/Http', $data);
+          $this->files->parseDirectory($entityPath."/code/{{namespace|studly_case}}/", "$dest/src", $data);
+          $this->files->parseDirectory($entityPath."/code/Http", "$dest/src/Http", $data);
         }
 
         /* create an empty seeder if it does not exist */
-        $this->put($dest . '/resources/seeders/' . strtolower($data['entity_name']). '.php', '', true);
+        $this->put("$dest/resources/seeders/" . strtolower($data['entity_name']). '.php', '', true);
 
         try {
             /* secondly, stitch the entity with the module classes */
-            $this->processFile(
-                "$dest/src/$moduleName".'ModuleServiceProvider.php',
+            $this->processFile("$dest/src/$moduleName".'ModuleServiceProvider.php',
                 ['routes' => $entityPath.'/templates/module/routes.php',
                  'bindings' => $entityPath.'/templates/module/bindings.php',
                  'singletons' => $entityPath.'/templates/module/singletons.php'], $data);
 
-            $this->processFile(
-                "$dest/src/$moduleName".'Module.php',
+            $this->processFile("$dest/src/$moduleName".'Module.php',
                 ['sections' => $entityPath.'/templates/module/sections.php'], $data);
 
-            $this->processFile(
-                "$dest/src/$moduleName".'ModuleSeeder.php',
+            $this->processFile("$dest/src/$moduleName".'ModuleSeeder.php',
                 ['seeders' => $entityPath.'/templates/module/seeding.php'], $data );
 
-            $this->processFile(
-                $dest.'/resources/lang/en/section.php',
+            $this->processFile("$dest/resources/lang/en/section.php",
                 [strtolower(str_plural($data['entity_name'])) => $entityPath.'/templates/module/section.php'], $data);
 
             $this->processFile(
-                $dest.'/resources/lang/en/stream.php',
+                "$dest/resources/lang/en/stream.php",
                 [$data['stream_slug'] => $entityPath.'/templates/module/stream.php'], $data);
         } catch (\PhpParser\Error $e) {
             die($e->getMessage());
@@ -119,30 +126,5 @@ class GenerateEntity
     protected function processLanguage($file, $template, $data)
     {
         $this->processTemplate($file, $template, $data, 'return [', '];');
-    }
-
-    /**
-     * Get the template data from a stream object.
-     *
-     * @param Module          $module
-     * @param StreamInterface $stream
-     *
-     * @return array
-     */
-    protected function getTemplateData(Module $module, StreamInterface $stream)
-    {
-
-        /* seed file path for this entity */
-        $seedFile = $module->getPath()."/resources/seeders/".strtolower(str_singular($stream->getSlug())).".php";
-
-        return [
-            'config' => config($module->getNamespace('builder')),
-            'vendor' => $module->getVendor(),
-            'namespace' => $stream->getNamespace(),
-            'module_slug' => $module->getSlug(),
-            'stream_slug' => $stream->getSlug(),
-            'entity_name' => studly_case(str_singular($stream->getSlug())),
-            'seeder_data' => file_exists($seedFile) ? file_get_contents($seedFile) : ''
-        ];
     }
 }

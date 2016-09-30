@@ -292,10 +292,10 @@ This indicates to the builder extension the stream `namespaces` that your module
 
 When code is generated for an entity, the builder extension saves it under `src/{namespace}` by default. This is useful when your module handles streams from different namespaces.
 
-To change this behaviour and store under the module `src/` folder directly, set `namespace_folder` to `false`,
+To change this behaviour and store under the module `src/` folder directly, set `group` to `false`,
 
 ```
-  'namespace_folder' => true,
+  'group' => true,
 ```
 
 * There are two settings to the seeding option in `builder.php`,

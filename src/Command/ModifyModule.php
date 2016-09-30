@@ -48,7 +48,11 @@ class ModifyModule
     public function handle()
     {
         $module = $this->module;
-        $data = $this->getTemplateData($module);
+        $data = [
+            'config' => config($module->getNamespace('builder')),
+            'vendor' => $module->getVendor(),
+            'module_slug' => $module->getSlug()
+        ];
         $module_name = studly_case($data['module_slug']);
         $src = __DIR__.'/../../resources/stubs/module';
 
@@ -73,22 +77,5 @@ class ModifyModule
         } catch (\PhpParser\Error $e) {
             die($e->getMessage());
         }
-    }
-
-    /**
-     * Get template data.
-     *
-     * @param Module          $module
-     * @param StreamInterface $stream
-     *
-     * @return array
-     */
-    protected function getTemplateData(Module $module)
-    {
-      return [
-          'config' => config($module->getNamespace('builder')),
-          'vendor' => $module->getVendor(),
-          'module_slug' => $module->getSlug()
-      ];
     }
 }

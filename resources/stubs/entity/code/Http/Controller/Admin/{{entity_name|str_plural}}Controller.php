@@ -1,7 +1,7 @@
 <?php namespace {{vendor|studly_case}}\{{module_slug|studly_case}}Module\Http\Controller\Admin;
 
-use {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}}\Form\{{entity_name}}FormBuilder;
-use {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}}\Table\{{entity_name}}TableBuilder;
+use {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.group == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}}\Form\{{entity_name}}FormBuilder;
+use {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.group == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}}\Table\{{entity_name}}TableBuilder;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 use Illuminate\Routing\Redirector;
 

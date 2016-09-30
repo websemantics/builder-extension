@@ -85,10 +85,19 @@ class ModifyEntity
         $this->files->setAvoidOverwrite(_getAvoidOverwrite($module));
 
         /* get the template data */
-        $data = $this->getTemplateData($module, $stream, $assignment, $fieldConfig);
+        $data = [
+            'config' => config($module->getNamespace('builder')),
+            'field_slug' => $assignment->getFieldSlug(),
+            'vendor' => $module->getVendor(),
+            'module_slug' => $module->getSlug(),
+            'namespace' => $stream->getNamespace(),
+            'stream_slug' => $stream->getSlug(),
+            'entity_name' => studly_case(str_singular($stream->getSlug())),
+            'column_template' => $fieldConfig['column_template'],
+        ];
 
         $entityDest = $destination.'/src/'.
-        (config($module->getNamespace('builder.namespace_folder')) ? $data['namespace'].'/' : '')
+        (config($module->getNamespace('builder.group')) ? $data['namespace'].'/' : '')
         .$data['entity_name'];
 
         /* get the assigned class name, i.e. TextFieldType */
@@ -142,29 +151,5 @@ class ModifyEntity
     {
         $this->processTemplate($file, $path."$ftClsName.txt", $data,
         '$builder->setColumns([', ']);', $path."TextFieldType.txt");
-    }
-
-    /**
-     * Get the template data from a stream object.
-     *
-     * @param Module          $module
-     * @param StreamInterface $stream
-     * @param AssignmentModel $assignment
-     * @param array           $fieldConfig
-     *
-     * @return array
-     */
-    protected function getTemplateData(Module $module, StreamInterface $stream,
-                                       AssignmentModel $assignment, $fieldConfig) {
-        return [
-            'config' => config($module->getNamespace('builder')),
-            'field_slug' => $assignment->getFieldSlug(),
-            'vendor' => $module->getVendor(),
-            'module_slug' => $module->getSlug(),
-            'namespace' => $stream->getNamespace(),
-            'stream_slug' => $stream->getSlug(),
-            'entity_name' => studly_case(str_singular($stream->getSlug())),
-            'column_template' => $fieldConfig['column_template'],
-        ];
     }
 }

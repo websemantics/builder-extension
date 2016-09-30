@@ -1,13 +1,13 @@
-<?php namespace {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}};
+<?php namespace {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.group == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}};
 
-use {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}}\Contract\{{entity_name}}RepositoryInterface;
+use {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.group == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}}\Contract\{{entity_name}}RepositoryInterface;
 use {{config.extends_repository}};
 
 /**
  * Class {{entity_name}}Repository
  *
 {{config.docblock}}
- * @package   {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}}
+ * @package   {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.group == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}}
  */
 
 class {{entity_name}}Repository extends {{config.extends_repository|split('\\')|last}} implements {{entity_name}}RepositoryInterface

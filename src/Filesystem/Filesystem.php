@@ -99,36 +99,30 @@ class Filesystem extends \Illuminate\Filesystem\Filesystem
 			// create it recursively, which just gets the destination prepared to copy
 			// the files over. Once we make the source we'll proceed the copying.
 
-			if (!$this->isDirectory($destination))
-			{
+			if (!$this->isDirectory($destination)){
 				$this->makeDirectory($destination, 0777, true);
 			}
 
 			$items = new FilesystemIterator($source, $options);
 
-			foreach ($items as $item)
-			{
-
+			foreach ($items as $item){
 				// As we spin through items, we will check to see if the current file is actually
 				// a source or a file. When it is actually a source we will need to call
 				// back into this function recursively to keep copying these nested folders.
 				$target = $destination.'/'.$this->parser->parse($item->getBasename(), $data);
 
-				if ($item->isDir())
-				{
-					$path = $item->getPathname();
-
-					if (!$this->parseDirectory($path, $target, $data, $options)) return false;
-				}
-
-				// If the current items is just a regular file, we will just parse its content
-				// and then copy this to the new location and keep looping.
-				else
-				{
-	        $template = file_get_contents($item->getPathname());
-
-	        $this->put($target, $this->parser->parse($template, $data));
-
+				if ($item->isDir()){
+					if (!$this->parseDirectory($item->getPathname(), $target, $data, $options)){
+              return false;
+          }
+				} else {
+          // If the current items is just a regular file, we will just parse its content
+  				// and then copy this to the new location and keep looping.
+          if($this->parser->isTemplate($template = file_get_contents($item->getPathname()))){
+              $this->put($target, $this->parser->parse($template, $data));
+          } else {
+              $this->copy($item->getPathname(), $target);
+          }
 				}
 			}
 			return true;

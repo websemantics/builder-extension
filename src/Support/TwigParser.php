@@ -45,6 +45,18 @@ class TwigParser
    */
   public function parse($content, $data = [])
   {
-      return $this->twig->render($content, $data);
+    return $this->twig->render($content, $data);
+  }
+
+  /**
+   * Check the content of the file if it resembles a template
+   *
+   * @param  string $content
+   * @param  array $data
+   * @return string
+   */
+  public function isTemplate($content)
+  {
+    return is_string($content) && str_contains($content, ['{{', '}}']);
   }
 }

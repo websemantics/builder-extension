@@ -117,7 +117,7 @@ php artisan builder:clear
 
 #### Create a Templates
 
-To create a Builder template run the following command,
+To create a Builder template that can used in your own projects using `builder:make`, run the following command,
 
 
 ```bash

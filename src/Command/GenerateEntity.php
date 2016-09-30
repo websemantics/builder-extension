@@ -99,7 +99,7 @@ class GenerateEntity
 
             $this->processFile(
                 $dest.'/resources/lang/en/section.php',
-                [str_plural(strtolower($data['entity_name'])) => $entityPath.'/templates/module/section.php'], $data);
+                [strtolower(str_plural($data['entity_name'])) => $entityPath.'/templates/module/section.php'], $data);
 
             $this->processFile(
                 $dest.'/resources/lang/en/stream.php',

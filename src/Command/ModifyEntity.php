@@ -155,7 +155,7 @@ class ModifyEntity
      * @return array
      */
     protected function getTemplateData(Module $module, StreamInterface $stream,
-                                       AssignmentModel $assignment,$fieldConfig) {
+                                       AssignmentModel $assignment, $fieldConfig) {
         return [
             'config' => config($module->getNamespace('builder')),
             'field_slug' => $assignment->getFieldSlug(),

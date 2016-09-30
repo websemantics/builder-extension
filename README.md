@@ -124,7 +124,7 @@ To create a Builder template that can used in your own projects using `builder:m
 php artisan builder:make template-template
 ```
 
-For more details, read the [documentation](https://github.com/pyrocms-templates/template-template).
+For more details, read the [template-template documentation](https://github.com/pyrocms-templates/template-template).
 
 #### Make Stream
 

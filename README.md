@@ -157,10 +157,13 @@ The `Inheritable` column indicates the properties a stream would inherit if one 
 ```bash
 # First, generate the module
 php artisan make:addon vendor.module.name
+
 # Then generate the stream migration files
 php artisan make:stream 'comment:title_column(name),name:trans' vendor.module.name
+
 # This can also be expressed as
 php artisan make:stream 'comment:title_column(name),name:translatable(true)' vendor.module.name
+
 # Or
 php artisan make:stream 'comment:title_column(name):translatable(true),name:type(anomaly.field_type.text):translatable(true)' vendor.module.name
 ```

@@ -1,6 +1,4 @@
-<?php
-
-namespace Websemantics\BuilderExtension\Parser;
+<?php namespace Websemantics\BuilderExtension\Support;
 
 use Websemantics\BuilderExtension\Support\Helper;
 use PhpParser\PrettyPrinter\Standard;

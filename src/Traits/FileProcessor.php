@@ -1,6 +1,6 @@
 <?php namespace Websemantics\BuilderExtension\Traits;
 
-use Websemantics\BuilderExtension\Parser\GenericPhpParser;
+use Websemantics\BuilderExtension\Support\GenericPhpParser;
 
 /**
  * Class FileProcessor

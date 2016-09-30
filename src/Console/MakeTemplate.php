@@ -56,6 +56,8 @@ class MakeTemplate extends Command
         _resolveAddonNamespace(_render('{{ vendor }}.{{ type }}.{{ slug }}', $context),
           $this->option('shared'));
 
+dd([$vendor, $type, $slug, $path]);
+
       $this->dispatch(new ScaffoldTemplate($vendor, $type, $slug,
                          $this->getBuilderPath($template),
                          $path, $context));

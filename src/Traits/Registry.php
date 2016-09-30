@@ -214,7 +214,9 @@ trait Registry
     }
 
     /**
-     * Get the template type (module, field_type, extension etc).
+     * Get the template type (module, field_type, extension etc) from
+     * the template name, i.e. default-module => 'module'
+     *                         pyrocms-theme => 'theme' etc
      *
      * @param string $template, the Builder template name
      *
@@ -231,13 +233,13 @@ trait Registry
      * Use console command 'ask' method by default unless a list of options are provided,
      * in which case use 'choice' for generic list oe 'confirm' for ['yes','no'] list,
      *
-     * @param string $template, the Builder template name
+     * @param string $template, the template name
      * @param string $defults,  list of defults (override the schema defults)
      * @param string $ignore,   if true, ignore asking a question for the provided defults
      *
      * @return array
      */
-    protected function getTemplateContext($template = [], $defults = [], $ignore = false)
+    protected function getTemplateContext($template, $defults = [], $ignore = false)
     {
         $context = [];
         $metadata = $this->getTemplateMetadata($template);
@@ -259,8 +261,8 @@ trait Registry
             }
         }
 
-        /* append addon type */
-        $context['type'] = $this->getTemplateType($template);
+        /* append addon type if not provided (template-template)*/
+        $context['type'] = isset($context['type']) ? $context['type'] : $this->getTemplateType($template);
 
         return $context;
     }

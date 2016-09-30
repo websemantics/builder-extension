@@ -79,6 +79,9 @@ class GenerateEntity
           $this->files->parseDirectory($entityPath."/code/Http", $dest.'/src/Http', $data);
         }
 
+        /* create an empty seeder if it does not exist */
+        $this->put($dest . '/resources/seeders/' . strtolower($data['entity_name']). '.php', '', true);
+
         try {
 
             /* secondly, stitch the entity with the module classes */

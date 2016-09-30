@@ -165,7 +165,6 @@ class ModifyEntity
     ) {
 
         $fieldSlug = $assignment->getFieldSlug();
-        $fieldLabel = ucwords(str_replace('_',' ', $assignment->getFieldSlug()));
         $namespace = studly_case($stream->getNamespace());
         $namespace_folder = config($module->getNamespace('builder.namespace_folder')) ? "$namespace\\" : "";
 
@@ -176,7 +175,6 @@ class ModifyEntity
             'module_name' => studly_case($module->getSlug()),
             'entity_name' => studly_case(str_singular($stream->getSlug())),
             'field_slug' => $fieldSlug,
-            'field_label' => $fieldLabel,
             'relation_name' => camel_case($fieldSlug),
             'null_relationship_entry' => _nullRelationshipEntry($module),
             'column_template' => $fieldConfig['column_template'],

@@ -78,7 +78,7 @@ trait Registry
 
       /* Check for ZipArchive */
       if (!class_exists('ZipArchive')) {
-          throw new Exception('Error, ZipArchive class is not avilable, unable to recover!');
+          throw new Exception('Error, ZipArchive class is not available, unable to recover!');
       }
 
         $this->zip = new \ZipArchive();

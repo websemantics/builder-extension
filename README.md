@@ -12,12 +12,12 @@
    \  /          \/              \  /      /              \/__     \                \   /   \
     \/            \               \/    __/                   \     \                \_/      \     /'\
     /   /          \              /    /                       \     \                /        \   /   \
-       /                              /                               \__            /          \ /
-      /      ____________     ______      ______     _____________             \                       /
-    _/      |            \====\      \   /     /====|             \\==========\================\        /   
-   /        |     __      |    \      \ /     /     |      __      |          |    \          |           
-            |    |__)     |     \      V     /      |     |__)     |          |     \         |            
-            |             |      \          /       |             <          ┌┴┐             ┌┴┐
+       /                              /                               \__                      \ /         
+      /      ____________     ______      ______     _____________          \\|//                         /
+    _/      |            \====\      \   /     /====|             \\===ooO==(o o)==Ooo========\          /   
+   /        |    ))\      |    \      \ /     /     |      __      |         (_)              |           
+            |    |OO)     |     \      V     /      |     |__)     |          |               |            
+            |    |/       |      \          /       |             <          ┌┴┐             ┌┴┐
             |         ___/        |        |        |              \        _ \ \           /  |
             |        |            |        |        |       |\      \      | \_| |         |    \_
             |        |            |        |        |       | \      \      \___/      __   \     `-_
@@ -25,8 +25,8 @@
              _______  __   __  ___   ___      ______   _______  ________             /    /      \    \
             |  _    ||  | |  ||   | |   |    |      | |       ||    _   |            |   |        |   |
             | |_|   ||  | |  ||   | |   |    |  _    ||    ___||   | |  |            \    \      /    /
-            |       ||  |_|  ||   | |   |    | | |   ||   |___ |   |_| <              \    `-..-'    /
-            |  _   | |       ||   | |   |___ | |_|   ||    ___||       |               '-_        _-'
+            |       ||  |_|  ||   | |   |    | |O|   ||   |___ |   |_| <              \    `-..-'    /
+            |  _   | |       ||   | |   |___ | |O|   ||    ___||       |               '-_        _-'
             | |_|   ||       ||   | |       ||       ||   |___ |   |\   \    - -- -       `------'
             |_______||_______||___| |_______||______| |_______||___| \___\     
 
@@ -34,19 +34,9 @@
 ```                                                                                             
 > This PyroCMS 3 extension once installed becomes your coding companion to scaffold Pyro modules, themes, extensions and [stream entities](#stream-entities).
 
-## Motivation
-
-From the prospective of a developer, Pyro 3 reduces complexity and introduces simplicity and structure into building large scale web applications with its [modular design](https://en.wikipedia.org/wiki/Modular_design), Modules, Extension, etc and data structure abstraction ([ATD](https://en.wikipedia.org/wiki/Abstract_data_type)), realized in the [Stream Platform](https://github.com/anomalylabs/streams-platform).
-
-However, with structure comes repetition and the need to use boilerplate code combined with predefined set of steps to integrate that with your application. Usually this is all covered in the documentation, but who has time for that?
-
-This extension tries to remove some of that tedious work so that the developer can focus on writing business logic of the application. To achieve that, the Builder extension offers a number of commands and provide scaffolders for the different aspects of building a Pyro application.
-
-For examples, once installed, the extension will scaffold a software structure called [Entity](#stream-entities) for every stream migration generated with the `make:stream` command. The code generated includes `Models`, `Repositories`, `Table Builders`, `Form Builders`, `Admin Controllers`, `Seeders` to name a few. And with the help of a [PHP parser](https://github.com/nikic/PHP-Parser), it will configure the module classes with routes, bindings, language file entries and even seeding and even helper functions.
-
 ## Install
 
-In your project folder, require the extension with `composer` and then install,
+In your project folder, require the extension with `composer` and then install as follows,
 
 ```bash
 composer require websemantics/builder-extension
@@ -55,23 +45,23 @@ php artisan extension:install websemantics.extension.builder
 
 ## Getting Started
 
-The first command to use when developing a Pyro application with the Builder extension is `make:addon`. The extension override the core `make:addon` command to add essential files and features to the generated modules. Use the `make:addon` as per the [documentation](https://www.pyrocms.com/documentation),
+The first command to use when developing a Pyro application with the Builder extension is `make:addon`. The extension override the default `make:addon` command to add essential files and features to the generated modules.
 
 #### Make Module
 
-Provide the vendor and module name, that's all,
+Create a Builder compatible module using `make:addon` command as per usual, [documentation](https://www.pyrocms.com/documentation),
 
 ```bash
 php artisan make:addon vendor.module.name
 ```
 
-The builder extension will download the [default module template](https://github.com/pyrocms-templates/default-module) from a [registry](#the-registry) and generate all the module files. The downloaded module template is cached at `app/storage/streams/default/builder/default-module`. To download a fresh copy of the template, use `--force` option.
+The builder extension will download the [default module](https://github.com/pyrocms-templates/default-module) from a [registry](#the-registry) and generate all the module files. The downloaded module template is cached at `app/storage/streams/default/builder/default-module`. To download a fresh copy of the template, use `--force` option.
 
 ```bash
 php artisan make:addon vendor.module.name --force
 ```
 
-Note that, a fields migration with not be generated by default as per Pyro 3 default `make:addon` command behaviour as with the Builder extension, fields migrations are generated per stream migrations.
+Note that, a fields migration file will not be generated by default as per Pyro 3 default `make:addon` command behaviour. The Builder extension generates a separate fields migration file for each stream migration.
 
 #### List Templates
 
@@ -84,16 +74,32 @@ php artisan builder:list
 Result,
 
 ```
-+----------------+----------------------------------------------------+
-| Name           | Description                                        |
-+----------------+----------------------------------------------------+
-| default-module | Default module template for Pyro Builder Extension |
-+----------------+----------------------------------------------------+
+ ____   __ __  ____  _     ___      ___  ____
+|    \ |  |  ||    || |   |   \    /  _||    \
+|  o  )|  |  | |  | | |   |    \  /  |_ |  D  )
+|     ||  |  | |  | | |__ |  D  ||    _||    /
+|  O  ||  :  | |  | |    ||     ||   |_ |    \
+|_____| \__,_||____||____||_____||_____||__|\_|
+Addons scaffolder for maximum coding pleasure
+
+Available Commands:
+- builder:list, List available templates from the registry
+- builder:make, Create an addon from a template
+- builder:clear, Clear cache and locally stored templates
+
+Retrieving a list of available templates
++-------------------+-------------------------------------------------------+---+
+| Name              | Description                                           | ★ |
++-------------------+-------------------------------------------------------+---+
+| default-module    | Default module template for Pyro Builder Extension    | 1 |
+| pyrocms-theme     | The official admin theme for PyroCMS customized.      | 1 |
+| template-template | Starter template for building a Pyro Builder template | 1 |
++-------------------+-------------------------------------------------------+---+
 ```
 
 #### Make Template
 
-This command will download and scaffold the selected addon template. If the template is already cached then it will be used by default unless the `--force` option is specified to force a fresh copy of the template.
+This command will download and scaffold the selected addon template of any type. If the template is already cached, it will then be used by default unless the `--force` option is specified to download a fresh copy of the template.
 
 ```bash
 php artisan builder:make default-module --force
@@ -109,6 +115,17 @@ This command will clear the Builder cache and delete all downloaded templates.
 php artisan builder:clear
 ```
 
+#### Create a Templates
+
+To create a Builder template run the following command,
+
+
+```bash
+php artisan builder:make template-template
+```
+
+For more details, read the [documentation](https://github.com/pyrocms-templates/template-template).
+
 #### Make Stream
 
 This is an enhanced version of Pyro 3 default `make:stream` command. It introduces the ability to specify stream fields and properties.
@@ -119,7 +136,7 @@ Using the example in [Auto-pyro](https://github.com/websemantics/auto-pyro) to c
 php make:stream 'task:tc(name),name,description:t(anomaly.field_type.textarea),completed:t(anomaly.field_type.boolean)' websemantics.module.todo
 ```
 
-Instead of just the stream slug, the new command accepts a comma-separated list of fields following the stream slug and options.
+Instead of specifying the stream `slug` only, the new command accepts a comma-separated list of fields following the stream slug and options.
 
 The following is the complete colon-separated list of options appended after the stream or field slugs. They can be used to customize the generated stream / fields migration files. Option values - if applicable - are provided between parentheses (see example below),
 
@@ -165,6 +182,16 @@ The previous will generate a streams migration with as follows,
 ```
 
 If the `type` property of a field is not set, the Builder extension will assume, `anomaly.field_type.text` as default.
+
+## Motivation
+
+From the prospective of a developer, Pyro 3 reduces complexity and introduces simplicity and structure into building large scale web applications with its [modular design](https://en.wikipedia.org/wiki/Modular_design), Modules, Extension, etc and data structure abstraction ([ATD](https://en.wikipedia.org/wiki/Abstract_data_type)), realized in the [Stream Platform](https://github.com/anomalylabs/streams-platform).
+
+However, with structure comes repetition and the need to use boilerplate code combined with predefined set of steps to integrate that with your application. Usually this is all covered in the documentation, but who has time for that?
+
+This extension tries to remove some of that tedious work so that the developer can focus on writing business logic of the application. To achieve that, the Builder extension offers a number of commands and provide scaffolders for the different aspects of building a Pyro application.
+
+For examples, once installed, the extension will scaffold a software structure called [Entity](#stream-entities) for every stream migration generated with the `make:stream` command. The code generated includes `Models`, `Repositories`, `Table Builders`, `Form Builders`, `Admin Controllers`, `Seeders` to name a few. And with the help of a [PHP parser](https://github.com/nikic/PHP-Parser), it will configure the module classes with routes, bindings, language file entries and even seeding and even helper functions.
 
 ## Stream Entities
 

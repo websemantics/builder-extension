@@ -51,7 +51,7 @@ class ListTemplates extends Command
         Get a list of all repositories from cache or builder templates registry.
         Return all addon types or filter on $type provided
       */
-      $this->info("Retrieving a list of avilable $title");
+      $this->info("Retrieving a list of available $title");
 
       $this->flush($this->getCacheKey($this->registry));
 

@@ -63,7 +63,7 @@ class MakeTemplate extends Command
       $this->info("Builder has successfully created an addon from '$template' at '$path'");
 
     } else {
-      $this->output->error("Builder template not found. Use 'builder:list' command for a list of avilable templates.");
+      $this->output->error("Builder template not found. Use 'builder:list' command for a list of available templates.");
     }
   }
 

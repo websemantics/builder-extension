@@ -1,7 +1,7 @@
 <?php namespace {{vendor_name}}\{{module_name}}Module\Http\Controller\Admin;
 
-use {{vendor_name}}\{{module_name}}Module\{{namespace_folder}}{{entity_name}}\Form\{{entity_name}}FormBuilder;
-use {{vendor_name}}\{{module_name}}Module\{{namespace_folder}}{{entity_name}}\Table\{{entity_name}}TableBuilder;
+use {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\\{% endif %}{{entity_name}}\Form\{{entity_name}}FormBuilder;
+use {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\\{% endif %}{{entity_name}}\Table\{{entity_name}}TableBuilder;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 use Illuminate\Routing\Redirector;
 

@@ -166,11 +166,9 @@ class ModifyEntity
 
         $fieldSlug = $assignment->getFieldSlug();
         $namespace = studly_case($stream->getNamespace());
-        $namespace_folder = config($module->getNamespace('builder.namespace_folder')) ? "$namespace\\" : "";
 
         return [
             'namespace' => $namespace,
-            'namespace_folder' => $namespace_folder,
             'vendor_name' => studly_case($module->getVendor()),
             'module_name' => studly_case($module->getSlug()),
             'entity_name' => studly_case(str_singular($stream->getSlug())),

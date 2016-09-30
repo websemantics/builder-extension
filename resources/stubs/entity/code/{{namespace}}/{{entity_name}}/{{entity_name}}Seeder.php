@@ -1,4 +1,4 @@
-<?php namespace {{vendor_name}}\{{module_name}}Module\{{namespace_folder}}{{entity_name}};
+<?php namespace {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\\{% endif %}{{entity_name}};
 
 use Anomaly\Streams\Platform\Database\Seeder\Seeder;
 
@@ -6,7 +6,7 @@ use Anomaly\Streams\Platform\Database\Seeder\Seeder;
  * Class {{entity_name}}Seeder
  *
 {{config.docblock}}
- * @package   {{vendor_name}}\{{module_name}}Module\{{namespace_folder}}{{entity_name}}
+ * @package   {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\\{% endif %}{{entity_name}}
  */
 
 class {{entity_name}}Seeder extends Seeder

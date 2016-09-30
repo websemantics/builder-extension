@@ -1,12 +1,12 @@
-<?php namespace {{vendor_name}}\{{module_name}}Module\{{namespace_folder}}{{entity_name}}\Table;
+<?php namespace {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\\{% endif %}{{entity_name}}\Table;
 
-use {{vendor_name}}\{{module_name}}Module\{{namespace_folder}}{{entity_name}}\{{entity_name}}Model;
+use {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\\{% endif %}{{entity_name}}\{{entity_name}}Model;
 
 /**
  * Class {{entity_name}}TableColumns
  *
 {{config.docblock}}
- * @package   {{vendor_name}}\{{module_name}}Module\{{namespace_folder}}{{entity_name}}\Table
+ * @package   {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\\{% endif %}{{entity_name}}\Table
  */
 
 class {{entity_name}}TableColumns

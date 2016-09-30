@@ -145,13 +145,11 @@ class GenerateEntity
     {
         $namespace = studly_case($stream->getNamespace());
         $seeder_data = (new SeedersParser())->parse($module, $stream);
-        $namespace_folder = config($module->getNamespace('builder.namespace_folder')) ? "$namespace\\" : "";
 
         return [
             'config' => config($module->getNamespace('builder')),
             'namespace' => $namespace,
             'seeder_data' => $seeder_data,
-            'namespace_folder' => $namespace_folder,
             'vendor_name' => studly_case($module->getVendor()),
             'module_name' => studly_case($module->getSlug()),
             'stream_slug' => $stream->getSlug(),
@@ -169,7 +167,6 @@ class GenerateEntity
   // 'column_template' => $fieldConfig['column_template'],
   // 'namespace' => $namespace,
   // 'seeder_data' => $seeder_data,
-  // 'namespace_folder' => $namespace_folder,
   // 'vendor_name' => studly_case($module->getVendor()),
   // 'module_name' => studly_case($module->getSlug()),
   // 'stream_slug' => $stream->getSlug(),

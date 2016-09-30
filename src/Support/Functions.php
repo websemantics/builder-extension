@@ -162,33 +162,6 @@
       }
   }
 
-  /**
-   * Return icon option
-   *
-   * @param    Module - $module
-   * @return   string
-   */
-
-   if (!function_exists('_iconOption')) {
-       function _iconOption($module){
-         return array_get(config($module->getNamespace('builder')), 'icon', 'fa fa-square');
-       }
-   }
-
-
-  /**
-   * Return the landing (home) page option (true *default)
-   *
-   * @param    Module - $module
-   * @return   boolean
-   */
-
-   if (!function_exists('_landingPageOption')) {
-       function _landingPageOption($module){
-         return array_get(config($module->getNamespace('builder')), 'landing_page', true);
-       }
-   }
-
  /**
   * Extract the class name of the assignment filed type, i.e. TextFieldType to
   * access the field template i.e. 'templates/field/table/TextFieldType.txt'

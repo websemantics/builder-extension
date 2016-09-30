@@ -53,7 +53,7 @@ class ModifyModule
         $source = __DIR__.'/../../resources/stubs/module';
 
         try {
-          if(_landingPageOption($module)){
+          if(config($module->getNamespace('builder.landing_page'))){
 
             /* adding routes to the module service provider class
             (currently, just for the optional landing (home) page) */
@@ -75,7 +75,7 @@ class ModifyModule
 
           /* adding module icon */
           $this->processVariable($dest.'/src/'.$data['module_name'].'Module.php',
-          ' "'._iconOption($module).'"','protected $icon =', ';');
+          ' "'.config($module->getNamespace('builder.icon')).'"','protected $icon =', ';');
 
         } catch (\PhpParser\Error $e) {
             die($e->getMessage());

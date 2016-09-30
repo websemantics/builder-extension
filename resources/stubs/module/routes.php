@@ -1,2 +1,2 @@
 <?php 
-['admin/{{module_name|lower}}'            => '{{vendor_name}}\{{module_name}}Module\Http\Controller\Admin\{{module_name}}Controller@index'];
+['admin/{{module_name|lower}}'            => '{{vendor|studly_case}}\{{module_name}}Module\Http\Controller\Admin\{{module_name}}Controller@index'];

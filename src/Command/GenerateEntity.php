@@ -145,9 +145,9 @@ class GenerateEntity
     {
         return [
             'config' => config($module->getNamespace('builder')),
+            'vendor' => $module->getVendor(),
             'namespace' => studly_case($stream->getNamespace()),
             'seeder_data' => (new SeedersParser())->parse($module, $stream),
-            'vendor_name' => studly_case($module->getVendor()),
             'module_name' => studly_case($module->getSlug()),
             'stream_slug' => $stream->getSlug(),
             'entity_name' => studly_case(str_singular($stream->getSlug())),
@@ -156,14 +156,3 @@ class GenerateEntity
         ];
     }
 }
-
-
-  // 'field_slug' => $fieldSlug,
-  // 'column_template' => $fieldConfig['column_template'],
-  // 'namespace' => $namespace,
-  // 'seeder_data' => $seeder_data,
-  // 'vendor_name' => studly_case($module->getVendor()),
-  // 'module_name' => studly_case($module->getSlug()),
-  // 'stream_slug' => $stream->getSlug(),
-  // 'entity_label' => ucwords(str_replace('_',' ', $stream->getSlug())),
-  // 'entity_name' => studly_case(str_singular($stream->getSlug())),

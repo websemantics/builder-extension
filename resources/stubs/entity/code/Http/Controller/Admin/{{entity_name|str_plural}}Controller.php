@@ -1,7 +1,7 @@
-<?php namespace {{vendor_name}}\{{module_name}}Module\Http\Controller\Admin;
+<?php namespace {{vendor|studly_case}}\{{module_name}}Module\Http\Controller\Admin;
 
-use {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\{% endif %}{{entity_name}}\Form\{{entity_name}}FormBuilder;
-use {{vendor_name}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\{% endif %}{{entity_name}}\Table\{{entity_name}}TableBuilder;
+use {{vendor|studly_case}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\{% endif %}{{entity_name}}\Form\{{entity_name}}FormBuilder;
+use {{vendor|studly_case}}\{{module_name}}Module\{% if config.namespace_folder == true %}{{namespace}}\{% endif %}{{entity_name}}\Table\{{entity_name}}TableBuilder;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 use Illuminate\Routing\Redirector;
 
@@ -9,7 +9,7 @@ use Illuminate\Routing\Redirector;
  * Class {{entity_name}}Controller
  *
 {{config.docblock}}
- * @package   {{vendor_name}}\{{module_name}}Module\Http\Controller\Admin
+ * @package   {{vendor|studly_case}}\{{module_name}}Module\Http\Controller\Admin
  */
 
 class {{entity_name|str_plural}}Controller extends AdminController

@@ -157,19 +157,15 @@ class ModifyEntity
      *
      * @return array
      */
-    protected function getTemplateData(
-        Module $module,
-        StreamInterface $stream,
-        AssignmentModel $assignment,
-        $fieldConfig
-    ) {
+    protected function getTemplateData(Module $module, StreamInterface $stream,
+                                       AssignmentModel $assignment,$fieldConfig) {
         return [
             'config' => config($module->getNamespace('builder')),
+            'vendor' => $module->getVendor(),
+            'field_slug' => $assignment->getFieldSlug(),
             'namespace' => studly_case($stream->getNamespace()),
-            'vendor_name' => studly_case($module->getVendor()),
             'module_name' => studly_case($module->getSlug()),
             'entity_name' => studly_case(str_singular($stream->getSlug())),
-            'field_slug' => $assignment->getFieldSlug(),
             'column_template' => $fieldConfig['column_template'],
         ];
     }

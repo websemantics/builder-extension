@@ -94,8 +94,8 @@ class ModifyModule
     {
 
         return [
-            'vendor_name' => studly_case($module->getVendor()),
-            'module_name' => studly_case($module->getSlug()),
+          'vendor' => $module->getVendor(),
+          'module_name' => studly_case($module->getSlug()),
         ];
     }
 }

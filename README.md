@@ -164,7 +164,7 @@ php artisan make:stream 'comment:title_column(name),name:trans' vendor.module.na
 # This can also be expressed as
 php artisan make:stream 'comment:title_column(name),name:translatable(true)' vendor.module.name
 
-# Or
+# Or as,
 php artisan make:stream 'comment:title_column(name):translatable(true),name:type(anomaly.field_type.text):translatable(true)' vendor.module.name
 ```
 

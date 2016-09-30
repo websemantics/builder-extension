@@ -133,7 +133,7 @@ class GenerateEntity
     {
 
         /* seed file path for this entity */
-        $seed = $module->getPath()."/resources/seeders/".strtolower(str_singular($stream->getSlug())).".php";
+        $seedFile = $module->getPath()."/resources/seeders/".strtolower(str_singular($stream->getSlug())).".php";
 
         return [
             'config' => config($module->getNamespace('builder')),
@@ -142,7 +142,7 @@ class GenerateEntity
             'module_slug' => $module->getSlug(),
             'stream_slug' => $stream->getSlug(),
             'entity_name' => studly_case(str_singular($stream->getSlug())),
-            'seeder_data' => file_exists($seed) ? file_get_contents($seed) : ''
+            'seeder_data' => file_exists($seedFile) ? file_get_contents($seedFile) : ''
         ];
     }
 }

@@ -18,6 +18,7 @@ use Packaged\Figlet\Figlet;
 
   /**
    * The default Figlet font
+   * url: https://github.com/patorjk/figlet.js/blob/master/fonts/Crawford2.flf
    *
    * @var string
    */

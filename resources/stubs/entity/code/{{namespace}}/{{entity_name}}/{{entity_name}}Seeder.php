@@ -18,7 +18,7 @@ class {{entity_name}}Seeder extends Seeder
      * @var array
      */
     protected $data = [
-        {{seeder_data}}
+        {{seeder_data|raw}}
     ];
 
     /**

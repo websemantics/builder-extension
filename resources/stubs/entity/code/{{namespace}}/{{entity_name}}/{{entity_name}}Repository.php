@@ -1,16 +1,16 @@
 <?php namespace {{vendor_name}}\{{module_name}}Module\{{namespace_folder}}{{entity_name}};
 
 use {{vendor_name}}\{{module_name}}Module\{{namespace_folder}}{{entity_name}}\Contract\{{entity_name}}RepositoryInterface;
-{{extends_repository_use}}
+use {{config.extends_repository}};
 
 /**
  * Class {{entity_name}}Repository
  *
-{{docblock}}
+{{config.docblock}}
  * @package   {{vendor_name}}\{{module_name}}Module\{{namespace_folder}}{{entity_name}}
  */
 
-class {{entity_name}}Repository {{extends_repository}}implements {{entity_name}}RepositoryInterface
+class {{entity_name}}Repository extends {{config.extends_repository|split('\\')|last}} implements {{entity_name}}RepositoryInterface
 {
     /**
      * The {{entity_name|lower}} model.

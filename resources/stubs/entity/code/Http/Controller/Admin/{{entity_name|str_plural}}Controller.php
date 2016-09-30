@@ -8,7 +8,7 @@ use Illuminate\Routing\Redirector;
 /**
  * Class {{entity_name}}Controller
  *
-{{docblock}}
+{{config.docblock}}
  * @package   {{vendor_name}}\{{module_name}}Module\Http\Controller\Admin
  */
 

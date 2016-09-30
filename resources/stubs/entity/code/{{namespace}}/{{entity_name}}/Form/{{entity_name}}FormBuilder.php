@@ -5,7 +5,7 @@ use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 /**
  * Class {{entity_name}}FormBuilder
  *
-{{docblock}}
+{{config.docblock}}
  * @package   {{vendor_name}}\{{module_name}}Module\{{namespace_folder}}{{entity_name}}\Form
  */
 

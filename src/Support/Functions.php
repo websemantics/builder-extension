@@ -190,20 +190,6 @@
    }
 
  /**
-  * Return the DocBlock from the module's build config file
-  *
-  * @param    Module - $module
-  * @return   string
-  */
-
-  if (!function_exists('_getDocblock')) {
-      function _getDocblock($module){
-        return array_get(config($module->getNamespace('builder')),
-                            'docblock', '');
-      }
-  }
-
- /**
   * Return a string to display or a null relationship entry value
   *
   * @return   string
@@ -214,40 +200,6 @@
         return array_get(config($module->getNamespace('builder')),
                             'null_relationship_entry',
                             '<span class="label label-default">null</span>');
-      }
-  }
-
- /**
-  * Get the 'extends' string for a possible Super Class for the Entity Repository
-  *
-  * @return   string
-  */
-
-  if (!function_exists('_extendsRepository')) {
-      function _extendsRepository($module){
-        $extends_repository = array_get(config($module->getNamespace('builder')),
-                            'extends_repository', '');
-
-        if($extends_repository) {
-          $extends_repository = explode('\\', $extends_repository);
-          return (!empty($extends_repository))?"extends " . end($extends_repository) . " ":"";
-        }
-
-        return '';
-      }
-  }
-
- /**
-  * Get the 'use' string for the parent class that Entity Repository extends
-  *
-  * @return   string
-  */
-
-  if (!function_exists('_extendsRepositoryUse')) {
-      function _extendsRepositoryUse($module){
-        $extends_repository =  array_get(config($module->getNamespace('builder')),
-                            'extends_repository',null);
-        return (!empty($extends_repository))? "use $extends_repository;":"";
       }
   }
 

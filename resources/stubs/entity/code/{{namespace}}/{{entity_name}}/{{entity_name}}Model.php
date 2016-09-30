@@ -6,7 +6,7 @@ use Anomaly\Streams\Platform\Model\{{namespace}}\{{namespace}}{{stream_slug|stud
 /**
  * Class {{entity_name}}Model
  *
-{{docblock}}
+{{config.docblock}}
  * @package   {{vendor_name}}\{{module_name}}Module\{{namespace_folder}}{{entity_name}}
  */
 

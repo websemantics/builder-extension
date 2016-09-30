@@ -148,18 +148,30 @@ class GenerateEntity
         $namespace_folder = config($module->getNamespace('builder.namespace_folder')) ? "$namespace\\" : "";
 
         return [
-            'docblock' => _getDocblock($module),
+            'config' => config($module->getNamespace('builder')),
             'namespace' => $namespace,
             'seeder_data' => $seeder_data,
             'namespace_folder' => $namespace_folder,
             'vendor_name' => studly_case($module->getVendor()),
             'module_name' => studly_case($module->getSlug()),
             'stream_slug' => $stream->getSlug(),
-            'entity_label' => ucwords(str_replace('_',' ', $stream->getSlug())),
             'entity_name' => studly_case(str_singular($stream->getSlug())),
-            'extends_repository' => _extendsRepository($module),
-            'extends_repository_use' => _extendsRepositoryUse($module),
+            'entity_label' => ucwords(str_replace('_',' ', $stream->getSlug()))//,
 
         ];
     }
 }
+
+
+  // 'field_slug' => $fieldSlug,
+  // 'relation_name' => camel_case($fieldSlug),
+  // 'null_relationship_entry' => _nullRelationshipEntry($module),
+  // 'column_template' => $fieldConfig['column_template'],
+  // 'namespace' => $namespace,
+  // 'seeder_data' => $seeder_data,
+  // 'namespace_folder' => $namespace_folder,
+  // 'vendor_name' => studly_case($module->getVendor()),
+  // 'module_name' => studly_case($module->getSlug()),
+  // 'stream_slug' => $stream->getSlug(),
+  // 'entity_label' => ucwords(str_replace('_',' ', $stream->getSlug())),
+  // 'entity_name' => studly_case(str_singular($stream->getSlug())),

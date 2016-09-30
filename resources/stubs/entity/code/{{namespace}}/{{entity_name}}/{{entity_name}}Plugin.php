@@ -5,7 +5,7 @@ use Anomaly\Streams\Platform\Addon\Plugin\Plugin;
 /**
  * Class {{entity_name}}Plugin
  *
-{{docblock}}
+{{config.docblock}}
  * @package   {{vendor_name}}\{{module_name}}Module\{{namespace_folder}}{{entity_name}}
  */
 

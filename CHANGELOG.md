@@ -1,5 +1,5 @@
-1.0.5
-  date: 2016-09-29
+1.0.6
+  date: 2016-09-30
   changes:
   - Use Twig parser with filters and functions,
   - Add support to `anomaly.field_type.language` and `anomaly.field_type.select` for generated entities,
@@ -8,6 +8,8 @@
   - Fix an issue with module entity section entry by adding href attribute (occurs @ 1st section),
   - Show repository stars when using `builder:list`,
   - Support for `choice` and `confirm` question types when using `options` in builder schema,
+  - Refactor Entity templates to use filters and functions to produce all needed derivatives,
+  - Rename some builder config variables, `seeding => seed`, `namespace_folder => group`,
 
 1.0.4
   date: 2016-09-19

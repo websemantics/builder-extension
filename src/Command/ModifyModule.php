@@ -49,7 +49,7 @@ class ModifyModule
     {
         $module = $this->module;
         $data = $this->getTemplateData($module);
-        $module_name = studly_case($data['module']['slug']);
+        $module_name = studly_case($data['module_slug']);
         $src = __DIR__.'/../../resources/stubs/module';
 
         try {

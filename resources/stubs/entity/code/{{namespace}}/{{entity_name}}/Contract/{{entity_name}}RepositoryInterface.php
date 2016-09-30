@@ -1,4 +1,4 @@
-<?php namespace {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace}}\{% endif %}{{entity_name}}\Contract;
+<?php namespace {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}}\Contract;
 
 use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
 
@@ -6,7 +6,7 @@ use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
  * Interface {{entity_name}}RepositoryInterface
  *
 {{config.docblock}}
- * @package   {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace}}\{% endif %}{{entity_name}}\Contract
+ * @package   {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}}\Contract
  */
 
 interface {{entity_name}}RepositoryInterface extends EntryRepositoryInterface

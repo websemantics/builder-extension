@@ -72,7 +72,7 @@ class ModifyEntity
         $assignment = $this->assignment;
         $destination = $module->getPath();
         $entity = __DIR__.'/../../resources/stubs/entity';
-        $source = $entity.'/code/{{namespace}}/';
+        $source = $entity.'/code/{{namespace|studly_case}}/';
 
         /* get the field config params from build.php */
         $fieldConfig = _getFieldConfig(
@@ -86,7 +86,6 @@ class ModifyEntity
 
         /* get the template data */
         $data = $this->getTemplateData($module, $stream, $assignment, $fieldConfig);
-        $module_name = studly_case($data['module_slug']);
 
         $entityDest = $destination.'/src/'.
         (config($module->getNamespace('builder.namespace_folder')) ? $data['namespace'].'/' : '')

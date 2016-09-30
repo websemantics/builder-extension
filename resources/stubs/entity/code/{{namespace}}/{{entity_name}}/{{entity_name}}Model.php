@@ -1,16 +1,16 @@
-<?php namespace {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace}}\{% endif %}{{entity_name}};
+<?php namespace {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}};
 
-use {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace}}\{% endif %}{{entity_name}}\Contract\{{entity_name}}Interface;
-use Anomaly\Streams\Platform\Model\{{namespace}}\{{namespace}}{{stream_slug|studly_case}}EntryModel;
+use {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}}\Contract\{{entity_name}}Interface;
+use Anomaly\Streams\Platform\Model\{{namespace|studly_case}}\{{namespace|studly_case}}{{stream_slug|studly_case}}EntryModel;
 
 /**
  * Class {{entity_name}}Model
  *
 {{config.docblock}}
- * @package   {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace}}\{% endif %}{{entity_name}}
+ * @package   {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}}
  */
 
-class {{entity_name}}Model extends {{namespace}}{{stream_slug|studly_case}}EntryModel implements {{entity_name}}Interface
+class {{entity_name}}Model extends {{namespace|studly_case}}{{stream_slug|studly_case}}EntryModel implements {{entity_name}}Interface
 {
     /**
      * Disable timestamps for this model.

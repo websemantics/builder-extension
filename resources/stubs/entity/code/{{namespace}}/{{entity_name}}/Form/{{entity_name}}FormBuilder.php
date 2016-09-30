@@ -1,4 +1,4 @@
-<?php namespace {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace}}\{% endif %}{{entity_name}}\Form;
+<?php namespace {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}}\Form;
 
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 
@@ -6,7 +6,7 @@ use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
  * Class {{entity_name}}FormBuilder
  *
 {{config.docblock}}
- * @package   {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace}}\{% endif %}{{entity_name}}\Form
+ * @package   {{vendor|studly_case}}\{{module_slug|studly_case}}Module\{% if config.namespace_folder == true %}{{namespace|studly_case}}\{% endif %}{{entity_name}}\Form
  */
 
 class {{entity_name}}FormBuilder extends FormBuilder

@@ -84,7 +84,6 @@ class GenerateEntity
         $this->put($dest . '/resources/seeders/' . strtolower($data['entity_name']). '.php', '', true);
 
         try {
-
             /* secondly, stitch the entity with the module classes */
             $this->processFile(
                 $dest.'/src/'.$module_name.'ModuleServiceProvider.php',

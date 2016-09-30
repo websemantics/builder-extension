@@ -84,20 +84,6 @@
     }
   }
 
-  /**
-   * Return a true if the array provided is associative
-   *
-   * @param    array $array
-   * @return   boolean
-   */
-
-   if (!function_exists('_isAssociative')) {
-     function _isAssociative($array)
-     {
-         return ($array !== array_values($array));
-     }
-   }
-
  /**
   * Return a list of namespaces from the provided module's build config file,
   *
@@ -108,7 +94,7 @@
   if (!function_exists('_getNamespaces')) {
       function _getNamespaces($module){
         $namespaces = array_get(config($module->getNamespace('builder')), 'namespaces', []);
-        return _isAssociative($namespaces) ? array_keys($namespaces) : $namespaces;
+        return ($namespaces !== array_values($namespaces)) ? array_keys($namespaces) : $namespaces;
       }
   }
 

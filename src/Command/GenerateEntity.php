@@ -2,7 +2,6 @@
 
 use Anomaly\Streams\Platform\Addon\Module\Module;
 use Websemantics\BuilderExtension\Traits\TemplateProcessor;
-use Websemantics\BuilderExtension\Parser\SeedersParser;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 
 /**
@@ -59,20 +58,19 @@ class GenerateEntity
 
         $entityPath = __DIR__.'/../../resources/stubs/entity';
         $modulePath = __DIR__.'/../../resources/stubs/module';
+        $dest = $module->getPath();
 
         $data = $this->getTemplateData($module, $stream);
-        $module_name = studly_case($data['module_slug']);
+        $moduleName = studly_case($data['module_slug']);
 
         /* uncomment the array entries to protect these files from being overwriten or add your own */
         $this->files->setAvoidOverwrite(_getAvoidOverwrite($module, [
-              // $module_name . 'ModuleSeeder.php',
-              // $module_name . 'Module.php',
-              // $module_name . 'ModuleServiceProvider.php',
+              // $moduleName . 'ModuleSeeder.php',
+              // $moduleName . 'Module.php',
+              // $moduleName . 'ModuleServiceProvider.php',
             ]));
 
-        $dest = $module->getPath();
-
-        /* initially, copy the template files to the entity's src folder */
+        /* initially, copy the entity template files to the module src folder */
         if(config($module->getNamespace('builder.namespace_folder'))){
           $this->files->parseDirectory($entityPath."/code/", $dest.'/src', $data);
         } else {
@@ -86,17 +84,17 @@ class GenerateEntity
         try {
             /* secondly, stitch the entity with the module classes */
             $this->processFile(
-                $dest.'/src/'.$module_name.'ModuleServiceProvider.php',
+                "$dest/src/$moduleName".'ModuleServiceProvider.php',
                 ['routes' => $entityPath.'/templates/module/routes.php',
                  'bindings' => $entityPath.'/templates/module/bindings.php',
                  'singletons' => $entityPath.'/templates/module/singletons.php'], $data);
 
             $this->processFile(
-                $dest.'/src/'.$module_name.'Module.php',
+                "$dest/src/$moduleName".'Module.php',
                 ['sections' => $entityPath.'/templates/module/sections.php'], $data);
 
             $this->processFile(
-                $dest.'/src/'.$module_name.'ModuleSeeder.php',
+                "$dest/src/$moduleName".'ModuleSeeder.php',
                 ['seeders' => $entityPath.'/templates/module/seeding.php'], $data );
 
             $this->processFile(
@@ -133,14 +131,18 @@ class GenerateEntity
      */
     protected function getTemplateData(Module $module, StreamInterface $stream)
     {
+
+        /* seed file path for this entity */
+        $seed = $module->getPath()."/resources/seeders/".strtolower(str_singular($stream->getSlug())).".php";
+
         return [
             'config' => config($module->getNamespace('builder')),
             'vendor' => $module->getVendor(),
-            'module_slug' => $module->getSlug(),
             'namespace' => $stream->getNamespace(),
+            'module_slug' => $module->getSlug(),
             'stream_slug' => $stream->getSlug(),
             'entity_name' => studly_case(str_singular($stream->getSlug())),
-            'seeder_data' => (new SeedersParser())->parse($module, $stream)
+            'seeder_data' => file_exists($seed) ? file_get_contents($seed) : ''
         ];
     }
 }

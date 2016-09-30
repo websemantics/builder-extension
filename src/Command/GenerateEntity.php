@@ -60,8 +60,6 @@ class GenerateEntity
         $entityPath = __DIR__.'/../../resources/stubs/entity';
         $modulePath = __DIR__.'/../../resources/stubs/module';
 
-        $namespace_folder = _getNamespaceFolderTemplate($module);
-
         $data = $this->getTemplateData($module, $stream);
 
         /* uncomment the array entries to protect these files from being overwriten or add your own */
@@ -74,11 +72,12 @@ class GenerateEntity
         $dest = $module->getPath();
 
         /* initially, copy the template files to the entity's src folder */
-        $this->files->parseDirectory(
-            $entityPath."/code/$namespace_folder",
-            $dest.'/src',
-            $data
-        );
+        if(config($module->getNamespace('builder.namespace_folder'))){
+          $this->files->parseDirectory($entityPath."/code/", $dest.'/src', $data);
+        } else {
+          $this->files->parseDirectory($entityPath."/code/{{namespace}}/", $dest.'/src', $data);
+          $this->files->parseDirectory($entityPath."/code/Http", $dest.'/src/Http', $data);
+        }
 
         /* create an empty seeder if it does not exist */
         $this->put($dest . '/resources/seeders/' . strtolower($data['entity_name']). '.php', '', true);
@@ -146,9 +145,7 @@ class GenerateEntity
     {
         $namespace = studly_case($stream->getNamespace());
         $seeder_data = (new SeedersParser())->parse($module, $stream);
-
-        /* check if we are using a grouping folder for all generated entities with the same namespace */
-        $namespace_folder = _getNamespaceFolder($module, $namespace);
+        $namespace_folder = config($module->getNamespace('builder.namespace_folder')) ? "$namespace\\" : "";
 
         return [
             'docblock' => _getDocblock($module),

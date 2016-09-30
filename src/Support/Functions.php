@@ -136,40 +136,6 @@
   }
 
  /**
-  * Return the folder name for the curent namespace or empty
-  *
-  * @param    Module - $module
-  * @param    String - $namespace
-  * @param    Bollean - $forward, if true, use forward slash, otherwise backward slash
-  * @return   string
-  */
-
-  if (!function_exists('_getNamespaceFolder')) {
-      function _getNamespaceFolder($module, $namespace, $forward = false){
-        $namespace = ($forward) ? "$namespace/": "$namespace\\";
-
-        $namespaces = array_get(config($module->getNamespace('builder')), 'namespaces', []);
-
-        return array_get(config($module->getNamespace('builder')),
-                            'namespace_folder', true) ? $namespace : "";
-      }
-  }
-
- /**
-  * Return the folder template for the curent namespace
-  *
-  * @param    Module - $module
-  * @return   string
-  */
-
-  if (!function_exists('_getNamespaceFolderTemplate')) {
-      function _getNamespaceFolderTemplate($module){
-        return array_get(config($module->getNamespace('builder')),
-                            'namespace_folder', true) ? "" : "{namespace}/";
-      }
-  }
-
- /**
   * Return a list of class suffixes that won't be overwritten
   *
   * @param    Module - $module
@@ -205,7 +171,7 @@
 
    if (!function_exists('_iconOption')) {
        function _iconOption($module){
-         return array_get(config($module->getNamespace('builder')), 'icon', 'fa fa-puzzle-piece');
+         return array_get(config($module->getNamespace('builder')), 'icon', 'fa fa-square');
        }
    }
 

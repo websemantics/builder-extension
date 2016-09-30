@@ -87,10 +87,9 @@ class ModifyEntity
         /* get the template data */
         $data = $this->getTemplateData($module, $stream, $assignment, $fieldConfig);
 
-        /* get the namespace destination folder, if any! */
-        $namespaceFolder = _getNamespaceFolder($module, $data['namespace'], true);
-
-        $entityDest = $destination.'/src/'.$namespaceFolder.$data['entity_name'];
+        $entityDest = $destination.'/src/'.
+        (config($module->getNamespace('builder.namespace_folder')) ? $data['namespace'].'/' : '')
+        .$data['entity_name'];
 
         /* get the assigned class name, i.e. TextFieldType */
         $fieldTypeClassName = _getFieldTypeClassName($assignment);
@@ -168,13 +167,11 @@ class ModifyEntity
         $fieldSlug = $assignment->getFieldSlug();
         $fieldLabel = ucwords(str_replace('_',' ', $assignment->getFieldSlug()));
         $namespace = studly_case($stream->getNamespace());
-
-        /* wheather we use a grouping folder for all streams with the same namespace */
-        $namespaceFolder = _getNamespaceFolder($module, $namespace);
+        $namespace_folder = config($module->getNamespace('builder.namespace_folder')) ? "$namespace\\" : "";
 
         return [
             'namespace' => $namespace,
-            'namespace_folder' => $namespaceFolder,
+            'namespace_folder' => $namespace_folder,
             'vendor_name' => studly_case($module->getVendor()),
             'module_name' => studly_case($module->getSlug()),
             'entity_name' => studly_case(str_singular($stream->getSlug())),

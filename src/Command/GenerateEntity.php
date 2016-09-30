@@ -159,7 +159,6 @@ class GenerateEntity
 
 
   // 'field_slug' => $fieldSlug,
-  // 'null_relationship_entry' => _nullRelationshipEntry($module),
   // 'column_template' => $fieldConfig['column_template'],
   // 'namespace' => $namespace,
   // 'seeder_data' => $seeder_data,

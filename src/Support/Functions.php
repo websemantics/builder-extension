@@ -190,20 +190,6 @@
    }
 
  /**
-  * Return a string to display or a null relationship entry value
-  *
-  * @return   string
-  */
-
-  if (!function_exists('_nullRelationshipEntry')) {
-      function _nullRelationshipEntry($module){
-        return array_get(config($module->getNamespace('builder')),
-                            'null_relationship_entry',
-                            '<span class="label label-default">null</span>');
-      }
-  }
-
- /**
   * Extract the class name of the assignment filed type, i.e. TextFieldType to
   * access the field template i.e. 'templates/field/table/TextFieldType.txt'
   * If the 'column_template' is set, use 'templates/field/table/template/TextFieldType.txt'

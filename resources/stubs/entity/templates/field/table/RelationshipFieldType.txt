@@ -2,6 +2,6 @@
                 [   'heading' => '{{field_slug}}',
                     'value'   => function ({{entity_name}}Model $entry) {
                         return ($entry->{{field_slug|camel_case}}) ? $entry->{{field_slug|camel_case}}->getTitle() :
-                        '{{null_relationship_entry}}';
+                        '{{config.null_relationship_entry}}';
                     }
                 ],

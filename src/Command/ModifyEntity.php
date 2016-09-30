@@ -164,12 +164,12 @@ class ModifyEntity
         $fieldConfig
     ) {
         return [
+            'config' => config($module->getNamespace('builder')),
             'namespace' => studly_case($stream->getNamespace()),
             'vendor_name' => studly_case($module->getVendor()),
             'module_name' => studly_case($module->getSlug()),
             'entity_name' => studly_case(str_singular($stream->getSlug())),
             'field_slug' => $assignment->getFieldSlug(),
-            'null_relationship_entry' => _nullRelationshipEntry($module),
             'column_template' => $fieldConfig['column_template'],
         ];
     }

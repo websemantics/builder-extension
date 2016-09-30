@@ -1,3 +1,8 @@
+1.0.7
+  date: 2016-09-31
+  changes:
+  - Only text files are parsed by Twig
+
 1.0.6
   date: 2016-09-30
   changes:

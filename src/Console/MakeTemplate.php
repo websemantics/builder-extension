@@ -51,16 +51,15 @@ class MakeTemplate extends Command
 
       /* read the Builder template metadata and return the templaet context object */
       $context = $this->getTemplateContext($template);
+      $addon = _render('{{ vendor }}.{{ type }}.{{ slug }}', $context);
 
-      list($vendor, $type, $slug, $path) =
-        _resolveAddonNamespace(_render('{{ vendor }}.{{ type }}.{{ slug }}', $context),
-          $this->option('shared'));
+      list($vendor, $type, $slug, $path) = _resolveAddonNamespace($addon, $this->option('shared'));
 
       $this->dispatch(new ScaffoldTemplate($vendor, $type, $slug,
                          $this->getBuilderPath($template),
                          $path, $context));
 
-      $this->info("Builder has successfully created an addon from '$template' at '$path'");
+      $this->info("Builder has successfully created '$addon' addon from '$template' at '$path'");
 
     } else {
       $this->output->error("Builder template not found. Use 'builder:list' command for a list of available templates.");

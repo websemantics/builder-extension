@@ -14,6 +14,16 @@ return [
 
       /*
       |--------------------------------------------------------------------------
+      | Template of templates
+      |--------------------------------------------------------------------------
+      |
+      | To create an addon template, that used to create addons.
+      |
+      */
+      'default-template'  => env('BUILDER_DEFAULT_TEMPLATE', 'template-template'),
+
+      /*
+      |--------------------------------------------------------------------------
       | Default Templates
       |--------------------------------------------------------------------------
       |
@@ -23,7 +33,6 @@ return [
       */
       'templates' => [
         'module' => env('BUILDER_DEFAULT_MODULE', 'default-module'),
-        'template' => env('BUILDER_DEFAULT_TEMPLATE', 'template-template'),
         'theme' => [
             env('BUILDER_DEFAULT_ADMIN', 'pyrocms-theme'),
             env('BUILDER_DEFAULT_FRONT', 'starter-theme')

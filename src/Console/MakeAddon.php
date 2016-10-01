@@ -48,24 +48,27 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
      */
     public function fire(AddonManager $addons)
     {
+      $this->logo();
+
       list($vendor, $type, $slug, $path) =
         _resolveAddonNamespace($this->argument('namespace'), $this->option('shared'));
 
-      /* construct an index for a potential template then fetch it */
-      $index = $type . (($type !== 'theme') ? "" : ($this->option('admin') ? '.0' : '.1'));
-      $template = _config("config.templates.$index");
+      /* construct an index for a potential template  */
+      $index = "templates.$type" . (($type !== 'theme') ? "" : ($this->option('admin') ? '.0' : '.1'));
+
+      /* the template option indicates that the user wants to create a template not the actual addon */
+      $template = _config("config." . ($this->option('template') ? "default-template" : $index));
 
       if ($template && $this->download($template, $this->option('force'))) {
 
-          $this->logo();
           $context = $this->getTemplateContext($template,
-          ['vendor' => $vendor, 'slug' => $slug], true);
+          ['vendor' => $vendor, 'slug' => $slug, 'type' => $type], true, $this->option('default'));
 
           $this->dispatch(new ScaffoldTemplate($vendor, $type, $slug,
                               $this->getBuilderPath($template),
                               $path, $context));
 
-          $this->info("Builder has successfully created a module addon from '$template'");
+          $this->info("Builder has successfully created a $type addon from '$template'");
 
           return;
       } else { /* When things go wrong - which happens sometimes - fallback to Pyro make:addon */
@@ -83,6 +86,8 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
     protected function getOptions()
     {
       return [
+        ['default', null, InputOption::VALUE_NONE, "Indicates whether to use template default values."],
+        ['template', null, InputOption::VALUE_NONE, "Indicates whether an addon or a addon template should be created."],
         ['admin', null, InputOption::VALUE_NONE, "Indicates whether the addon is an Admin theme."],
         ['force', null, InputOption::VALUE_NONE, "Indicates whether to force a fresh download of the template."],
         ['shared', null, InputOption::VALUE_NONE, 'Indicates if the addon should be created in shared addons.'],

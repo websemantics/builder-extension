@@ -124,6 +124,14 @@ To create a Builder template that can used in your own projects using `builder:m
 php artisan builder:make template-template
 ```
 
+You can also do this,
+
+```bash
+php artisan make:addon websemantics.theme.flat --template  --force --default
+```
+
+This will create a theme template with default vendor and slug.
+ 
 For more details, read the [template-template documentation](https://github.com/pyrocms-templates/template-template).
 
 #### Make Stream

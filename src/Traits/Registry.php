@@ -236,24 +236,24 @@ trait Registry
      * @param string $template, the template name
      * @param string $defults,  list of defults (override the schema defults)
      * @param string $ignore,   if true, ignore asking a question for the provided defults
+     * @param string $ignore,   if true, ignore asking all questions
      *
      * @return array
      */
-    protected function getTemplateContext($template, $defults = [], $ignore = false)
+    protected function getTemplateContext($template, $defults = [], $ignore = false, $ignoreAll = false)
     {
         $context = [];
         $metadata = $this->getTemplateMetadata($template);
 
         foreach (isset($metadata['schema']) ? $metadata['schema'] : [] as $property => $schema) {
 
-            $question = (!empty($schema['label']) ? $schema['label'] : $property) . '?';
-
             $default = isset($defults[$property]) ? $defults[$property] :
                       (isset($schema['default']) ? $schema['default'] : null);
 
-            if($ignore && isset($defults[$property])){
+            if($ignoreAll || ($ignore && isset($defults[$property]))) {
               $context[$property] = $default;
             } else {
+              $question = (!empty($schema['label']) ? $schema['label'] : $property) . '?';
               $context[$property] = !isset($schema['options']) ? $this->ask($question, $default) :
                       ((count(array_diff($schema['options'], ['yes','no'])) == 0 ) ?
                       ($this->confirm($question, $default) ? 'true' : 'false') :

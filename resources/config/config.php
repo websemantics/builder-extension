@@ -14,15 +14,21 @@ return [
 
       /*
       |--------------------------------------------------------------------------
-      | Default Module
+      | Default Templates
       |--------------------------------------------------------------------------
       |
-      | The default Builder module template used by make:addon overridden command
-      | to generate a module that's compatible with the Builder extension entities
-      |
+      | The default templates used by the Builder to scaffold addon code When
+      | the user invoke make:addon command.
       |
       */
-      'default-module' => env('BUILDER_DEFAULT_MODULE', 'default-module'),
+      'templates' => [
+        'module' => env('BUILDER_DEFAULT_MODULE', 'default-module'),
+        'template' => env('BUILDER_DEFAULT_TEMPLATE', 'template-template'),
+        'theme' => [
+            env('BUILDER_DEFAULT_ADMIN', 'pyrocms-theme'),
+            env('BUILDER_DEFAULT_FRONT', 'starter-theme')
+          ]
+      ],
 
       /*
       |--------------------------------------------------------------------------

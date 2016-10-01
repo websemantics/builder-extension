@@ -12,8 +12,8 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
 /**
   * Class MakeAddon.
   *
-  * Override core MakeAddon command to generate module files that are
-  * compatible with the Builder extension.
+  * Override core MakeAddon command to generate supported addon files
+  * (curently, module, theme) that are compatible with the Builder extension.
   *
   * @link      http://websemantics.ca/ibuild
   * @link      http://ibuild.io
@@ -26,7 +26,7 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
  {
      use Registry;
 
-    /* Black magic */
+    /* Kung fu */
     use DispatchesJobs, IgnoreJobs {
        IgnoreJobs::dispatch insteadof DispatchesJobs;
     }
@@ -51,18 +51,18 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
       list($vendor, $type, $slug, $path) =
         _resolveAddonNamespace($this->argument('namespace'), $this->option('shared'));
 
-      if ($type === 'module') {
+      if ($template = _config("config.templates.$type")) {
 
         $this->logo();
 
-        /* Get the default module template from the registry */
-        if ($this->download($template = _config('config.default-module'), $this->option('force'))) {
+        /* Get the default addon template from the registry */
+        if ($this->download($template, $this->option('force'))) {
 
             $context = $this->getTemplateContext($template,
             ['vendor' => $vendor, 'slug' => $slug], true);
 
             $this->dispatch(new ScaffoldTemplate($vendor, $type, $slug,
-                                $this->getBuilderPath(_config('config.default-module')),
+                                $this->getBuilderPath($template),
                                 $path, $context));
 
             $this->info("Builder has successfully created a module addon from '$template'");
@@ -85,7 +85,8 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
     protected function getOptions()
     {
       return [
-        ['force', null, InputOption::VALUE_NONE, "Indicates whether to force a fresh download of the '"._config('config.default-module')."'."],
+        ['admin', null, InputOption::VALUE_NONE, "Indicates whether the addon is an Admin theme."],
+        ['force', null, InputOption::VALUE_NONE, "Indicates whether to force a fresh download of the template."],
         ['shared', null, InputOption::VALUE_NONE, 'Indicates if the addon should be created in shared addons.'],
         ['migration', null, InputOption::VALUE_NONE, 'Indicates if a fields migration should be created.'],
       ];

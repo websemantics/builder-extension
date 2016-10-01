@@ -51,27 +51,25 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
       list($vendor, $type, $slug, $path) =
         _resolveAddonNamespace($this->argument('namespace'), $this->option('shared'));
 
-      if ($template = _config("config.templates.$type")) {
+      /* construct an index for a potential template then fetch it */
+      $index = $type . (($type !== 'theme') ? "" : ($this->option('admin') ? '.0' : '.1'));
+      $template = _config("config.templates.$index");
 
-        $this->logo();
+      if ($template && $this->download($template, $this->option('force'))) {
 
-        /* Get the default addon template from the registry */
-        if ($this->download($template, $this->option('force'))) {
+          $this->logo();
+          $context = $this->getTemplateContext($template,
+          ['vendor' => $vendor, 'slug' => $slug], true);
 
-            $context = $this->getTemplateContext($template,
-            ['vendor' => $vendor, 'slug' => $slug], true);
+          $this->dispatch(new ScaffoldTemplate($vendor, $type, $slug,
+                              $this->getBuilderPath($template),
+                              $path, $context));
 
-            $this->dispatch(new ScaffoldTemplate($vendor, $type, $slug,
-                                $this->getBuilderPath($template),
-                                $path, $context));
+          $this->info("Builder has successfully created a module addon from '$template'");
 
-            $this->info("Builder has successfully created a module addon from '$template'");
-
-            return;
-        } else {
-            /* When things go wrong - which does happen sometimes - fallback to Pyro make:addon */
-          $this->ignoreJobs = false;
-        }
+          return;
+      } else { /* When things go wrong - which happens sometimes - fallback to Pyro make:addon */
+        $this->ignoreJobs = false;
       }
 
       parent::fire($addons);

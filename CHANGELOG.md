@@ -1,8 +1,13 @@
+1.0.8
+  date: 2016-10-01
+  changes:
+  - 
+
 1.0.7
   date: 2016-09-31
   changes:
   - Detect text files for Twig parsing,
-  - Extend `make:addon` command to scaffold a starter theme (by default) or an admin theme with `--default` option,
+  - Extend `make:addon` command to scaffold a starter theme (by default) or an admin theme with `--admin` option,
   - Extend `make:addon` command to scaffold templates with `--template` option.
   - Add an option `--default` to `make:addon` command to skip user interactivity.
 

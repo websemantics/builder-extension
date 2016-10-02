@@ -228,7 +228,7 @@ All environment variables used by the extension are listed here,
 | *BUILDER_TMP* | Temporary folder to uncompress zip files | `folder` |
 | *MIGRATION_PADDING* | Padding between arrays `(key,value)`s in migration file | `30` chars |
 
-Configuration file can be found at, `./resources/config/config.php`. Overridden to change the default behaviour.
+Configuration file can be found at, `./resources/config/config.php`. Overridden in project `.env` file to change the default behaviour.
 
 ## Stream Entities
 

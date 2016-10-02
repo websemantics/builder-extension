@@ -1,7 +1,13 @@
-1.0.8
-  date: 2016-10-01
+1.0.9
+  date: 2016-10-02
   changes:
-  - Remove MakeTemplate, `builder:make` command and replace with command `make:addon`.
+  - 
+
+1.0.8
+  date: 2016-10-02
+  changes:
+  - Remove `builder:make` command and replace with command `make:addon`.
+  - Improved documentation.
 
 1.0.7
   date: 2016-09-31

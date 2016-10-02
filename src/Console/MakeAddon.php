@@ -6,6 +6,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Anomaly\Streams\Platform\Addon\AddonManager;
 use Anomaly\Streams\Platform\Addon\Console\MakeAddon;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 use Websemantics\BuilderExtension\Traits\Registry;
 use Websemantics\BuilderExtension\Traits\IgnoreJobs;
 use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
@@ -54,16 +55,20 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
       list($vendor, $type, $slug, $path) =
         _resolveAddonNamespace($this->argument('namespace'), $this->option('shared'));
 
-      /* construct an index for a potential template  */
-      $index = "templates.$type" . (($type !== 'theme') ? "" : ($this->option('admin') ? '.0' : '.1'));
+      /* Get the template name if provided by the user */
+      if(!$template = $this->argument('template')){
 
-      /* the template option indicates that the user wants to create a template not the actual addon */
-      $template = _config("config." . ($this->option('template') ? "default-template" : $index));
+        /* otherwise, construct an index for a potential template based on the addon type  */
+        $index = "templates.$type" . (($type !== 'theme') ? "" : ($this->option('admin') ? '.0' : '.1'));
+
+        /* if the template option is provided, create a template project, not the actual addon */
+        $template = _config("config." . ($this->option('template') ? "default-template" : $index));
+      }
 
       if ($template && $this->download($template, $this->option('force'))) {
 
           $context = $this->getTemplateContext($template,
-          ['vendor' => $vendor, 'slug' => $slug, 'type' => $type], true, $this->option('default'));
+          ['vendor' => $vendor, 'slug' => $slug, 'type' => $type], true, $this->option('defaults'));
 
           $this->dispatch(new ScaffoldTemplate($vendor, $type, $slug,
                               $this->getBuilderPath($template),
@@ -80,19 +85,33 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
     }
 
     /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments()
+    {
+        return [
+            ['namespace', InputArgument::REQUIRED, 'The addon\'s desired dot namespace.'],
+            ['template', InputArgument::OPTIONAL, 'The template name to scaffold.'],
+        ];
+    }
+
+    /**
      * Get the console command options.
      *
      * @return array
      */
     protected function getOptions()
     {
-      return [
-        ['default', null, InputOption::VALUE_NONE, "Indicates whether to force template default values."],
-        ['template', null, InputOption::VALUE_NONE, "Indicates whether an addon or an addon template should be created."],
-        ['admin', null, InputOption::VALUE_NONE, "Indicates whether the addon is an Admin theme."],
-        ['force', null, InputOption::VALUE_NONE, "Indicates whether to force a fresh download of the template."],
-        ['shared', null, InputOption::VALUE_NONE, 'Indicates if the addon should be created in shared addons.'],
-        ['migration', null, InputOption::VALUE_NONE, 'Indicates if a fields migration should be created.'],
-      ];
+        return [
+          ['force', null, InputOption::VALUE_NONE, "Indicates whether to force a fresh download of the template."],
+          ['shared', null, InputOption::VALUE_NONE, 'Indicates if the addon should be created in shared addons.'],
+          ['migration', null, InputOption::VALUE_NONE, 'Indicates if a fields migration should be created.'],
+          ['template', null, InputOption::VALUE_NONE, "Indicates whether an addon or an addon template should be created."],
+          ['admin', null, InputOption::VALUE_NONE, "Indicates whether the addon is an Admin theme."],
+          ['defaults', null, InputOption::VALUE_NONE, "Indicates whether to force template default values."],
+        ];
     }
+
  }

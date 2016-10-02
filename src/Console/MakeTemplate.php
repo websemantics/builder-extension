@@ -4,6 +4,7 @@ use Illuminate\Console\Command;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+use Anomaly\Streams\Platform\Addon\AddonManager;
 use Websemantics\BuilderExtension\Traits\Registry;
 use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
 
@@ -43,7 +44,7 @@ class MakeTemplate extends Command
    * Download and make an addon from a Builder template.
    * --force will re-download an exist template
    */
-  public function handle()
+   public function fire(AddonManager $addons)
   {
     $this->logo();
 

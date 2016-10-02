@@ -4,6 +4,7 @@ namespace Websemantics\BuilderExtension\Console;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Anomaly\Streams\Platform\Addon\AddonManager;
+use Anomaly\Streams\Platform\Addon\Console\MakeAddon;
 use Symfony\Component\Console\Input\InputOption;
 use Websemantics\BuilderExtension\Traits\Registry;
 use Websemantics\BuilderExtension\Traits\IgnoreJobs;
@@ -22,7 +23,7 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
   * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
   * @copyright 2012-2016 Web Semantics, Inc
   */
- class MakeAddon extends \Anomaly\Streams\Platform\Addon\Console\MakeAddon
+ class MakeAddon extends MakeAddon
  {
      use Registry;
 
@@ -68,7 +69,7 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
                               $this->getBuilderPath($template),
                               $path, $context));
 
-          $this->info("Builder has successfully created a $type addon from '$template'");
+          $this->info("Builder has successfully created a $type addon from '$template' at '$path'");
 
           return;
       } else { /* When things go wrong - which happens sometimes - fallback to Pyro make:addon */
@@ -86,8 +87,8 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
     protected function getOptions()
     {
       return [
-        ['default', null, InputOption::VALUE_NONE, "Indicates whether to use template default values."],
-        ['template', null, InputOption::VALUE_NONE, "Indicates whether an addon or a addon template should be created."],
+        ['default', null, InputOption::VALUE_NONE, "Indicates whether to force template default values."],
+        ['template', null, InputOption::VALUE_NONE, "Indicates whether an addon or an addon template should be created."],
         ['admin', null, InputOption::VALUE_NONE, "Indicates whether the addon is an Admin theme."],
         ['force', null, InputOption::VALUE_NONE, "Indicates whether to force a fresh download of the template."],
         ['shared', null, InputOption::VALUE_NONE, 'Indicates if the addon should be created in shared addons.'],

@@ -74,7 +74,8 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
                               $this->getBuilderPath($template),
                               $path, $context));
 
-          $this->info("Builder has successfully created a $type addon from '$template' at '$path'");
+          $this->info("Builder has successfully created a $type addon from '$template' at:");
+          $this->line($path);
 
           return;
       } else { /* When things go wrong - which happens sometimes - fallback to Pyro make:addon */

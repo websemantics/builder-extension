@@ -7,7 +7,7 @@ return [
       | Github Registry Username
       |--------------------------------------------------------------------------
       |
-      | The default Builder Extension registery
+      | The default Builder Extension registry
       |
       */
       'registry'           => env('BUILDER_REGISTRY', 'pyrocms-templates'),
@@ -52,10 +52,10 @@ return [
 
       /*
       |--------------------------------------------------------------------------
-      | Public path
+      | Storage path
       |--------------------------------------------------------------------------
       |
-      | Where templates are stored in the public folder
+      | Where templates are stored in the storage folder
       |
       | i.e. 'app/storage/streams/default/builder'
       |
@@ -92,7 +92,7 @@ return [
       |--------------------------------------------------------------------------
       |
       | Padding (number of chars) between the 'key', 'value' of
-      | associative arrays inside a migration files (keep'me tidy)
+      | associative arrays inside a migration file (keep'me tidy)
       |
       |
       */

@@ -37,7 +37,7 @@ class ListTemplates extends Command
     protected $description = 'List available Builder addon templates';
 
     /**
-     * List the Builder's registery templates.
+     * List the Builder's registry templates.
      */
     public function handle()
     {

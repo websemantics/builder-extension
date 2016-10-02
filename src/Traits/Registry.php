@@ -12,7 +12,7 @@ use Symfony\Component\Console\Formatter\OutputFormatterStyle;
  *
  * Use a Github organization as the Builder registry.
  *
- * TODO: Seperate cache, console output from registery and generic
+ * TODO: Seperate cache, console output from registry and generic
  *       command operations. This class is quite the mess and should
  *       have never been seen by another human being, but here it is!
  *
@@ -42,7 +42,7 @@ trait Registry
     protected $client;
 
     /**
-     * The Github registery organization.
+     * The Github registry organization.
      *
      * @var string
      */
@@ -150,7 +150,7 @@ trait Registry
     }
 
     /**
-     * Download a Builder template from the registery,.
+     * Download a Builder template from the registry,.
      *
      * @param string $template, the selected template
      * @param bool   $force,    force download if the template already exists

@@ -224,9 +224,9 @@ All environment variables used by the extension are listed here,
 | Default template for front-end themes | *BUILDER_DEFAULT_FRONT* | `starter-theme` |
 | Time used to cache an API call | *BUILDER_TTL* | `60` minutes |
 | Path to the local storage to cache templates | *BUILDER_PATH* | `builder` |
-| Url template used to download a compressed file from the template repo | *BUILDER_ARCHIVE_URL* | `url-template` |
+| Url to the compressed file of the template repo| *BUILDER_ARCHIVE_URL* | `url-template` |
 | Temporary folder to uncompress zip files | *BUILDER_TMP* | `folder` |
-| Padding (number of chars) between the 'key', 'value' of associative arrays inside a migration file | *MIGRATION_PADDING* | `30` |
+| Padding between arrays `(key,value)` paris in migration file | *MIGRATION_PADDING* | `30` chars |
 
 Configuration file can be found at, `./resources/config/config.php`. Overridden to change the default behaviour.
 

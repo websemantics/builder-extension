@@ -223,7 +223,7 @@ All environment variables used by the extension are listed here,
 | Default template for admin themes | *BUILDER_DEFAULT_ADMIN* | `pyrocms-theme` |
 | Default template for front-end themes | *BUILDER_DEFAULT_FRONT* | `starter-theme` |
 | Time used to cache an API call | *BUILDER_TTL* | `60` minutes |
-| Path to the local storage to cache templates | *BUILDER_PATH* | `app/storage/streams/default/builder` |
+| Path to the local storage to cache templates | *BUILDER_PATH* | `builder` |
 | Url template used to download a compressed file from the template repo | *BUILDER_ARCHIVE_URL* | `url-template` |
 | Temporary folder to uncompress zip files | *BUILDER_TMP* | `folder` |
 | Padding (number of chars) between the 'key', 'value' of associative arrays inside a migration file | *MIGRATION_PADDING* | `30` |

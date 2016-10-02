@@ -434,16 +434,6 @@ The extension will then generate a controller per entity at `blog-module/src/Htt
 
 * For *ModuleWasInstalled* event, this will add `routes` and `sections` to the module and service provider. It will also seed the module if the builder config file was set accordingly.
 
-## Support
-
-Need help or have a question? post a questions at [StackOverflow](https://stackoverflow.com/questions/tagged/builder-extension)
-
-*Please don't use the issue trackers for support/questions.*
-
-## Contribution
-
-Well finally, we are more than happy to accept external contributions to the project in the form of feedback, bug reports and even better - pull requests :)
-
 ## Screencasts
 
 To generate screen recordings, follow these steps,
@@ -465,6 +455,16 @@ asciinema2gif --size small --speed 3 https://asciinema.org/api/asciicasts/{{id}}
 The `asciinema` command will generate a url to the recording, for example,  `https://asciinema.org/a/e32g9nqayq1dqb9txd063ez8m`. Replace the `{{id}}` in the url provided for `asciinema2gif` with the one unique id from `asciinema` url, `e32g9nqayq1dqb9txd063ez8m`. Read the documentations for more details regarding [valid url formats](https://github.com/tav/asciinema2gif#url-format).
 
 Copy the generated file `asciicast.gif` from the current directory to the desired location.
+
+## Support
+
+Need help or have a question? post a questions at [StackOverflow](https://stackoverflow.com/questions/tagged/builder-extension)
+
+*Please don't use the issue trackers for support/questions.*
+
+## Contribution
+
+Well finally, we are more than happy to accept external contributions to the project in the form of feedback, bug reports and even better - pull requests :)
 
 ## Resources
 

@@ -1,36 +1,35 @@
 ```
 
-                                             /'\
-                                            /   \
-                                           /     \
-                         _                /   ..' \_                      /\/'\
-                        / \              / './       \                   /     \
-                      _/   \            /             \        _        /       \
-\           /'\      /  '._'\          /               \      / \      /      /''\
- \         /   \    /        \        /      /          \    /   \    / \_ ..'    \
-  \    /'./     \  /          \__    /      /            \  /     \__/             \     /'\
-   \  /          \/              \  /      /              \/__     \                \   /   \
-    \/            \               \/    __/                   \     \                \_/      \     /'\
-    /   /          \              /    /                       \     \                /        \   /   \
-       /                              /                               \__                      \ /         
-      /      ____________     ______      ______     _____________          \\|//                         /
-    _/      |            \====\      \   /     /====|             \\===ooO==(o o)\=Ooo========\          /   
-   /        |    ))\      |    \      \ /     /     |      __      |         (_) |            |           
-            |    |OO)     |     \      V     /      |     |__)     |             |            |            
-            |    |/       |      \          /       |             <             ┌┴┐          ┌┴┐
-            |         ___/        |        |        |              \           _ \ \        /  |
-            |        |            |        |        |       |\      \         | \_| |      |    \_
-            |        |            |        |        |       | \      \         \___/   __   \     `-_
-            |________|            |________|        |_______|  \______\               /   \  ''-.    \
-             _______  __   __  ___   ___      ______   _______  ________             /    /      \    \
-            |  _    ||  | |  ||   | |   |    |      | |       ||    _   |            |   |        |   |
-            | |_|   ||  | |  ||   | |   |    |  _    ||    ___||   | |  |            \    \      /    /
-            |       ||  |_|  ||   | |   |    | |O|   ||   |___ |   |_| <              \    `-..-'    /
-            |  _   | |       ||   | |   |___ | |O|   ||    ___||       |               '-_        _-'
-            | |_|   ||       ||   | |       ||       ||   |___ |   |\   \    - -- -       `------'
-            |_______||_______||___| |_______||______| |_______||___| \___\     
+                                                 /'\
+                                                /   \
+                                               /     \
+                             _                /   ..' \_                      /\/'\
+                            / \              / './       \                   /     \
+                          _/   \            /             \        _        / oO    \
+                /'\      /  '._'\          /               \      / \      /      /''\
+               /   \    /        \        /      /          \    /   \    / \_ ..'    \
+              /     \  /          \__    /      /            \  /     \__/             \  
+                     \/              \  /      /              \/__     \                \  
+                      \               \/    __/                   \     \                \     
+                       \              /                            \     \                     
+                                              ))))                        \__                        
+                 _________ _______     __ooO_(O o)_Ooo____                                  
+                |          \      \   /     | (_)         \\===========\===========\         
+                |     __    \      \ /      |     __      |            |           |           
+                |    |__)    \      V      /|    |__)     |            |           |            
+                |            |\           / |            <            ┌┴┐         ┌┴┐
+                |        ___/  |         |  |             \          _ \ \       /  |
+                |       |      |         |  |      |\      \        | \_| |     |    \_
+                |       |      |         |  |      | \      \        \___/  __  \      `-_
+                |_______|      |_________|  |______|  |______|             /   \  ''-.    \
+                 ____   __ __  ____  _     ___      ___  ____             /    /      \    \
+                |    \ |  |  ||    || |   |   \    /  _||    \            |   |        |   |
+                | ()  )|  |  | |  | | |\\\\    \  /  |_ | ()  )           \    \      /    /
+                |     ||  |  | |  | |  ( oo) () ||    _||    /             \    `-..-'    /
+                | ()  ||  :  | |  | |   (_)     ||   |_ |    \       - --   '-_        _-'
+                |_____| \__,_||____||____||_____||_____||__|\_|                `------'
+                Addons scaffolder for maximum coding pleasure            - -- --------- -- -
 
-            Addons scaffolder for maximum coding pleasure                            - -- --------- -- -
 ```                                                                                             
 > This PyroCMS 3 extension once installed becomes your coding companion to scaffold Pyro modules, themes, extensions and [stream entities](#stream-entities).
 
@@ -76,16 +75,16 @@ Result,
 ```
  ____   __ __  ____  _     ___      ___  ____
 |    \ |  |  ||    || |   |   \    /  _||    \
-|  o  )|  |  | |  | | |   |    \  /  |_ |  D  )
-|     ||  |  | |  | | |__ |  D  ||    _||    /
-|  O  ||  :  | |  | |    ||     ||   |_ |    \
+| ()  )|  |  | |  | | |\\\\    \  /  |_ | ()  )
+|     ||  |  | |  | |  ( oo) () ||    _||    /
+| ()  ||  :  | |  | |   (_)     ||   |_ |    \
 |_____| \__,_||____||____||_____||_____||__|\_|
 Addons scaffolder for maximum coding pleasure
 
-Available Commands:
-- builder:list, List available templates from the registry
-- builder:make, Create an addon from a template
-- builder:clear, Clear cache and locally stored templates
+Builder Commands:
+- make:addon Create an addon from a template if available
+- builder:list List available templates from the registry
+- builder:clear Clear cache and locally stored templates
 
 Retrieving a list of available templates
 +-------------------+------------------------------------------------------------+---+
@@ -131,7 +130,7 @@ php artisan make:addon websemantics.theme.flat --template  --force --default
 ```
 
 This will create a theme template with default vendor and slug.
- 
+
 For more details, read the [template-template documentation](https://github.com/pyrocms-templates/template-template).
 
 #### Make Stream

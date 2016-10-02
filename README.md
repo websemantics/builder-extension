@@ -215,18 +215,18 @@ If the `type` property of a field is not set, the builder extension will assume 
 
 All environment variables used by the extension are listed here,
 
-| Description       |  Variable      | Default |
-| ------------- |:-------------:|:-------------:|
-| The default Builder Extension registry | *BUILDER_REGISTRY* | `pyrocms-templates` |
-| Template of templates to create an addon template | *BUILDER_DEFAULT_TEMPLATE* | `template-template` |
-| Default template for modules | *BUILDER_DEFAULT_MODULE* | `default-module` |
-| Default template for admin themes | *BUILDER_DEFAULT_ADMIN* | `pyrocms-theme` |
-| Default template for front-end themes | *BUILDER_DEFAULT_FRONT* | `starter-theme` |
-| Time used to cache an API call | *BUILDER_TTL* | `60` minutes |
-| Path to the local storage to cache templates | *BUILDER_PATH* | `builder` |
-| Url to the compressed file of the template repo| *BUILDER_ARCHIVE_URL* | `url-template` |
-| Temporary folder to uncompress zip files | *BUILDER_TMP* | `folder` |
-| Padding between arrays `(key,value)`s in migration file | *MIGRATION_PADDING* | `30` chars |
+|  Variable        | Description     | Default |
+| ------------- |-------------|-------------|
+| *BUILDER_REGISTRY* | The default Builder Extension registry | `pyrocms-templates` |
+| *BUILDER_DEFAULT_TEMPLATE* | Template of templates to create an addon template | `template-template` |
+| *BUILDER_DEFAULT_MODULE* | Default template for modules | `default-module` |
+| *BUILDER_DEFAULT_ADMIN* | Default template for admin themes | `pyrocms-theme` |
+| *BUILDER_DEFAULT_FRONT* | Default template for front-end themes | `starter-theme` |
+| *BUILDER_TTL* | Time used to cache an API call | `60` minutes |
+| *BUILDER_PATH* | Path to the local storage to cache templates | `builder` |
+| *BUILDER_ARCHIVE_URL* | Url to the compressed file of the template repo| `url-template` |
+| *BUILDER_TMP* | Temporary folder to uncompress zip files | `folder` |
+| *MIGRATION_PADDING* | Padding between arrays `(key,value)`s in migration file | `30` chars |
 
 Configuration file can be found at, `./resources/config/config.php`. Overridden to change the default behaviour.
 

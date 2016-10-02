@@ -226,7 +226,7 @@ All environment variables used by the extension are listed here,
 | Path to the local storage to cache templates | *BUILDER_PATH* | `builder` |
 | Url to the compressed file of the template repo| *BUILDER_ARCHIVE_URL* | `url-template` |
 | Temporary folder to uncompress zip files | *BUILDER_TMP* | `folder` |
-| Padding between arrays `(key,value)` paris in migration file | *MIGRATION_PADDING* | `30` chars |
+| Padding between arrays `(key,value)`s in migration file | *MIGRATION_PADDING* | `30` chars |
 
 Configuration file can be found at, `./resources/config/config.php`. Overridden to change the default behaviour.
 

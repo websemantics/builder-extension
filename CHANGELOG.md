@@ -1,7 +1,12 @@
+1.1.0
+  date: 2016-10-03
+  changes:
+  -
+
 1.0.9
   date: 2016-10-03
   changes:
-  - Bug fix, `Cannot declare class Websemantics\BuilderExtension\Console\MakeAddon because the name is already in use`
+  - Fix, `Cannot declare class Websemantics\BuilderExtension\Console\MakeAddon because the name is already in use`
 
 1.0.8
   date: 2016-10-02

@@ -49,7 +49,7 @@ class ModifyModule
     {
         $module = $this->module;
         $data = [
-            'config' => config($module->getNamespace('builder')),
+            'config' => _config('builder', $module),
             'vendor' => $module->getVendor(),
             'module_slug' => $module->getSlug()
         ];
@@ -57,7 +57,7 @@ class ModifyModule
         $src = __DIR__.'/../../resources/stubs/module';
 
         try {
-          if(config($module->getNamespace('builder.landing_page'))){
+          if(_config('builder.landing_page', $module)){
 
             /* adding routes to the module service provider class
             (currently, just for the optional landing (home) page) */
@@ -72,7 +72,7 @@ class ModifyModule
 
           /* adding module icon */
           $this->processVariable($module->getPath().'/src/'.$module_name.'Module.php',
-          ' "'.config($module->getNamespace('builder.icon')).'"','protected $icon =', ';');
+          ' "'._config('builder.icon', $module).'"','protected $icon =', ';');
 
         } catch (\PhpParser\Error $e) {
             die($e->getMessage());

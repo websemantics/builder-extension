@@ -47,7 +47,7 @@ class ModuleWasInstalledHandler {
 
         $this->dispatch(new ModifyModule($module));
 
-        if(config($module->getNamespace('builder.seed'))){
+        if(_config('builder.seed', $module)){
     			$this->dispatch(new SeedModule($module));
     		}
 		}

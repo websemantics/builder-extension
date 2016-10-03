@@ -81,12 +81,12 @@ class ModifyEntity
             $assignment->getFieldSlug()
         );
 
-        /* set a list of files to avoid overwrite */
-        $this->files->setAvoidOverwrite(_getAvoidOverwrite($module));
+        /* protect module classes from being overwriten */
+        $this->files->setAvoidOverwrite(_config('builder.avoid_overwrite', $module));
 
         /* get the template data */
         $data = [
-            'config' => config($module->getNamespace('builder')),
+            'config' => _config('builder', $module),
             'field_slug' => $assignment->getFieldSlug(),
             'vendor' => $module->getVendor(),
             'module_slug' => $module->getSlug(),
@@ -97,8 +97,8 @@ class ModifyEntity
         ];
 
         $entityDest = $destination.'/src/'.
-        (config($module->getNamespace('builder.group')) ? $data['namespace'].'/' : '')
-        .$data['entity_name'];
+        (_config('builder.group', $module) ? $data['namespace'].'/' : '') .
+        $data['entity_name'];
 
         /* get the assigned class name, i.e. TextFieldType */
         $fieldTypeClassName = _getFieldTypeClassName($assignment);

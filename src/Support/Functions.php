@@ -30,13 +30,14 @@
    * Shorthand for config helper
    *
    * @param    string $path, config path
+   * @param    Addon addon, optional addon
    * @return   *,
    */
 
    if (!function_exists('_config')) {
-     function _config($path)
+     function _config($path, $addon = null)
      {
-       return config('websemantics.extension.builder::' . $path);
+       return config(($addon ? $addon->getNamespace() : 'websemantics.extension.builder') . "::$path");
      }
    }
 
@@ -93,7 +94,7 @@
 
   if (!function_exists('_getNamespaces')) {
       function _getNamespaces($module){
-        $namespaces = array_get(config($module->getNamespace('builder')), 'namespaces', []);
+        $namespaces = _config('builder.namespaces', $module);
         return ($namespaces !== array_values($namespaces)) ? array_keys($namespaces) : $namespaces;
       }
   }
@@ -109,7 +110,7 @@
 
   if (!function_exists('_getFieldConfig')) {
       function _getFieldConfig($module, $namespace_slug, $field_slug){
-        $namespaces = array_get(config($module->getNamespace('builder')), 'namespaces', []);
+        $namespaces = _config('builder.namespaces', $module);
         $namespace = array_get($namespaces, $namespace_slug, []);
         $field = array_get($namespace, $field_slug, []);
 
@@ -118,20 +119,6 @@
           'hide_field' => array_get($field, 'hide_field', false),
           'column_template' => array_get($field, 'column_template', null),
         ];
-      }
-  }
-
- /**
-  * Return a list of class suffixes that won't be overwritten
-  *
-  * @param    Module - $module
-  * @return   string
-  */
-
-  if (!function_exists('_getAvoidOverwrite')) {
-      function _getAvoidOverwrite($module, $extra = []){
-        return array_merge(array_get(config($module->getNamespace('builder')),
-                            'avoid_overwrite', []),$extra);
       }
   }
 

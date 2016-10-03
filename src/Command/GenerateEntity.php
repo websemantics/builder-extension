@@ -5,7 +5,9 @@ use Websemantics\BuilderExtension\Traits\TemplateProcessor;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 
 /**
- * Class GenerateEntity. Generates code from a stream schema
+ * Class GenerateEntity.
+ *
+ * Generates entity classes from a stream schema
  *
  * @link      http://websemantics.ca/ibuild
  * @link      http://ibuild.io
@@ -64,7 +66,7 @@ class GenerateEntity
         $seedFile = "$dest/resources/seeders/".strtolower(str_singular($stream->getSlug())).".php";
 
         $data = [
-            'config' => config($module->getNamespace('builder')),
+            'config' => _config('builder', $module),
             'vendor' => $module->getVendor(),
             'namespace' => $stream->getNamespace(),
             'module_slug' => $module->getSlug(),
@@ -74,15 +76,11 @@ class GenerateEntity
         ];
         $moduleName = studly_case($data['module_slug']);
 
-        /* uncomment the array entries to protect these files from being overwriten or add your own */
-        $this->files->setAvoidOverwrite(_getAvoidOverwrite($module, [
-              // $moduleName . 'ModuleSeeder.php',
-              // $moduleName . 'Module.php',
-              // $moduleName . 'ModuleServiceProvider.php',
-            ]));
+        /* protect module classes from being overwriten */
+        $this->files->setAvoidOverwrite(_config('builder.avoid_overwrite', $module));
 
         /* initially, copy the entity template files to the module src folder */
-        if(config($module->getNamespace('builder.group'))){
+        if(_config('builder.group', $module)){
           $this->files->parseDirectory($entityPath."/code/", "$dest/src", $data);
         } else {
           $this->files->parseDirectory($entityPath."/code/{{namespace|studly_case}}/", "$dest/src", $data);

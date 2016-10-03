@@ -4,7 +4,6 @@ namespace Websemantics\BuilderExtension\Console;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Anomaly\Streams\Platform\Addon\AddonManager;
-use Anomaly\Streams\Platform\Addon\Console\MakeAddon;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Websemantics\BuilderExtension\Traits\Registry;
@@ -24,7 +23,7 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
   * @author    Adnan M.Sagar, Phd. <adnan@websemantics.ca>
   * @copyright 2012-2016 Web Semantics, Inc
   */
- class MakeAddon extends MakeAddon
+ class MakeAddon extends \Anomaly\Streams\Platform\Addon\Console\MakeAddon
  {
      use Registry;
 

@@ -117,8 +117,6 @@ class GenerateEntity
                 "$dest/resources/lang/en/permission.php",
                 [$data['stream_slug'] => $entityPath.'/templates/module/permission.php'], $data);
 
-
-
         } catch (\PhpParser\Error $e) {
             die($e->getMessage());
         }

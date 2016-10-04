@@ -106,10 +106,13 @@ class Filesystem extends \Illuminate\Filesystem\Filesystem
 			$items = new FilesystemIterator($source, $options);
 
 			foreach ($items as $item){
-				// As we spin through items, we will check to see if the current file is actually
-				// a source or a file. When it is actually a source we will need to call
-				// back into this function recursively to keep copying these nested folders.
-				$target = $destination.'/'.$this->parser->parse($item->getBasename(), $data);
+
+        /* Fix for windows os, replace dot with pipe for Twig */
+        $path = preg_replace_callback('/{{.+?}}/', function($match) {
+           return str_replace('.', '|', $match[0]);
+        }, $item->getBasename());
+
+				$target = $destination.'/'.$this->parser->parse($path, $data);
 
 				if ($item->isDir()){
 					if (!$this->parseDirectory($item->getPathname(), $target, $data, $options)){

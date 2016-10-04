@@ -54,7 +54,9 @@ class Helper
         }
 
         if (!is_null($matchKey)) {
-            $node->expr->items[$matchKey] = $this->makeArrayItem($name, $array);
+            if(!isset($node->expr->items[$matchKey])){
+              $node->expr->items[$matchKey] = $this->makeArrayItem($name, $array);
+            }
         } else {
             $node->expr->items[] = $this->makeArrayItem($name, $array);
         }
@@ -155,9 +157,9 @@ class Helper
     public function array2Node($items)
     {
         foreach ($items as $key => $value) {
-            $items[$key] = new ArrayItem(new String_($value), new String_($key));
+            $value = is_string($value) ? new String_($value) : $this->array2Node($value);
+            $items[$key] = new ArrayItem($value, new String_($key));
         }
-
         return new Array_($items);
     }
 

@@ -48,12 +48,14 @@ class ModifyModule
     public function handle()
     {
         $module = $this->module;
+        $dest = $module->getPath();
+
         $data = [
             'config' => _config('builder', $module),
             'vendor' => $module->getVendor(),
-            'module_slug' => $module->getSlug()
+            'module_name' => studly_case($module->getSlug())
         ];
-        $module_name = studly_case($data['module_slug']);
+
         $src = __DIR__.'/../../resources/stubs/module';
 
         try {
@@ -61,17 +63,24 @@ class ModifyModule
 
             /* adding routes to the module service provider class
             (currently, just for the optional landing (home) page) */
-            $this->processFile($module->getPath().'/src/'.$module_name.'ModuleServiceProvider.php',
+            $this->processFile("$dest/src/". $data['module_name'] .'ModuleServiceProvider.php',
                 ['routes' => $src.'/routes.php'], $data);
 
             /* adding sections to the module class
             (currently, just for the optional landing (home) page)*/
-            $this->processFile($module->getPath().'/src/'.$module_name.'Module.php',
+            $this->processFile("$dest/src/". $data['module_name'] .'Module.php',
                               ['sections' => $src.'/sections.php'], $data, true);
           }
 
+          /* generate sitemap for the module main stream */
+          if($stream_slug = _config('builder.sitemap.stream_slug', $module)){
+            $data['entity_name'] =  studly_case(str_singular($stream_slug));
+            $data['repository_name'] =  str_plural($stream_slug);
+            $this->files->parseDirectory("$src/config", "$dest/resources/config", $data);
+          }
+
           /* adding module icon */
-          $this->processVariable($module->getPath().'/src/'.$module_name.'Module.php',
+          $this->processVariable("$dest/src/". $data['module_name'] .'Module.php',
           ' "'._config('builder.icon', $module).'"','protected $icon =', ';');
 
         } catch (\PhpParser\Error $e) {

@@ -369,6 +369,27 @@ To change this behaviour and store under the module `src/` folder directly, set 
 
 Turn on and off with `true` / `false` values as needed.
 
+* To generate fields and streams permissions set `permissions` to true,
+
+```
+  'permissions' => true
+```
+
+* To generate sitemap, set the stream_slug for the module main stream, for example `pages` stream,
+
+```
+	'sitemap' => [ 'stream_slug' => 'pages',
+                 'url_method' => '->getPath()',
+                 'entries_method' => '->accessible()->visible()',
+                 'priority' => 0.5,
+                 'frequency' => 'monthly',
+                 'images' => '[]',
+                 'title' => 'null'
+               ],
+```
+
+The `url_method` is used to retrieve the resource path, and `entries_method` should return a filtered collection of stream entries.
+
 * Specify your project docblock to be included with the generated classes,
 
 ```

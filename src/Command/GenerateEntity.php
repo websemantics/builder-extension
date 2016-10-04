@@ -91,7 +91,7 @@ class GenerateEntity
         $this->put("$dest/resources/seeders/" . strtolower($data['entity_name']). '.php', '', true);
 
         try {
-            /* secondly, stitch the entity with the module classes */
+            /* stitch the entity with the module classes */
             $this->processFile("$dest/src/$moduleName".'ModuleServiceProvider.php',
                 ['routes' => $entityPath.'/templates/module/routes.php',
                  'bindings' => $entityPath.'/templates/module/bindings.php',
@@ -106,9 +106,19 @@ class GenerateEntity
             $this->processFile("$dest/resources/lang/en/section.php",
                 [strtolower(str_plural($data['entity_name'])) => $entityPath.'/templates/module/section.php'], $data);
 
+            $this->processFile("$dest/resources/config/permissions.php",
+                [$data['stream_slug'] => $entityPath.'/templates/module/permissions.php'], $data);
+
             $this->processFile(
                 "$dest/resources/lang/en/stream.php",
                 [$data['stream_slug'] => $entityPath.'/templates/module/stream.php'], $data);
+
+            $this->processFile(
+                "$dest/resources/lang/en/permission.php",
+                [$data['stream_slug'] => $entityPath.'/templates/module/permission.php'], $data);
+
+
+
         } catch (\PhpParser\Error $e) {
             die($e->getMessage());
         }

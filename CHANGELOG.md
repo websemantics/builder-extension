@@ -1,7 +1,9 @@
 1.1.0
   date: 2016-10-03
   changes:
-  -
+  - Generate sitemap
+  - Generate fields and streams permissions
+  - Fix for issue #13,
 
 1.0.9
   date: 2016-10-03

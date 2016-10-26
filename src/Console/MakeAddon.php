@@ -48,7 +48,7 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
      * Execute the console command.
      */
     public function fire(AddonManager $addons)
-    {
+    { 
       $this->logo();
 
       list($vendor, $type, $slug, $path) =
@@ -90,10 +90,10 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
      * @return array
      */
     protected function getArguments()
-    {
+    {   
         return [
             ['namespace', InputArgument::REQUIRED, 'The addon\'s desired dot namespace.'],
-            ['template', InputArgument::OPTIONAL, 'The template name to scaffold.'],
+            ['template', InputArgument::OPTIONAL, 'The template name to scaffold.']
         ];
     }
 
@@ -105,13 +105,12 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
     protected function getOptions()
     {
         return [
-          ['force', null, InputOption::VALUE_NONE, "Indicates whether to force a fresh download of the template."],
-          ['shared', null, InputOption::VALUE_NONE, 'Indicates if the addon should be created in shared addons.'],
-          ['migration', null, InputOption::VALUE_NONE, 'Indicates if a fields migration should be created.'],
-          ['template', null, InputOption::VALUE_NONE, "Indicates whether an addon or an addon template should be created."],
-          ['admin', null, InputOption::VALUE_NONE, "Indicates whether the addon is an Admin theme."],
-          ['defaults', null, InputOption::VALUE_NONE, "Indicates whether to force template default values."],
+            ['force', null, InputOption::VALUE_NONE, "Indicates whether to force a fresh download of the template."],
+            ['shared', null, InputOption::VALUE_NONE, 'Indicates if the addon should be created in shared addons.'],
+            ['migration', null, InputOption::VALUE_NONE, 'Indicates if a fields migration should be created.'],
+            ['template', null, InputOption::VALUE_NONE, "Indicates whether an addon or an addon template should be created."],
+            ['admin', null, InputOption::VALUE_NONE, "Indicates whether the addon is an Admin theme."],
+            ['defaults', null, InputOption::VALUE_NONE, "Indicates whether to force template default values."],
         ];
     }
-
  }

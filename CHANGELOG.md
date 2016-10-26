@@ -1,3 +1,9 @@
+1.1.2
+  date: 2016-10-26
+  changes:
+  - Fix issue with override commands, currently realized by replacing the original command singleton.
+  -  
+
 1.1.1
   date: 2016-10-12
   changes:

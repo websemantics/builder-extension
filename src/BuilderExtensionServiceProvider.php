@@ -21,10 +21,8 @@ class BuilderExtensionServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $commands = [
-      'Anomaly\Streams\Platform\Addon\Console\MakeAddon' => 'Websemantics\BuilderExtension\Console\MakeAddon',
-      'Anomaly\Streams\Platform\Stream\Console\Make' => 'Websemantics\BuilderExtension\Console\Make',
-      'Websemantics\BuilderExtension\Console\ListTemplates' => 'Websemantics\BuilderExtension\Console\ListTemplates',
-      'Websemantics\BuilderExtension\Console\ClearTemplates' => 'Websemantics\BuilderExtension\Console\ClearTemplates'
+      'Websemantics\BuilderExtension\Console\ListTemplates',
+      'Websemantics\BuilderExtension\Console\ClearTemplates'
     ];
 
     /**
@@ -53,6 +51,8 @@ class BuilderExtensionServiceProvider extends AddonServiceProvider
      */
     protected $singletons = [
       'migration.creator' => 'Websemantics\BuilderExtension\Database\Migration\MigrationCreator',
+      'Anomaly\Streams\Platform\Addon\Console\MakeAddon' => 'Websemantics\BuilderExtension\Console\MakeAddon',
+      'Anomaly\Streams\Platform\Stream\Console\Make' => 'Websemantics\BuilderExtension\Console\Make',
       'Illuminate\Filesystem\Filesystem' => 'Websemantics\BuilderExtension\Filesystem\Filesystem'
     ];
 }

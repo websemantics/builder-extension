@@ -1,7 +1,7 @@
 1.1.2
-  date: 2016-10-26
+  date: 2016-10-30
   changes:
-  - Fix issue with override commands, currently realized by replacing the original command singleton.
+  - Fix issue with override `make:addon` and `make:stream commands`, currently realized using singleton.
   -  
 
 1.1.1

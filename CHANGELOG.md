@@ -2,7 +2,7 @@
   date: 2016-10-30
   changes:
   - Fix issue with override `make:addon` and `make:stream commands`, currently realized using singleton.
-  -  
+  - Fix issue #23
 
 1.1.1
   date: 2016-10-12

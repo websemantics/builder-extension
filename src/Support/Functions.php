@@ -30,14 +30,15 @@
    * Shorthand for config helper
    *
    * @param    string $path, config path
-   * @param    Addon addon, optional addon
+   * @param    Addon $addon, optional addon
+   * @param    Addon $default, optional default value if not found
    * @return   *,
    */
 
    if (!function_exists('_config')) {
-     function _config($path, $addon = null)
+     function _config($path, $addon = null, $default = null)
      {
-       return config(($addon ? $addon->getNamespace() : 'websemantics.extension.builder') . "::$path");
+       return config(($addon ? $addon->getNamespace() : 'websemantics.extension.builder') . "::$path")?:$default;
      }
    }
 
@@ -94,7 +95,7 @@
 
   if (!function_exists('_getNamespaces')) {
       function _getNamespaces($module){
-        $namespaces = _config('builder.namespaces', $module);
+        $namespaces = _config('builder.namespaces', $module, []);
         return ($namespaces !== array_values($namespaces)) ? array_keys($namespaces) : $namespaces;
       }
   }

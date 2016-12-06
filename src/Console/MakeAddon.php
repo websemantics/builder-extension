@@ -48,7 +48,7 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
      * Execute the console command.
      */
     public function fire(AddonManager $addons)
-    { 
+    {
       $this->logo();
 
       list($vendor, $type, $slug, $path) =
@@ -90,7 +90,7 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
      * @return array
      */
     protected function getArguments()
-    {   
+    {
         return [
             ['namespace', InputArgument::REQUIRED, 'The addon\'s desired dot namespace.'],
             ['template', InputArgument::OPTIONAL, 'The template name to scaffold.']

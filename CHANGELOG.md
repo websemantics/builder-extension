@@ -1,43 +1,41 @@
-1.1.2
-  date: 2016-10-30
-  changes:
+#### [1.*.*] - 2016-12-**
+##### Changed
+  - Add support for theme skin addon type.
+  - Generic fixes.
+
+#### [1.1.2] - 2016-10-30
+##### Changed
   - Fix issue with override `make:addon` and `make:stream` commands, currently realized using singleton.
   - Fix issue #23
 
-1.1.1
-  date: 2016-10-12
-  changes:
+#### [1.1.1] - 2016-10-12
+##### Changed
   - Fix landing page routes
 
-1.1.0
-  date: 2016-10-03
-  changes:
+#### [1.1.0] - 2016-10-03
+##### Changed
   - Generate sitemap
   - Generate fields and streams permissions
   - Fix for issue #13,
 
-1.0.9
-  date: 2016-10-03
-  changes:
+#### [1.0.9]  2016-10-03
+##### Changed
   - Fix, `Cannot declare class Websemantics\BuilderExtension\Console\MakeAddon because the name is already in use`
 
-1.0.8
-  date: 2016-10-02
-  changes:
+#### [1.0.8]  2016-10-02
+##### Changed
   - Remove `builder:make` command and replace with command `make:addon`.
   - Improved documentation.
 
-1.0.7
-  date: 2016-09-31
-  changes:
+#### [1.0.7]  2016-09-31
+##### Changed
   - Detect text files for Twig parsing,
   - Extend `make:addon` command to scaffold a starter theme (by default) or an admin theme with `--admin` option,
   - Extend `make:addon` command to scaffold templates with `--template` option.
   - Add an option `--default` to `make:addon` command to skip user interactivity.
 
-1.0.6
-  date: 2016-09-30
-  changes:
+#### [1.0.6]  2016-09-30
+##### Changed
   - Use Twig parser with filters and functions,
   - Add support to `anomaly.field_type.language` and `anomaly.field_type.select` for generated entities,
   - Make module landing page optional (work in progress),
@@ -48,24 +46,21 @@
   - Refactor Entity templates to use filters and functions to produce all needed derivatives,
   - Rename some builder config variables, `seeding => seed`, `namespace_folder => group`,
 
-1.0.4
-  date: 2016-09-19
-  changes:
+#### [1.0.4] - 2016-09-19
+##### Changed
   - Add stream slug to filename of fields migrations.
   - Fix bug when stream migration file is first in order before fields migration file due to matching timestamps by introducing a 10 second delay between generating the two.
 
-1.0.1
-  date: 2016-09-17
-  changes:
+#### [1.0.1] - 2016-09-17
+##### Changed
   - Extend `make:migration` command to accept field schemas to generate stream assignments,.
   - Change order of creating fields/stream migrations to creating fields migration first.
   - Prevent command `make:addon` from creating a fields migration by default, fields migrations are now created per stream migration.
   - Fix issues [#8](https://github.com/websemantics/builder-extension/issues/8) and [#11](https://github.com/websemantics/builder-extension/issues/11).
   - Publish as composer package.
 
-1.0.0
-  date: 2016-09-11
-  changes:
+#### [1.0.0] - 2016-09-11
+##### Changed
   - Rebrand as `Pyro Builder`, a generic Addons & Entities scaffolder,
   - Link to Builder Addon templates registry via Github,
   - Add `builder:clear` command to clear Builder cache and stored templates,
@@ -75,16 +70,14 @@
   - Remove references to `SelfHandling` interface for Laravel 5.3/Pyro 3.1,
   - Other fixes for Laravel 5.3
 
-0.9.1
-  date: 2016-08-16
-  changes:
+#### [0.9.1] - 2016-08-16
+##### Changed
   - Generate entity seeder when a stream is created,
   - Better documentation and simpler examples to follow,
   - Update logo, again!
 
-0.9.0
-  date: 2016-08-15
-  changes:
+#### [0.9.0] - 2016-08-15
+##### Changed
   - Major code cleaning and refactoring,
   - Enhanced generated code,
   - Generic helper functions for generated modules,
@@ -96,45 +89,39 @@
   - Fall back template to unrecognized field types for table and form builder
   - Many bug fixes
 
-0.8.0
-  date: 2016-02-26
-  changes:
+#### [0.8.0] - 2016-02-26
+##### Changed
   - Generates seeder command for automatic module seeding after install,
   - Enables / disables seeding from builder config
 
-0.7.0
-  date: 2016-02-25
-  changes:
+#### [0.7.0] - 2016-02-25
+##### Changed
   - Improved documentation,
   - Automatically seeds modules after install,
   - Support for more field types,
   - Module example
 
-0.6.0
-  date: 2016-02-12
-  changes:
+#### [0.6.0] - 2016-02-12
+##### Changed
   - Add common methods to Repository class,
   - Generate language files for stream, fields and section,
   - fixing few bugs with Entity Seeders,
   - Code updates due to changes in Pyro
 
-0.5.0
-  date: 2015-11-17
-  changes:
+#### [0.5.0] - 2015-11-17
+##### Changed
   - Add new command to create a module
 
-0.4.0
-  date: 2015-11-5
-  changes:
+#### [0.4.0] - 2015-11-5
+##### Changed
   - Customize table columns and form fields,
   - More control on templates,
   - Example builder config file,
   - Detailed documentation,
   - Fixing bugs
 
-0.2.0
-  date: 2015-04-5
-  changes:
+#### [0.2.0] - 2015-04-5
+##### Changed
   - Creates streams entities,
   - Allow to group entity code in namespace folder,
   - Seeding streams

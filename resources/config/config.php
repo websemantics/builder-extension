@@ -33,6 +33,7 @@ return [
       */
       'templates' => [
         'module' => env('BUILDER_DEFAULT_MODULE', 'default-module'),
+        'skin' => env('BUILDER_DEFAULT_MODULE', 'default-skin'),
         'theme' => [
             env('BUILDER_DEFAULT_ADMIN', 'pyrocms-theme'),
             env('BUILDER_DEFAULT_FRONT', 'starter-theme')
@@ -97,6 +98,5 @@ return [
       |
       */
       'padding' => env('MIGRATION_PADDING', '30'),
-
 
 ];

@@ -191,7 +191,7 @@ trait Registry
                 return false;
             }
         } else {
-            $this->output->note("Builder template '$template' already exists. \nUse --force option to get a fresh copy.");
+            $this->output->note("Use --force option to download a fresh copy of '$template'.");
         }
 
         return true;
@@ -261,7 +261,7 @@ trait Registry
             }
         }
 
-        /* append addon type if not provided (template-template)*/
+        /* append addon type if not provided (template-template) */
         $context['type'] = isset($context['type']) ? $context['type'] : $this->getTemplateType($template);
 
         return $context;

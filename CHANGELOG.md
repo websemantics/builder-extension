@@ -1,7 +1,7 @@
-#### [1.*.*] - 2016-12-**
+#### [1.1.3] - 2017-03-18
 ##### Changed
   - Add support for theme skin addon type.
-  - Generic fixes.
+  - Fix issue #27
 
 #### [1.1.2] - 2016-10-30
 ##### Changed

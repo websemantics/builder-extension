@@ -3,6 +3,7 @@
 namespace Websemantics\BuilderExtension\Console;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Contracts\Config\Repository;
 use Anomaly\Streams\Platform\Addon\AddonManager;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
@@ -47,7 +48,7 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
     /**
      * Execute the console command.
      */
-    public function fire(AddonManager $addons)
+    public function fire(AddonManager $addons, Repository $config)
     {
       $this->logo();
 

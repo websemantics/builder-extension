@@ -141,7 +141,7 @@ Retrieving a list of available templates
 +-------------------+-----------------------------------------------------------------------+---+
 ```
 
-Notice how each template has one star only! :/ Well, you can change that by liking these repos on [github](https://github.com/pyrocms-templates) :)
+Notice how each template has one star only! :/ Well, you can change that by liking these repos [here](https://github.com/pyrocms-templates) :)
 
 ## Clear Cache
 

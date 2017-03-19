@@ -1,6 +1,6 @@
 #### [1.1.4] - 2017-03-18
 ##### Changed
-  -  Upgrade to PHP-Parser v3
+  -  Upgrade to PHP-Parser v3 [UPGRADE-3.0](https://github.com/nikic/PHP-Parser/blob/master/UPGRADE-3.0.md)
 
 #### [1.1.3] - 2017-03-17
 ##### Changed

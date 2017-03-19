@@ -74,7 +74,6 @@ php artisan make:addon vendor.module.name
 
 The previous command creates a module based on the [default module](https://github.com/pyrocms-templates/default-module) template. The downloaded module template will be cached  at `app/storage/streams/default/builder/default-module`.
 
-| |  |
 | ------------- | ------------- |
 | **NOTE**: | A fields migration file will not be generated as per Pyro 3 default `make:addon` command behaviour. The builder extension generates a separate fields migration file for each [stream migration](#make-stream) instead. |
 

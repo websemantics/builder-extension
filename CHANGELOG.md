@@ -1,4 +1,8 @@
-#### [1.1.3] - 2017-03-18
+#### [1.1.4] - 2017-03-18
+##### Changed
+  -  Upgrade to PHP-Parser v3
+
+#### [1.1.3] - 2017-03-17
 ##### Changed
   - Add support for theme skin addon type.
   - Fix issue #27

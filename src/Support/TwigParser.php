@@ -32,7 +32,7 @@ class TwigParser
    */
   public function __construct()
   {
-    $this->twig = new \Twig_Environment(new \Twig_Loader_String);
+    $this->twig = new \Twig_Environment(new \Twig_Loader_Array());
     $this->twig->addExtension(new TwigExtension());
   }
 

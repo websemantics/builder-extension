@@ -1,6 +1,10 @@
-#### [1.1.4] - 2017-03-18
+#### [1.1.5] - 2017-90-10
 ##### Changed
-  -  Upgrade to PHP-Parser v3 [UPGRADE-3.0](https://github.com/nikic/PHP-Parser/blob/master/UPGRADE-3.0.md)
+  -  Upgrade to Twig v4
+
+#### [1.1.4] - 2017-90-10
+##### Changed
+  -  Upgrade to PHP-Parser v4
 
 #### [1.1.3] - 2017-03-17
 ##### Changed

@@ -17,7 +17,27 @@ class TwigParser
 {
 
   /**
-   * Create a new TwigParser instance and parse data into the content
+   * The Twig instance
+   *
+   * @var Bridge
+   */
+  protected $twig;
+
+  /**
+   * Create a new TwigParser instance
+   *
+   * @param UrlGenerator $url
+   * @param Engine       $parser
+   * @param Request      $request
+   */
+  public function __construct()
+  {
+    $this->twig = new \Twig_Environment(new \Twig_Loader_Array());
+    $this->twig->addExtension(new TwigExtension());
+  }
+
+  /**
+   * Parse data into the content
    *
    * @param  string $content
    * @param  array $data
@@ -25,9 +45,6 @@ class TwigParser
    */
   public function parse($content, $data = [])
   {
-    $twig = new \Twig_Environment(new \Twig_Loader_Array(array()));
-    $twig->addExtension(new TwigExtension());
-    $template = $twig->createTemplate($content);
-    $subject = $template->render($data);
+    return $this->twig->createTemplate($content)->render($data);
   }
 }

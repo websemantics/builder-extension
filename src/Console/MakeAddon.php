@@ -83,7 +83,7 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
         $this->ignoreJobs = false;
       }
 
-      parent::fire($addons);
+      parent::handle($addons, $loader, $config);
     }
 
     /**

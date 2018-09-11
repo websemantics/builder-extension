@@ -1,3 +1,7 @@
+#### [1.1.7] - 2017-90-11
+##### Changed
+  -  Add support for new field types (credits @edster)
+
 #### [1.1.6] - 2017-90-11
 ##### Changed
   -  Fix issues related to recent PyroCMS API updates

@@ -1,6 +1,14 @@
-#### [1.1.4] - 2017-03-18
+#### [1.1.6] - 2017-90-11
 ##### Changed
-  -  Upgrade to PHP-Parser v3 [UPGRADE-3.0](https://github.com/nikic/PHP-Parser/blob/master/UPGRADE-3.0.md)
+  -  Fix issues related to recent PyroCMS API updates
+
+#### [1.1.5] - 2017-90-10
+##### Changed
+  -  Upgrade to Twig v4
+
+#### [1.1.4] - 2017-90-10
+##### Changed
+  -  Upgrade to PHP-Parser v4
 
 #### [1.1.3] - 2017-03-17
 ##### Changed

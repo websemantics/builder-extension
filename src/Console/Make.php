@@ -52,7 +52,7 @@ class Make extends \Anomaly\Streams\Platform\Stream\Console\Make
     /**
      * Execute the console command.
      */
-    public function fire(AddonCollection $addons)
+    public function handle(AddonCollection $addons)
     {
         $schema = $this->argument('schema');
         $stream_slug = explode(':', trim($schema))[0];

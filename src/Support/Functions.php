@@ -22,7 +22,9 @@
   if (!function_exists('_render')) {
     function _render($template, $context)
     {
-      return (new \Twig_Environment(new \Twig_Loader_String))->render($template, $context);
+      $twig = new \Twig_Environment(new \Twig_Loader_Array(array()));
+      $template = $twig->createTemplate($template);
+      return $template->render($context);
     }
   }
 

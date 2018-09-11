@@ -58,7 +58,7 @@ return [
       |
       | Where templates are stored in the storage folder
       |
-      | i.e. 'app/storage/streams/default/builder'
+      | i.e. 'storage/streams/default/builder'
       |
       |
       */

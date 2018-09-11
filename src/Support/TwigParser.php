@@ -45,6 +45,6 @@ class TwigParser
    */
   public function parse($content, $data = [])
   {
-    return $this->twig->render($content, $data);
+    return $this->twig->createTemplate($content)->render($data);
   }
 }

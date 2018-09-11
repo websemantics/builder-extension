@@ -6,6 +6,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Contracts\Config\Repository;
 use Anomaly\Streams\Platform\Addon\AddonManager;
 use Symfony\Component\Console\Input\InputOption;
+use Anomaly\Streams\Platform\Addon\AddonLoader;
 use Symfony\Component\Console\Input\InputArgument;
 use Websemantics\BuilderExtension\Traits\Registry;
 use Websemantics\BuilderExtension\Traits\IgnoreJobs;
@@ -48,7 +49,7 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
     /**
      * Execute the console command.
      */
-    public function fire(AddonManager $addons, Repository $config)
+    public function handle(AddonManager $addons, AddonLoader $loader, Repository $config)
     {
       $this->logo();
 
@@ -82,7 +83,7 @@ use Websemantics\BuilderExtension\Command\ScaffoldTemplate;
         $this->ignoreJobs = false;
       }
 
-      parent::fire($addons);
+      parent::handle($addons, $loader, $config);
     }
 
     /**

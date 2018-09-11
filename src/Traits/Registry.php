@@ -168,19 +168,19 @@ trait Registry
                             'registry' => $this->registry,
                             'template' => $template, ]);
 
-        /* get a temp folder to download the template zip to */
-        $tmp = $this->getBuilderPath(_config('config.tmp'));
+            /* get a temp folder to download the template zip to */
+            $tmp = $this->getBuilderPath(_config('config.tmp'));
 
             try {
                 /* download the template zip file, show progress, uncompress and remove */
-          $bar->start(" Downloading '$template' ... ");
+                $bar->start(" Downloading '$template' ... \n");
 
                 $this->files->put($tmp, file_get_contents($src, false, stream_context_create([],
-          ['notification' => function ($notification_code) use ($bar) {
-              if (in_array($notification_code, [STREAM_NOTIFY_CONNECT, STREAM_NOTIFY_PROGRESS])) {
-                  $bar->advance();
-              }
-          }])));
+                ['notification' => function ($notification_code) use ($bar) {
+                    if (in_array($notification_code, [STREAM_NOTIFY_CONNECT, STREAM_NOTIFY_PROGRESS])) {
+                        $bar->advance();
+                    }
+                }])));
                 $this->zip->open($tmp);
                 $this->zip->extractTo($dist);
                 $this->zip->close();

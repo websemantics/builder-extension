@@ -109,7 +109,7 @@ use Packaged\Figlet\Figlet;
 
             if ($font === null) {
 
-              $font = $env->getExtension('builder')->getDefaultFigletFont();
+              $font = $env->getExtension(TwigExtension::class)->getDefaultFigletFont();
               $fontDir = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR .
                         'resources' . DIRECTORY_SEPARATOR . 'figlet' . DIRECTORY_SEPARATOR;
             }

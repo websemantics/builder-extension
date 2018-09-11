@@ -1,5 +1,7 @@
 <?php namespace Websemantics\BuilderExtension\Support;
 
+use Illuminate\Foundation\Application;
+use Anomaly\Streams\Platform\View\Twig\Bridge;
 use Websemantics\BuilderExtension\Support\TwigExtension;
 
 /**
@@ -30,10 +32,9 @@ class TwigParser
    * @param Engine       $parser
    * @param Request      $request
    */
-  public function __construct()
+  public function __construct(Application $app)
   {
-    $this->twig = new \Twig_Environment(new \Twig_Loader_Array());
-    $this->twig->addExtension(new TwigExtension());
+    $this->twig = $app['twig'];
   }
 
   /**

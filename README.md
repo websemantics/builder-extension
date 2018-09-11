@@ -134,10 +134,11 @@ Retrieving a list of available templates
 +-------------------+-----------------------------------------------------------------------+---+
 | Name              | Description                                                           | ★ |
 +-------------------+-----------------------------------------------------------------------+---+
-| default-module    | The default module template for Pyro Builder                          | 1 |
-| pyrocms-theme     | A customizable release of the official PyroCMS admin theme            | 1 |
-| starter-theme     | A customizable release of PyroCMS started theme                       | 1 |
-| template-template | The default Pyro Builder template for building Pyro Builder templates | 1 |
+| default-module    | The default module template for Pyro Builder                          | 2 |
+| default-skin      | The default skin template for PyroCMS Plus Theme                      | 0 |
+| pyrocms-theme     | A customizable release of the official PyroCMS admin theme            | 2 |
+| starter-theme     | A customizable release of PyroCMS started theme                       | 4 |
+| template-template | The default Pyro Builder template for building Pyro Builder templates | 3 |
 +-------------------+-----------------------------------------------------------------------+---+
 ```
 

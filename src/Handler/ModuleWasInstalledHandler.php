@@ -1,10 +1,10 @@
 <?php namespace Websemantics\BuilderExtension\Handler;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Websemantics\BuilderExtension\Command\SeedModule;
+use Websemantics\BuilderExtension\Command\ModifyModule;
 use Anomaly\Streams\Platform\Addon\Module\Event\ModuleWasInstalled;
 use Anomaly\Streams\Platform\Addon\Module\ModuleCollection;
-use Websemantics\BuilderExtension\Command\ModifyModule;
-use Websemantics\BuilderExtension\Command\SeedModule;
 
 /**
  * Class ModuleWasInstalledHandler
@@ -17,39 +17,40 @@ use Websemantics\BuilderExtension\Command\SeedModule;
  * @package   Websemantics\BuilderExtension
  */
 
-class ModuleWasInstalledHandler {
+class ModuleWasInstalledHandler
+{
 
-  use DispatchesJobs;
+    use DispatchesJobs;
 
-	protected $modules;
+    protected $modules;
+    protected $once = [];
 
-	/**
-	 * Create the event handler.
-	 *
-	 * @return void
-	 */
-	public function __construct(ModuleCollection $moduleCollection)
-	{
-		$this->modules = $moduleCollection->withConfig('builder');
-	}
+    /**
+     * Create the event handler.
+     *
+     * @return void
+     */
+    public function __construct(ModuleCollection $moduleCollection)
+    {
+        $this->modules = $moduleCollection->withConfig('builder');
+    }
 
-	/**
-	 * Dispaches two jobs, 'ModifyModule' and 'SeedModule' *question of configuration
-	 *
-	 * @param  ModuleWasInstalled  $event
-	 * @return void
-	 */
-	public function handle(ModuleWasInstalled $event)
-	{
-		$module = $event->getModule();
+    /**
+     * Dispaches two jobs, 'ModifyModule' and 'SeedModule' *question of configuration
+     *
+     * @param  ModuleWasInstalled  $event
+     * @return void
+     */
+    public function handle(ModuleWasInstalled $event)
+    {
+        $module = $event->getModule();
+        if (count(_getNamespaces($module)) > 0) {
 
-		if(count(_getNamespaces($module)) > 0){
+            $this->dispatch(new ModifyModule($module));
 
-        $this->dispatch(new ModifyModule($module));
-
-        if(_config('builder.seed', $module)){
-    			$this->dispatch(new SeedModule($module));
-    		}
-		}
-	}
+            if (_config('builder.seed', $module)) {
+                $this->dispatch(new SeedModule($module));
+            }
+        }
+    }
 }

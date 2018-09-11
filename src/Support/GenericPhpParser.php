@@ -82,7 +82,7 @@ class GenericPhpParser
         $templateNode = $this->phpParser->parse($template);
 
         // Reading template file
-        if (count($templateNode) > 0 && $templateNode[0]->getType() !== 'Expr_Array') {
+        if (count($templateNode) > 0 && $templateNode[0]->expr->getType() !== 'Expr_Array') {
             throw new \Exception('Incorrect template formatting', 1);
         }
 
@@ -91,14 +91,14 @@ class GenericPhpParser
         // then merge with the template array
         // TO DO: abstract to a better logic
         if ($this->code[0]->getType() === 'Stmt_Namespace') {
-            $this->helper->parseClassProperty($this->code[0], $name, $templateNode[0], $front);
+            $this->helper->parseClassProperty($this->code[0], $name, $templateNode[0]->expr, $front);
         }
 
         // (3) Parse the addon.php language file for the section list
         // TO DO: abstract to a better logic
         if ($this->code[0]->getType() === 'Stmt_Return' &&
            $this->code[0]->expr->getType() === 'Expr_Array') {
-            $this->helper->parseReturnArray($this->code[0], $name, $templateNode[0], $front);
+            $this->helper->parseReturnArray($this->code[0], $name, $templateNode[0]->expr, $front);
         }
     }
 

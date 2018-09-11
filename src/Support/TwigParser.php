@@ -32,9 +32,10 @@ class TwigParser
    * @param Engine       $parser
    * @param Request      $request
    */
-  public function __construct(Application $app)
+  public function __construct(\Twig_Environment $env)
   {
-    $this->twig = $app['twig'];
+    $this->twig = $env;
+    if(!$env->hasExtension(TwigExtension::class))$env->addExtension(new TwigExtension());
   }
 
   /**

@@ -52,8 +52,8 @@ class BuilderExtensionServiceProvider extends AddonServiceProvider
      */
     protected $bindings = [
         'migration.creator' => 'Websemantics\BuilderExtension\Database\Migration\MigrationCreator',
+        'Illuminate\Filesystem\Filesystem' => 'Websemantics\BuilderExtension\Filesystem\Filesystem',
         'Anomaly\Streams\Platform\Addon\Console\MakeAddon' => 'Websemantics\BuilderExtension\Console\MakeAddon',
         'Anomaly\Streams\Platform\Stream\Console\Make' => 'Websemantics\BuilderExtension\Console\Make',
-        'Illuminate\Filesystem\Filesystem' => 'Websemantics\BuilderExtension\Filesystem\Filesystem',
     ];
 }

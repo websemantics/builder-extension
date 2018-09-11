@@ -103,6 +103,7 @@ trait FileProcessor
         }
 
         $content = $phpParser->prettyPrint();
+
         if(!is_null($content)){
            $this->put($file, $content);
         }

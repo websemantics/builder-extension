@@ -84,7 +84,7 @@ class Helper
 
                 foreach ($block->stmts as $key => $property) {
                     if ($property->getType() === 'Stmt_Property' &&
-                       $name === $property->props[0]->name) {
+                       $name == $property->props[0]->name) {
                         $matchKey = $key;
 
                         $array = ($front) ?

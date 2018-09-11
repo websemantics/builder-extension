@@ -22,9 +22,8 @@
   if (!function_exists('_render')) {
     function _render($template, $context)
     {
-      $twig = new \Twig_Environment(new \Twig_Loader_Array(array()));
-      $template = $twig->createTemplate($template);
-      return $template->render($context);
+      $twig = new \Twig_Environment(new \Twig_Loader_Array());
+      return $twig->createTemplate($template)->render($context);
     }
   }
 
